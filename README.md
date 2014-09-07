@@ -2,9 +2,9 @@
 
 ####Useful links
 
-- http://portal.uni-freiburg.de/jakobs/Lehre/ss2014/fp2014-2
-- http://portal.uni-freiburg.de/jakobs/Fortgeschrittenen-Praktikum
-- http://hacol13.physik.uni-freiburg.de/fp/
+- [information (2014)](http://portal.uni-freiburg.de/jakobs/Lehre/ss2014/fp2014-2)
+- [information (general)](http://portal.uni-freiburg.de/jakobs/Fortgeschrittenen-Praktikum)
+- [instructions](http://hacol13.physik.uni-freiburg.de/fp/)
 
 ####Schedule
 

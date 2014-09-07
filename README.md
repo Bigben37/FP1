@@ -8,14 +8,14 @@
 
 ####Schedule
 
-| Day      | Date | Description               |  
-|----------|------|---------------------------|  
-|Montag    | 08.09| Lange Halbwertszeiten     |  
-|Dienstag  | 16.09| I2-Molekül                |  
-|Freitag   | 19.09| Szinillationszähler       |  
-|Mittwoch  | 24.09| Farady- und Pockelseffekt |  
-|Donnerstag| 02.10| Halbleiter                |  
-|Mittwoch  | 08.10| Ringlaser                 |  
-|Montag    | 13.10| Kernspinresonanz          |  
-|Donnerstag| 16.10| Hanle-Effekt              |  
-|Dienstag  | 21.10| SQUID                     |  
+| Day      | Date | Description               | Δt/d |  
+|----------|------|---------------------------|------|  
+|Montag    | 08.09| Lange Halbwertszeiten     |  -   |  
+|Dienstag  | 16.09| I2-Molekül                | 6.5  |  
+|Freitag   | 19.09| Szinillationszähler       | 1.5  |  
+|Mittwoch  | 24.09| Farady- und Pockelseffekt | 3.5  |  
+|Donnerstag| 02.10| Halbleiter                | 6.5  |  
+|Mittwoch  | 08.10| Ringlaser                 | 4.5  |  
+|Montag    | 13.10| Kernspinresonanz          | 3.5  |  
+|Donnerstag| 16.10| Hanle-Effekt              | 1.5  |  
+|Dienstag  | 21.10| SQUID                     | 3.5  |  

@@ -1,45 +1,88 @@
 \documentclass[12pt, a4paper]{scrartcl}
 
-% packages
-\usepackage[ngerman]{babel}
+% CONFIG
+\newcommand{\exptitle}{Versuchsname}      % long name of experiment 
+\newcommand{\exptitleshort}{Versuchsname} % short name of experiment
+\newcommand{\expdate}{\today}             % date of experiment
+
+% PACKAGES + MODIFICATIONS
+\usepackage[ngerman]{babel} %standard language stuff
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
-\usepackage[fleqn]{amsmath} %math
-\usepackage{amsthm, amssymb} %math
+\usepackage[fleqn]{amsmath}  % math
+\usepackage{amssymb}
 
-\usepackage{graphicx} %Graphiken
-\usepackage{float}
+\usepackage{graphicx} %graphics
+\usepackage{float} 
 
-%modifications
-\setcounter{tocdepth}{2}
-\setlength{\parindent}{0pt}
-%\setlength{\mathindent}{0pt} 
-\numberwithin{equation}{section}
-\renewcommand\thesection{\Roman{section}}
+\usepackage[automark,headsepline]{scrlayer-scrpage} %headings
+\pagestyle{scrheadings}
+\ihead{\exptitleshort}
+\ohead{\pagemark}
+\cfoot{}
 
+\usepackage{hyperref}
+\hypersetup{
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,       % show Acrobat’s toolbar?
+    pdfmenubar=true,       % show Acrobat’s menu?
+    pdffitwindow=false,    % window fit to page when opened
+    pdfstartview={FitH},   % fits the width of the page to the window
+    pdfnewwindow=true,     % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,       % color of internal links (change box color with linkbordercolor)
+    citecolor=green,       % color of links to bibliography
+    filecolor=magenta,     % color of file links
+    urlcolor=cyan          % color of external links
+}
 
-\title{Versuchsname}
+\usepackage{chngcntr}
+\counterwithin{figure}{section}  % number figures per section
+\numberwithin{equation}{section} % number equations per section
+
+\usepackage{enumerate} % better way to config enumerates
+
+\setcounter{tocdepth}{2} % table of contents depth
+
+\setlength{\parindent}{0pt} % no indent on new paragraph
+
+\renewcommand\thesection{\Roman{section}} % roman numbers for sections
+
+% DOCUMENT SETTINGS
+\title{\exptitle}
 \subtitle{Fortgeschrittenen Praktikum 1}
-\author{Moritz Bitterling und Benjamin Rottler}
-\date{\today}
+\author{Moritz Bitterling und Benjamin Rottler \\ Universität Freiburg}
+\date{\expdate}
 
+% DOCUMENT
 \begin{document}
 
-\maketitle
+\hypersetup{pageanchor=false} %stop page numbering (hyperref) to prevent for double page numers
+\maketitle  %TODO make better title page with logo
+\thispagestyle{empty}
 
 \newpage
-
 \tableofcontents
+\thispagestyle{empty}
 
 \newpage
+\hypersetup{pageanchor=true} %start page numbering again
+\setcounter{page}{1} %set to page 1
 
-\section{Versuchsbeschreibung}
+\section{Versuchsziel}
+\input{01_Ziel} 
 
 \section{Physikalische Grundlagen}
+\input{02_Grundlagen}
+
+\section{Versuchsaufbau}
+\input{03_Aufbau}
 
 \section{Versuchsdurchführung}
+\input{04_Durchfuerung}
 
 \section{Auswertung}
+\input{05_Auswertung}
 
 \end{document}

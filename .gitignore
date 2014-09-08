@@ -8,6 +8,7 @@ Thumbs.db
 /eclipse
 .metadata
 tmp/
+bin/
 *.tmp
 *.bak
 *.synctex.gz

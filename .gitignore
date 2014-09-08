@@ -3,12 +3,13 @@ Thumbs.db
 
 #linux
 *~
+*.swp
 
 #eclipse
 /eclipse
 .metadata
-tmp/
-bin/
+/**/tmp
+/**/bin
 *.tmp
 *.bak
 *.synctex.gz

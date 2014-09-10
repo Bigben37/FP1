@@ -50,16 +50,19 @@
 \renewcommand\thesection{\Roman{section}} % roman numbers for sections
 
 % DOCUMENT SETTINGS
+
 \title{\exptitle}
-\subtitle{Fortgeschrittenen Praktikum 1}
+\subtitle{Fortgeschrittenen-Praktikum 1}
 \author{Moritz Bitterling und Benjamin Rottler \\ Universität Freiburg}
 \date{\expdate}
+\publishers{\vspace{3cm} \includegraphics[height=8cm]{../bilder/Uni_Logo}}
+% Betreuer?
 
 % DOCUMENT
 \begin{document}
 
 \hypersetup{pageanchor=false} %stop page numbering (hyperref) to prevent for double page numers
-\maketitle  %TODO make better title page with logo
+\maketitle
 \thispagestyle{empty}
 
 \newpage
@@ -70,18 +73,11 @@
 \hypersetup{pageanchor=true} %start page numbering again
 \setcounter{page}{1} %set to page 1
 
-\section{Versuchsziel}
 \input{01_Ziel} 
-
-\section{Physikalische Grundlagen}
 \input{02_Grundlagen}
-
-\section{Versuchsaufbau}
 \input{03_Aufbau}
-
 \input{04_Durchfuerung}
-
-\section{Auswertung}
 \input{05_Auswertung}
+\input{06_Diskussion}
 
 \end{document}

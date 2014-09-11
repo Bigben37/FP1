@@ -1,9 +1,11 @@
 #!/usr/bin/python2.7
-from ROOT import TF1, TVirtualFitter, TMatrixD
-import os, codecs
+from ROOT import TF1, TVirtualFitter
+import os
+import codecs
+
 
 class Fitter:
-    
+
     def __init__(self, name, function):
         self.name = name
         self.function = TF1(name, function)
@@ -12,12 +14,12 @@ class Fitter:
         self.params = dict()
         self.virtualFitter = None
         self.matrix = None
-        
+
     def setParam(self, index, name, startvalue=1):
         self.params[index] = {'name': name, 'startvalue': startvalue, 'value': 0, 'error': 0}
         self.function.SetParameter(index, startvalue)
         self.function.SetParName(index, name)
-        
+
     def fit(self, graph, xstart, xend):
         graph.Fit(self.function, '', '', xstart, xend)
         self.virtualFitter = TVirtualFitter.GetFitter()
@@ -25,17 +27,17 @@ class Fitter:
             self.params[i]['value'] = self.virtualFitter.GetParameter(i)
             self.params[i]['error'] = self.virtualFitter.GetParError(i)
         n = len(self.params)
-        self.matrix =[[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
-        
+        self.matrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
+
     def getChisquare(self):
         return self.function.GetChisquare()
-    
+
     def getNDF(self):
         return self.function.GetNDF()
-    
+
     def getChisquareOverNDF(self):
         return self.getChisquare() / self.getNDF()
-    
+
     def saveData(self, path):
         d = os.getcwd()
         p = os.path.abspath(os.path.join(d, path))
@@ -58,5 +60,5 @@ class Fitter:
             f.write('covariance matrix\n')
             f.write('=================\n')
             f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self.matrix)
-            #TODO create and print correlation coefficient matrix
+            # TODO create and print correlation coefficient matrix
             f.close()

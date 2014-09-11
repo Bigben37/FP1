@@ -2,6 +2,7 @@
 from ROOT import gROOT, TCanvas, TLegend
 import os.path
 import csv
+import numpy
 from data import Data, DataErrors  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
 
 class DataK(Data):
@@ -49,23 +50,56 @@ def makeCharacteristic():
     dkg.SetMarkerColor(4)  # blue
     dkg.Draw('P')
     
-    l = TLegend(0.65, 0.5, 0.89, 0.7)
-    l.AddEntry('du', '{}^{238} Uran', 'p')
-    l.AddEntry('dk', '{}^{40} Kalium', 'p')
-    l.SetTextSize(0.05)
+    l = TLegend(0.55, 0.4, 0.98, 0.7)
+    l.AddEntry('du', '{}^{238} Uran ohne Untergrund', 'p')
+    l.AddEntry('dk', '{}^{40} Kalium ohne Untergrund', 'p')
+    l.SetTextSize(0.035)
     l.Draw()
     
     c.Update()
     c.Print('../img/Kalium40_Charakteristik.pdf', 'pdf')
     
+def readSingleEntryFile(path):
+    if path:
+        d = os.path.dirname(os.path.abspath(__file__))
+        p = os.path.abspath(os.path.join(d, path))
+        with open(p, 'rb') as f:
+            return float(f.readline().split('\t')[1].replace(',', '.'))
 
 def makeMassFit():
-    pass
+    # config files
+    # file = [mass, path]
+    files = []
+    files.append([2.0123, "../data/11_K_m9_3200_t420.txt", 420])
+    files.append([2.0123, "../data/11b_K_m9_3200_t420.txt", 420])
+    files.append([1.9047, "../data/13_K_m8_3200_t420.txt", 420])
+    files.append([1.6812, "../data/15_K_m7_3200_t420.txt", 420])
+    files.append([1.4827, "../data/17_K_m6_3200_t420.txt", 420])
+    files.append([1.2952, "../data/19_K_m5_3200_t480.txt", 480])
+    files.append([1.0993, "../data/21_K_m4_3200_t480.txt", 480])
+    files.append([0.8086, "../data/23_K_m3_3200_t540.txt", 540])
+    files.append([0.6954, "../data/25_K_m2_3200_t540.txt", 540])
+    files.append([0.5007, "../data/27_K_m1_3200_t660.txt", 660])
+    files.append([0.3030, "../data/29_K_m0_3200_t780.txt", 780])
+    u = readSingleEntryFile('../data/32b_Untergrund_3200_t36000_corr.txt')
+    tu = 36000
+    
+    d = MassCounts()
+    
+    for file in files:
+        n = readSingleEntryFile(file[1])
+        d.addPoint(file[0] , n - u, 0, numpy.sqrt(n / file[2] + u / tu))
+       
+    c = TCanvas('c2', '', 800, 600)
+    g = d.makeGraph('g', 'Massa m / g', 'Z#ddot{a}hlrate n / (1/s)')
+    g.Draw('AP')
+    c.Update()
+    c.Print('../img/Kalium40_MassDepenency.pdf')
 
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
-    makeCharacteristic()
+    #makeCharacteristic()
     makeMassFit()
     
     

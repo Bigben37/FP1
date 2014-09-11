@@ -20,12 +20,9 @@ class DataU(Data):
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
-    m = DataU.fromPath(
-        "../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # messurement
-    # underground
-    u = DataU.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")
-    # real data
-    d = m - u
+    m = DataU.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # messurement 
+    u = DataU.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")  # underground
+    d = m - u  # real data
 
     # start graphics
     gmax = 4000

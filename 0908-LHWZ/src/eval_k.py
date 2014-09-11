@@ -94,7 +94,7 @@ def makeMassFit():
     # TODO create legend with fit parameters
 
     c.Update()
-    c.Print('../img/Kalium40_MassDepenency.pdf')
+    c.Print('../img/Kalium40_Massenabhaengigkeit.pdf')
 
 
 def main():

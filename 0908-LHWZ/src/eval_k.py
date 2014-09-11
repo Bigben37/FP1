@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, TCanvas, TLegend
+from ROOT import gROOT, TCanvas, TLegend, TF1, TVirtualFitter, TMatrixD
 import os.path
 import csv
 import numpy
@@ -93,6 +93,21 @@ def makeMassFit():
     c = TCanvas('c2', '', 800, 600)
     g = d.makeGraph('g', 'Massa m / g', 'Z#ddot{a}hlrate n / (1/s)')
     g.Draw('AP')
+    
+    f = TF1('fitfunc', '[0]*(1-exp(-[1]*x))')
+    f.SetParameter(0, 1)
+    f.SetParName(0, 'a')
+    f.SetParameter(1, 1)
+    f.SetParName(1, 'b')
+    f.SetLineColor(2)
+    f.SetLineWidth(1)
+    g.Fit(f, '', '', 0, 2.1)
+    print("chi^2 / ndf = ", f.GetChisquare() / f.GetNDF())
+    
+    fitter = TVirtualFitter.GetFitter()
+    matrix = TMatrixD(2, 2, fitter.GetCovarianceMatrix())
+    matrix.Print()
+    
     c.Update()
     c.Print('../img/Kalium40_MassDepenency.pdf')
 

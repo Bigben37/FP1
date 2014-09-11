@@ -1,35 +1,11 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, TCanvas, TGraph, TLegend
+from ROOT import gROOT, TCanvas, TLegend
 import os.path
 import csv
-import array
+from data import Data  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
 
 
-class Data(object):
-
-    def __init__(self):
-        self.path = ''
-        self.x = []
-        self.y = []
-
-    @staticmethod
-    def fromPath(path):
-        data = Data()
-        data.path = path
-        if path:
-            data.loadData()
-        return data
-
-    @staticmethod
-    def fromLists(x, y):
-        if len(x) == len(y):
-            data = Data()
-            data.x = x
-            data.y = y
-            return data
-        else:
-            print('Data.fromLists():ERROR - lists have to be the same length')
-            return None
+class DataU(Data):
 
     def loadData(self):
         d = os.path.dirname(os.path.abspath(__file__))
@@ -38,54 +14,16 @@ class Data(object):
             reader = csv.reader(f, delimiter='\t')
             for row in reader:
                 xi, yi = row
-                self.x.append(float(xi.replace(',', '.')))
-                self.y.append(float(yi.replace(',', '.').replace(',', '.')))
-
-    def makeGraph(self, name='', xtitle='', ytitle=''):
-        graph = TGraph(
-            len(self.x), array.array('f', self.x), array.array('f', self.y))
-        graph.SetName(name)
-        graph.SetMarkerColor(1)
-        graph.SetMarkerStyle(5)
-        graph.SetTitle("")
-        graph.GetXaxis().SetTitle(xtitle)
-        graph.GetXaxis().CenterTitle()
-        graph.GetYaxis().SetTitle(ytitle)
-        graph.GetYaxis().CenterTitle()
-        return graph
-
-    def __add__(self, other):
-        if isinstance(other, Data):
-            if len(self.y) == len(other.y):
-                y = []
-                for i in range(len(self.y)):
-                    y.append(self.y[i] + other.y[i])
-                return Data.fromLists(self.x, y)
-            else:
-                return NotImplemented
-        else:
-            return NotImplemented
-
-    def __sub__(self, other):
-        if isinstance(other, Data):
-            if len(self.y) == len(other.y):
-                y = []
-                for i in range(len(self.y)):
-                    y.append(self.y[i] + other.y[i])
-                return Data.fromLists(self.x, y)
-            else:
-                return NotImplemented
-        else:
-            return NotImplemented
+                self.addPoint(float(xi.replace(',', '.')), float(yi.replace(',', '.')))
 
 
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
-    m = Data.fromPath(
+    m = DataU.fromPath(
         "../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # messurement
     # underground
-    u = Data.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")
+    u = DataU.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")
     # real data
     d = m - u
 

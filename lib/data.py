@@ -184,3 +184,17 @@ class DataErrors(object):
         graph.GetYaxis().SetTitle(ytitle)
         graph.GetYaxis().CenterTitle()
         return graph
+    
+    #TODO implement XError methods
+    
+    def setYErrorAbs(self, error):
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], error)
+            
+    def setYErrorRel(self, relerror):
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], self.points[i][1]*relerror)
+            
+    def setYErrorFunc(self, f):
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], f(self.points[i][1]))

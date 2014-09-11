@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, TCanvas, TLegend
+from ROOT import gROOT, gStyle, TCanvas, TLegend
 import os.path
 import csv
 from data import Data  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
@@ -20,6 +20,8 @@ class DataU(Data):
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
+    gStyle.SetPadTickY(1) 
+    gStyle.SetPadTickX(1)
     m = DataU.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # messurement 
     u = DataU.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")  # underground
     d = m - u  # real data

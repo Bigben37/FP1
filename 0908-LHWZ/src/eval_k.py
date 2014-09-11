@@ -1,9 +1,10 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, TCanvas, TLegend, TF1, TVirtualFitter, TMatrixD
+from ROOT import gROOT, gStyle, TCanvas, TLegend, TF1, TVirtualFitter, TMatrixD
 import os.path
 import csv
 import numpy
 from data import Data, DataErrors  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
+from fitter import Fitter
 
 class DataK(Data):
 
@@ -92,29 +93,27 @@ def makeMassFit():
        
     c = TCanvas('c2', '', 800, 600)
     g = d.makeGraph('g', 'Massa m / g', 'Z#ddot{a}hlrate n / (1/s)')
+    g.SetMaximum(6)
+    g.SetMinimum(2)
     g.Draw('AP')
     
-    f = TF1('fitfunc', '[0]*(1-exp(-[1]*x))')
-    f.SetParameter(0, 1)
-    f.SetParName(0, 'a')
-    f.SetParameter(1, 1)
-    f.SetParName(1, 'b')
-    f.SetLineColor(2)
-    f.SetLineWidth(1)
-    g.Fit(f, '', '', 0, 2.1)
-    print("chi^2 / ndf = ", f.GetChisquare() / f.GetNDF())
+    fit = Fitter('f', '[0]*(1-exp(-[1]*x))')
+    fit.setParam(0, 'a')
+    fit.setParam(1, 'b')
+    fit.fit(g, 0.2, 2.1)
+    fit.saveData('../fit/kalium.txt')
     
-    fitter = TVirtualFitter.GetFitter()
-    matrix = TMatrixD(2, 2, fitter.GetCovarianceMatrix())
-    matrix.Print()
-    
+    #TODO create legend with fit parameters
+   
     c.Update()
     c.Print('../img/Kalium40_MassDepenency.pdf')
 
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
-    #makeCharacteristic()
+    gStyle.SetPadTickY(1) 
+    gStyle.SetPadTickX(1)
+    makeCharacteristic()
     makeMassFit()
     
     

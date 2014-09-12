@@ -68,7 +68,7 @@ def makeMassFit():
         d.addPoint(file[0], n - u, 0, numpy.sqrt(n / file[2] + u / tu))
 
     c = TCanvas('c2', '', 800, 600)
-    g = d.makeGraph('g', 'Massa m / g', 'Z#ddot{a}hlrate n / (1/s)')
+    g = d.makeGraph('g', 'Masse m / g', 'Z#ddot{a}hlrate n / (1/s)')
     g.SetMaximum(6)
     g.SetMinimum(2)
     g.Draw('AP')
@@ -76,19 +76,28 @@ def makeMassFit():
     fit = Fitter('f', '[0]*(1-exp(-[1]*x))')
     fit.setParam(0, 'a')
     fit.setParam(1, 'b')
-    fit.fit(g, 0.2, 2.1)
+    fit.fit(g, 0.1, 2.5)
     fit.saveData('../fit/kalium.txt')
+    
+    a = fit.params[0]['value']
+    sa = fit.params[0]['error']
+    b = fit.params[1]['value']
+    sb = fit.params[1]['error']
 
-    # TODO create legend with fit parameters
+    l = TLegend(0.4, 0.15, 0.85, 0.5)
+    l.AddEntry('g', '{}^{40} Kalium ohne Untergrund', 'p')  # TODO with error bar? (options +'e')
+    l.AddEntry(fit.function, 'Fit mit n(m)=a(1-exp(-b*m))', 'l')
+    l.AddEntry(0, '#chi^{2} / DoF : %f' % fit.getChisquareOverDoF(), '')
+    l.AddEntry(0, 'Paramter:', '') 
+    l.AddEntry(0, 'a: %e #pm %e' % (a, sa), '')
+    l.AddEntry(0, 'b: %e #pm %e' % (b, sb), '')   
+    l.SetTextSize(0.03)
+    l.Draw()
 
     NA = 6.02214129e23
     hrel = 0.000118
     mrel = 39.0983 + 35.45
     f = 1.29
-    a = fit.params[0]['value']
-    sa = fit.params[0]['error']
-    b = fit.params[1]['value']
-    sb = fit.params[1]['error']
     rho = fit.getCorrMatrixElem(1, 0)
     thalf = (numpy.log(2) * NA * hrel * f) / (1.12 * mrel * 2 * a * b) / (3600 * 24 * 365.242)
     sthalf = thalf * numpy.sqrt((sa / a) ** 2 + (sb / b) ** 2 + 2 * rho * (sa / a) * (sb / b))

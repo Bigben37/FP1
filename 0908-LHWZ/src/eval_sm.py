@@ -50,7 +50,6 @@ def area(*args):
     return np.pi*(d/2)**2, (1./8)*(d**3)*(np.pi**2)*sd
 
 def calculateHalfLife(a, n, sa, sn):
-    print('%f  %f  %f  %f' % (a, n, sa, sn))
     c  = 0.004026
     NA = 6.02214129e23
     m  = 2*150.36 + 3*15.999
@@ -114,7 +113,20 @@ def makeAreaFit():
     l.Draw()
     
     c.Update()
-    #c.Print('../img/Samarium147-Flaechenabhaengigkeit.pdf', 'pdf')
+    c.Print('../img/Samarium147-Flaechenabhaengigkeit.pdf', 'pdf')
+    
+    #calculation with fit parameters
+    c  = 0.004026
+    NA = 6.02214129e23
+    m  = 2*150.36 + 3*15.999
+    h = 0.1487
+    t = (np.log(2) * c * NA * h) / (2 * m * b) / (3600 * 24 * 365.242)
+    st = t * (sb / b)
+    with TxtFile('../fit/samarium.txt', 'a') as f:
+        f.writeline('calculation from fit')
+        f.writeline('====================')
+        f.writeline('\t', '%e' % t, TxtFile.PM, '%e' % st)
+        f.writeline()
     
     # calculation from single data points
     sc = map(lambda p: calculateHalfLife(*p), d.points)
@@ -131,7 +143,7 @@ def main():
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    #makeCharacteristic()
+    makeCharacteristic()
     makeAreaFit()
 
 if __name__ == "__main__":

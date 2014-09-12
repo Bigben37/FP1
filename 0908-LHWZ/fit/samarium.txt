@@ -25,6 +25,10 @@ correlation matrix
 1.0	-0.734816796837
 -0.734816796837	1.0
 
+calculation from fit
+====================
+1.198035e+11	±	6.122738e+09
+
 calculation from single data points
 ===================================
 6.394253e+10	±	4.755079e+09

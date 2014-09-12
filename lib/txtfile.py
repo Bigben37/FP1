@@ -11,7 +11,8 @@ class TxtFile(object):
     def __init__(self, path, mode, enc='utf-8'):
         # if file/directory does not exist create dirs and file
         if not os.path.exists(path):
-            os.mkdir(os.path.dirname(path))
+            if not os.path.exists(os.path.dirname(path)):
+                os.mkdir(os.path.dirname(path))
             codecs.open(path, 'a', enc).close()
         # open file with actual mode
         self._file = codecs.open(path, mode, enc)

@@ -52,8 +52,8 @@ class Fitter:
     def getCorrMatrixElem(self, col, row):
         return self._corrMatrix[col][row]
 
-    def saveData(self, path):
-        with TxtFile(path, 'w') as f:
+    def saveData(self, path, mode='w'):
+        with TxtFile(path, mode) as f:
             f.writeline('fitting info')
             f.writeline('============')
             f.writeline(TxtFile.CHISQUARE+ ':\t\t' + str(self.getChisquare()))
@@ -72,4 +72,5 @@ class Fitter:
             f.writeline('correlation matrix')
             f.writeline('==================')
             f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
+            f.writeline()
             f.close()

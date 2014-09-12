@@ -1,7 +1,8 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
-import os.path
+import os
 import csv
+import codecs
 import numpy
 from data import Data, DataErrors  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
 from fitter import Fitter
@@ -92,6 +93,26 @@ def makeMassFit():
     fit.saveData('../fit/kalium.txt')
 
     # TODO create legend with fit parameters
+
+    NA = 6.02214129e23
+    hrel = 0.000118
+    mrel = 39.0983 + 35.45
+    f = 1.29
+    a = fit.params[0]['value']
+    sa = fit.params[0]['error']
+    b = fit.params[1]['value']
+    sb = fit.params[1]['error']
+    rho = fit.corrMatrix[1][0]
+    thalf = (numpy.log(2) * NA * hrel * f) / (1.12 * mrel * 2 * a * b) / (3600 * 24 * 365.242)
+    sthalf = thalf * numpy.sqrt((sa / a) ** 2 + (sb / b) ** 2 + 2 * rho * (sa / a) * (sb / b))
+
+    d = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.abspath(os.path.join(d, '../fit/kalium.txt'))
+    with codecs.open(path, 'a', 'utf-8') as f:
+        f.write('\n')
+        f.write('calculations\n')
+        f.write('============\n')
+        f.write('\t'.join(['half-life of Kalium:', '%e' % thalf, unichr(0x00B1), '%e' % sthalf]))
 
     c.Update()
     c.Print('../img/Kalium40_Massenabhaengigkeit.pdf')

@@ -34,11 +34,11 @@ class Fitter:
     def getChisquare(self):
         return self.function.GetChisquare()
 
-    def getNDF(self):
+    def getDoF(self):
         return self.function.GetNDF()
 
-    def getChisquareOverNDF(self):
-        return self.getChisquare() / self.getNDF()
+    def getChisquareOverDoF(self):
+        return self.getChisquare() / self.getDoF()
     
     def getCovMatrix(self):
         return self._covMatrix
@@ -57,8 +57,8 @@ class Fitter:
             f.writeline('fitting info')
             f.writeline('============')
             f.writeline(TxtFile.CHISQUARE+ ':\t\t' + str(self.getChisquare()))
-            f.writeline('NDF:\t' + str(self.getNDF()) + '')
-            f.writeline(TxtFile.CHISQUARE + '/NDF:\t' + str(self.getChisquareOverNDF()))
+            f.writeline('NDF:\t' + str(self.getDoF()) + '')
+            f.writeline(TxtFile.CHISQUARE + '/DoF:\t' + str(self.getChisquareOverDoF()))
             f.writeline('')
             f.writeline('parameters')
             f.writeline('==========')

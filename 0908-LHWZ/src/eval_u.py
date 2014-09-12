@@ -15,7 +15,7 @@ def main():
     c = TCanvas('c', '', 800, 600)
     c.SetLogy()
     dg = d.makeGraph('d', 'Spannung U / V', 'Z#ddot{a}hlrate n / (1/s)')
-    dg.SetMaximum(4000)
+    dg.SetMaximum(4500)
     dg.SetMinimum(0.01)
     dg.Draw('AP')
     ug = u.makeGraph('u')

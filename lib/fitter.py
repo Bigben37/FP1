@@ -13,7 +13,8 @@ class Fitter:
         self.function.SetLineWidth(1)
         self.params = dict()
         self.virtualFitter = None
-        self.matrix = None
+        self.covMatrix = None
+        self.corrMatrix = None
 
     def setParam(self, index, name, startvalue=1):
         self.params[index] = {'name': name, 'startvalue': startvalue, 'value': 0, 'error': 0}
@@ -27,7 +28,8 @@ class Fitter:
             self.params[i]['value'] = self.virtualFitter.GetParameter(i)
             self.params[i]['error'] = self.virtualFitter.GetParError(i)
         n = len(self.params)
-        self.matrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
+        self.covMatrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
+        self.corrMatrix = [[self.covMatrix[col][row] / (self.params[col]['error'] * self.params[row]['error']) for row in xrange(n)] for col in xrange(n)]
 
     def getChisquare(self):
         return self.function.GetChisquare()
@@ -59,6 +61,9 @@ class Fitter:
             f.write('\n')
             f.write('covariance matrix\n')
             f.write('=================\n')
-            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self.matrix)
-            # TODO create and print correlation coefficient matrix
+            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self.covMatrix)
+            f.write('\n')
+            f.write('correlation matrix\n')
+            f.write('=================\n')
+            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self.corrMatrix)
             f.close()

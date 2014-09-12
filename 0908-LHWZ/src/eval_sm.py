@@ -1,26 +1,12 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 import os.path
-import csv
-from data import Data  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
-
-
-class DataSm(Data):
-
-    def loadData(self):
-        d = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.abspath(os.path.join(d, self.path))
-        with open(path, 'rb') as f:
-            reader = csv.reader(f, delimiter='\t')
-            for row in reader:
-                xi, yi = row
-                self.addPoint(float(xi.replace(',', '.')), float(yi.replace(',', '.')))
-
+from lhwz import LHWZData
 
 def makeCharacteristic():
-    msm = DataSm.fromPath("../data/07_Sm_ggrFl_Zaehlrohrcharakteristik_1000-2200-100.txt")  # Samarium
-    mu = DataSm.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")       # Uranium
-    u = DataSm.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")                     # underground
+    msm = LHWZData.fromPath("../data/07_Sm_ggrFl_Zaehlrohrcharakteristik_1000-2200-100.txt")  # Samarium
+    mu = LHWZData.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")       # Uranium
+    u = LHWZData.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")                     # underground
     du = mu - u
     u.points = u.points[:13]  # get relevant underground (1000V-2200V) for samarium
     dsm = msm - u

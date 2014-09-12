@@ -1,29 +1,16 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 import os
-import csv
-import codecs
 import numpy
 from data import Data, DataErrors  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
 from fitter import Fitter
-
-
-class DataK(Data):
-
-    def loadData(self):
-        d = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.abspath(os.path.join(d, self.path))
-        with open(path, 'rb') as f:
-            reader = csv.reader(f, delimiter='\t')
-            for row in reader:
-                xi, yi = row
-                self.addPoint(float(xi.replace(',', '.')), float(yi.replace(',', '.')))
-
+from txtfile import TxtFile
+from lhwz import LHWZData
 
 def makeCharacteristic():
-    mk = DataK.fromPath("../data/10_K_m9_Zaehlrohrcharakteristik_2500-4000-100.txt")  # kalium
-    mu = DataK.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # Uranium
-    u = DataK.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")                # underground
+    mk = LHWZData.fromPath("../data/10_K_m9_Zaehlrohrcharakteristik_2500-4000-100.txt")  # kalium
+    mu = LHWZData.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # Uranium
+    u  = LHWZData.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")                # underground
     du = mu - u
     u.points = u.points[15:]  # get relevant underground (2500V-4000V) for kalium
     dk = mk - u
@@ -102,21 +89,18 @@ def makeMassFit():
     sa = fit.params[0]['error']
     b = fit.params[1]['value']
     sb = fit.params[1]['error']
-    rho = fit.corrMatrix[1][0]
+    rho = fit.getCorrMatrixElem(1, 0)
     thalf = (numpy.log(2) * NA * hrel * f) / (1.12 * mrel * 2 * a * b) / (3600 * 24 * 365.242)
     sthalf = thalf * numpy.sqrt((sa / a) ** 2 + (sb / b) ** 2 + 2 * rho * (sa / a) * (sb / b))
 
-    d = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.abspath(os.path.join(d, '../fit/kalium.txt'))
-    with codecs.open(path, 'a', 'utf-8') as f:
-        f.write('\n')
-        f.write('calculations\n')
-        f.write('============\n')
-        f.write('\t'.join(['half-life of Kalium:', '%e' % thalf, unichr(0x00B1), '%e' % sthalf]))
+    with TxtFile.fromRelPath('../fit/kalium.txt', 'a') as f:
+        f.writeline()
+        f.writeline('calculations')
+        f.writeline('============')
+        f.writeline('\t', 'half-life of Kalium:', '%e' % thalf, TxtFile.PM, '%e' % sthalf)
 
     c.Update()
     c.Print('../img/Kalium40_Massenabhaengigkeit.pdf')
-
 
 def main():
     gROOT.Reset()
@@ -125,7 +109,6 @@ def main():
     gStyle.SetPadTickX(1)
     makeCharacteristic()
     makeMassFit()
-
 
 if __name__ == "__main__":
     main()

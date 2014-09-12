@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7
 from ROOT import TF1, TVirtualFitter
 import os
-import codecs
+from txtfile import TxtFile
 
 
 class Fitter:
@@ -13,8 +13,8 @@ class Fitter:
         self.function.SetLineWidth(1)
         self.params = dict()
         self.virtualFitter = None
-        self.covMatrix = None
-        self.corrMatrix = None
+        self._covMatrix = None
+        self._corrMatrix = None
 
     def setParam(self, index, name, startvalue=1):
         self.params[index] = {'name': name, 'startvalue': startvalue, 'value': 0, 'error': 0}
@@ -28,8 +28,8 @@ class Fitter:
             self.params[i]['value'] = self.virtualFitter.GetParameter(i)
             self.params[i]['error'] = self.virtualFitter.GetParError(i)
         n = len(self.params)
-        self.covMatrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
-        self.corrMatrix = [[self.covMatrix[col][row] / (self.params[col]['error'] * self.params[row]['error']) for row in xrange(n)] for col in xrange(n)]
+        self._covMatrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
+        self._corrMatrix = [[self._covMatrix[col][row] / (self.params[col]['error'] * self.params[row]['error']) for row in xrange(n)] for col in xrange(n)]
 
     def getChisquare(self):
         return self.function.GetChisquare()
@@ -39,31 +39,37 @@ class Fitter:
 
     def getChisquareOverNDF(self):
         return self.getChisquare() / self.getNDF()
+    
+    def getCovMatrix(self):
+        return self._covMatrix
+        
+    def getCovMatrixElem(self, col, row):
+        return self._covMatrix[col][row]
+        
+    def getCorrMatrix(self):
+        return self._corrMatrix
+        
+    def getCorrMatrixElem(self, col, row):
+        return self._corrMatrix[col][row]
 
     def saveData(self, path):
-        d = os.getcwd()
-        p = os.path.abspath(os.path.join(d, path))
-        if not os.path.exists(p):
-            os.mkdir(os.path.dirname(p))
-            open(p, 'a').close()
-        with codecs.open(p, 'w', 'utf-8') as f:
-            f.write('fitting info\n')
-            f.write('============\n')
-            f.write(unichr(0x1D712) + unichr(0x00B2) + ':\t\t' + str(self.getChisquare()) + '\n')
-            f.write('NDF:\t' + str(self.getNDF()) + '\n')
-            f.write(unichr(0x1D712) + unichr(0x00B2) + '/NDF:\t' + str(self.getChisquareOverNDF()) + '\n')
-            f.write('\n')
-            f.write('parameters\n')
-            f.write('==========\n')
+        with TxtFile(path, 'w') as f:
+            f.writeline('fitting info')
+            f.writeline('============')
+            f.writeline(TxtFile.CHISQUARE+ ':\t\t' + str(self.getChisquare()))
+            f.writeline('NDF:\t' + str(self.getNDF()) + '')
+            f.writeline(TxtFile.CHISQUARE + '/NDF:\t' + str(self.getChisquareOverNDF()))
+            f.writeline('')
+            f.writeline('parameters')
+            f.writeline('==========')
             for i, param in self.params.iteritems():
-                #f.write(str(i) + '\t' + param['name'] + '\t' + str(param['value']) + '\t(+-)\t' + str(param['error']) + '\n')
-                f.write('\t'.join([str(i), param['name'], str(param['value']), unichr(0x00B1), str(param['error'])]) + '\n')
-            f.write('\n')
-            f.write('covariance matrix\n')
-            f.write('=================\n')
-            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self.covMatrix)
-            f.write('\n')
-            f.write('correlation matrix\n')
-            f.write('=================\n')
-            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self.corrMatrix)
+                f.writeline('\t', str(i), param['name'], str(param['value']), TxtFile.PM, str(param['error']))
+            f.writeline('')
+            f.writeline('covariance matrix')
+            f.writeline('=================')
+            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._covMatrix)
+            f.writeline('')
+            f.writeline('correlation matrix')
+            f.writeline('==================')
+            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
             f.close()

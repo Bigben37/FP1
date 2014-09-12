@@ -1,40 +1,22 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
-import os.path
-import csv
-from data import Data  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
-
-
-class DataU(Data):
-
-    def loadData(self):
-        d = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.abspath(os.path.join(d, self.path))
-        with open(path, 'rb') as f:
-            reader = csv.reader(f, delimiter='\t')
-            for row in reader:
-                xi, yi = row
-                self.addPoint(float(xi.replace(',', '.')), float(yi.replace(',', '.')))
-
+from lhwz import LHWZData
 
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1) 
     gStyle.SetPadTickX(1)
-    m = DataU.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # messurement 
-    u = DataU.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")  # underground
+    m = LHWZData.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # messurement 
+    u = LHWZData.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")  # underground
     d = m - u  # real data
 
     # start graphics
-    gmax = 4000
-    gmin = 0.01
-
     c = TCanvas('c', '', 800, 600)
     c.SetLogy()
     dg = d.makeGraph('d', 'Spannung U / V', 'Z#ddot{a}hlrate n / (1/s)')
-    dg.SetMaximum(gmax)
-    dg.SetMinimum(gmin)
+    dg.SetMaximum(4000)
+    dg.SetMinimum(0.01)
     dg.Draw('AP')
     ug = u.makeGraph('u')
     ug.SetMarkerColor(4)  # blue

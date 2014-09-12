@@ -48,7 +48,7 @@ class Data(object):
             try:
                 data.loadData()
             except NameError:
-                print("Data.loadData() not in scope! Please implement. ")
+                print(data.__class__.__name__ + ".loadData() not in scope! Please implement. ")
         return data
 
     @classmethod
@@ -185,7 +185,17 @@ class DataErrors(object):
         graph.GetYaxis().CenterTitle()
         return graph
     
-    #TODO implement XError methods
+    def setXErrorAbs(self, error):
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], self.points[i][1], error, self.points[i][3])
+            
+    def setXErrorRel(self, relerror):
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][0]*relerror, self.points[i][3])
+            
+    def setXErrorFunc(self, f):
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], self.points[i][1], f(self.points[i][0]), self.points[i][3])
     
     def setYErrorAbs(self, error):
         for i in range(self.getLength()):

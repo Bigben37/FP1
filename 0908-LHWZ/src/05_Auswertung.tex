@@ -32,6 +32,7 @@ Jedoch kann man die Fehler der Zählrate des Urans wegen der logarithmischen Ska
 weggelassen wurden.
 
 \subsection{Bestimmung der Halbwertszeit von \samarium}
+\subsubsection{$\alpha$-Plateau von \samarium}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Samarium147_Charakteristik.pdf}
@@ -39,17 +40,118 @@ weggelassen wurden.
   \label{img:char:samarium}
 \end{center}
 \end{figure}
+%TODO Beschreibung usw.
 
+\subsubsection{Messung der Flächen}
+Die Durchmesser der verschiedenen Flächen wurden je $N = 6$ mal mit einer Schiebelehre (Fehler $s_d = 0.005$ cm) gemessen. Der Mittelwert $\bar{d}$ berechnet sich mit
+\begin{equation}
+  \bar{d} = \frac{1}{n} \sum_{i=1}^{n} d_i
+\end{equation}
+Nun gibt es zwei Arten von Fehlern für den mittleren Durchmesser, der eine entspricht der Standardabweichung\footnote{Allerdings muss hier mit 
+dem Gewichtungsfaktor $\frac{1}{N-1}$ gerechnet werden, da aus dem gleichen Datensatz schon der Mittelwert berechnet wurde und somit ein Freiheitsgrad 
+weniger verfügbar ist.} 
+und der andere lässt sich aus dem Fehler der Einzelmessung berechnen.
+\begin{equation}
+  s_{\bar{d}, \text{stat}} = \sqrt{\frac{1}{N-1} \sum_{n=1}^{N} \left( d_i - \bar{d} \right)^2} \qquad \text{und} \qquad 
+  s_{\bar{d}} = \frac{s_d}{\sqrt{N}} 
+\end{equation}
+Wie man in \autoref{tab:data:samarium:diameter} sehen kann, ist der statistische Fehler immer größer oder gleicht dem Fehler, der durch die Einzelmessungen 
+verursacht wird. Deshalb haben wir im Folgenden mit dem statistischen Fehler die Fehler der abhängigen Größen berechnet.
+\begin{table}[H]
+\caption{Mittlere Durchmesser mit verschiedenen Fehlern}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+  \hline
+  Durchmesser $\bar{d}$ / cm & $s_{\bar{d}, \text{stat}} / \text{cm}$ & $s_{\bar{d}} / \text{cm}$  \\ \hline 
+  0.9983 & 0.0068 & 0.002 \\ \hline
+  1.6992 & 0.0058 & 0.002 \\ \hline
+  2.8792 & 0.0020 & 0.002 \\ \hline
+\end{tabular}
+\end{center}
+\label{tab:data:samarium:diameter}
+\end{table}
+
+\subsubsection{Bestimmung der Halbwertszeit von \samarium ~aus den einzelnen Flächen}
+Die Fläche und ihr Fehler berechnen sich nun mit
+\begin{equation}
+  F = \pi  \cdot \left( \frac{d}{2} \right)^2 , \qquad 
+  s_F = F \cdot \sqrt{ \left( \frac{\partial F}{\partial d} \cdot s_d \right)^2 } = \frac{d}{2} \cdot \pi \cdot s_d
+\end{equation}
+In \autoref{tab:data:samarium:area} sind die verschiedenen Flächen mit zugehörigen Fehlern aufgelistet.
+\input{data_samarium_areas}
+Die Zählrate $n$ hängt nach \autoref{eq:samarium:counts} von der Fläche $F$ folgendermaßen ab:
+\begin{equation}
+\label{eq:samarium:counts_eval}
+  n(F) = \frac{A_V \cdot F \cdot R}{4} \Rightarrow A_V = \frac{4 \cdot n}{F \cdot R}
+\end{equation}
+Daraus lässt sich die Halbwertszeit mit \autoref{eq:samarium:halflife} bestimmen:
+\begin{equation}
+  T_{1/2}({}^{147}\text{Sm}) = \ln 2 \cdot \frac{N}{A} = \ln 2 \frac{N}{A_V \cdot F \cdot d} \overset{\text{\eqref{eq:samarium:counts_eval}}}{=} 
+  \ln 2 \cdot \frac{N \cdot R}{4 \cdot n \cdot d}
+\end{equation}
+Die Anzahl $N$ der Kerne in \samarium\, ist
+\begin{equation}
+  N = 2 \cdot N_{\text{Sm}_2\text{O}_3} \cdot h_{\text{rel}} = \frac{m \cdot N_A}{M_{\text{Sm}_2\text{O}_3}} \cdot h_{\text{rel}}
+\end{equation}
+mit $m$ Masse der Probe, Avogadrokonstante $N_A$, molarer Masse $M_{\text{Sm}_2\text{O}_3}=348.717$u und natürlicher Häufigkeit $h_{\text{rel}} = 0.1487$ von \samarium. \\
+Mit $\rho \cdot F = d \cdot m$ kann man nun die Halbwertszeit von \samarium\, in Abhängigkeit der Fläche bestimmen.
+\begin{equation}
+  \label{eq:samarium:halflife_eval}
+  T_{1/2}({}^{147}Sm) = \frac{\ln 2}{2} \frac{R \cdot \rho \cdot N_A \cdot h_{\text{rel}}}{M_{\text{Sm}_2\text{O}_3}} \frac{F}{n} = const. \cdot \frac{F}{n}
+\end{equation}
+In \autoref{tab:data:samarium} sind die Messdaten der Zählraten für die verschiedenen Flächen aufgelistet.
+\input{data_samarium}
+Daraus lassen sich folgende Halbwertszeiten berechnen:
+\begin{gather}
+  T_{1/2}(F=0.7828 \text{ cm}^2) = (0.639 \pm 0.048)\cdot 10^{11} \text{ a} \\
+  T_{1/2}(F=2.2676 \text{ cm}^2) = (0.888 \pm 0.042)\cdot 10^{11} \text{ a}\\
+  T_{1/2}(F=6.5106 \text{ cm}^2) = (1.090 \pm 0.042)\cdot 10^{11} \text{ a}
+\end{gather}
+Man erkennt, dass die Werte für die Halbwertszeiten mit der Fläche zunehmen, was nicht dem theoretischen Modell entspricht (die Abhängigkeit der 
+Fläche wurde schon in der Formel berücksichtigt und es wurden ungefähr gleiche Werte erwartet). Außerdem ist der Unterschied der ersten und letzten 
+Halbwertszeit ungefähr $59\%$. Deshalb wird im nächsten Abschnitt die Halbwertszeit mit einer anderen Methode bestimmt, 
+um etwaige systematische Fehler herauszufiltern.
+
+\subsubsection{Bestimmung der Halbwertszeit von \samarium ~mit einer Ausgleichsgeraden}
+Eine Ausgleichsgerade lässt sich mit nur drei Messpunkten nicht so exakt bestimmen, jedoch wurde wegen der großen Unstimmigkeit der Fehler 
+zueinander eine andere Methode zur Bestimmung der Halbwertszeit gesucht.
+Aus \autoref{eq:samarium:halflife_eval} folgt
+\begin{equation}
+   n = \frac{\ln 2}{2} \frac{R \cdot \rho \cdot N_A \cdot h_{\text{rel}}}{M_{\text{Sm}_2\text{O}_3} \cdot T_{1/2}({}^{147}\text{Sm})} \cdot F
+\end{equation}
+Es wird ein Polynom ersten Grades angesetzt:
+\begin{equation}
+  n(F) = a + b \cdot F
+\end{equation}
+wobei man mit der Steigung $b$ die Halbwertszeit berechnen kann
+\begin{equation}
+  T_{1/2}({}^{147}\text{Sm}) = \frac{\ln 2}{2} \frac{R \cdot \rho \cdot N_A \cdot h_{\text{rel}}}{M_{\text{Sm}_2\text{O}_3} \cdot b}
+\end{equation}
+Der Fehler folgt aus dem Fehler der Steigung $s_b$
+\begin{equation}
+  s_{T_{1/2}} = T_{1/2}({}^{147}\text{Sm}) \cdot \frac{s_b}{b}
+\end{equation}
+Der Achsenabschnitt $a$ sollte im Idealfall verschwinden. \\
+Die Kurvenanpassung liefert
+\begin{gather}
+  a = (0.068  \pm 0.012 ) \cdot \frac{1}{\text{s}} \\
+  b = (0.0947 \pm 0.0048) \cdot \frac{1}{\text{s}\cdot \text{cm}^2}
+\end{gather}
+und ist in \autoref{img:samarium:areafit} graphisch dargestellt. 
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Samarium147-Flaechenabhaengigkeit.pdf}
   \caption[Flächenabhängigkeit von \samarium]{Flächenabhängigkeit von \samarium bei 1600V}
-  \label{figureLabel}
+  \label{img:samarium:areafit}
 \end{center}
 \end{figure}
+Die Rechnung liefert eine Halbwertszeit von
+\begin{equation}
+  T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11} \text{ a}
+\end{equation}
 
-
-%TODO Rest der Samariumauswertung
+\subsubsection{Diskussion der Ergebnisse}
+Der Literaturwert für die Halbwertszeit von \samarium beträgt 
 
 \subsection{Bestimmung der Halbwertszeit von \kalium}
 \subsubsection{$\beta$-Plateau von \kalium}
@@ -60,9 +162,9 @@ weggelassen wurden.
   \label{img:char:kalium}
 \end{center}
 \end{figure}
-In \autoref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium ohne Untergrund gegen die Zählrohrspannun $V$ aufgetragen 
-und in Vergleich mit der Zählrate von \uran gesetzt worden. Die Fehler wurden, wie in Kapitel \ref{sub:eval:uran} beschrieben, bestimmt.
-%TODO Erklärung Peak am Anfang
+In \autoref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium\, ohne Untergrund gegen die Zählrohrspannun $V$ aufgetragen 
+und in Vergleich mit der Zählrate von \uran\, gesetzt worden. Die Fehler wurden, wie in Kapitel \ref{sub:eval:uran} beschrieben, bestimmt.
+%TODO Erklärung Peak am Anfang + Beschreibung Kurve
 
 \subsubsection{Massenabhängigkeit der Zählrate} %TODO besserer Titel?
 Nach \autoref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab:

@@ -74,7 +74,7 @@ def makeMassFit():
 
     d.saveDataToLaTeX(['Masse $m / g$', '$s_m / g$ ', 'Z\"ahlrate $n / (1/s)$', '$s_n / (1/s)$'],
                       ['%.3f', '%.3f', '%.3f', '%.3f'], 
-                      'Z\"ahlraten von \\kalium f\"ur verschiedene Massen mit Fehlern', 'tab:data:kalium', '../src/data_kalium.tex', 'w')
+                      'Z\"ahlraten von \\kalium\,f\"ur verschiedene Massen mit Fehlern', 'tab:data:kalium', '../src/data_kalium.tex', 'w')
 
     c = TCanvas('c2', '', 800, 600)
     g = d.makeGraph('g', 'Masse m / g', 'Z#ddot{a}hlrate n / (1/s)')

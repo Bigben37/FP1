@@ -267,7 +267,6 @@ class DataErrors(object):
                 for i in range(self.getLength()):
                     y.append(ys[i] - yo[i])
                     yerror.append(np.sqrt((yse[i])**2 + (yoe[i])**2))
-                print(yerror)
                 return DataErrors.fromLists(self.getX(), y, [0] * self.getLength(), yerror)
             else:
                 return NotImplemented

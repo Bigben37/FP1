@@ -47,12 +47,12 @@ def readSingleEntryFile(path):
             return float(f.readline().split('\t')[1].replace(',', '.'))
 
 def avgstd(list):
-    return np.average(list), np.std(list)
+    return np.average(list), np.std(list, ddof=1)
 
 def area(*args):
     d  = args[0][0]
     sd = args[0][1]
-    return np.pi*(d/2)**2, (1./8)*(d**3)*(np.pi**2)*sd
+    return np.pi*(d/2)**2, (d / 2)*np.pi*sd
 
 def calculateHalfLife(a, n, sa, sn):
     c  = 0.004026
@@ -70,6 +70,13 @@ def makeAreaFit():
     d_l = [2.880, 2.880, 2.875, 2.880, 2.880, 2.880]
     d = map(avgstd, [d_s, d_m, d_l])
     a = map(area, d)
+    
+    diaarea = DataErrors()
+    for i in range(3):
+        diaarea.addPoint(d[i][0], a[i][0], d[i][1], a[i][1])
+    diaarea.saveDataToLaTeX(['Durchmesser $d$ / cm', '$s_d$ / cm', 'Fl\"ache $F / \\text{cm}^2$', '$s_F / \\text{cm}^2$'], 
+                            ['%.4f', '%.4f', '%.4f', '%.4f'], 'Verschiedene Fl\"achen f\"ur die Samariumessung', 
+                            'tab:data:samarium:area', '../src/data_samarium_areas.tex', 'w')
     
     with TxtFile('../fit/samarium.txt', 'w') as f:
         f.writeline('areas')
@@ -91,6 +98,10 @@ def makeAreaFit():
     for file in files:
         n = readSingleEntryFile(file[2])
         d.addPoint(file[0], n - u, file[1], np.sqrt(n / file[3] + u / tu))
+        
+    d.saveDataToLaTeX(['Fl\"ache $F / \\text{cm}^2$', '$s_F / \\text{cm}^2$', 'Z\"ahlrate $n / (1/s)$', '$s_n / (1/s)$'], 
+                      ['%.4f', '%.4f', '%.3f', '%.3f'], 'Z\"ahlraten von \\samarium~f\"ur verschiedene Fl\"achen mit Fehlern', 
+                      'tab:data:samarium', '../src/data_samarium.tex', 'w')
         
     c = TCanvas('c2', '', 800, 600)
     g = d.makeGraph('g', 'Fl#ddot{a}che F / cm^{2}', 'Z#ddot{a}hlrate n / (1/s)')

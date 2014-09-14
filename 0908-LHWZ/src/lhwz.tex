@@ -34,7 +34,7 @@
     linkcolor=blue,       % color of internal links (change box color with linkbordercolor)
     citecolor=green,       % color of links to bibliography
     filecolor=magenta,     % color of file links
-    urlcolor=cyan          % color of external links
+    urlcolor=blue          % color of external links
 }
 
 \usepackage{chngcntr}
@@ -60,14 +60,22 @@
 \subtitle{Fortgeschrittenen-Praktikum 1}
 \author{Moritz Bitterling und Benjamin Rottler \\ Universität Freiburg}
 \date{\expdate}
-\publishers{\vspace{3cm} \includegraphics[height=8cm]{../../img/logo_uni.pdf}}
-%TODO links unten Name von Betreuer einfügen
 
 % DOCUMENT
 \begin{document}
 
 \hypersetup{pageanchor=false} %stop page numbering (hyperref) to prevent for double page numers
 \input{titlepage}
+\thispagestyle{empty}
+
+\newpage
+Alle Berechnungen in diesem Protokoll wurden unter Python 2.7 mit Hilfe folgender Programmbibliotheken durchgeführt:
+\begin{itemize}
+  \item PyROOT (\url{http://root.cern.ch/drupal/content/pyroot})
+  \item NumPy (\url{http://www.numpy.org/})
+\end{itemize}
+Alle Python-Skripte und \LaTeX-Skripte können online unter \\
+\url{https://github.com/Bigben37/FP1/tree/master/0908-LHWZ} abgerufen werden.
 \thispagestyle{empty}
 
 \newpage

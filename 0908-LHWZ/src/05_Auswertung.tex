@@ -2,7 +2,7 @@
 
 \subsection{Zählrohrcharakteristik mit \uran}
 \label{sub:eval:uran}
-Die gemessene Abhängigkeit der Zählrate $n$ von \uran ohne Untergrund von der Zählrohrspannung $U$ wird in der Abbildung \ref{img:char:uran} gezeigt.
+Die gemessene Abhängigkeit der Zählrate $n$ von \uran\, ohne Untergrund von der Zählrohrspannung $U$ wird in der Abbildung \ref{img:char:uran} gezeigt.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Uran238_Charakteristik.pdf}
@@ -72,6 +72,7 @@ verursacht wird. Deshalb haben wir im Folgenden mit dem statistischen Fehler die
 \end{table}
 
 \subsubsection{Bestimmung der Halbwertszeit von \samarium ~aus den einzelnen Flächen}
+\label{subsub:samarium:halflife:single}
 Die Fläche und ihr Fehler berechnen sich nun mit
 \begin{equation}
   F = \pi  \cdot \left( \frac{d}{2} \right)^2 , \qquad 
@@ -103,9 +104,9 @@ In \autoref{tab:data:samarium} sind die Messdaten der Zählraten für die versch
 \input{data_samarium}
 Daraus lassen sich folgende Halbwertszeiten berechnen:
 \begin{gather}
-  T_{1/2}(F=0.7828 \text{ cm}^2) = (0.639 \pm 0.048)\cdot 10^{11} \text{ a} \\
-  T_{1/2}(F=2.2676 \text{ cm}^2) = (0.888 \pm 0.042)\cdot 10^{11} \text{ a}\\
-  T_{1/2}(F=6.5106 \text{ cm}^2) = (1.090 \pm 0.042)\cdot 10^{11} \text{ a}
+  T_{1/2}(F=0.783 \text{ cm}^2) = (0.639 \pm 0.05)\cdot 10^{11} \text{ a} \\
+  T_{1/2}(F=2.268 \text{ cm}^2) = (0.888 \pm 0.04)\cdot 10^{11} \text{ a}\\
+  T_{1/2}(F=6.5106 \text{ cm}^2) = (1.09 \pm 0.04)\cdot 10^{11} \text{ a}
 \end{gather}
 Man erkennt, dass die Werte für die Halbwertszeiten mit der Fläche zunehmen, was nicht dem theoretischen Modell entspricht (die Abhängigkeit der 
 Fläche wurde schon in der Formel berücksichtigt und es wurden ungefähr gleiche Werte erwartet). Außerdem ist der Unterschied der ersten und letzten 
@@ -151,14 +152,23 @@ Die Rechnung liefert eine Halbwertszeit von
 \end{equation}
 
 \subsubsection{Diskussion der Ergebnisse}
-Der Literaturwert für die Halbwertszeit von \samarium beträgt 
+Der Literaturwert für die Halbwertszeit von \samarium\, ist $\tilde{T}_{1/2}({}^{147}\text{Sm}) = 1.06 \cdot 10^{11} \text{ a}$.
+Wie schon in \ref{subsub:samarium:halflife:single} erwähnt, stimmen die Halbwertszeiten für die unterschiedlichen Flächen nicht miteinander 
+überein. Der Wert für die größte Fläche $T_{1/2}(F=6.5106 \text{ cm}^2) = (1.09 \pm 0.04)\cdot 10^{11} \text{ a}$ stimmt innerhalb einer 
+Standardabweichung mit dem Literaturwert überein, die Werte der anderen Flächen weichen jedoch stark von ihm ab. Wir vermuten einen systematischen 
+Fehler (TODO Ursachen) \\%TODO Ursachen
+Bei der Bestimmung der Halbwertszeit mit der Ausgleichsgeraden errechnet man einen Wert von 
+$T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11} \text{ a}$, welcher innerhalb von drei Standardabweichungen mit dem Literaturwert 
+übereinstimmt. Der Achsenabschnitt sollte laut theoretischem Modell verschwinden, jedoch beträgt er $a = (0.068  \pm 0.012 ) \cdot \frac{1}{\text{s}}$
+Dies könnte auf einen systematischen Fehler hinweisen.
+%TODO Chi^2
 
 \subsection{Bestimmung der Halbwertszeit von \kalium}
 \subsubsection{$\beta$-Plateau von \kalium}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Kalium40_Charakteristik.pdf}
-  \caption[$\beta$-Plateau mit \samarium]{$\beta$-Plateau von \kalium}
+  \caption[$\beta$-Plateau mit \kalium]{$\beta$-Plateau von \kalium}
   \label{img:char:kalium}
 \end{center}
 \end{figure}
@@ -226,6 +236,7 @@ Man erhält folgendes Ergebnis:
 \end{equation}
 
 \subsubsection{Diskussion des Ergebnisses}
+
 
 %Tabellen mit Messergebnissen
 %Abbildungen

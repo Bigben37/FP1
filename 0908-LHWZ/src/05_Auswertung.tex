@@ -1,6 +1,7 @@
 \section{Messergebnisse und Auswertung}
 
 \subsection{Zählrohrcharakteristik mit \uran}
+\label{sub:eval:uran}
 Die gemessene Abhängigkeit der Zählrate $n$ von \uran ohne Untergrund von der Zählrohrspannung $U$ wird in der Abbildung \ref{img:char:uran} gezeigt.
 \begin{figure}[H]
 \begin{center}
@@ -14,7 +15,21 @@ unterschiedlichen Energien der beiden Strahlungen verursacht werden. Des weitere
 \ref{img:char:uran} abgebildet. Der Anstieg der Zählrate des Untergrundes, verursacht von der Zählrohrspannung, lässt sich gut erkennen. Allerdings 
 sieht man auch die statistischen Schwankungen in der Zählrate des Untergrundes (die Messpunkte mit $n = 0 / s$ lassen sich auf der logarithmischen 
 Skala nicht darstellen), da die einzelnen Messpunkte nur in einer geringen Zeitspanne ($t=50s$) aufgenommen wurden. Für eine glattere Kurve wäre 
-eine längere Messzeit erforderlich gewesen.
+eine längere Messzeit erforderlich gewesen. \\
+Die relativen Fehler auf die gemessenen Zählraten $\hat{n}$ beträgt nach \autoref{eq:counts:errors}
+\begin{equation}
+  \frac{s_{\hat{n}}}{\hat{n}} = \frac{1}{\sqrt{\hat{n} \cdot t_{\hat{n}}}}
+\end{equation}
+Von der gemessenen Zählrate $\hat{n}$ zieht man die Untergrundszählrate $u$ ab, um die echte Zählrate $n$ zu berechnen.
+\begin{equation}
+  n = \hat{n} - u
+\end{equation}
+Der absolute Fehler von der echten Zählrate lässt sich folgendermaßen bestimmen.
+\begin{equation}
+  s_n = \sqrt{s_{\hat{n}} + s_u}
+\end{equation}
+Jedoch kann man die Fehler der Zählrate des Urans wegen der logarithmischen Skala nicht mehr gut erkennen, weshalb sie in der Abbildung 
+weggelassen wurden.
 
 \subsection{Bestimmung der Halbwertszeit von \samarium}
 \begin{figure}[H]
@@ -46,11 +61,11 @@ eine längere Messzeit erforderlich gewesen.
 \end{center}
 \end{figure}
 In \autoref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium ohne Untergrund gegen die Zählrohrspannun $V$ aufgetragen 
-und in Vergleich mit der Zählrate von \uran gesetzt worden.
+und in Vergleich mit der Zählrate von \uran gesetzt worden. Die Fehler wurden, wie in Kapitel \ref{sub:eval:uran} beschrieben, bestimmt.
 %TODO Erklärung Peak am Anfang
 
-\subsubsection{Massenabhängigkeit der Zählrate} %TODO besserer Titel
-Nach \autoref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab: %TODO ref
+\subsubsection{Massenabhängigkeit der Zählrate} %TODO besserer Titel?
+Nach \autoref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab:
 \begin{equation}
   n(m) = \frac{f}{2} \frac{A_s \cdot F \cdot \rho}{\mu} \left( 1 - e^{- \frac{\mu \cdot m}{F \cdot \rho}} \right) = a(1-e^{-b \cdot m})
 \end{equation}
@@ -58,19 +73,20 @@ mit
 \begin{equation}
   a = \frac{f}{2} \frac{A_s \cdot F \cdot \rho}{\mu} \qquad \text{und} \qquad b = \frac{\mu}{F \cdot \rho}
 \end{equation}
-%TODO Tabelle Messwerte
-Die beiden Parameter $a$ und $b$ lassen sich mit einer Kurvenanpassung bestimmen.
+Die beiden Parameter $a$ und $b$ lassen sich mit einer Kurvenanpassung (siehe \autoref{img:kalium:massdep}) bestimmen. \\
+Die Werte dafür sind in \autoref{tab:data:kalium} aufgelistet.
+\input{data_kalium} 
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Kalium40_Massenabhaengigkeit.pdf}
   \caption[Massenabhängigkeit der Zählrate von \kalium]{Massenabhängigkeit der Zählrate von \kalium bei 3200V}
-  \label{figureLabel}
+  \label{img:kalium:massdep}
 \end{center}
 \end{figure}
 Die Werte lauten:
 \begin{gather}
-  a = 5.397 \pm 0.067 \\ %TODO runden ja oder nein?
-  b = 1.862 \pm 0.064
+  a = (5.397 \pm 0.067) \cdot \frac{1}{s} \\ %TODO runden ja oder nein?
+  b = (1.862 \pm 0.064) \cdot \frac{1}{g} 
 \end{gather}
 Außerdem ergibt sich ein Korrelationskoeffizient von
 \begin{equation}

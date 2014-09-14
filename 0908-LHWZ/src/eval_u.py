@@ -1,5 +1,6 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
+import numpy as np
 from lhwz import LHWZData
 
 def main():
@@ -7,13 +8,17 @@ def main():
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1) 
     gStyle.SetPadTickX(1)
+    errorf = lambda n: np.sqrt(n / 50)  # t = 50s
     m = LHWZData.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # messurement 
+    m.setYErrorFunc(errorf)
     u = LHWZData.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")  # underground
+    u.setYErrorFunc(errorf)
     d = m - u  # real data
 
     # start graphics
     c = TCanvas('c', '', 800, 600)
     c.SetLogy()
+    d.setYErrorAbs(0)  # errors to small to see properly -> set to 0
     dg = d.makeGraph('d', 'Spannung U / V', 'Z#ddot{a}hlrate n / (1/s)')
     dg.SetMaximum(4500)
     dg.SetMinimum(0.01)

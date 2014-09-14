@@ -1,22 +1,27 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 import os
-import numpy
+import numpy as np
 from data import Data, DataErrors  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
 from fitter import Fitter
 from txtfile import TxtFile
 from lhwz import LHWZData
 
 def makeCharacteristic():
+    errorf = lambda n: np.sqrt(n / 50)  # t = 50s
     mk = LHWZData.fromPath("../data/10_K_m9_Zaehlrohrcharakteristik_2500-4000-100.txt")  # kalium
+    mk.setYErrorFunc(errorf)
     mu = LHWZData.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")  # Uranium
+    mu.setYErrorFunc(errorf)
     u  = LHWZData.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")                # underground
+    u.setYErrorFunc(errorf)
     du = mu - u
     u.points = u.points[15:]  # get relevant underground (2500V-4000V) for kalium
     dk = mk - u
 
     c = TCanvas('c1', '', 800, 600)
     c.SetLogy()
+    du.setYErrorAbs(0)  # errors to small to see properly -> set to 0
     dug = du.makeGraph('du', 'Spannung U / V', 'Z#ddot{a}hlrate n / (1/s)')
     dug.SetMaximum(4000)
     dug.SetMinimum(1)
@@ -65,7 +70,7 @@ def makeMassFit():
 
     for file in files:
         n = readSingleEntryFile(file[1])
-        d.addPoint(file[0], n - u, 0, numpy.sqrt(n / file[2] + u / tu))
+        d.addPoint(file[0], n - u, 0, np.sqrt(n / file[2] + u / tu))
 
     c = TCanvas('c2', '', 800, 600)
     g = d.makeGraph('g', 'Masse m / g', 'Z#ddot{a}hlrate n / (1/s)')
@@ -99,8 +104,8 @@ def makeMassFit():
     mrel = 39.0983 + 35.45
     f = 1.29
     rho = fit.getCorrMatrixElem(1, 0)
-    thalf = (numpy.log(2) * NA * hrel * f) / (1.12 * mrel * 2 * a * b) / (3600 * 24 * 365.242)
-    sthalf = thalf * numpy.sqrt((sa / a) ** 2 + (sb / b) ** 2 + 2 * rho * (sa / a) * (sb / b))
+    thalf = (np.log(2) * NA * hrel * f) / (1.12 * mrel * 2 * a * b) / (3600 * 24 * 365.242)
+    sthalf = thalf * np.sqrt((sa / a) ** 2 + (sb / b) ** 2 + 2 * rho * (sa / a) * (sb / b))
 
     with TxtFile.fromRelPath('../fit/kalium.txt', 'a') as f:
         f.writeline()

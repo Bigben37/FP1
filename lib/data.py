@@ -1,6 +1,7 @@
 #!/usr/bin/python2.7
 from ROOT import TGraph, TGraphErrors
 import array
+import numpy as np
 
 class Data(object):
 
@@ -208,3 +209,40 @@ class DataErrors(object):
     def setYErrorFunc(self, f):
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], f(self.points[i][1]))
+            
+    def __add__(self, other):
+        if isinstance(other, DataErrors):
+            if self.getLength() == other.getLength():
+                y = []
+                yerror = []
+                ys = self.getY()
+                yse = self.getEY()
+                yo = other.getY()
+                yoe = other.getYE()
+                for i in range(self.getLength()):
+                    y.append(ys[i] + yo[i])
+                    yerror.append(np.sqrt((yse[i])**2 + (yoe[i])**2))
+                return DataErrors.fromLists(self.getX(), y, [0] * self.getLength(), yerror)
+            else:
+                return NotImplemented
+        else:
+            return NotImplemented
+
+    def __sub__(self, other):
+        if isinstance(other, DataErrors):
+            if self.getLength() == other.getLength():
+                y = []
+                yerror = []
+                ys = self.getY()
+                yse = self.getEY()
+                yo = other.getY()
+                yoe = other.getEY()
+                for i in range(self.getLength()):
+                    y.append(ys[i] - yo[i])
+                    yerror.append(np.sqrt((yse[i])**2 + (yoe[i])**2))
+                print(yerror)
+                return DataErrors.fromLists(self.getX(), y, [0] * self.getLength(), yerror)
+            else:
+                return NotImplemented
+        else:
+            return NotImplemented

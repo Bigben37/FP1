@@ -8,15 +8,20 @@ from fitter import Fitter
 from txtfile import TxtFile
 
 def makeCharacteristic():
+    errorf = lambda n: np.sqrt(n / 50)  # t = 50s
     msm = LHWZData.fromPath("../data/07_Sm_ggrFl_Zaehlrohrcharakteristik_1000-2200-100.txt")  # Samarium
+    msm.setYErrorFunc(errorf)
     mu = LHWZData.fromPath("../data/01_Uran_Zaehlrohrcharakteristik_1000-4000-100.txt")       # Uranium
+    mu.setYErrorFunc(errorf)
     u = LHWZData.fromPath("../data/02_Uran_Untergrund_1000-4000-100.txt")                     # underground
+    u.setYErrorFunc(errorf)
     du = mu - u
     u.points = u.points[:13]  # get relevant underground (1000V-2200V) for samarium
     dsm = msm - u
 
     c = TCanvas('c1', '', 800, 600)
     c.SetLogy()
+    du.setYErrorAbs(0)  # errors to small to see properly -> set to 0
     dug = du.makeGraph('du', 'Spannung U / V', 'Z#ddot{a}hlrate n / (1/s)')
     dug.SetMaximum(4000)
     dug.SetMinimum(0.1)

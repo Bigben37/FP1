@@ -7,6 +7,7 @@ und die Zerfallskonstante $\lambda =\frac{1}{\tau}$ verwendet.
 Das Produkt $\lambda \cdot dt$ gibt die Wahrscheinlichkeit dafür an, dass ein Kern in der Zeiteinheit $dt$ zerfällt.
 Aus der Halbwertszeit $T_{1/2}$ des Elements wird $\lambda$ so berechnet:
 \begin{equation}
+\label{eq:lambdahwz}
 	\lambda=\frac{\ln (2)}{T_{1/2}}
 \end{equation}
 Das Produkt aus Zerfallskonstante und Zahl der vorhandenen Kerne $N(t)$ liefert die
@@ -24,6 +25,7 @@ Damit erhält man für die Aktivität $A(t)$
 \end{equation}
 Für lange Halbwertszeiten sind Kernanzahl $N$ und Aktivität $A$ nahezu konstant und es gilt
 \begin{equation}
+\label{eq:aln}
 	A=\lambda N
 \end{equation}
 
@@ -58,7 +60,8 @@ zerfällt durch $\beta^-$-Zerfall zu Protaktinium \chemel{Pa}{234},
 mit einer Energie der Elektronen von maximal 0.2\,MeV.
 
 \subsubsection{Elektroneneinfang}
-Die andere Zerfallsmöglichkeit von \chemel{K}{40} ist der Einfang eines inneren Schalenelektrons
+Die andere Zerfallsmöglichkeit von \chemel{K}{40} (Wahrscheinlichkeit 10.72\,\%)
+ist der Einfang eines inneren Schalenelektrons
 in den Kern und Umwandlung eines Protons in ein Neutron:
 \begin{center}
 $\text{p}^+ + \text{e}^- \rightarrow \text{n} + \nu_e$ bzw.\\[0.15cm]
@@ -67,16 +70,110 @@ ${}^{A}_{Z}\text{X} \rightarrow {}^{A}_{Z-1}\text{Y} + \nu_e$
 Für \chemel{K}{40} bedeutet das eine Umwandlung zu \chemel{Ar}{40}.\\
 Die Zerfallskonstanten für die beiden Zerfallsprozesse von \chemel{K}{40} addieren sich.
 Da nur der $\beta^-$-Zerfall detektiert werden kann, muss dies bei der Bestimmung der
-Halbwertszeit berücksichtigt werden.
+Halbwertszeit durch Multiplikation mit dem Faktor 1.12 berücksichtigt werden.
 
 \subsection{Absorption von radioaktiver Strahlung}
+\subsubsection{$\alpha$-Strahlung}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=10cm]{../img/absalpha}
+  \caption{Kegel mit Öffnungswinkel $\alpha$,
+  innerhalb dessen ein emittiertes $\alpha$-Teilchen die Oberfläche erreicht}
+  \label{img:absalpha}
+\end{center}
+\end{figure}
+Bei der Absorption von $\alpha$-Strahlung wird davon ausgegangen, dass die Strahlung im Medium
+die Reichweite R besitzt.
+Man erhält dann für eine Schicht mit der Dicke $dr$ und der Entfernung $r$ von der Schichtoberfläche
+folgenden Anteil $dn$ der Zählrate an der Oberfläche:
+\begin{equation}
+  dn=A_V \cdot F \cdot dr \cdot p_{\text{ex}}(r)
+\end{equation}
+$A_V$ ist die Aktivität der Probe pro Volumen, $F$ die Oberfläche der Probe und $p_{\text{ex}}$
+die Wahrscheinlichkeit, dass ein emittiertes $\alpha$-Teilchen aus der Tiefe $r$ die Oberfläche erreicht.\\
+Für die Zählrate $n$ an der Oberfläche folgt dann
+\begin{equation}
+  n=\int_{0}^{R}{A_V \cdot F \cdot p_{\text{ex}}(r) \cdot dr}
+\end{equation}
+Da das $\alpha$-Teilchen in eine zufällige Richtung abgestrahlt wird,
+lässt sich $p_{\text{ex}}$ durch den Raumwinkel $\Omega(\alpha)$ berechnen,
+den der Kegel mit Öffnungswinkel $\alpha$
+aus dem gesamten Raumwinkel $4\pi$ ausschneidet:
+\begin{equation}
+  p_{\text{ex}}(\alpha)=\frac{\Omega(\alpha)}{4\pi}
+\end{equation}
+Auf \autoref{img:absalpha} erkennt man,
+dass für den Öffnungswinkel $\alpha$ gilt:
+\begin{equation}
+  \cos \alpha = \frac{r}{R}
+\end{equation}
+Damit folgt für den Raumwinkel
+\begin{equation}
+  \Omega=2\pi \cdot (1-\cos(\alpha))=2\pi \cdot (1-\frac{r}{R})
+\end{equation}
+Es gilt also
+\begin{equation}
+\label{eq:nAFR4}
+  n=A_V \cdot F \cdot \int_{0}^{R}{\frac{1}{4\pi}\cdot 2\pi \cdot (1-\frac{r}{R}) \cdot dr}=
+  A_V \cdot F \cdot \frac{R}{4}
+\end{equation}
+Da sowohl $R$ als auch $A_V$ nicht bekannt sind, muss obige Gleichung weiter umgeformt werden.
+Dafür wird folgender Zusammenhang benutzt:
+\begin{equation}
+  N_{{}^{147}\text{Sm}}=
+  2 \cdot h_{\text{rel}} \cdot N_A \cdot \frac{m_{\text{Sm}_2\text{O}_3}}{M_{\text{Sm}_2\text{O}_3}}=
+  2 \cdot h_{\text{rel}} \cdot N_A \cdot \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot V}{M_{\text{Sm}_2\text{O}_3}}
+\end{equation}
+$  N_{{}^{147}\text{Sm}}$ ist die Zahl der Kerne des radioaktiven Isotops von Samarium und
+$h_{\text{rel}}$ seine natürliche Häufigkeit. $m_{\text{Sm}_2\text{O}_3}$ ist die Masse von Sm$_2$O$_3$ im Zählrohr,
+$\rho_{\text{Sm}_2\text{O}_3}$ seine Dichte und $M_{\text{Sm}_2\text{O}_3}$ die molare Masse.
+Der Faktor 2 ist vorhanden, weil in einem Mol Sm$_2$O$_3$ zwei Mol Samarium vorliegen.
+$N_A$ ist die Avogadrozahl.\\
+Es gilt also
+\begin{equation}
+\begin{split}
+  & n \overset{\ref{eq:nAFR4}}=
+  \frac{A}{V} \cdot F \cdot \frac{R}{4} \overset{\ref{eq:aln}}=
+  \frac{\lambda \cdot N_{{}^{147}\text{Sm}}}{V} \cdot F \cdot \frac{R}{4} =
+  \frac{\lambda \cdot 2 \cdot h_{\text{rel}} \cdot N_A \cdot
+  \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot V}{M_{\text{Sm}_2\text{O}_3}}}{V} 
+  \cdot F \cdot \frac{R}{4} \overset{\ref{eq:lambdahwz}}= \\[0.2cm]
+  & \frac{\ln(2) \cdot h_{\text{rel}} \cdot N_A \cdot
+  \rho_{\text{Sm}_2\text{O}_3} \cdot R \cdot F}{2 \cdot T_{1/2} \cdot M_{\text{Sm}_2\text{O}_3}} 
+  \end{split}
+\end{equation}
+Das Produkt $\rho_{\text{Sm}_2\text{O}_3} \cdot R$ lässt sich mit der Näherung von Bragg und Kleeman abschätzen:
+\begin{equation}
+  \rho \cdot R = c \cdot \sqrt{m_A}
+\end{equation}
+Diese Beziehung gilt für alle Materialien. $m_A$ ist das effektive Atomgewicht des Materials
+und wird folgendermaßen berechnet:
+\begin{equation}
+  \sqrt{m_A} = \sum_{i}p_i \cdot \sqrt{m_{A_i}}
+\end{equation}
+${m_{A_i}}$ ist das Atomgewicht eines Elements und $p_i$ sein relativer Anteil.\\
+Es gilt
+\begin{equation}
+  \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3}} {\rho_{\text{Luft}} \cdot R_{\text{Luft}}}
+  =\sqrt{\frac{m_{A,\text{Sm}_2\text{O}_3}}{m_{A,\text{Luft}}}}
+\end{equation}
+Mit $m_{A,\text{Sm}_2\text{O}_3} = 123.76 \, \text{g}$, $m_{A,\text{Luft}} =14.66\, \text{g}$,
+$\rho_{\text{Luft}} = 0.001226\,\text{g} / \text{cm}^3$ und 
+$R_{\text{Luft}} = 1.13$\,cm folgt
+\begin{equation}
+  \rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3} =
+  4.025 \cdot 10^{-3} \, \text{g/cm}^2
+\end{equation}
+
+
+\subsubsection{$\beta$-Strahlung}
 
 \subsection{Funktionsweise des Zählrohrs}
 
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=8cm]{../img/aufbau}
-  \caption[Zählrohrcharakteristik mit \uran]{Methangaszählrohr zur Bestimmung der Aktivität von radioaktiven Proben}
+  \caption{Methangaszählrohr zur Bestimmung der Aktivität von radioaktiven Proben}
   \label{img:aufbau}
 \end{center}
 \end{figure}

@@ -2,6 +2,7 @@
 from ROOT import TGraph, TGraphErrors
 import array
 import numpy as np
+from txtfile import TxtFile
 
 class Data(object):
 
@@ -75,7 +76,14 @@ class Data(object):
         graph.GetYaxis().SetTitle(ytitle)
         graph.GetYaxis().CenterTitle()
         return graph
-
+    
+    def saveData(self, title, path, mode, encoding=''):
+        with TxtFile(path, mode, encoding) as f:
+            f.writeline(title)
+            f.writeline('='*len(title))
+            for point in self.points:
+                f.writeline('\t', *point)
+                
     def __add__(self, other):
         if isinstance(other, Data):
             if self.getLength() == other.getLength():
@@ -210,6 +218,22 @@ class DataErrors(object):
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], f(self.points[i][1]))
             
+    def saveDataToLaTeX(self, thead, format, caption, label, path, mode, encoding='utf-8'):
+        i = '  '  # intendation
+        with TxtFile(path, mode, encoding) as f:
+            f.writeline('\\begin{table}[H]')
+            f.writeline('\\caption{' + caption + '}')
+            f.writeline('\\begin{center}')
+            f.writeline('\\begin{tabular}{' + '|c' * len(self.points[0])  + '|}')
+            f.writeline(i + '\hline')
+            f.writeline(i + ' & '.join(thead) + ' \\\\ \hline ')
+            for point in self.points:
+                f.writeline(i + ' & '.join(format) % (point[0], point[2], point[1], point[3]) + ' \\\\ \hline')
+            f.writeline('\\end{tabular}')  
+            f.writeline('\\end{center}')    
+            f.writeline('\\label{' + label  + '}')  
+            f.writeline('\\end{table}')
+    
     def __add__(self, other):
         if isinstance(other, DataErrors):
             if self.getLength() == other.getLength():
@@ -227,6 +251,9 @@ class DataErrors(object):
                 return NotImplemented
         else:
             return NotImplemented
+        
+    def saveData(self):
+        pass
 
     def __sub__(self, other):
         if isinstance(other, DataErrors):

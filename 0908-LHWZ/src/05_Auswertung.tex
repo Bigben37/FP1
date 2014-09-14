@@ -1,7 +1,7 @@
 \section{Messergebnisse und Auswertung}
 
-\subsection{Zählrohrcharakterstik mit \uran}
-
+\subsection{Zählrohrcharakteristik mit \uran}
+Die gemessene Abhängigkeit der Zählrate $n$ von \uran ohne Untergrund von der Zählrohrspannung $U$ wird in der Abbildung \ref{img:char:uran} gezeigt.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Uran238_Charakteristik.pdf}
@@ -9,7 +9,12 @@
   \label{img:char:uran}
 \end{center}
 \end{figure}
-%TODO Beschreibung
+Man erkennt gut das $\alpha$-Plateau bis ca. $2000\,V$ und das $\beta$-Plateau von $2800\,V$ bis $3500\,V$, welche durch die 
+unterschiedlichen Energien der beiden Strahlungen verursacht werden. Des weiteren wurde die Zählrate des Untergrundes in der gleiche Abbildung 
+\ref{img:char:uran} abgebildet. Der Anstieg der Zählrate des Untergrundes, verursacht von der Zählrohrspannung, lässt sich gut erkennen. Allerdings 
+sieht man auch die statistischen Schwankungen in der Zählrate des Untergrundes (die Messpunkte mit $n = 0 / s$ lassen sich auf der logarithmischen 
+Skala nicht darstellen), da die einzelnen Messpunkte nur in einer geringen Zeitspanne ($t=50s$) aufgenommen wurden. Für eine glattere Kurve wäre 
+eine längere Messzeit erforderlich gewesen.
 
 \subsection{Bestimmung der Halbwertszeit von \samarium}
 \begin{figure}[H]
@@ -40,10 +45,12 @@
   \label{img:char:kalium}
 \end{center}
 \end{figure}
-%TODO Beschreibung der Graphik
+In Abbildung \ref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium ohne Untergrund gegen die Zählrohrspannun $V$ aufgetragen 
+und in Vergleich mit der Zählrate von \uran gesetzt worden.
+%TODO Erklärung Peak am Anfang
 
 \subsubsection{Massenabhängigkeit der Zählrate} %TODO besserer Titel
-Nach * hängt die Zählrate folgendermaßen von der Masse der Probe ab: %TODO \refeq{}
+Nach \eqref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab: %TODO ref
 \begin{equation}
   n(m) = \frac{f}{2} \frac{A_s \cdot F \cdot \rho}{\mu} \left( 1 - e^{- \frac{\mu \cdot m}{F \cdot \rho}} \right) = a(1-e^{-b \cdot m})
 \end{equation}
@@ -67,16 +74,16 @@ Die Werte lauten:
 \end{gather}
 Außerdem ergibt sich ein Korrelationskoeffizient von
 \begin{equation}
-  \rho = -0.823206987745
+  \rho = \frac{\cov(a, b)}{\sigma_a \sigma_b} = -0.823206987745
 \end{equation}
 %TODO Chi^2 / DoF Auswertung
 
 \subsubsection{Berechnung der Halbwertszeit}
 Aus dem Produkt der beiden Parameter lässt sich die spezifische Aktivität $A_s = \frac{A}{m}$ bestimmen:
 \begin{equation}
-  A_s = \frac{2 \cdot a \cdot b}{f}
+  A_s = \frac{2 \cdot a \cdot b}{f} \quad \Rightarrow \quad A = m \cdot \frac{2 \cdot a \cdot b}{f}
 \end{equation}
-Die Halbwertszeit von Kalium lässt sich nach * mit %TODO refeq
+Die Halbwertszeit von Kalium lässt sich nach \eqref{eq:kalium:halflife} mit %TODO refeq
 \begin{equation}
   T_{1/2}({}^{40}K) = \frac{\ln 2}{1.12} \frac{N}{A}
 \end{equation}
@@ -99,6 +106,8 @@ Man erhält folgendes Ergebnis:
 \begin{equation}
   T_{1/2} \left( {}^{40} K \right) = (1.199786 \pm 0.03015611) \cdot 10^9\,a \approx (1.20 \pm 0.03) \cdot 10^9\,a  
 \end{equation}
+
+\subsubsection{Diskussion des Ergebnisses}
 
 %Tabellen mit Messergebnissen
 %Abbildungen

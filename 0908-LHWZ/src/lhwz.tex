@@ -50,6 +50,8 @@
 
 \setlength{\parindent}{0pt} % no indent on new paragraph
 
+\usepackage{pdfpages} % include pdf files
+
 % NEW COMMANDS
 \newcommand{\chemel}[2]{\texorpdfstring{${}^{#2}\text{#1}$}{#1-#2}}
 \newcommand{\uran}{\chemel{U}{238}}
@@ -97,5 +99,11 @@ Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
 \input{03_Aufbau}
 \input{04_Durchfuerung}
 \input{05_Auswertung}
+
+\appendix
+\section{Anhang}
+\subsection{Messprotokoll}
+\includepdf[pages={1-5}]{../data/protokoll.pdf}
+
 
 \end{document}

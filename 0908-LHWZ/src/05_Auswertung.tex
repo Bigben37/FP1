@@ -2,7 +2,7 @@
 
 \subsection{Zählrohrcharakteristik mit \uran}
 \label{sub:eval:uran}
-Die gemessene Abhängigkeit der Zählrate $n$ von \uran\, ohne Untergrund von der Zählrohrspannung $U$ wird in der Abbildung \ref{img:char:uran} gezeigt.
+Die gemessene Abhängigkeit der Zählrate $n$ von \uran\, ohne Untergrund von der Zählrohrspannung $U$ wird in der \autoref{img:char:uran} gezeigt.
 Von der gemessenen Zählrate $\hat{n}$ muss der Untergrund $u$ abgezogen werden, um die echte Zählrate $n$ zu erhalten: $n = \hat{n}- u$. Der 
 Fehler auf die echte Zählraten $n$ beträgt nach \autoref{eq:counts:errors}
 \begin{equation}
@@ -32,7 +32,7 @@ Die Werte und ihre Fehler wurden wie in \ref{sub:eval:uran} beschrieben berechne
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Samarium147_Charakteristik.pdf}
-  \caption[$\alpha$-Plateau mit \samarium]{$\alpha$-Plateau von \samarium} %TODO bessere beschreibung
+  \caption[$\alpha$-Plateau mit \samarium]{$\alpha$-Plateau von \samarium}
   \label{img:char:samarium}
 \end{center}
 \end{figure}
@@ -53,7 +53,7 @@ und der andere lässt sich aus dem Fehler der Einzelmessung berechnen.
   s_{\bar{d}, \text{stat}} = \sqrt{\frac{1}{N-1} \sum_{n=1}^{N} \left( d_i - \bar{d} \right)^2} \qquad \text{und} \qquad 
   s_{\bar{d}} = \frac{s_d}{\sqrt{N}} 
 \end{equation}
-%TODO wieso nicht beide Fehler quatratisch addieren?
+
 Wie man in \autoref{tab:data:samarium:diameter} sehen kann, ist der statistische Fehler immer größer oder gleicht dem Fehler, der durch die Einzelmessungen 
 verursacht wird. Deshalb haben wir im Folgenden mit dem statistischen Fehler die Fehler der abhängigen Größen berechnet.
 \begin{table}[H]
@@ -143,7 +143,8 @@ und ist in \autoref{img:samarium:areafit} graphisch dargestellt.
   \label{img:samarium:areafit}
 \end{center}
 \end{figure}
-%TODO Chi^2
+Der $\chi^2$-Wert beträgt $\chi^2 =0.43$ und die Zahl der Freiheitsgrade $\text{DoF} = 1$. Daraus folgt, dass das Modell mit einer 
+Wahrscheinlichkeit von $48.8\%$ die Messdaten beschreibt.
 Die Rechnung liefert eine Halbwertszeit von
 \begin{equation}
   T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11} \text{ a}
@@ -221,14 +222,15 @@ Die Werte dafür sind in \autoref{tab:data:kalium} aufgelistet.
 \end{figure}
 Die Werte lauten:
 \begin{gather}
-  a = (5.37 \pm 0.10) \cdot \frac{1}{\text{s}} \\ %TODO runden ja oder nein?
+  a = (5.37 \pm 0.10) \cdot \frac{1}{\text{s}} \\
   b = (1.84 \pm 0.11) \cdot \frac{1}{\text{g}} 
 \end{gather}
 Außerdem ergibt sich ein Korrelationskoeffizient von
 \begin{equation}
   \rho = \frac{\cov(a, b)}{\sigma_a \sigma_b} = -0.82
 \end{equation}
-%TODO Chi^2 / DoF Auswertung
+Der $\chi^2$-Wert beträgt $\chi^2 =7.72$ und die Zahl der Freiheitsgrade $\text{DoF} = 9$. Daraus folgt, dass das Modell mit einer 
+Wahrscheinlichkeit von $43.7\%$ die Messdaten beschreibt.
 
 \subsubsection{Berechnung der Halbwertszeit}
 Aus dem Produkt der beiden Parameter lässt sich die spezifische Aktivität $A_s = \frac{A}{m}$ bestimmen:
@@ -265,7 +267,7 @@ Man erhält folgendes Ergebnis:
 \end{equation}
 
 \subsubsection{Diskussion des Ergebnisses}
-Der Literaturwert für die Halbwertszeit von \kalium ist $\tilde{T}_{1/2}({}^{40}\text{K}) = 1.28 \cdot 10^{9} \text{ a}$. Der gemessene Wert 
+Der Literaturwert für die Halbwertszeit von \kalium\, ist $\tilde{T}_{1/2}({}^{40}\text{K}) = 1.28 \cdot 10^{9} \text{ a}$. Der gemessene Wert 
 $T_{1/2} \left( {}^{40} K \right) = (1.22 \pm 0.06) \cdot 10^9\,\text{a}$ stimmt innerhalb einer Standardabweichung mit dem Literaturwert überein. 
 Allerdings ist dabei zu beachten, dass der Fehler aufgrund des hohen Fehlers des Untergrundes auch relativ groß ausfällt. \\
 Wie schon in \ref{subsub:samarium:discussion} erwähnt, ist die Einstellung der Schwelle des SCAs eine Möglichkeit für einen systematischen Fehler. \\

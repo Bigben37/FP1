@@ -3,35 +3,31 @@
 \subsection{Zählrohrcharakteristik mit \uran}
 \label{sub:eval:uran}
 Die gemessene Abhängigkeit der Zählrate $n$ von \uran\, ohne Untergrund von der Zählrohrspannung $U$ wird in der Abbildung \ref{img:char:uran} gezeigt.
+Von der gemessenen Zählrate $\hat{n}$ muss der Untergrund $u$ abgezogen werden, um die echte Zählrate $n$ zu erhalten: $n = \hat{n}- u$. Der 
+Fehler auf die echte Zählraten $n$ beträgt nach \autoref{eq:counts:errors}
+\begin{equation}
+  s_n=\sqrt{s_{\hat{n}}{}^2+s_u{}^2}=\sqrt{\frac{\hat{n}}{t_{\hat{n}}}+\frac{u}{t_u}}
+\end{equation}
+wobei $t_{\hat{n}}$ und $t_u$ der Messzeit pro Messpunkt der gemessenen Zählrate bzw. des Untergrunds entspricht. \\
+Jedoch sind die Fehler der Zählrate des Urans wegen der logarithmischen Skala nicht mehr gut zu erkennen, weshalb sie in der Abbildung nicht 
+eingezeichnet wurden.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Uran238_Charakteristik.pdf}
-  \caption[Zählrohrcharakteristik mit \uran]{Zählrohrcharakteristik mit \uran und Untergrund}
+  \caption[Zählrohrcharakteristik mit \uran]{Zählrohrcharakteristik mit \uran\, und Untergrund}
   \label{img:char:uran}
 \end{center}
 \end{figure}
 Man erkennt gut das $\alpha$-Plateau bis ca. $2000\,V$ und das $\beta$-Plateau von $2800\,V$ bis $3500\,V$, welche durch die 
 unterschiedlichen Energien der beiden Strahlungen verursacht werden. Des weiteren wurde die Zählrate des Untergrundes in der gleiche Abbildung 
 \ref{img:char:uran} abgebildet. Der Anstieg der Zählrate des Untergrundes, verursacht von der Zählrohrspannung, lässt sich gut erkennen. Allerdings 
-sieht man auch die statistischen Schwankungen in der Zählrate des Untergrundes (die Messpunkte mit $n = 0 / s$ lassen sich auf der logarithmischen 
-Skala nicht darstellen), da die einzelnen Messpunkte nur in einer geringen Zeitspanne ($t=50s$) aufgenommen wurden. Für eine glattere Kurve wäre 
-eine längere Messzeit erforderlich gewesen. \\
-Die relativen Fehler auf die gemessenen Zählraten $\hat{n}$ beträgt nach \autoref{eq:counts:errors}
-\begin{equation}
-  \frac{s_{\hat{n}}}{\hat{n}} = \frac{1}{\sqrt{\hat{n} \cdot t_{\hat{n}}}}
-\end{equation}
-Von der gemessenen Zählrate $\hat{n}$ zieht man die Untergrundszählrate $u$ ab, um die echte Zählrate $n$ zu berechnen.
-\begin{equation}
-  n = \hat{n} - u
-\end{equation}
-Der absolute Fehler von der echten Zählrate lässt sich folgendermaßen bestimmen.
-\begin{equation}
-  s_n = \sqrt{s_{\hat{n}} + s_u}
-\end{equation}
-Jedoch kann man die Fehler der Zählrate des Urans wegen der logarithmischen Skala nicht mehr gut erkennen, weshalb sie in der Abbildung 
-weggelassen wurden.
-
+sieht man auch die statistischen Schwankungen in der Zählrate des Untergrundes (die Messpunkte mit $n = 0 $ lassen sich auf der logarithmischen 
+Skala nicht darstellen), da die einzelnen Messpunkte nur in einer geringen Zeitspanne ($t=50\,$s) aufgenommen wurden. Für eine glattere Kurve wäre 
+eine längere Messzeit erforderlich gewesen.
 \subsection{Bestimmung der Halbwertszeit von \samarium}
+Alle Zählraten in diesem Abschnitt sind schon die echten Zählraten, also die gemessenen Zählraten vom Untergrund bereinigt. 
+Die Werte und ihre Fehler wurden wie in \ref{sub:eval:uran} beschrieben berechnet.
+\ref{sub:eval:uran} beschrieben bestimmt.
 \subsubsection{$\alpha$-Plateau von \samarium}
 \begin{figure}[H]
 \begin{center}
@@ -40,10 +36,12 @@ weggelassen wurden.
   \label{img:char:samarium}
 \end{center}
 \end{figure}
-%TODO Beschreibung usw.
+In \autoref{img:char:samarium} ist das $\alpha$-Plateau von \samarium\, im Vergleich zur Zählrohrcharakteristik von \uran\, dargestellt worden. 
+Man erkennt trotz einiger Schwankungen den Plateaucharakter des aufgenommenen Ausschnitts. Möchte man die Schwankungen verringern, so ist eine 
+längere Dauer der Messzeit erforderlich.
 
 \subsubsection{Messung der Flächen}
-Die Durchmesser der verschiedenen Flächen wurden je $N = 6$ mal mit einer Schiebelehre (Fehler $s_d = 0.005$ cm) gemessen. Der Mittelwert $\bar{d}$ berechnet sich mit
+Die Durchmesser $d$ der verschiedenen Flächen wurden je $N = 6$ mal mit einer Schiebelehre (Fehler $s_d = 0.005$ cm) gemessen. Der Mittelwert $\bar{d}$ berechnet sich mit
 \begin{equation}
   \bar{d} = \frac{1}{n} \sum_{i=1}^{n} d_i
 \end{equation}
@@ -55,14 +53,15 @@ und der andere lässt sich aus dem Fehler der Einzelmessung berechnen.
   s_{\bar{d}, \text{stat}} = \sqrt{\frac{1}{N-1} \sum_{n=1}^{N} \left( d_i - \bar{d} \right)^2} \qquad \text{und} \qquad 
   s_{\bar{d}} = \frac{s_d}{\sqrt{N}} 
 \end{equation}
+%TODO wieso nicht beide Fehler quatratisch addieren?
 Wie man in \autoref{tab:data:samarium:diameter} sehen kann, ist der statistische Fehler immer größer oder gleicht dem Fehler, der durch die Einzelmessungen 
 verursacht wird. Deshalb haben wir im Folgenden mit dem statistischen Fehler die Fehler der abhängigen Größen berechnet.
 \begin{table}[H]
-\caption{Mittlere Durchmesser mit verschiedenen Fehlern}
+\caption{Mittlere Durchmesser $\bar{d}$ mit verschiedenen Fehlern}
 \begin{center}
 \begin{tabular}{|c|c|c|}
   \hline
-  Durchmesser $\bar{d}$ / cm & $s_{\bar{d}, \text{stat}} / \text{cm}$ & $s_{\bar{d}} / \text{cm}$  \\ \hline 
+  \rule{0pt}{1em} Durchmesser $\bar{d}$ / cm & $s_{\bar{d}, \text{stat}} / \text{cm}$ & $s_{\bar{d}} / \text{cm}$  \\ \hline % strech height with \rule so that bar is visible
   0.9983 & 0.0068 & 0.002 \\ \hline
   1.6992 & 0.0058 & 0.002 \\ \hline
   2.8792 & 0.0020 & 0.002 \\ \hline
@@ -70,7 +69,7 @@ verursacht wird. Deshalb haben wir im Folgenden mit dem statistischen Fehler die
 \end{center}
 \label{tab:data:samarium:diameter}
 \end{table}
-
+Im Folgenden wird der mittlere Durchmesser mit $d$ und der Fehler mit $s_d$ bezeichnet.
 \subsubsection{Bestimmung der Halbwertszeit von \samarium ~aus den einzelnen Flächen}
 \label{subsub:samarium:halflife:single}
 Die Fläche und ihr Fehler berechnen sich nun mit
@@ -80,25 +79,23 @@ Die Fläche und ihr Fehler berechnen sich nun mit
 \end{equation}
 In \autoref{tab:data:samarium:area} sind die verschiedenen Flächen mit zugehörigen Fehlern aufgelistet.
 \input{data_samarium_areas}
-Die Zählrate $n$ hängt nach \autoref{eq:samarium:counts} von der Fläche $F$ folgendermaßen ab:
+Die Zählrate $n$ hängt nach \autoref{eq:nAFR4} von der Fläche $F$ folgendermaßen ab:
 \begin{equation}
 \label{eq:samarium:counts_eval}
   n(F) = \frac{A_V \cdot F \cdot R}{4} \Rightarrow A_V = \frac{4 \cdot n}{F \cdot R}
 \end{equation}
 Daraus lässt sich die Halbwertszeit mit \autoref{eq:samarium:halflife} bestimmen:
 \begin{equation}
-  T_{1/2}({}^{147}\text{Sm}) = \ln 2 \cdot \frac{N}{A} = \ln 2 \frac{N}{A_V \cdot F \cdot d} \overset{\text{\eqref{eq:samarium:counts_eval}}}{=} 
-  \ln 2 \cdot \frac{N \cdot R}{4 \cdot n \cdot d}
-\end{equation}
-Die Anzahl $N$ der Kerne in \samarium\, ist
-\begin{equation}
-  N = 2 \cdot N_{\text{Sm}_2\text{O}_3} \cdot h_{\text{rel}} = \frac{m \cdot N_A}{M_{\text{Sm}_2\text{O}_3}} \cdot h_{\text{rel}}
-\end{equation}
-mit $m$ Masse der Probe, Avogadrokonstante $N_A$, molarer Masse $M_{\text{Sm}_2\text{O}_3}=348.717$u und natürlicher Häufigkeit $h_{\text{rel}} = 0.1487$ von \samarium. \\
-Mit $\rho \cdot F = d \cdot m$ kann man nun die Halbwertszeit von \samarium\, in Abhängigkeit der Fläche bestimmen.
-\begin{equation}
   \label{eq:samarium:halflife_eval}
-  T_{1/2}({}^{147}Sm) = \frac{\ln 2}{2} \frac{R \cdot \rho \cdot N_A \cdot h_{\text{rel}}}{M_{\text{Sm}_2\text{O}_3}} \frac{F}{n} = const. \cdot \frac{F}{n}
+  T_{1/2}({}^{147}Sm) = \frac{\ln 2}{2} \cdot
+      \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3} \cdot N_A \cdot h_{\text{rel}}}{M_{\text{Sm}_2\text{O}_3}} 
+  	  \cdot \frac{F}{n} = const. \cdot \frac{F}{n}
+\end{equation}
+mit $N_A$ Avogadrokonstante, $h_{\text{rel}} = 0.1487$ natürlicher Häufigkeit von Samarium und $M_{\text{Sm}_2\text{O}_3} = 348.717$ u der 
+Molaren Masse von $\text{Sm}_2\text{O}_3$.
+Der Faktor $\rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3}$ ist eine Konstante und wurde in \autoref{eq:samarium:Rrho} berechnet:
+\begin{equation}
+  R \cdot \rho = 4.025 \cdot 10^{-3} \, \text{g/cm}^2
 \end{equation}
 In \autoref{tab:data:samarium} sind die Messdaten der Zählraten für die verschiedenen Flächen aufgelistet.
 \input{data_samarium}
@@ -109,8 +106,8 @@ Daraus lassen sich folgende Halbwertszeiten berechnen:
   T_{1/2}(F=6.5106 \text{ cm}^2) = (1.09 \pm 0.04)\cdot 10^{11} \text{ a}
 \end{gather}
 Man erkennt, dass die Werte für die Halbwertszeiten mit der Fläche zunehmen, was nicht dem theoretischen Modell entspricht (die Abhängigkeit der 
-Fläche wurde schon in der Formel berücksichtigt und es wurden ungefähr gleiche Werte erwartet). Außerdem ist der Unterschied der ersten und letzten 
-Halbwertszeit ungefähr $59\%$. Deshalb wird im nächsten Abschnitt die Halbwertszeit mit einer anderen Methode bestimmt, 
+Fläche wurde schon in der Formel berücksichtigt und es werden deshalb ungefähr gleiche Werte erwartet). Außerdem ist der Unterschied der ersten und letzten 
+Halbwertszeit $59\%$. Deshalb wird im nächsten Abschnitt versucht, die Halbwertszeit mit einer anderen Methode zu bestimmen, 
 um etwaige systematische Fehler herauszufiltern.
 
 \subsubsection{Bestimmung der Halbwertszeit von \samarium ~mit einer Ausgleichsgeraden}
@@ -132,7 +129,7 @@ Der Fehler folgt aus dem Fehler der Steigung $s_b$
 \begin{equation}
   s_{T_{1/2}} = T_{1/2}({}^{147}\text{Sm}) \cdot \frac{s_b}{b}
 \end{equation}
-Der Achsenabschnitt $a$ sollte im Idealfall verschwinden. \\
+Der Achsenabschnitt $a$ ist im theoretischen Modell nicht erhalten und sollte daher im Idealfall verschwinden. \\[\baselineskip]
 Die Kurvenanpassung liefert
 \begin{gather}
   a = (0.068  \pm 0.012 ) \cdot \frac{1}{\text{s}} \\
@@ -142,7 +139,7 @@ und ist in \autoref{img:samarium:areafit} graphisch dargestellt.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Samarium147-Flaechenabhaengigkeit.pdf}
-  \caption[Flächenabhängigkeit von \samarium]{Flächenabhängigkeit von \samarium bei 1600V}
+  \caption[Flächenabhängigkeit von \samarium]{Flächenabhängigkeit von \samarium\, bei 1600 V}
   \label{img:samarium:areafit}
 \end{center}
 \end{figure}
@@ -164,6 +161,8 @@ Dies könnte auf einen systematischen Fehler hinweisen.
 %TODO Chi^2
 
 \subsection{Bestimmung der Halbwertszeit von \kalium}
+Auch in diesem Abschnitt sind alle Zählraten bereits die echten Zählraten und nach dem Verfahren, das in \ref{sub:eval:uran} beschrieben wurde, 
+berechnet.
 \subsubsection{$\beta$-Plateau von \kalium}
 \begin{figure}[H]
 \begin{center}
@@ -172,9 +171,11 @@ Dies könnte auf einen systematischen Fehler hinweisen.
   \label{img:char:kalium}
 \end{center}
 \end{figure}
-In \autoref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium\, ohne Untergrund gegen die Zählrohrspannun $V$ aufgetragen 
-und in Vergleich mit der Zählrate von \uran\, gesetzt worden. Die Fehler wurden, wie in Kapitel \ref{sub:eval:uran} beschrieben, bestimmt.
-%TODO Erklärung Peak am Anfang + Beschreibung Kurve
+In \autoref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium\, ohne Untergrund gegen die Zählrohrspannung $V$ aufgetragen 
+und in Vergleich mit der Zählrate von \uran\, gesetzt worden. Man erkennt das $\beta$-Plateau von $2700V$ bis ca. $3300V$. Danach steigt die 
+Zählrate an, da die Spannung zu hoch für ein Proportionalzählrohr ist und man in den Bereich begrenzter Proportionalität gelangt. Die hohen Werte 
+am Anfang sind durch kurzzeitige Schwankungen in der Zählrate zu erklären. Um eine Kurve mit weniger Schwankungen zu erhalten, müsste man bei den 
+einzelnen Spannungen längere Messungen durchführen.
 
 \subsubsection{Massenabhängigkeit der Zählrate} %TODO besserer Titel?
 Nach \autoref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab:
@@ -191,14 +192,14 @@ Die Werte dafür sind in \autoref{tab:data:kalium} aufgelistet.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Kalium40_Massenabhaengigkeit.pdf}
-  \caption[Massenabhängigkeit der Zählrate von \kalium]{Massenabhängigkeit der Zählrate von \kalium bei 3200V}
+  \caption[Massenabhängigkeit der Zählrate von \kalium]{Massenabhängigkeit der Zählrate von \kalium\, bei 3200 V}
   \label{img:kalium:massdep}
 \end{center}
 \end{figure}
 Die Werte lauten:
 \begin{gather}
-  a = (5.397 \pm 0.067) \cdot \frac{1}{s} \\ %TODO runden ja oder nein?
-  b = (1.862 \pm 0.064) \cdot \frac{1}{g} 
+  a = (5.397 \pm 0.067) \cdot \frac{1}{\text{s}} \\ %TODO runden ja oder nein?
+  b = (1.862 \pm 0.064) \cdot \frac{1}{\text{g}} 
 \end{gather}
 Außerdem ergibt sich ein Korrelationskoeffizient von
 \begin{equation}
@@ -211,9 +212,14 @@ Aus dem Produkt der beiden Parameter lässt sich die spezifische Aktivität $A_s
 \begin{equation}
   A_s = \frac{2 \cdot a \cdot b}{f} \quad \Rightarrow \quad A = m \cdot \frac{2 \cdot a \cdot b}{f}
 \end{equation}
-Die Halbwertszeit von Kalium lässt sich nach \eqref{eq:kalium:halflife} mit %TODO refeq
+Es wird bei der Messung nur die $\beta^-$-Strahlung gemessen, allerdings tritt bei dem Zerfall von \kalium\, auch noch Elektroneneinfang auf. 
+Das Verhältnis zwischen $\beta^-$-Zerfall und Elektroneneinfang beträgt $12\%$. Daher gilt für die Zerfallskonstante
 \begin{equation}
-  T_{1/2}({}^{40}K) = \frac{\ln 2}{1.12} \frac{N}{A}
+  \lambda = \lambda_{\beta^-} + \lambda_{\text{EC}} = 1.12 \lambda_{\beta^-}
+\end{equation}
+Daher berechnet sich die Halbwertszeit von \kalium\, mit \autoref{eq:lambdahwz}
+\begin{equation}
+  T_{1/2}({}^{40}K) = \frac{\ln 2}{\lambda} = \frac{\ln 2}{1.12} \frac{1}{\lambda_{\beta^-}} = \frac{\ln 2}{1.12} \frac{N}{A}
 \end{equation}
 bestimmen. \\
 Die Anzahl $N$ der Kaliumkerne in Kaliumchlorid ist:
@@ -232,12 +238,7 @@ Der Fehler ergibt sich aus den relativen Fehlern von $a$ und $b$ und der Berück
 \end{equation}
 Man erhält folgendes Ergebnis:
 \begin{equation}
-  T_{1/2} \left( {}^{40} K \right) = (1.20 \pm 0.03) \cdot 10^9\,a  
+  T_{1/2} \left( {}^{40} K \right) = (1.20 \pm 0.03) \cdot 10^9\,\text{a}  
 \end{equation}
 
 \subsubsection{Diskussion des Ergebnisses}
-
-
-%Tabellen mit Messergebnissen
-%Abbildungen
-%Auswertung, in der die Analyse der Messdaten beschrieben wird und die Ergebnisse mit ihren Fehlern zusammengestellt werden.

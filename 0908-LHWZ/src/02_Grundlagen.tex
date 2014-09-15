@@ -131,17 +131,17 @@ Der Faktor 2 ist vorhanden, weil in einem Mol Sm$_2$O$_3$ zwei Mol Samarium vorl
 $N_A$ ist die Avogadrozahl.\\
 Es gilt also
 \begin{equation}
+\label{eq:samarium:halflife}
 \begin{split}
-  & n \overset{\ref{eq:nAFR4}}=
-  \frac{A}{V} \cdot F \cdot \frac{R}{4} \overset{\ref{eq:aln}}=
-  \frac{\lambda \cdot N_{{}^{147}\text{Sm}}}{V} \cdot F \cdot \frac{R}{4} =
-  \frac{\lambda \cdot 2 \cdot h_{\text{rel}} \cdot N_A \cdot
-  \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot V}{M_{\text{Sm}_2\text{O}_3}}}{V} 
-  \cdot F \cdot \frac{R}{4} \overset{\ref{eq:lambdahwz}}= \\[0.2cm]
-  & \frac{\ln(2) \cdot h_{\text{rel}} \cdot N_A \cdot
-  \rho_{\text{Sm}_2\text{O}_3} \cdot R \cdot F}{2 \cdot T_{1/2} \cdot M_{\text{Sm}_2\text{O}_3}} 
+  n & \overset{\ref{eq:nAFR4}}{=}
+  \frac{A}{V} \cdot F \cdot \frac{R}{4} \overset{\ref{eq:aln}}{=} \frac{\lambda \cdot N_{{}^{147}\text{Sm}}}{V} \cdot F \cdot \frac{R}{4} \\
+  &= \frac{\lambda \cdot 2 \cdot h_{\text{rel}} \cdot N_A \cdot
+  \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot V}{M_{\text{Sm}_2\text{O}_3}}}{V} \cdot F \cdot \frac{R}{4} \\
+  &\overset{\ref{eq:lambdahwz}}{=} \frac{\ln 2}{2} \cdot \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot R \cdot N_A \cdot h_{\text{rel}}}{M_{\text{Sm}_2\text{O}_3}} 
+  \cdot \frac{F}{T_{1/2}}
   \end{split}
 \end{equation}
+%TODO eqref für ()?
 Das Produkt $\rho_{\text{Sm}_2\text{O}_3} \cdot R$ lässt sich mit der Näherung von Bragg und Kleeman abschätzen:
 \begin{equation}
   \rho \cdot R = c \cdot \sqrt{m_A}
@@ -161,6 +161,7 @@ Mit $m_{A,\text{Sm}_2\text{O}_3} = 123.76 \, \text{g}$, $m_{A,\text{Luft}} =14.6
 $\rho_{\text{Luft}} = 0.001226\,\text{g} / \text{cm}^3$ und 
 $R_{\text{Luft}} = 1.13$\,cm folgt
 \begin{equation}
+\label{eq:samarium:Rrho}
   \rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3} =
   4.025 \cdot 10^{-3} \, \text{g/cm}^2
 \end{equation}
@@ -223,7 +224,6 @@ bzw.
 	t_n=
 	\frac{1}{n \cdot s_{n,\text{rel}}{}^2}
 \end{equation}
-
 Meist ist es nicht möglich, die Zählrate $n$ direkt zu messen, da zusätzlich noch eine Untergrundstrahlung
 vorhanden ist. Die gemessene Zählrate $\hat{n}$ muss also um die Untergrundzählrate $u$ bereinigt werden:
 \begin{equation}
@@ -231,5 +231,6 @@ vorhanden ist. Die gemessene Zählrate $\hat{n}$ muss also um die Untergrundzäh
 \end{equation}
 Man erhält dann für den Fehler $s_n$
 \begin{equation}
+\label{eq:counts:errors}
   s_n=\sqrt{s_{\hat{n}}{}^2+s_u{}^2}=\sqrt{\frac{\hat{n}}{t_{\hat{n}}}+\frac{u}{t_u}}
 \end{equation}

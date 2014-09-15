@@ -4,16 +4,17 @@
 \subsubsection{Das Zerfallsgesetz}
 Für die Beschreibung des radioaktiven Zerfalls eines Isotops werden seine mittlere Lebensdauer $\tau$ 
 und die Zerfallskonstante $\lambda =\frac{1}{\tau}$ verwendet.
-Das Produkt $\lambda \cdot dt$ gibt die Wahrscheinlichkeit dafür an, dass ein Kern in der Zeiteinheit $dt$ zerfällt.
+Das Produkt $\lambda \cdot \difd t$ gibt die Wahrscheinlichkeit dafür an,
+dass ein Kern in der Zeiteinheit $\difd t$ zerfällt.
 Aus der Halbwertszeit $T_{1/2}$ des Elements wird $\lambda$ so berechnet:
 \begin{equation}
 \label{eq:lambdahwz}
 	\lambda=\frac{\ln (2)}{T_{1/2}}
 \end{equation}
 Das Produkt aus Zerfallskonstante und Zahl der vorhandenen Kerne $N(t)$ liefert die
-Änderung der Kernanzahl $\frac{-d N(t)}{dt}$ und wird als Aktivität $A(t)$ bezeichnet:
+Änderung der Kernanzahl $-\difd N(t) / {\difd t}$ und wird als Aktivität $A(t)$ bezeichnet:
 \begin{equation}
-	A(t)=\lambda N(t)= -\frac{d N(t)}{dt}
+	A(t)=\lambda N(t)= -\frac{\difd N(t)}{\difd t}
 \end{equation}
 Als Lösung dieser Differenzialgleichung erhält man das Zerfallsgesetz (mit $N_0 = N(0)$):
 \begin{equation}
@@ -84,16 +85,16 @@ Halbwertszeit durch Multiplikation mit dem Faktor 1.12 berücksichtigt werden.
 \end{figure}
 Bei der Absorption von $\alpha$-Strahlung wird davon ausgegangen, dass die Strahlung im Medium
 die Reichweite R besitzt.
-Man erhält dann für eine Schicht mit der Dicke $dr$ und der Entfernung $r$ von der Schichtoberfläche
-folgenden Anteil $dn$ der Zählrate an der Oberfläche:
+Man erhält dann für eine Schicht mit der Dicke $\difd r$ und der Entfernung $r$ von der Schichtoberfläche
+folgenden Anteil $\difd n$ der Zählrate an der Oberfläche:
 \begin{equation}
-  dn=A_V \cdot F \cdot dr \cdot p_{\text{ex}}(r)
+  \difd n=A_V \cdot F \cdot \difd r \cdot p_{\text{ex}}(r)
 \end{equation}
 $A_V$ ist die Aktivität der Probe pro Volumen, $F$ die Oberfläche der Probe und $p_{\text{ex}}$
 die Wahrscheinlichkeit, dass ein emittiertes $\alpha$-Teilchen aus der Tiefe $r$ die Oberfläche erreicht.\\
 Für die Zählrate $n$ an der Oberfläche folgt dann
 \begin{equation}
-  n=\int_{0}^{R}{A_V \cdot F \cdot p_{\text{ex}}(r) \cdot dr}
+  n=\int_{0}^{R}{A_V \cdot F \cdot p_{\text{ex}}(r) \cdot \difd r}
 \end{equation}
 Da das $\alpha$-Teilchen in eine zufällige Richtung abgestrahlt wird,
 lässt sich $p_{\text{ex}}$ durch den Raumwinkel $\Omega(\alpha)$ berechnen,
@@ -114,7 +115,7 @@ Damit folgt für den Raumwinkel
 Es gilt also
 \begin{equation}
 \label{eq:nAFR4}
-  n=A_V \cdot F \cdot \int_{0}^{R}{\frac{1}{4\pi}\cdot 2\pi \cdot (1-\frac{r}{R}) \cdot dr}=
+  n=A_V \cdot F \cdot \int_{0}^{R}{\frac{1}{4\pi}\cdot 2\pi \cdot (1-\frac{r}{R}) \cdot \difd r}=
   A_V \cdot F \cdot \frac{R}{4}
 \end{equation}
 Da sowohl $R$ als auch $A_V$ nicht bekannt sind, muss obige Gleichung weiter umgeformt werden.

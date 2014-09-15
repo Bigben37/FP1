@@ -75,7 +75,7 @@ def makeAreaFit():
     for i in range(3):
         diaarea.addPoint(d[i][0], a[i][0], d[i][1], a[i][1])
     diaarea.saveDataToLaTeX(['Durchmesser $d$ / cm', '$s_d$ / cm', 'Fl\"ache $F / \\text{cm}^2$', '$s_F / \\text{cm}^2$'], 
-                            ['%.4f', '%.4f', '%.4f', '%.4f'], 'Verschiedene Fl\"achen f\"ur die Samariumessung', 
+                            ['%.4f', '%.4f', '%.4f', '%.4f'], 'Verschiedene Fl\"achen f\"ur die Samariummessung', 
                             'tab:data:samarium:area', '../src/data_samarium_areas.tex', 'w')
     
     with TxtFile('../fit/samarium.txt', 'w') as f:

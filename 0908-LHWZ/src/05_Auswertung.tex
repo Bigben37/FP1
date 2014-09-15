@@ -1,6 +1,6 @@
 \section{Messergebnisse und Auswertung}
 
-\subsection{Zählrohrcharakteristik mit \uran}
+\subsection{Bestimmung der Zählrohrcharakteristik mit \uran}
 \label{sub:eval:uran}
 Die gemessene Abhängigkeit der Zählrate $n$ von \uran\, ohne Untergrund von der Zählrohrspannung $U$ wird in der \autoref{img:char:uran} gezeigt.
 Von der gemessenen Zählrate $\hat{n}$ muss der Untergrund $u$ abgezogen werden, um die echte Zählrate $n$ zu erhalten: $n = \hat{n}- u$. Der 
@@ -19,15 +19,14 @@ eingezeichnet wurden.
 \end{center}
 \end{figure}
 Man erkennt gut das $\alpha$-Plateau bis ca. $2000\,V$ und das $\beta$-Plateau von $2800\,V$ bis $3500\,V$, welche durch die 
-unterschiedlichen Energien der beiden Strahlungen verursacht werden. Des weiteren wurde die Zählrate des Untergrundes in der gleiche Abbildung 
-\ref{img:char:uran} abgebildet. Der Anstieg der Zählrate des Untergrundes, verursacht von der Zählrohrspannung, lässt sich gut erkennen. Allerdings 
+unterschiedlichen Energien der beiden Strahlungen verursacht werden. Des Weiteren wurde die Zählrate des Untergrundes in der gleichen 
+\autoref{img:char:uran} abgebildet. Der Anstieg der Zählrate des Untergrundes, verursacht von der Zählrohrspannung, lässt sich gut erkennen. Allerdings 
 sieht man auch die statistischen Schwankungen in der Zählrate des Untergrundes (die Messpunkte mit $n = 0 $ lassen sich auf der logarithmischen 
 Skala nicht darstellen), da die einzelnen Messpunkte nur in einer geringen Zeitspanne ($t=50\,$s) aufgenommen wurden. Für eine glattere Kurve wäre 
 eine längere Messzeit erforderlich gewesen.
 \subsection{Bestimmung der Halbwertszeit von \samarium}
 Alle Zählraten in diesem Abschnitt sind schon die echten Zählraten, also die gemessenen Zählraten vom Untergrund bereinigt. 
-Die Werte und ihre Fehler wurden wie in \ref{sub:eval:uran} beschrieben berechnet.
-\ref{sub:eval:uran} beschrieben bestimmt.
+Die Werte und ihre Fehler wurden, wie in \ref{sub:eval:uran} beschrieben, berechnet.
 \subsubsection{$\alpha$-Plateau von \samarium}
 \begin{figure}[H]
 \begin{center}
@@ -43,7 +42,7 @@ längere Dauer der Messzeit erforderlich.
 \subsubsection{Messung der Flächen}
 Die Durchmesser $d$ der verschiedenen Flächen wurden je $N = 6$ mal mit einer Schiebelehre (Fehler $s_d = 0.005$ cm) gemessen. Der Mittelwert $\bar{d}$ berechnet sich mit
 \begin{equation}
-  \bar{d} = \frac{1}{n} \sum_{i=1}^{n} d_i
+  \bar{d} = \frac{1}{N} \sum_{i=1}^{N} d_i
 \end{equation}
 Nun gibt es zwei Arten von Fehlern für den mittleren Durchmesser, der eine entspricht der Standardabweichung\footnote{Allerdings muss hier mit 
 dem Gewichtungsfaktor $\frac{1}{N-1}$ gerechnet werden, da aus dem gleichen Datensatz schon der Mittelwert berechnet wurde und somit ein Freiheitsgrad 
@@ -69,9 +68,7 @@ verursacht wird. Deshalb haben wir im Folgenden mit dem statistischen Fehler die
 \end{center}
 \label{tab:data:samarium:diameter}
 \end{table}
-Im Folgenden wird der mittlere Durchmesser mit $d$ und der Fehler mit $s_d$ bezeichnet.
-\subsubsection{Bestimmung der Halbwertszeit von \samarium ~aus den einzelnen Flächen}
-\label{subsub:samarium:halflife:single}
+Im Folgenden wird der mittlere Durchmesser mit $d$ und der Fehler mit $s_d$ bezeichnet.\\
 Die Fläche und ihr Fehler berechnen sich nun mit
 \begin{equation}
   F = \pi  \cdot \left( \frac{d}{2} \right)^2 , \qquad 
@@ -79,6 +76,8 @@ Die Fläche und ihr Fehler berechnen sich nun mit
 \end{equation}
 In \autoref{tab:data:samarium:area} sind die verschiedenen Flächen mit zugehörigen Fehlern aufgelistet.
 \input{data_samarium_areas}
+\subsubsection{Bestimmung der Halbwertszeit von \samarium ~aus den einzelnen Flächen}
+\label{subsub:samarium:halflife:single}
 Die Zählrate $n$ hängt nach \autoref{eq:nAFR4} von der Fläche $F$ folgendermaßen ab:
 \begin{equation}
 \label{eq:samarium:counts_eval}
@@ -87,18 +86,23 @@ Die Zählrate $n$ hängt nach \autoref{eq:nAFR4} von der Fläche $F$ folgenderma
 Daraus lässt sich die Halbwertszeit mit \autoref{eq:samarium:halflife} bestimmen:
 \begin{equation}
   \label{eq:samarium:halflife_eval}
-  T_{1/2}({}^{147}Sm) = \frac{\ln 2}{2} \cdot
+  T_{1/2}({}^{147}\text{Sm}) = \frac{\ln 2}{2} \cdot
       \frac{\rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3} \cdot N_A \cdot h_{\text{rel}}}{M_{\text{Sm}_2\text{O}_3}} 
   	  \cdot \frac{F}{n} = const. \cdot \frac{F}{n}
 \end{equation}
-mit $N_A$ Avogadrokonstante, $h_{\text{rel}} = 0.1487$ natürlicher Häufigkeit von Samarium und $M_{\text{Sm}_2\text{O}_3} = 348.717$ u der 
-Molaren Masse von $\text{Sm}_2\text{O}_3$.
+mit $N_A$ Avogadrokonstante, $h_{\text{rel}} = 0.1487$ natürlicher Häufigkeit von Samarium und $M_{\text{Sm}_2\text{O}_3} = 348.717$ g/mol der 
+molaren Masse von $\text{Sm}_2\text{O}_3$.
 Der Faktor $\rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3}$ ist eine Konstante und wurde in \autoref{eq:samarium:Rrho} berechnet:
 \begin{equation}
-  R \cdot \rho = 4.025 \cdot 10^{-3} \, \text{g/cm}^2
+  \rho_{\text{Sm}_2\text{O}_3} \cdot R_{\text{Sm}_2\text{O}_3} = 4.025 \cdot 10^{-3} \, \text{g/cm}^2
 \end{equation}
 In \autoref{tab:data:samarium} sind die Messdaten der Zählraten für die verschiedenen Flächen aufgelistet.
 \input{data_samarium}
+Der Fehler der Halbwertszeit kann mit 
+\begin{equation}
+  s_{T_{1/2}} = T_{1/2} \cdot \sqrt{ \left( \frac{s_F}{F} \right)^2 + \left( \frac{s_n}{n} \right)^2 }
+\end{equation}
+bestimmt werden
 Daraus lassen sich folgende Halbwertszeiten berechnen:
 \begin{gather}
   T_{1/2}(F=0.783 \text{ cm}^2) = (0.639 \pm 0.05)\cdot 10^{11} \text{ a} \\
@@ -129,7 +133,7 @@ Der Fehler folgt aus dem Fehler der Steigung $s_b$
 \begin{equation}
   s_{T_{1/2}} = T_{1/2}({}^{147}\text{Sm}) \cdot \frac{s_b}{b}
 \end{equation}
-Der Achsenabschnitt $a$ ist im theoretischen Modell nicht erhalten und sollte daher im Idealfall verschwinden. \\[\baselineskip]
+Der Achsenabschnitt $a$ ist im theoretischen Modell nicht enthalten und sollte daher im Idealfall verschwinden. \\[\baselineskip]
 Die Kurvenanpassung liefert
 \begin{gather}
   a = (0.068  \pm 0.012 ) \cdot \frac{1}{\text{s}} \\
@@ -139,12 +143,12 @@ und ist in \autoref{img:samarium:areafit} graphisch dargestellt.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/Samarium147-Flaechenabhaengigkeit.pdf}
-  \caption[Flächenabhängigkeit von \samarium]{Flächenabhängigkeit von \samarium\, bei 1600 V}
+  \caption[Flächenabhängigkeit von \samarium]{Flächenabhängigkeit der Zählrate $n$ von \samarium\,bei 1600\,V}
   \label{img:samarium:areafit}
 \end{center}
 \end{figure}
 Der $\chi^2$-Wert beträgt $\chi^2 =0.43$ und die Zahl der Freiheitsgrade $\text{DoF} = 1$. Daraus folgt, dass das Modell mit einer 
-Wahrscheinlichkeit von $48.8\%$ die Messdaten beschreibt.
+Wahrscheinlichkeit von $48.8\,\%$ die Messdaten beschreibt. \\
 Die Rechnung liefert eine Halbwertszeit von
 \begin{equation}
   T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11} \text{ a}
@@ -152,23 +156,23 @@ Die Rechnung liefert eine Halbwertszeit von
 
 \subsubsection{Diskussion der Ergebnisse}
 \label{subsub:samarium:discussion}
-Der Literaturwert für die Halbwertszeit von \samarium\, ist $\tilde{T}_{1/2}({}^{147}\text{Sm}) = 1.06 \cdot 10^{11} \text{ a}$.
+Der Literaturwert für die Halbwertszeit von \samarium\, ist $\tilde{T}_{1/2}({}^{147}\text{Sm}) = 1.06 \cdot 10^{11}\,\text{a}$.
 Wie schon in \ref{subsub:samarium:halflife:single} erwähnt, stimmen die Halbwertszeiten für die unterschiedlichen Flächen nicht miteinander 
-überein. Der Wert für die größte Fläche $T_{1/2}(F=6.5106 \text{ cm}^2) = (1.09 \pm 0.04)\cdot 10^{11} \text{ a}$ stimmt innerhalb einer 
+überein. Der Wert für die größte Fläche $T_{1/2}(F=6.5106 \text{ cm}^2) = (1.09 \pm 0.04)\cdot 10^{11}\,\text{a}$ stimmt innerhalb einer 
 Standardabweichung mit dem Literaturwert überein, die Werte der anderen Flächen weichen jedoch stark von ihm ab. Wir vermuten einen systematischen 
-Fehler.\\
+Fehler, der mit größerer Fläche abnimmt.\\
 Bei der Bestimmung der Halbwertszeit mit der Ausgleichsgeraden errechnet man einen Wert von 
-$T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11} \text{ a}$, welcher innerhalb von drei Standardabweichungen mit dem Literaturwert 
-übereinstimmt. Der Achsenabschnitt sollte laut theoretischem Modell verschwinden, jedoch beträgt er $a = (0.068  \pm 0.012 ) \cdot \frac{1}{\text{s}}$
+$T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11}\,\text{a}$, welcher innerhalb von drei Standardabweichungen mit dem Literaturwert 
+übereinstimmt. Der Achsenabschnitt sollte laut theoretischem Modell verschwinden, jedoch beträgt er $a = (0.068  \pm 0.012 )\,\frac{1}{\text{s}}$.
 Dies könnte auf einen systematischen Fehler hinweisen. \\
-Eine Möglichkeit für einen systematischen Fehler ist die unterschiedliche Dichte der Probe für die verschiedene Flächen. Je nach dem, wie dicht 
+Eine Möglichkeit für einen systematischen Fehler ist die unterschiedliche Dichte der Proben für verschiedene Flächen. Je nachdem, wie dicht 
 das Samariumoxid in das Aluminiumschälchen gedrückt wurde, besitzen die Proben eine unterschiedliche Dichte, was zu einer anderen Zählrate und 
 somit auch zu einer anderen Halbwertszeit führt. \\
 Eine andere Quelle für systematische Fehler ist die Schwelle des SCAs. Stellt man die Schwelle zu 
-gering ein, wird ein Teil des Untergrundes als Strahlung interpretiert und mitgemessen. Stellt man die Schwelle zu hoch ein, so registriert man 
+gering ein, wird ein Teil des Rauschens als Strahlung interpretiert und mitgemessen. Stellt man die Schwelle zu hoch ein, so registriert man 
 nicht diejenigen $\alpha$-Teilchen, die aus den unteren Schichten der Samariumoxid-Probe kommen und ihre Energie schon teilweise durch Absorption 
-abgegeben haben. Es ist jedoch besser, den Schwellenwert ein bisschen zu niedrig einzustellen, da man durch die Untergrundsmessung bei gleicher 
-Schwelle den Fehler des Untergrundes berücksichtigen kann.
+abgegeben haben. Es ist jedoch gut, den Schwellenwert so niedrig wie möglich einzustellen, da man durch die Untergrundsmessung bei gleicher 
+Schwelle den Fehler durch den Untergrund berücksichtigen kann.
 
 \subsection{Bestimmung der Halbwertszeit von \kalium}
 Auch in diesem Abschnitt sind alle Zählraten bereits die echten Zählraten und nach dem Verfahren, das in \ref{sub:eval:uran} beschrieben wurde, 
@@ -181,34 +185,35 @@ berechnet.
   \label{img:char:kalium}
 \end{center}
 \end{figure}
-In \autoref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium\, ohne Untergrund gegen die Zählrohrspannung $V$ aufgetragen 
-und in Vergleich mit der Zählrate von \uran\, gesetzt worden. Man erkennt das $\beta$-Plateau von $2700V$ bis ca. $3300V$. Danach steigt die 
+In \autoref{img:char:kalium} ist das $\beta$-Plateau der Zählrate $n$ von \kalium\, ohne Untergrund gegen die Zählrohrspannung $U$ aufgetragen 
+und in Vergleich mit der Zählrate von \uran\, gesetzt worden. Man erkennt das $\beta$-Plateau von $2700\,$V bis ca. $3300\,$V. Danach steigt die 
 Zählrate an, da die Spannung zu hoch für ein Proportionalzählrohr ist und man in den Bereich begrenzter Proportionalität gelangt. Die hohen Werte 
 am Anfang sind durch kurzzeitige Schwankungen in der Zählrate zu erklären. Um eine Kurve mit weniger Schwankungen zu erhalten, müsste man bei den 
 einzelnen Spannungen längere Messungen durchführen.
 
 \subsubsection{Massenabhängigkeit der Zählrate}
 \label{subsub:kalium:massdep}
-Für die Bestimmung der Massenabhängigkeit der Zählrate wurde der Untergrund bei $U=3200\,$V über die Nacht ($t=10$h) aufgenommen. Es wurde eine 
-Untergrundszählrate von $u=7.227 \cdot \frac{1}{\text{s}}$ gemessen. Dieser Wert ist höchst unrealistisch, da bei den Messungen mit der Probe 
-maximal eine Zählrate von $6.186$ erreicht wurde und somit bei Abzug des Untergrundes nur negative Zählraten berechnet werden. Außerdem 
-geht aus der allgemeinen Untergrundsmessung in \ref{sub:eval:uran} bei $U=3200\,$V  eine Untergrundszählrate von $u'=0.760 \cdot \frac{1}{\text{s}}$ 
+Für die Bestimmung der Massenabhängigkeit der Zählrate wurde der Untergrund bei $U=3200\,$V über die Nacht ($t=10\,$h) aufgenommen. Es wurde eine 
+Untergrundszählrate von $u=7.227\,\frac{1}{\text{s}}$ gemessen. Dieser Wert ist höchst unrealistisch, da bei den Messungen mit der Probe 
+maximal eine Zählrate von $6.186\,\frac{1}{\text{s}}$ erreicht wurde und somit bei Abzug des Untergrundes nur negative Zählraten berechnet werden. Außerdem 
+geht aus der allgemeinen Untergrundsmessung in \ref{sub:eval:uran} bei $U=3200\,$V  eine Untergrundszählrate von $u'=0.760\,\frac{1}{\text{s}}$ 
 hervor. \\ 
 Diese Messung kann durch unterschiedliche Fehler hervorgerufen worden sein. Zum einen könnte durch eine oder mehrere kurze, sehr starke 
-Störung eine große Anzahl von Ereignissen registriert worden sein, wodurch die Anzahl aller Ereignisse natürlich stark verfälscht werden kann. Des 
-weiteren kann es sein, dass das Rauschen über eine kurze Zeitspanne über den Schwellenwert des SCA gelangt ist und somit das Rauschen als viele 
-Ereignisse gezählt wurde. Vergleicht man $n$ mit $n'$, so sieht man, dass die beiden Werte sich ungefähr um einen Faktor $10$ unterscheiden. Es kann 
-daher auch nicht ausgeschlossen werden, dass das verwendete LabView Programm bei zu großen Zeiten ($t=10\,\text{h} = 36000\,\text{s}$) 
+Störungen eine große Anzahl von Ereignissen registriert worden sein, wodurch die Anzahl aller Ereignisse natürlich stark verfälscht werden kann. Des 
+Weiteren kann es sein, dass das Rauschen über eine kurze Zeitspanne über den Schwellenwert des SCA gelangt ist und somit das Rauschen als viele 
+Ereignisse gezählt wurde. Vergleicht man $u$ mit $u'$, so sieht man, dass die beiden Werte sich ungefähr um einen Faktor $10$ unterscheiden. Es kann 
+daher auch nicht ausgeschlossen werden, dass das verwendete \emph{LabView}-Programm bei zu großen Zeiten ($t=10\,\text{h} = 36000\,\text{s}$) 
 einen Kommafehler verursacht. \\
-Um die Berechnungen trotzdem ohne Untergrund durchzuführen, werden wir $n'$ als Untergrundszählrate benutzen. Daraus ergibt sich ein größerer 
+Um die Berechnungen trotzdem ohne Untergrund durchzuführen, werden wir $u'$ als Untergrundszählrate benutzen. Daraus ergibt sich ein größerer 
 Fehler auf den Untergrund und letztendlich, mit den Gleichungen aus \ref{sub:eval:uran}, auch ein größerer Fehler auf die echte Zählrate.\\[\baselineskip]
-Nach \autoref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab:
+Nach \autoref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab, verziert mit dem Faktor $\frac{f}{2}$, welcher 
+den Rückstreuungskoeffizienten $f$ von Aluminium und den gemessenen Raumwinkel $\Omega = \frac{2 \pi}{4 \pi} = \frac{1}{2}$ berücksichtigt:
 \begin{equation}
-  n(m) = \frac{f}{2} \frac{A_s \cdot F \cdot \rho}{\mu} \left( 1 - e^{- \frac{\mu \cdot m}{F \cdot \rho}} \right) = a(1-e^{-b \cdot m})
+  n(m) = \frac{f}{2} \cdot \frac{A_S \cdot F \cdot \rho}{\mu} \left( 1 - e^{- \frac{\mu \cdot m}{F \cdot \rho}} \right) = a(1-e^{-b \cdot m})
 \end{equation}
 mit
 \begin{equation}
-  a = \frac{f}{2} \frac{A_s \cdot F \cdot \rho}{\mu} \qquad \text{und} \qquad b = \frac{\mu}{F \cdot \rho}
+  a = \frac{f}{2} \cdot \frac{A_S \cdot F \cdot \rho}{\mu} \qquad \text{und} \qquad b = \frac{\mu}{F \cdot \rho}
 \end{equation}
 Die beiden Parameter $a$ und $b$ lassen sich mit einer Kurvenanpassung (siehe \autoref{img:kalium:massdep}) bestimmen. \\
 Die Werte dafür sind in \autoref{tab:data:kalium} aufgelistet.
@@ -222,44 +227,43 @@ Die Werte dafür sind in \autoref{tab:data:kalium} aufgelistet.
 \end{figure}
 Die Werte lauten:
 \begin{gather}
-  a = (5.37 \pm 0.10) \cdot \frac{1}{\text{s}} \\
-  b = (1.84 \pm 0.11) \cdot \frac{1}{\text{g}} 
+  a = (5.37 \pm 0.10)\,\frac{1}{\text{s}} \\
+  b = (1.84 \pm 0.11)\,\frac{1}{\text{g}} 
 \end{gather}
 Außerdem ergibt sich ein Korrelationskoeffizient von
 \begin{equation}
-  \rho = \frac{\cov(a, b)}{\sigma_a \sigma_b} = -0.82
+  \rho = \frac{\cov(a, b)}{s_a \cdot s_b} = -0.82
 \end{equation}
 Der $\chi^2$-Wert beträgt $\chi^2 =7.72$ und die Zahl der Freiheitsgrade $\text{DoF} = 9$. Daraus folgt, dass das Modell mit einer 
-Wahrscheinlichkeit von $43.7\%$ die Messdaten beschreibt.
+Wahrscheinlichkeit von $43.7\,\%$ die Messdaten beschreibt.
 
 \subsubsection{Berechnung der Halbwertszeit}
-Aus dem Produkt der beiden Parameter lässt sich die spezifische Aktivität $A_s = \frac{A}{m}$ bestimmen:
+Aus dem Produkt der beiden Parameter lässt sich die spezifische Aktivität $A_S = \frac{A}{m}$ bestimmen:
 \begin{equation}
-  A_s = \frac{2 \cdot a \cdot b}{f} \quad \Rightarrow \quad A = m \cdot \frac{2 \cdot a \cdot b}{f}
+  A_S = \frac{2 \cdot a \cdot b}{f} \quad \Rightarrow \quad A = m \cdot \frac{2 \cdot a \cdot b}{f}
 \end{equation}
 Es wird bei der Messung nur die $\beta^-$-Strahlung gemessen, allerdings tritt bei dem Zerfall von \kalium\, auch noch Elektroneneinfang auf. 
-Das Verhältnis zwischen $\beta^-$-Zerfall und Elektroneneinfang beträgt $12\%$. Daher gilt für die Zerfallskonstante
+Das Verhältnis zwischen der Häufigkeit von Elektroneneinfang und $\beta^-$-Zerfall beträgt $12\,\%$. Daher gilt für die Zerfallskonstante
 \begin{equation}
   \lambda = \lambda_{\beta^-} + \lambda_{\text{EC}} = 1.12 \lambda_{\beta^-}
 \end{equation}
-Daher berechnet sich die Halbwertszeit von \kalium\, mit \autoref{eq:lambdahwz}
+Nun berechnet sich die Halbwertszeit von \kalium\, mit \autoref{eq:lambdahwz}
 \begin{equation}
   T_{1/2}({}^{40}K) = \frac{\ln 2}{\lambda} = \frac{\ln 2}{1.12} \frac{1}{\lambda_{\beta^-}} = \frac{\ln 2}{1.12} \frac{N}{A}
 \end{equation}
-bestimmen. \\
 Die Anzahl $N$ der Kaliumkerne in Kaliumchlorid ist:
 \begin{equation}
-  N = \frac{m \cdot N_A}{M_{KCl}} h_{\text{rel}}
+  N = \frac{m \cdot N_A}{M_{\text{KCl}}} h_{\text{rel}}
 \end{equation}
-wobei $N_A$ die Avogadrokonstante, $M_{KCl}=74.5483\,u$ die molare Masse von Kaliumchlorid und $h_{\text{rel}}=0.0118\%$ die relative Anzahl von Kaliumkernen 
-in Kaliumchlorid ist. \\
-Daraus berechnet sich die Halbwertszeit von Kalium mit:
+wobei $N_A$ die Avogadrokonstante, $M_{\text{KCl}}=74.5483\,$g/mol die molare Masse von Kaliumchlorid und $h_{\text{rel}}=0.0118\,\%$ die 
+relative Häufigkeit von \kalium\, in natürlichem Kalium ist. \\
+Daraus berechnet sich die Halbwertszeit von \kalium\, mit:
 \begin{equation}
   T_{1/2} \left( {}^{40} K \right)  = \frac{\ln 2}{1.12} \frac{N_A \cdot h_{\text{rel}}}{M_{KCl}} \frac{f}{2} \frac{1}{a \cdot b} = const. \cdot \frac{1}{a \cdot b}
 \end{equation}
 Der Fehler ergibt sich aus den relativen Fehlern von $a$ und $b$ und der Berücksichtigung des Korrelationskoeffizienten $\rho$:
 \begin{equation}
-  \sigma_{T_{1/2}} = \sqrt{ \left( \frac{\sigma_a}{a} \right)^2 + \left( \frac{\sigma_b}{b} \right)^2 + 2 \cdot \frac{\sigma_a}{a} \cdot \frac{\sigma_b}{b} \cdot \rho   }
+  s_{T_{1/2}} = T_{1/2} \left( {}^{40} K \right) \cdot \sqrt{ \left( \frac{s_a}{a} \right)^2 + \left( \frac{s_b}{b} \right)^2 + 2 \cdot \frac{s_a}{a} \cdot \frac{s_b}{b} \cdot \rho   }
 \end{equation}
 Man erhält folgendes Ergebnis:
 \begin{equation}
@@ -271,4 +275,4 @@ Der Literaturwert für die Halbwertszeit von \kalium\, ist $\tilde{T}_{1/2}({}^{
 $T_{1/2} \left( {}^{40} K \right) = (1.22 \pm 0.06) \cdot 10^9\,\text{a}$ stimmt innerhalb einer Standardabweichung mit dem Literaturwert überein. 
 Allerdings ist dabei zu beachten, dass der Fehler aufgrund des hohen Fehlers des Untergrundes auch relativ groß ausfällt. \\
 Wie schon in \ref{subsub:samarium:discussion} erwähnt, ist die Einstellung der Schwelle des SCAs eine Möglichkeit für einen systematischen Fehler. \\
-Eine weiter Quelle für einen systematischen Fehler ist 
+Eine weiter Quelle für einen systematischen Fehler könnten Verunreinigungen im KCl sein.

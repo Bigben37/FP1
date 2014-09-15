@@ -55,7 +55,7 @@ def area(*args):
     return np.pi*(d/2)**2, (d / 2)*np.pi*sd
 
 def calculateHalfLife(a, n, sa, sn):
-    c  = 0.004026
+    c  = 0.004025
     NA = 6.02214129e23
     m  = 2*150.36 + 3*15.999
     h = 0.1487
@@ -132,7 +132,7 @@ def makeAreaFit():
     c.Print('../img/Samarium147-Flaechenabhaengigkeit.pdf', 'pdf')
     
     #calculation with fit parameters
-    c  = 0.004026
+    c  = 0.004025
     NA = 6.02214129e23
     m  = 2*150.36 + 3*15.999
     h = 0.1487

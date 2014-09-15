@@ -143,22 +143,31 @@ und ist in \autoref{img:samarium:areafit} graphisch dargestellt.
   \label{img:samarium:areafit}
 \end{center}
 \end{figure}
+%TODO Chi^2
 Die Rechnung liefert eine Halbwertszeit von
 \begin{equation}
   T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11} \text{ a}
 \end{equation}
 
 \subsubsection{Diskussion der Ergebnisse}
+\label{subsub:samarium:discussion}
 Der Literaturwert für die Halbwertszeit von \samarium\, ist $\tilde{T}_{1/2}({}^{147}\text{Sm}) = 1.06 \cdot 10^{11} \text{ a}$.
 Wie schon in \ref{subsub:samarium:halflife:single} erwähnt, stimmen die Halbwertszeiten für die unterschiedlichen Flächen nicht miteinander 
 überein. Der Wert für die größte Fläche $T_{1/2}(F=6.5106 \text{ cm}^2) = (1.09 \pm 0.04)\cdot 10^{11} \text{ a}$ stimmt innerhalb einer 
 Standardabweichung mit dem Literaturwert überein, die Werte der anderen Flächen weichen jedoch stark von ihm ab. Wir vermuten einen systematischen 
-Fehler (TODO Ursachen) \\%TODO Ursachen
+Fehler.\\
 Bei der Bestimmung der Halbwertszeit mit der Ausgleichsgeraden errechnet man einen Wert von 
 $T_{1/2}({}^{147}\text{Sm}) = (1.20 \pm 0.06) \cdot 10^{11} \text{ a}$, welcher innerhalb von drei Standardabweichungen mit dem Literaturwert 
 übereinstimmt. Der Achsenabschnitt sollte laut theoretischem Modell verschwinden, jedoch beträgt er $a = (0.068  \pm 0.012 ) \cdot \frac{1}{\text{s}}$
-Dies könnte auf einen systematischen Fehler hinweisen.
-%TODO Chi^2
+Dies könnte auf einen systematischen Fehler hinweisen. \\
+Eine Möglichkeit für einen systematischen Fehler ist die unterschiedliche Dichte der Probe für die verschiedene Flächen. Je nach dem, wie dicht 
+das Samariumoxid in das Aluminiumschälchen gedrückt wurde, besitzen die Proben eine unterschiedliche Dichte, was zu einer anderen Zählrate und 
+somit auch zu einer anderen Halbwertszeit führt. \\
+Eine andere Quelle für systematische Fehler ist die Schwelle des SCAs. Stellt man die Schwelle zu 
+gering ein, wird ein Teil des Untergrundes als Strahlung interpretiert und mitgemessen. Stellt man die Schwelle zu hoch ein, so registriert man 
+nicht diejenigen $\alpha$-Teilchen, die aus den unteren Schichten der Samariumoxid-Probe kommen und ihre Energie schon teilweise durch Absorption 
+abgegeben haben. Es ist jedoch besser, den Schwellenwert ein bisschen zu niedrig einzustellen, da man durch die Untergrundsmessung bei gleicher 
+Schwelle den Fehler des Untergrundes berücksichtigen kann.
 
 \subsection{Bestimmung der Halbwertszeit von \kalium}
 Auch in diesem Abschnitt sind alle Zählraten bereits die echten Zählraten und nach dem Verfahren, das in \ref{sub:eval:uran} beschrieben wurde, 
@@ -177,7 +186,21 @@ Zählrate an, da die Spannung zu hoch für ein Proportionalzählrohr ist und man
 am Anfang sind durch kurzzeitige Schwankungen in der Zählrate zu erklären. Um eine Kurve mit weniger Schwankungen zu erhalten, müsste man bei den 
 einzelnen Spannungen längere Messungen durchführen.
 
-\subsubsection{Massenabhängigkeit der Zählrate} %TODO besserer Titel?
+\subsubsection{Massenabhängigkeit der Zählrate}
+\label{subsub:kalium:massdep}
+Für die Bestimmung der Massenabhängigkeit der Zählrate wurde der Untergrund bei $U=3200\,$V über die Nacht ($t=10$h) aufgenommen. Es wurde eine 
+Untergrundszählrate von $u=7.227 \cdot \frac{1}{\text{s}}$ gemessen. Dieser Wert ist höchst unrealistisch, da bei den Messungen mit der Probe 
+maximal eine Zählrate von $6.186$ erreicht wurde und somit bei Abzug des Untergrundes nur negative Zählraten berechnet werden. Außerdem 
+geht aus der allgemeinen Untergrundsmessung in \ref{sub:eval:uran} bei $U=3200\,$V  eine Untergrundszählrate von $u'=0.760 \cdot \frac{1}{\text{s}}$ 
+hervor. \\ 
+Diese Messung kann durch unterschiedliche Fehler hervorgerufen worden sein. Zum einen könnte durch eine oder mehrere kurze, sehr starke 
+Störung eine große Anzahl von Ereignissen registriert worden sein, wodurch die Anzahl aller Ereignisse natürlich stark verfälscht werden kann. Des 
+weiteren kann es sein, dass das Rauschen über eine kurze Zeitspanne über den Schwellenwert des SCA gelangt ist und somit das Rauschen als viele 
+Ereignisse gezählt wurde. Vergleicht man $n$ mit $n'$, so sieht man, dass die beiden Werte sich ungefähr um einen Faktor $10$ unterscheiden. Es kann 
+daher auch nicht ausgeschlossen werden, dass das verwendete LabView Programm bei zu großen Zeiten ($t=10\,\text{h} = 36000\,\text{s}$) 
+einen Kommafehler verursacht. \\
+Um die Berechnungen trotzdem ohne Untergrund durchzuführen, werden wir $n'$ als Untergrundszählrate benutzen. Daraus ergibt sich ein größerer 
+Fehler auf den Untergrund und letztendlich, mit den Gleichungen aus \ref{sub:eval:uran}, auch ein größerer Fehler auf die echte Zählrate.\\[\baselineskip]
 Nach \autoref{eq:kalium:countrate} hängt die Zählrate folgendermaßen von der Masse der Probe ab:
 \begin{equation}
   n(m) = \frac{f}{2} \frac{A_s \cdot F \cdot \rho}{\mu} \left( 1 - e^{- \frac{\mu \cdot m}{F \cdot \rho}} \right) = a(1-e^{-b \cdot m})
@@ -198,8 +221,8 @@ Die Werte dafür sind in \autoref{tab:data:kalium} aufgelistet.
 \end{figure}
 Die Werte lauten:
 \begin{gather}
-  a = (5.397 \pm 0.067) \cdot \frac{1}{\text{s}} \\ %TODO runden ja oder nein?
-  b = (1.862 \pm 0.064) \cdot \frac{1}{\text{g}} 
+  a = (5.37 \pm 0.10) \cdot \frac{1}{\text{s}} \\ %TODO runden ja oder nein?
+  b = (1.84 \pm 0.11) \cdot \frac{1}{\text{g}} 
 \end{gather}
 Außerdem ergibt sich ein Korrelationskoeffizient von
 \begin{equation}
@@ -238,7 +261,12 @@ Der Fehler ergibt sich aus den relativen Fehlern von $a$ und $b$ und der Berück
 \end{equation}
 Man erhält folgendes Ergebnis:
 \begin{equation}
-  T_{1/2} \left( {}^{40} K \right) = (1.20 \pm 0.03) \cdot 10^9\,\text{a}  
+  T_{1/2} \left( {}^{40} K \right) = (1.22 \pm 0.06) \cdot 10^9\,\text{a}  
 \end{equation}
 
 \subsubsection{Diskussion des Ergebnisses}
+Der Literaturwert für die Halbwertszeit von \kalium ist $\tilde{T}_{1/2}({}^{40}\text{K}) = 1.28 \cdot 10^{9} \text{ a}$. Der gemessene Wert 
+$T_{1/2} \left( {}^{40} K \right) = (1.22 \pm 0.06) \cdot 10^9\,\text{a}$ stimmt innerhalb einer Standardabweichung mit dem Literaturwert überein. 
+Allerdings ist dabei zu beachten, dass der Fehler aufgrund des hohen Fehlers des Untergrundes auch relativ groß ausfällt. \\
+Wie schon in \ref{subsub:samarium:discussion} erwähnt, ist die Einstellung der Schwelle des SCAs eine Möglichkeit für einen systematischen Fehler. \\
+Eine weiter Quelle für einen systematischen Fehler ist 

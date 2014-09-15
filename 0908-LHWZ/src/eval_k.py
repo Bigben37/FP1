@@ -63,8 +63,8 @@ def makeMassFit():
     files.append([0.6954, "../data/25_K_m2_3200_t540.txt", 540])
     files.append([0.5007, "../data/27_K_m1_3200_t660.txt", 660])
     files.append([0.3030, "../data/29_K_m0_3200_t780.txt", 780])
-    u = readSingleEntryFile('../data/32b_Untergrund_3200_t36000_corr.txt')
-    tu = 36000
+    u = 0.760
+    tu = 50
 
     d = DataErrors()
 

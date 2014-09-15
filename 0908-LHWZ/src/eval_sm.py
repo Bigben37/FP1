@@ -99,7 +99,7 @@ def makeAreaFit():
         n = readSingleEntryFile(file[2])
         d.addPoint(file[0], n - u, file[1], np.sqrt(n / file[3] + u / tu))
         
-    d.saveDataToLaTeX(['Fl\"ache $F / \\text{cm}^2$', '$s_F / \\text{cm}^2$', 'Z\"ahlrate $n / (1/s)$', '$s_n / (1/s)$'], 
+    d.saveDataToLaTeX(['Fl\"ache $F / \\text{cm}^2$', '$s_F / \\text{cm}^2$', 'Z\"ahlrate $n / (1/\\text{s})$', '$s_n / (1/\\text{s})$'], 
                       ['%.4f', '%.4f', '%.3f', '%.3f'], 'Z\"ahlraten von \\samarium~f\"ur verschiedene Fl\"achen mit Fehlern', 
                       'tab:data:samarium', '../src/data_samarium.tex', 'w')
         

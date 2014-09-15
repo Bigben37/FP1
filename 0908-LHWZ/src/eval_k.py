@@ -72,7 +72,7 @@ def makeMassFit():
         n = readSingleEntryFile(file[1])
         d.addPoint(file[0], n - u, 0.001, np.sqrt(n / file[2] + u / tu))
 
-    d.saveDataToLaTeX(['Masse $m / g$', '$s_m / g$ ', 'Z\"ahlrate $n / (1/s)$', '$s_n / (1/s)$'],
+    d.saveDataToLaTeX(['Masse $m /$g', '$s_m /$g', 'Z\"ahlrate $n / (1/\\text{s})$', '$s_n / (1/\\text{s})$'],
                       ['%.3f', '%.3f', '%.3f', '%.3f'], 
                       'Z\"ahlraten von \\kalium\,f\"ur verschiedene Massen mit Fehlern', 'tab:data:kalium', '../src/data_kalium.tex', 'w')
 

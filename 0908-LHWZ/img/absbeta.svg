@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="absbeta.pdf">
+   sodipodi:docname="absbeta.svg">
   <defs
      id="defs4">
     <marker
@@ -180,8 +180,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="144.02779"
-     inkscape:cy="87.89518"
+     inkscape:cx="142.88004"
+     inkscape:cy="59.323752"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -212,7 +212,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -222,19 +222,19 @@
      id="layer1"
      transform="translate(0,-928.34511)">
     <rect
-       style="fill:#dcdc51;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#dcdc51;fill-opacity:1;stroke:none"
        id="rect2985"
-       width="198"
-       height="48.000004"
-       x="46.505077"
-       y="959.57404" />
+       width="200"
+       height="50"
+       x="45"
+       y="957.36084" />
     <rect
-       style="fill:none;stroke:#000000;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3757"
        width="199"
-       height="3.5355337"
-       x="46.005077"
-       y="987.20593" />
+       height="2.8805921"
+       x="45.5"
+       y="987.86084" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.99999982px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Sstart);marker-end:url(#Arrow1Send)"
        d="m 181.82902,987.16087 0,-27.22339"
@@ -284,24 +284,24 @@
     <rect
        style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect4433"
-       width="213.13199"
-       height="30.000025"
-       x="40.454315"
-       y="1008.574" />
+       width="215"
+       height="30.000078"
+       x="40"
+       y="1007.3608" />
     <rect
        style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect4435"
-       width="30"
-       height="85.000023"
-       x="15.505076"
-       y="953.57404" />
+       width="30.000002"
+       height="85"
+       x="15"
+       y="952.36084" />
     <rect
        style="fill:#999999;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="rect4437"
        width="30"
-       height="84.999977"
-       x="245.50508"
-       y="953.57404" />
+       height="85.000015"
+       x="245"
+       y="952.36084" />
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -333,17 +333,17 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.99999982px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Sstart);marker-end:url(#Arrow1Send)"
-       d="m 258.50508,1006.7852 0,-46.2202"
+       d="m 258.50508,1005.3564 0,-46.21996"
        id="path3763-4"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 244.76774,1008.3241 20.4872,0"
+       d="m 245.25,1007.1109 20.4872,0"
        id="path4903"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 244.74479,958.82406 20.51029,0"
+       d="m 245.25,957.61086 20.51029,0"
        id="path4903-5"
        inkscape:connector-curvature="0" />
     <text

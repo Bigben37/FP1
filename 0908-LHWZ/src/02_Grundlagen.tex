@@ -169,6 +169,44 @@ $R_{\text{Luft}} = 1.13$\,cm folgt
 
 \subsubsection{$\beta$-Strahlung}
 
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=10cm]{../img/absbeta}
+  \caption{Selbstabsorption von $\beta$-Strahlung bei KCl}
+  \label{img:absbeta}
+\end{center}
+\end{figure}
+
+Für $\beta$-Stahlung gilt das Gesetz der exponentiellen Absorption
+\begin{equation}
+  \frac{I(r)}{I_0} =e^{-\mu r}
+\end{equation}
+$I_0$ ist die Intensität der Strahlung vor der Absorption, $I(r)$ die Intensität nach
+Durchlaufen der Strecke $r$ im Medium mit dem Absorptionskoeffizienten $\mu$.\\
+Bei einem Material mit der Aktivität $A$ gilt an der Oberfläche für die Zählrate $\difd n$,
+die von der Schicht mit dem Volumen $\difd V$ und
+der Entfernung $r$ von der Oberfläche verursacht wird,
+\begin{equation}
+  \difd n= \frac{A}{V} \cdot \difd V \cdot e^{-\mu r}=
+  \frac{A}{m} \cdot \rho \cdot F \cdot \difd r \cdot e^{-\mu r}=
+  A_S \cdot \rho \cdot F \cdot \difd r \cdot e^{-\mu r}
+\end{equation}
+$V$ ist das Volumen der Probe, $m$ die Masse, $\rho$ ihre Dichte, $F$ die Probenoberfläche und $A_S$
+die spezifische Aktivität. Durch Integration über die Probendicke $d$ erhält man
+\begin{equation}
+  n= A_S \cdot \rho \cdot F \cdot \int_{0}^{d}e^{-\mu r} \cdot \difd r=
+  A_S \cdot \rho \cdot F \cdot \frac{1}{\mu} \cdot (1-e^{-\mu \cdot d})
+\end{equation}
+Unter Verwendung von $m=\rho \cdot V= \rho \cdot F \cdot d$ folgt
+\begin{equation}
+\label{eq:kalium:countrate}
+  n= A_S \cdot \rho \cdot F \cdot \frac{1}{\mu} \cdot (1-e^{-\frac{\mu \cdot m}{\rho \cdot F}})
+\end{equation}
+Bei der Auswertung ist ein weiterer Effekt zu berücksichtigen:
+Elektronen, die nach unten in Richtung des Aluminiumbehälters emittiert werden,
+werden zum Teil zurückgestreut. Dies wird durch die Einführung des Rückstreufaktors
+(1.29 bei Aluminium) berücksichtigt.
+
 \subsection{Funktionsweise des Zählrohrs}
 
 \begin{figure}[H]

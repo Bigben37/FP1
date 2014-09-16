@@ -1,9 +1,10 @@
 \documentclass[12pt, a4paper]{scrartcl}
 
 % CONFIG
-\newcommand{\exptitle}{Versuchsname}      % long name of experiment 
-\newcommand{\exptitleshort}{Versuchsname} % short name of experiment
-\newcommand{\expdate}{\today}             % date of experiment
+\newcommand{\exptitle}{ExpName}       % long name of experiment 
+\newcommand{\exptitleshort}{ShortExp} % short name of experiment
+\newcommand{\expdate}{Date}           % date of experiment
+\newcommand{\exptutor}{Betreuer}
 
 % PACKAGES + MODIFICATIONS
 \usepackage[ngerman]{babel} %standard language stuff
@@ -31,15 +32,18 @@
     pdfstartview={FitH},   % fits the width of the page to the window
     pdfnewwindow=true,     % links in new window
     colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=black,       % color of internal links (change box color with linkbordercolor)
+    linkcolor=blue,       % color of internal links (change box color with linkbordercolor)
     citecolor=green,       % color of links to bibliography
     filecolor=magenta,     % color of file links
-    urlcolor=cyan          % color of external links
+    urlcolor=blue          % color of external links
 }
 
-\usepackage{chngcntr}
+\usepackage[labelfont=bf]{caption} % bold captions
+
+\usepackage{chngcntr} % change behaviour of counters in different environments
 \counterwithin{figure}{section}  % number figures per section
 \numberwithin{equation}{section} % number equations per section
+\numberwithin{table}{section}    % number tables per section
 
 \usepackage{enumerate} % better way to config enumerates
 
@@ -47,11 +51,14 @@
 
 \setlength{\parindent}{0pt} % no indent on new paragraph
 
-\renewcommand\thesection{\Roman{section}} % roman numbers for sections
+\usepackage{pdfpages} % include pdf files
+
+% NEW COMMANDS
 
 % DOCUMENT SETTINGS
+
 \title{\exptitle}
-\subtitle{Fortgeschrittenen Praktikum 1}
+\subtitle{Fortgeschrittenen-Praktikum 1}
 \author{Moritz Bitterling und Benjamin Rottler \\ Universität Freiburg}
 \date{\expdate}
 
@@ -59,7 +66,18 @@
 \begin{document}
 
 \hypersetup{pageanchor=false} %stop page numbering (hyperref) to prevent for double page numers
-\maketitle  %TODO make better title page with logo
+\input{titlepage}
+\thispagestyle{empty}
+
+\newpage
+Alle Berechnungen in diesem Protokoll wurden unter Python 2.7 mit Hilfe folgender Programmbibliotheken durchgeführt:
+\begin{itemize}
+  \item PyROOT (\url{http://root.cern.ch/drupal/content/pyroot})
+  \item NumPy (\url{http://www.numpy.org/})
+\end{itemize}
+Die Graphiken wurden mit Inkscape (\url{http://www.inkscape.org}) gezeichnet.\\[\baselineskip]
+Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
+\url{https://github.com/Bigben37/FP1/tree/master/0908-LHWZ} abgerufen werden.
 \thispagestyle{empty}
 
 \newpage
@@ -70,19 +88,17 @@
 \hypersetup{pageanchor=true} %start page numbering again
 \setcounter{page}{1} %set to page 1
 
-\section{Versuchsziel}
 \input{01_Ziel} 
-
-\section{Physikalische Grundlagen}
 \input{02_Grundlagen}
-
-\section{Versuchsaufbau}
 \input{03_Aufbau}
-
-\section{Versuchsdurchführung}
 \input{04_Durchfuerung}
-
-\section{Auswertung}
 \input{05_Auswertung}
+
+%TODO add when finished
+%\appendix
+%\section{Anhang}
+%\subsection{Messprotokoll}
+%\includepdf[pages={-}]{../data/protokoll.pdf}
+
 
 \end{document}

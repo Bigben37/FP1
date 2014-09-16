@@ -19,3 +19,15 @@
 |Montag    | 13.10| Kernspinresonanz          | 3.5  |  
 |Donnerstag| 16.10| Hanle-Effekt              | 1.5  |  
 |Dienstag  | 21.10| SQUID                     | 3.5  |  
+
+####Setup
+We use the latest [Eclipse](https://www.eclipse.org/) version as IDE with following plugins:
+- [TeXlipse](http://texlipse.sourceforge.net/) for LaTeX
+- [PyDev](http://pydev.org/) for Python
+
+#####Running LaTeX scripts
+You can import the existing project with Eclipse. You can check our configuration in the `.texlipse` file.
+
+#####Running Python scripts
+Unfortunatly we cant sync our `.pydevproject` configuration file, because PyDev saves absoulte paths. You need to add the `lib` folder by your self to the `PYTHONPATH` (for example add it to the `external libraries` list of the project).
+

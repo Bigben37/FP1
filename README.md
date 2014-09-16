@@ -29,5 +29,5 @@ We use the latest [Eclipse](https://www.eclipse.org/) version as IDE with follow
 You can import the existing project with Eclipse. You can check our configuration in the `.texlipse` file.
 
 #####Running Python scripts
-Unfortunatly we cant sync our `.pydevproject` configuration file, because PyDev saves absoulte paths. You need to add the `lib` folder by your self to the `PYTHONPATH` (for example add it to the `external libraries` list of the project).
+Unfortunatley we cant sync our `.pydevproject` configuration file, because PyDev saves absoulte paths. You need to add the `lib` folder by yourself to the `PYTHONPATH` (for example add it to the `external libraries` list of the project).
 

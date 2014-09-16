@@ -1,16 +1,28 @@
 #!/usr/bin/python2.7
-from ROOT import TGraph, TGraphErrors
-import array
-import numpy as np
-from txtfile import TxtFile
+"""The Data and DataErros class encapsulate a list of experimental data and is used as a link between python and the ROOT library. 
+If you want to use them properly, you need to derive the class you need and add the function loadData(), in which u specify how the data 
+from the given path is loaded.
+"""
+
+__author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
+
+from ROOT import TGraph, TGraphErrors   # ROOT library
+import array                            # C-like arrays (for ROOT library)
+import numpy as np                      # Numpy
+from txtfile import TxtFile             # basic output to txt files, can be found the /lib directory
 
 class Data(object):
+    """Data class for x-y values (without errors)"""
 
     def __init__(self):
+        """Constructor, sets empty list for field _points. 
+        Usually, you dont want to use this, instead use Data.fromPath() or Data.fromLists()
+        """
         self.path = ''
         self._points = []
 
     def getPoints(self):
+        """points stores the x-y values in a list, i.e points = [[x1, y1], [x2, y2], [x3, y3], ...]"""
         return self._points
     
     def setPoints(self, points):
@@ -19,31 +31,57 @@ class Data(object):
     points = property(getPoints, setPoints)
 
     def getX(self):
+        """returns all x-values in a list"""
         return list(zip(*self._points)[0])
         
     def getY(self):
+        """returns all y-values in a list"""
         return list(zip(*self._points)[1])
     
     def getPoint(self, i):
+        """ Returns the i-th point of points
+        
+        Arguments:
+        i -- index of the point, which will be returned
+        """
         if i < len(self._points):
             return self._points[i]
         else:
             return None
 
     def addPoint(self, x, y):
+        """adds the point [x, y] to the list of points
+        
+        Arguments:
+        x -- x value of point
+        y -- y value of point
+        """
         self._points.append((x, y))
         
     def setXY(self, xlist, ylist):
+        """sets points from two given lists, one for x-values and one for y-values
+        
+        Arguments:
+        xlist -- list for x values
+        ylist -- list for y values
+        """
         if len(xlist) == len(ylist):
             self._points = zip(xlist, ylist)
         else:
             print('Data.setXY(x, ypyth):ERROR - lists have to be the same length')
             
     def getLength(self):
+        """returns the number of points in the list"""
         return len(self._points)
 
     @classmethod
     def fromPath(cls, path):
+        """Creates a new instance of Data from a given file. Make sure to implement your loadData() function, so that the class knows how to 
+        load the file
+        
+        Arguments:
+        path -- relative path to file
+        """
         data = cls()
         data.path = path
         if path:
@@ -55,6 +93,12 @@ class Data(object):
 
     @classmethod
     def fromLists(cls, x, y):
+        """Creates a new instance of Data from two given lists, one for x-values and one for y-values
+        
+        Arguments:
+        xlist -- list for x values
+        ylist -- list for y values
+        """
         if len(x) == len(y):
             data = cls()
             data.setXY(x, y)
@@ -64,6 +108,17 @@ class Data(object):
             return None
 
     def makeGraph(self, name='', xtitle='', ytitle=''):
+        """This function returns an instance of ROOTs TGraph, made with the points in from this class.
+        Some of the graph's default settings are changed:
+          - black points
+          - every point has the symbol of 'x'
+          - x- and y-axis are centered
+          
+        Arguments:
+        name   -- ROOT internal name of graph (default = '')
+        xtitle -- title of x-axis (default = '')
+        ytitle -- title of y-axis (default = '')
+        """
         x = self.getX()
         y = self.getY()
         graph = TGraph(self.getLength(), array.array('f', x), array.array('f', y))
@@ -77,14 +132,35 @@ class Data(object):
         graph.GetYaxis().CenterTitle()
         return graph
     
-    def saveData(self, title, path, mode, encoding=''):
+    def saveDataToLaTeX(self, thead, format, caption, label, path, mode, encoding='utf-8'):
+        """prints all points formatted into an latex file and saves it.
+        
+        Arguments:
+        thead    -- list of descriptions for columns, is used as first row
+        format   -- list of formatting rules, how to convert numbers into strings
+        caption  -- caption of table in latex
+        label    -- label of table in latex
+        path     -- relative path to file in which the data is saved to
+        mode     -- write mode (usually 'w' for overwriting or 'a' for appending)
+        encoding -- file encoding (default = 'utf-8')        
+        """
+        i = '  '  # intendation
         with TxtFile(path, mode, encoding) as f:
-            f.writeline(title)
-            f.writeline('='*len(title))
+            f.writeline('\\begin{table}[H]')
+            f.writeline('\\caption{' + caption + '}')
+            f.writeline('\\begin{center}')
+            f.writeline('\\begin{tabular}{' + '|c' * len(self.points[0])  + '|}')
+            f.writeline(i + '\hline')
+            f.writeline(i + ' & '.join(thead) + ' \\\\ \hline ')
             for point in self.points:
-                f.writeline('\t', *point)
+                f.writeline(i + ' & '.join(format) % (point[0], point[1]) + ' \\\\ \hline')
+            f.writeline('\\end{tabular}')  
+            f.writeline('\\end{center}')    
+            f.writeline('\\label{' + label  + '}')  
+            f.writeline('\\end{table}')
                 
     def __add__(self, other):
+        """addition operator for two instances, adds y-values, while not changing the x-values"""
         if isinstance(other, Data):
             if self.getLength() == other.getLength():
                 y = []
@@ -99,6 +175,7 @@ class Data(object):
             return NotImplemented
 
     def __sub__(self, other):
+        """subtraction operator for two instances, subtracts y-values, while not changing the x-values"""
         if isinstance(other, Data):
             if self.getLength() == other.getLength():
                 y = []
@@ -111,15 +188,20 @@ class Data(object):
                 return NotImplemented
         else:
             return NotImplemented
-        
+
 
 class DataErrors(object):
+    """Data class for x-y values with errors for x and y"""
 
     def __init__(self):
+        """Constructor, sets empty list for field _points. 
+        Usually, you dont want to use this, instead use Data.fromPath() or Data.fromLists()
+        """
         self.path = ''
         self._points = []
 
     def getPoints(self):
+        """points stores the x-y values in a list, i.e points = [[x1, y1], [x2, y2], [x3, y3], ...] """
         return self._points
     
     def setPoints(self, points):
@@ -128,57 +210,106 @@ class DataErrors(object):
     points = property(getPoints, setPoints)
 
     def getX(self):
+        """returns all x-values in a list"""
         return list(zip(*self._points)[0])
         
     def getY(self):
+        """returns all y-values in a list"""
         return list(zip(*self._points)[1])
     
     def getEX(self):
+        """returns all x-error-values in a list"""
         return list(zip(*self._points)[2])
     
     def getEY(self):
+        """returns all y-error-values in a list"""
         return list(zip(*self._points)[3])    
     
     def getPoint(self, i):
+        """ Returns the i-th point of points
+        
+        Arguments:
+        i -- index of the point, which will be returned
+        """
         if i < len(self._points):
             return self._points[i]
         else:
             return None
 
     def addPoint(self, x, y, ex, ey):
+        """adds the point [x, y, ex, ey] to the list of points
+        
+        Arguments:
+        x  -- x value of point
+        y  -- y value of point
+        ex -- x error of point
+        ey -- y error of point
+        """
         self._points.append((x, y, ex, ey))
         
     def setXY(self, xlist, ylist, exlist, eylist):
+        """sets points from two given lists, one for x-values and one for y-values
+        
+        Arguments:
+        xlist  -- list for x values
+        ylist  -- list for y values
+        exlist -- list for x error values
+        eylist -- list for y error values
+        """
         if len(xlist) == len(ylist) == len(exlist) == len(eylist):
             self._points = zip(xlist, ylist, exlist, eylist)
         else:
             print('Data.setXY(x, y, ex, ey):ERROR - lists have to be the same length')
             
     def getLength(self):
+        """returns the number of points in the list"""
         return len(self._points)
 
     @classmethod
     def fromPath(cls, path):
+        """Creates a new instance of Data from a given file. Make sure to implement your loadData() function, so that the class knows how to 
+        load the file
+        
+        Arguments:
+        path -- relative path to file
+        """
         data = cls()
         data.path = path
         if path:
             try:
                 data.loadData()
             except NameError:
-                print("Data.loadData() not in scope! Please implement. ")
+                print("DataErrors.loadData() not in scope! Please implement. ")
         return data
 
     @classmethod
     def fromLists(cls, x, y, ex, ey):
+        """Creates a new instance of Data from two given lists, one for x-values and one for y-values
+        
+        Arguments:
+        xlist -- list for x values
+        ylist -- list for y values
+        """
         if len(x) == len(y) == len(ex) == len(ey):
             data = cls()
             data.setXY(x, y, ex, ey)
             return data
         else:
-            print('Data.fromLists():ERROR - lists have to be the same length')
+            print('DataErrors.fromLists():ERROR - lists have to be the same length')
             return None
 
     def makeGraph(self, name='', xtitle='', ytitle=''):
+        """This function returns an instance of ROOTs TGraphErrors, made with the points in from this class.
+        Some of the graph's default settings are changed:
+          - black points
+          - every point has the symbol of 'x'
+          - x- and y-axis are centered
+          
+        Arguments:
+        name   -- ROOT internal name of graph (default = '')
+        xtitle -- title of x-axis (default = '')
+        ytitle -- title of y-axis (default = '')
+        """
         x = self.getX()
         y = self.getY()
         ex = self.getEX()
@@ -195,30 +326,71 @@ class DataErrors(object):
         return graph
     
     def setXErrorAbs(self, error):
+        """sets absolute x-error, same error for every data point
+        
+        Arguments:
+        error -- absolute error
+        """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], error, self.points[i][3])
             
     def setXErrorRel(self, relerror):
+        """sets relative x-error, the absolute error is calculated with x-value * relative error
+        
+        Arguments:
+        relerror -- relative error
+        """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][0]*relerror, self.points[i][3])
             
     def setXErrorFunc(self, f):
+        """calculates x-error with given function from x-value
+        
+        Arguments:
+        f -- error function
+        """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], f(self.points[i][0]), self.points[i][3])
     
     def setYErrorAbs(self, error):
+        """sets absolute y-error, same error for every data point
+        
+        Arguments:
+        error -- absolute error
+        """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], error)
             
     def setYErrorRel(self, relerror):
+        """sets relative y-error, the absolute error is calculated with y-value * relative error
+        
+        Arguments:
+        relerror -- relative error
+        """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], self.points[i][1]*relerror)
             
     def setYErrorFunc(self, f):
+        """calculates y-error with given function from y-value
+        
+        Arguments:
+        f -- error function
+        """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], f(self.points[i][1]))
             
     def saveDataToLaTeX(self, thead, format, caption, label, path, mode, encoding='utf-8'):
+        """prints all points formatted into an latex file and saves it.
+        
+        Arguments:
+        thead    -- list of descriptions for columns, is used as first row
+        format   -- list of formatting rules, how to convert numbers into strings
+        caption  -- caption of table in latex
+        label    -- label of table in latex
+        path     -- relative path to file in which the data is saved to
+        mode     -- write mode (usually 'w' for overwriting or 'a' for appending)
+        encoding -- file encoding (default = 'utf-8')        
+        """
         i = '  '  # intendation
         with TxtFile(path, mode, encoding) as f:
             f.writeline('\\begin{table}[H]')
@@ -235,6 +407,11 @@ class DataErrors(object):
             f.writeline('\\end{table}')
     
     def __add__(self, other):
+        """addition operator for two instances, adds y-values, while not changing the x-values.
+        The error of y values is calculated by the propagation of error:
+        yerror = sqrt(y1error^2 + y2error^2)
+        The error of x values is set to 0
+        """
         if isinstance(other, DataErrors):
             if self.getLength() == other.getLength():
                 y = []
@@ -251,11 +428,13 @@ class DataErrors(object):
                 return NotImplemented
         else:
             return NotImplemented
-        
-    def saveData(self):
-        pass
 
     def __sub__(self, other):
+        """subtraction operator for two instances, subtracts y-values, while not changing the x-values.
+        The error of y values is calculated by the propagation of error:
+        yerror = sqrt(y1error^2 + y2error^2)
+        The error of x values is set to 0
+        """
         if isinstance(other, DataErrors):
             if self.getLength() == other.getLength():
                 y = []

@@ -2,9 +2,9 @@
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 import os
 import numpy as np
-from data import Data, DataErrors  # make sure to set up your PYTHONPATH variable to find module or copy to same dir
-from fitter import Fitter
-from txtfile import TxtFile
+from data import Data, DataErrors  # make sure to add ../lib to your project path or copy file from there
+from fitter import Fitter          # make sure to add ../lib to your project path or copy file from there
+from txtfile import TxtFile        # make sure to add ../lib to your project path or copy file from there
 from lhwz import LHWZData
 
 def makeCharacteristic():

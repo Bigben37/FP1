@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7
 import csv
 import os
-from data import DataErrors
+from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
                 
 class LHWZData(DataErrors):
     def loadData(self):

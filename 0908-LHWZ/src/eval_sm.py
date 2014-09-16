@@ -3,9 +3,9 @@ from ROOT import gROOT, gStyle, TCanvas, TLegend
 import os.path
 import numpy as np
 from lhwz import LHWZData
-from data import DataErrors
-from fitter import Fitter
-from txtfile import TxtFile
+from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
+from fitter import Fitter    # make sure to add ../lib to your project path or copy file from there
+from txtfile import TxtFile  # make sure to add ../lib to your project path or copy file from there
 
 def makeCharacteristic():
     errorf = lambda n: np.sqrt(n / 50)  # t = 50s

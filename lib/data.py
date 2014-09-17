@@ -61,6 +61,24 @@ class GeneralData(object):
             except NameError:
                 print(data.__class__.__name__ + ".loadData() not in scope! Please implement. ")
         return data
+    
+    def filterY(self, lower=None, upper=None):
+        """deletes all values with are lower then the lower bound or higher than the higher bound
+        
+        Arguments:
+        lower -- lower bound
+        higher -- higher bound
+        """
+        marks = []
+        for i, point in enumerate(self.points):
+            if lower:
+                if point[1] < lower:
+                    marks.append(i)
+            if upper:
+                if point[1] > upper:
+                    marks.append(i)
+        for mark in reversed(marks):
+            del self._points[mark]
 
 class Data(GeneralData):
     """Data class for x-y values (without errors)"""

@@ -8,11 +8,12 @@ from txtfile import TxtFile             # basic output to txt files, can be foun
 
 
 class Fitter:
+
     """This class is a tool for fitting experimental data"""
-    
+
     def __init__(self, name, function):
         """Constructor, sets some constants for fitting function and initializes fields
-        
+
         Arguments:
         name     -- ROOT internal name of function
         function -- function to fit, use conventions from ROOT
@@ -27,7 +28,7 @@ class Fitter:
 
     def setParam(self, index, name, startvalue=1):
         """initializes parameter
-        
+
         Arguments:
         index      -- index of parameter (has to be the same as in the function of constructor)
         name       -- name of parameter
@@ -40,7 +41,7 @@ class Fitter:
     def fit(self, graph, xstart, xend):
         """computes fit and stores calculated parameters with errors in parameter dict. 
         Also extracts covariance matrix and calculates correlation matrix
-        
+
         Arguments:
         graph  -- an instance of ROOTs TGraph with data to fit
         xstart -- start value for x interval  
@@ -56,9 +57,9 @@ class Fitter:
         self._corrMatrix = [[self._covMatrix[col][row] / (self.params[col]['error'] * self.params[row]['error']) for row in xrange(n)] for col in xrange(n)]
 
     def getFunction(self):
-       """returns fit function"""
-       return self._function
-   
+        """returns fit function"""
+        return self._function
+
     function = property(getFunction)
 
     def getChisquare(self):
@@ -72,27 +73,27 @@ class Fitter:
     def getChisquareOverDoF(self):
         """returns chi^2 over degrees of freedom of fit"""
         return self.getChisquare() / self.getDoF()
-    
+
     def getCovMatrix(self):
         """returns covariance matrix of fit"""
         return self._covMatrix
-        
+
     def getCovMatrixElem(self, col, row):
         """returns entry of covariance matrix
-        
+
         Arguments:
         col -- column of element
         row -- row of element
         """
         return self._covMatrix[col][row]
-        
+
     def getCorrMatrix(self):
         """returns correlation matrix"""
         return self._corrMatrix
-        
+
     def getCorrMatrixElem(self, col, row):
         """returns entry of correlation matrix
-        
+
         Arguments:
         col -- column of element
         row -- row of element
@@ -101,7 +102,7 @@ class Fitter:
 
     def saveData(self, path, mode='w', enc='utf-8'):
         """saves fitting info (chi^2, DoF, chi^2/DoF, paramters with values and errors, covariance and correlation matrix)
-        
+
         Arguments:
         path -- relative path to file
         mode -- write mode (usually 'w' for overwriting or 'a' for appending)
@@ -110,7 +111,7 @@ class Fitter:
         with TxtFile.fromRelPath(path, mode) as f:
             f.writeline('fitting info')
             f.writeline('============')
-            f.writeline(TxtFile.CHISQUARE+ ':\t\t' + str(self.getChisquare()))
+            f.writeline(TxtFile.CHISQUARE + ':\t\t' + str(self.getChisquare()))
             f.writeline('DoF:\t' + str(self.getDoF()) + '')
             f.writeline(TxtFile.CHISQUARE + '/DoF:\t' + str(self.getChisquareOverDoF()))
             f.writeline('')

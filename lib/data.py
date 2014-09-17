@@ -11,7 +11,9 @@ import array                            # C-like arrays (for ROOT library)
 import numpy as np                      # Numpy
 from txtfile import TxtFile             # basic output to txt files, can be found the /lib directory
 
+
 class GeneralData(object):
+
     """Generl data class, is used as super class for Data and DataErrors"""
 
     def __init__(self):
@@ -20,19 +22,19 @@ class GeneralData(object):
         """
         self.path = ''
         self._points = []
-        
+
     def getPoints(self):
         """points stores the values in a list, i.e points = [p1, p2, p3, ...]"""
         return self._points
-    
+
     def setPoints(self, points):
         self._points = points
-        
+
     points = property(getPoints, setPoints)
-    
+
     def getPoint(self, i):
         """ Returns the i-th point of points
-        
+
         Arguments:
         i -- index of the point, which will be returned
         """
@@ -40,7 +42,7 @@ class GeneralData(object):
             return self._points[i]
         else:
             return None
-        
+
     def getLength(self):
         """returns the number of points in the list"""
         return len(self._points)
@@ -49,7 +51,7 @@ class GeneralData(object):
     def fromPath(cls, path):
         """Creates a new instance of Data from a given file. Make sure to implement your loadData() function, so that the class knows how to 
         load the file
-        
+
         Arguments:
         path -- relative path to file
         """
@@ -61,10 +63,10 @@ class GeneralData(object):
             except NameError:
                 print(data.__class__.__name__ + ".loadData() not in scope! Please implement. ")
         return data
-    
+
     def filterY(self, lower=None, upper=None):
         """deletes all values with are lower then the lower bound or higher than the higher bound
-        
+
         Arguments:
         lower -- lower bound
         higher -- higher bound
@@ -80,7 +82,9 @@ class GeneralData(object):
         for mark in reversed(marks):
             del self._points[mark]
 
+
 class Data(GeneralData):
+
     """Data class for x-y values (without errors)"""
 
     def __init__(self):
@@ -92,23 +96,23 @@ class Data(GeneralData):
     def getX(self):
         """returns all x-values in a list"""
         return list(zip(*self._points)[0])
-        
+
     def getY(self):
         """returns all y-values in a list"""
         return list(zip(*self._points)[1])
 
     def addPoint(self, x, y):
         """adds the point [x, y] to the list of points
-        
+
         Arguments:
         x -- x value of point
         y -- y value of point
         """
         self._points.append((x, y))
-        
+
     def setXY(self, xlist, ylist):
         """sets points from two given lists, one for x-values and one for y-values
-        
+
         Arguments:
         xlist -- list for x values
         ylist -- list for y values
@@ -118,11 +122,10 @@ class Data(GeneralData):
         else:
             print('Data.setXY(x, ypyth):ERROR - lists have to be the same length')
 
-
     @classmethod
     def fromLists(cls, x, y):
         """Creates a new instance of Data from two given lists, one for x-values and one for y-values
-        
+
         Arguments:
         xlist -- list for x values
         ylist -- list for y values
@@ -141,7 +144,7 @@ class Data(GeneralData):
           - black points
           - every point has the symbol of 'x'
           - x- and y-axis are centered
-          
+
         Arguments:
         name   -- ROOT internal name of graph (default = '')
         xtitle -- title of x-axis (default = '')
@@ -159,10 +162,10 @@ class Data(GeneralData):
         graph.GetYaxis().SetTitle(ytitle)
         graph.GetYaxis().CenterTitle()
         return graph
-    
+
     def saveDataToLaTeX(self, thead, format, caption, label, path, mode, encoding='utf-8'):
         """prints all points formatted into an latex file and saves it.
-        
+
         Arguments:
         thead    -- list of descriptions for columns, is used as first row
         format   -- list of formatting rules, how to convert numbers into strings
@@ -177,16 +180,16 @@ class Data(GeneralData):
             f.writeline('\\begin{table}[H]')
             f.writeline('\\caption{' + caption + '}')
             f.writeline('\\begin{center}')
-            f.writeline('\\begin{tabular}{' + '|c' * len(self.points[0])  + '|}')
+            f.writeline('\\begin{tabular}{' + '|c' * len(self.points[0]) + '|}')
             f.writeline(i + '\hline')
             f.writeline(i + ' & '.join(thead) + ' \\\\ \hline ')
             for point in self.points:
                 f.writeline(i + ' & '.join(format) % (point[0], point[1]) + ' \\\\ \hline')
-            f.writeline('\\end{tabular}')  
-            f.writeline('\\end{center}')    
-            f.writeline('\\label{' + label  + '}')  
+            f.writeline('\\end{tabular}')
+            f.writeline('\\end{center}')
+            f.writeline('\\label{' + label + '}')
             f.writeline('\\end{table}')
-                
+
     def __add__(self, other):
         """addition operator for two instances, adds y-values, while not changing the x-values"""
         if isinstance(other, Data):
@@ -219,6 +222,7 @@ class Data(GeneralData):
 
 
 class DataErrors(GeneralData):
+
     """Data class for x-y values with errors for x and y"""
 
     def __init__(self):
@@ -230,22 +234,22 @@ class DataErrors(GeneralData):
     def getX(self):
         """returns all x-values in a list"""
         return list(zip(*self._points)[0])
-        
+
     def getY(self):
         """returns all y-values in a list"""
         return list(zip(*self._points)[1])
-    
+
     def getEX(self):
         """returns all x-error-values in a list"""
         return list(zip(*self._points)[2])
-    
+
     def getEY(self):
         """returns all y-error-values in a list"""
-        return list(zip(*self._points)[3])    
-    
+        return list(zip(*self._points)[3])
+
     def addPoint(self, x, y, ex, ey):
         """adds the point [x, y, ex, ey] to the list of points
-        
+
         Arguments:
         x  -- x value of point
         y  -- y value of point
@@ -253,10 +257,10 @@ class DataErrors(GeneralData):
         ey -- y error of point
         """
         self._points.append((x, y, ex, ey))
-        
+
     def setXY(self, xlist, ylist, exlist, eylist):
         """sets points from two given lists, one for x-values and one for y-values
-        
+
         Arguments:
         xlist  -- list for x values
         ylist  -- list for y values
@@ -267,11 +271,11 @@ class DataErrors(GeneralData):
             self._points = zip(xlist, ylist, exlist, eylist)
         else:
             print('Data.setXY(x, y, ex, ey):ERROR - lists have to be the same length')
-            
+
     @classmethod
     def fromLists(cls, x, y, ex, ey):
         """Creates a new instance of Data from two given lists, one for x-values and one for y-values
-        
+
         Arguments:
         xlist -- list for x values
         ylist -- list for y values
@@ -290,7 +294,7 @@ class DataErrors(GeneralData):
           - black points
           - every point has the symbol of 'x'
           - x- and y-axis are centered
-          
+
         Arguments:
         name   -- ROOT internal name of graph (default = '')
         xtitle -- title of x-axis (default = '')
@@ -313,64 +317,64 @@ class DataErrors(GeneralData):
             return graph
         else:
             return None
-    
+
     def setXErrorAbs(self, error):
         """sets absolute x-error, same error for every data point
-        
+
         Arguments:
         error -- absolute error
         """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], error, self.points[i][3])
-            
+
     def setXErrorRel(self, relerror):
         """sets relative x-error, the absolute error is calculated with x-value * relative error
-        
+
         Arguments:
         relerror -- relative error
         """
         for i in range(self.getLength()):
-            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][0]*relerror, self.points[i][3])
-            
+            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][0] * relerror, self.points[i][3])
+
     def setXErrorFunc(self, f):
         """calculates x-error with given function from x-value
-        
+
         Arguments:
         f -- error function
         """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], f(self.points[i][0]), self.points[i][3])
-    
+
     def setYErrorAbs(self, error):
         """sets absolute y-error, same error for every data point
-        
+
         Arguments:
         error -- absolute error
         """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], error)
-            
+
     def setYErrorRel(self, relerror):
         """sets relative y-error, the absolute error is calculated with y-value * relative error
-        
+
         Arguments:
         relerror -- relative error
         """
         for i in range(self.getLength()):
-            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], self.points[i][1]*relerror)
-            
+            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], self.points[i][1] * relerror)
+
     def setYErrorFunc(self, f):
         """calculates y-error with given function from y-value
-        
+
         Arguments:
         f -- error function
         """
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], f(self.points[i][1]))
-            
+
     def saveDataToLaTeX(self, thead, format, caption, label, path, mode, encoding='utf-8'):
         """prints all points formatted into an latex file and saves it.
-        
+
         Arguments:
         thead    -- list of descriptions for columns, is used as first row
         format   -- list of formatting rules, how to convert numbers into strings
@@ -385,16 +389,16 @@ class DataErrors(GeneralData):
             f.writeline('\\begin{table}[H]')
             f.writeline('\\caption{' + caption + '}')
             f.writeline('\\begin{center}')
-            f.writeline('\\begin{tabular}{' + '|c' * len(self.points[0])  + '|}')
+            f.writeline('\\begin{tabular}{' + '|c' * len(self.points[0]) + '|}')
             f.writeline(i + '\hline')
             f.writeline(i + ' & '.join(thead) + ' \\\\ \hline ')
             for point in self.points:
                 f.writeline(i + ' & '.join(format) % (point[0], point[2], point[1], point[3]) + ' \\\\ \hline')
-            f.writeline('\\end{tabular}')  
-            f.writeline('\\end{center}')    
-            f.writeline('\\label{' + label  + '}')  
+            f.writeline('\\end{tabular}')
+            f.writeline('\\end{center}')
+            f.writeline('\\label{' + label + '}')
             f.writeline('\\end{table}')
-    
+
     def __add__(self, other):
         """addition operator for two instances, adds y-values, while not changing the x-values.
         The error of y values is calculated by the propagation of error:
@@ -411,7 +415,7 @@ class DataErrors(GeneralData):
                 yoe = other.getYE()
                 for i in range(self.getLength()):
                     y.append(ys[i] + yo[i])
-                    yerror.append(np.sqrt((yse[i])**2 + (yoe[i])**2))
+                    yerror.append(np.sqrt((yse[i]) ** 2 + (yoe[i]) ** 2))
                 return DataErrors.fromLists(self.getX(), y, [0] * self.getLength(), yerror)
             else:
                 return NotImplemented
@@ -434,7 +438,7 @@ class DataErrors(GeneralData):
                 yoe = other.getEY()
                 for i in range(self.getLength()):
                     y.append(ys[i] - yo[i])
-                    yerror.append(np.sqrt((yse[i])**2 + (yoe[i])**2))
+                    yerror.append(np.sqrt((yse[i]) ** 2 + (yoe[i]) ** 2))
                 return DataErrors.fromLists(self.getX(), y, [0] * self.getLength(), yerror)
             else:
                 return NotImplemented

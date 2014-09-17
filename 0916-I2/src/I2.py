@@ -15,6 +15,14 @@ class I2Data(DataErrors):
                     self.addPoint(float(xi.replace(',', '.')), float(yi.replace(',', '.')), 0, 0)
                     
     def findExtrema(self, steps, xstart, xend, minimum=True):
+        """finds extrema in data points by comparing near by values
+        
+        Arguments:
+        steps   -- number of comparisons to right and left side
+        xstart  -- start of x interval in which extrema are analyzed
+        xend    -- end of x interval in which extrema are anayzed
+        minimum -- if true searches for minima, if false searches for maxima (default = True)
+        """
         m = 1 if minimum else -1  # modifier for maxima/minimia
         data = I2Data()
         for i in range(steps, self.getLength() - steps):

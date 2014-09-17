@@ -11,8 +11,8 @@ import array                            # C-like arrays (for ROOT library)
 import numpy as np                      # Numpy
 from txtfile import TxtFile             # basic output to txt files, can be found the /lib directory
 
-class Data(object):
-    """Data class for x-y values (without errors)"""
+class GeneralData(object):
+    """Generl data class, is used as super class for Data and DataErrors"""
 
     def __init__(self):
         """Constructor, sets empty list for field _points. 
@@ -20,23 +20,15 @@ class Data(object):
         """
         self.path = ''
         self._points = []
-
+        
     def getPoints(self):
-        """points stores the x-y values in a list, i.e points = [[x1, y1], [x2, y2], [x3, y3], ...]"""
+        """points stores the values in a list, i.e points = [p1, p2, p3, ...]"""
         return self._points
     
     def setPoints(self, points):
         self._points = points
         
     points = property(getPoints, setPoints)
-
-    def getX(self):
-        """returns all x-values in a list"""
-        return list(zip(*self._points)[0])
-        
-    def getY(self):
-        """returns all y-values in a list"""
-        return list(zip(*self._points)[1])
     
     def getPoint(self, i):
         """ Returns the i-th point of points
@@ -48,6 +40,44 @@ class Data(object):
             return self._points[i]
         else:
             return None
+        
+    def getLength(self):
+        """returns the number of points in the list"""
+        return len(self._points)
+
+    @classmethod
+    def fromPath(cls, path):
+        """Creates a new instance of Data from a given file. Make sure to implement your loadData() function, so that the class knows how to 
+        load the file
+        
+        Arguments:
+        path -- relative path to file
+        """
+        data = cls()
+        data.path = path
+        if path:
+            try:
+                data.loadData()
+            except NameError:
+                print(data.__class__.__name__ + ".loadData() not in scope! Please implement. ")
+        return data
+
+class Data(GeneralData):
+    """Data class for x-y values (without errors)"""
+
+    def __init__(self):
+        """Constructor, sets empty list for field _points. 
+        Usually, you dont want to use this, instead use Data.fromPath() or Data.fromLists()
+        """
+        super(Data, self).__init__()
+
+    def getX(self):
+        """returns all x-values in a list"""
+        return list(zip(*self._points)[0])
+        
+    def getY(self):
+        """returns all y-values in a list"""
+        return list(zip(*self._points)[1])
 
     def addPoint(self, x, y):
         """adds the point [x, y] to the list of points
@@ -69,27 +99,7 @@ class Data(object):
             self._points = zip(xlist, ylist)
         else:
             print('Data.setXY(x, ypyth):ERROR - lists have to be the same length')
-            
-    def getLength(self):
-        """returns the number of points in the list"""
-        return len(self._points)
 
-    @classmethod
-    def fromPath(cls, path):
-        """Creates a new instance of Data from a given file. Make sure to implement your loadData() function, so that the class knows how to 
-        load the file
-        
-        Arguments:
-        path -- relative path to file
-        """
-        data = cls()
-        data.path = path
-        if path:
-            try:
-                data.loadData()
-            except NameError:
-                print(data.__class__.__name__ + ".loadData() not in scope! Please implement. ")
-        return data
 
     @classmethod
     def fromLists(cls, x, y):
@@ -190,24 +200,14 @@ class Data(object):
             return NotImplemented
 
 
-class DataErrors(object):
+class DataErrors(GeneralData):
     """Data class for x-y values with errors for x and y"""
 
     def __init__(self):
         """Constructor, sets empty list for field _points. 
         Usually, you dont want to use this, instead use Data.fromPath() or Data.fromLists()
         """
-        self.path = ''
-        self._points = []
-
-    def getPoints(self):
-        """points stores the x-y values in a list, i.e points = [[x1, y1], [x2, y2], [x3, y3], ...] """
-        return self._points
-    
-    def setPoints(self, points):
-        self._points = points
-        
-    points = property(getPoints, setPoints)
+        super(DataErrors, self).__init__()
 
     def getX(self):
         """returns all x-values in a list"""
@@ -225,17 +225,6 @@ class DataErrors(object):
         """returns all y-error-values in a list"""
         return list(zip(*self._points)[3])    
     
-    def getPoint(self, i):
-        """ Returns the i-th point of points
-        
-        Arguments:
-        i -- index of the point, which will be returned
-        """
-        if i < len(self._points):
-            return self._points[i]
-        else:
-            return None
-
     def addPoint(self, x, y, ex, ey):
         """adds the point [x, y, ex, ey] to the list of points
         
@@ -261,27 +250,6 @@ class DataErrors(object):
         else:
             print('Data.setXY(x, y, ex, ey):ERROR - lists have to be the same length')
             
-    def getLength(self):
-        """returns the number of points in the list"""
-        return len(self._points)
-
-    @classmethod
-    def fromPath(cls, path):
-        """Creates a new instance of Data from a given file. Make sure to implement your loadData() function, so that the class knows how to 
-        load the file
-        
-        Arguments:
-        path -- relative path to file
-        """
-        data = cls()
-        data.path = path
-        if path:
-            try:
-                data.loadData()
-            except NameError:
-                print("DataErrors.loadData() not in scope! Please implement. ")
-        return data
-
     @classmethod
     def fromLists(cls, x, y, ex, ey):
         """Creates a new instance of Data from two given lists, one for x-values and one for y-values
@@ -310,20 +278,23 @@ class DataErrors(object):
         xtitle -- title of x-axis (default = '')
         ytitle -- title of y-axis (default = '')
         """
-        x = self.getX()
-        y = self.getY()
-        ex = self.getEX()
-        ey = self.getEY()
-        graph = TGraphErrors(self.getLength(), array.array('f', x), array.array('f', y), array.array('f', ex), array.array('f', ey))
-        graph.SetName(name)
-        graph.SetMarkerColor(1)
-        graph.SetMarkerStyle(5)
-        graph.SetTitle("")
-        graph.GetXaxis().SetTitle(xtitle)
-        graph.GetXaxis().CenterTitle()
-        graph.GetYaxis().SetTitle(ytitle)
-        graph.GetYaxis().CenterTitle()
-        return graph
+        if self.points:
+            x = self.getX()
+            y = self.getY()
+            ex = self.getEX()
+            ey = self.getEY()
+            graph = TGraphErrors(self.getLength(), array.array('f', x), array.array('f', y), array.array('f', ex), array.array('f', ey))
+            graph.SetName(name)
+            graph.SetMarkerColor(1)
+            graph.SetMarkerStyle(5)
+            graph.SetTitle("")
+            graph.GetXaxis().SetTitle(xtitle)
+            graph.GetXaxis().CenterTitle()
+            graph.GetYaxis().SetTitle(ytitle)
+            graph.GetYaxis().CenterTitle()
+            return graph
+        else:
+            return None
     
     def setXErrorAbs(self, error):
         """sets absolute x-error, same error for every data point

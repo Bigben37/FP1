@@ -111,7 +111,7 @@ class Fitter:
             f.writeline('fitting info')
             f.writeline('============')
             f.writeline(TxtFile.CHISQUARE+ ':\t\t' + str(self.getChisquare()))
-            f.writeline('NDF:\t' + str(self.getDoF()) + '')
+            f.writeline('DoF:\t' + str(self.getDoF()) + '')
             f.writeline(TxtFile.CHISQUARE + '/DoF:\t' + str(self.getChisquareOverDoF()))
             f.writeline('')
             f.writeline('parameters')

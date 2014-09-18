@@ -33,3 +33,11 @@ class I2Data(DataErrors):
                 if passed:
                     data.addPoint(*self.points[i])
         return data
+    
+    def calcVacuumLambda(self):
+        """changes wavelength to vacuum wavelength. The refraction index depends on wavelength, its approximated by a polynomial 
+        or first order (n(s) = a + b*s, where x is wavelength)."""
+        a = 1.00028678401
+        b = -1.60115242176e-08
+        for i in range(self.getLength()):
+            points[i][0] *= a + b*points[i][0]

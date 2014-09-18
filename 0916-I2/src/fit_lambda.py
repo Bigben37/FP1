@@ -18,7 +18,7 @@ def fitLambda():
     fit.setParam(0, 'a', 2)
     fit.setParam(1, 'b', -1)
     fit.fit(g, 450, 700)
-    fit.saveData('../calc/lambda.txt', 'w')
+    fit.saveData('../calc/fit_lambda.txt', 'w')
     
     a = fit.params[0]['value']
     sa = fit.params[0]['error']
@@ -36,7 +36,7 @@ def fitLambda():
     l.Draw()
     
     c.Update()
-    c.Print('../img/lambda.pdf', 'pdf')
+    c.Print('../img/fit_lambda.pdf', 'pdf')
     
 
 def main():

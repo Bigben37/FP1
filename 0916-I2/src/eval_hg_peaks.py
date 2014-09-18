@@ -1,14 +1,15 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 from I2 import I2Data
+from txtfile import TxtFile
 
 def evalHgPeaks():
     data = I2Data.fromPath('../data/02_Hg_full_ngg11.txt')
-    mins = data.findExtrema(100, 425, 630, False)
+    mins = data.findExtrema(10, 425, 630, False)
     mins.filterY(1300)
-    print('found %d peaks' % mins.getLength())
-    
-    #TODO save peak data
+    with TxtFile.fromRelPath('../calc/hg_lines.txt', 'w') as f:
+        for min in mins.points:
+            f.writeline(str(min[0]))
 
     c = TCanvas('c1', '', 1280, 720)
     c.SetLogy()

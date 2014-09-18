@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Thu Sep 18 19:39:54 CEST 2014
+markTmpDer=true
+builderNum=2
+outputDir=bin
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=szintillationsz\u00E4hler.tex
+outputFile=szintillationsz\u00E4hler.pdf
+langSpell=de
+markDer=true
+srcDir=src

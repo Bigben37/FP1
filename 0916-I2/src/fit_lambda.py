@@ -12,6 +12,9 @@ def fitLambda():
     
     c = TCanvas('c1', '', 1280, 720)
     g = data.makeGraph('g', 'Wellenl#ddot{a}nge #lambda', 'Brechungsindex n')
+    #TODO custom labels
+    #print(g.GetYaxis().FindBin(1.0002765))
+    #g.GetYaxis().SetBinLabel(g.GetYaxis().FindBin(1.000276), '2.76')
     g.Draw('AP')
     
     fit = Fitter('f', '[0]+[1]*x')

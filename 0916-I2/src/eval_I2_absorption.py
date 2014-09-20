@@ -31,7 +31,7 @@ def avgerrors(values, errors):
     avg = sum(map(lambda v, e: v/(e**2), values, errors)) * var
     return avg, np.sqrt(var)
 
-def evalProgressions():
+def getExcitedStateOszillationConstants():
     
     # plot spectrum
     
@@ -49,7 +49,6 @@ def evalProgressions():
     myY = TGaxis()
     myY.ImportAxisAttributes(g.GetYaxis())
     myY.SetMaxDigits(3)
-    
     g.Draw('AL')
     
     pg1 = progression[1].makeGraph('prog1')
@@ -80,8 +79,7 @@ def evalProgressions():
         
         # Calculate vacuum wavelength and create Birge-Sponer plot
         
-        prog.useEnergyGauge()
-        prog.calcVacuumLambda()
+        prog.correctValues()
         c = TCanvas('c%d' % i, '', 1280, 720)
         g = makeBirgeSponer(prog, start[i - 1]).makeGraph('prog%d_bs' % i, '#nu\' + 1/2', '#Delta G (#nu\' + 1/2) / (cm^{-1})')
         g.Draw('AP')
@@ -125,16 +123,55 @@ def evalProgressions():
         
     # calculate weighted average for fit 1st- order
         
-    with TxtFile.fromRelPath('../calc/fit1ord.txt', 'w') as f:
+    with TxtFile.fromRelPath('../calc/ExcitedStateOszillationConstants.txt', 'w') as f:
         f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['a'], prog1ord['sa']))) 
         f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['b'], prog1ord['sb'])))
+    
+def intersect(listA, listB):
+    return list(set(listA) & set(listB))
+        
+def getAverageDeltaEnergy(lowprog, highprog):
+    # load data
+    lp = I2Data.fromPath(lowprog)
+    lp.correctValues(False)
+    lp.invertY()
+    lp.multiplyY(1e7)  # from 1/nm to 1/cm
+    hp = I2Data.fromPath(highprog)
+    hp.correctValues(False)
+    hp.invertY()
+    hp.multiplyY(1e7)  # from 1/nm to 1/cm
+    
+    # get same values for same nus
+    sameNus = intersect(lp.getX(), hp.getX())
+    deltas = []
+    deltas_errors = []
+    for nu in sameNus:
+        hv = hp.getByX(nu)  # high value
+        hy = hv[1]          # high y
+        hye = hv[3]         # high error
+        lv = lp.getByX(nu)  # low value
+        ly = lv[1]          # low y
+        lye = lv[3]         # low error
+        deltas.append(hy - ly)
+        deltas_errors.append(np.sqrt(hye**2 + lye**2))
+    return avgerrors(deltas, deltas_errors)
+
+def getGroundStateOszillationConstants():
+    dg12, dg12e = getAverageDeltaEnergy('../data/prog2nl.txt', '../data/prog1nl.txt')
+    dg32, dg32e = getAverageDeltaEnergy('../data/prog3nl.txt', '../data/prog2nl.txt')
+    we, wee = 2*dg12 - dg32, np.sqrt(4*(dg12e**2) + dg32e**2)  # w_e, s_w_e
+    wexe, wexee = 0.5 * (dg12 - dg32), 0.5*np.sqrt(dg12e**2 + dg32e**2)  # w_e x_e, s_(w_e x_e)
+    with TxtFile('../calc/GroundStateOszillationConstants.txt', 'w') as f:
+        f.writeline('\t', str(we), str(wee))
+        f.writeline('\t', str(wexe), str(wexee))
 
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    evalProgressions()
+    getExcitedStateOszillationConstants()
+    getGroundStateOszillationConstants()
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,6 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend, TGaxis
+import os
 import numpy as np
 from I2 import I2Data
 from txtfile import TxtFile
@@ -164,14 +165,42 @@ def getGroundStateOszillationConstants():
     with TxtFile('../calc/GroundStateOszillationConstants.txt', 'w') as f:
         f.writeline('\t', str(we), str(wee))
         f.writeline('\t', str(wexe), str(wexee))
+        
+def loadOszillationConstants(path):
+    if path:
+        d = os.path.dirname(os.path.abspath(__file__))
+        p = os.path.abspath(os.path.join(d, path))
+        consts = []
+        with open(p, 'r') as f:
+            for line in f:
+                consts.append(list(map(lambda x: float(x), line.strip().split('\t'))))  # remove \n, split by \t, convert to float
+        return consts
+
+def calcualteDissEnergyFromMorse(w_e, w_ex_e):
+    we = w_e[0]
+    wee = w_e[1]
+    wexe = w_ex_e[0]
+    wexee = w_ex_e[1]
+    val =  we**2 / (4*wexe)
+    err = val * np.sqrt(4*(wee / we)**2 + (wexee / wexe)**2)
+    return str(val), str(err)
+        
+def calculateDissEnergiesFromMorse():
+    with TxtFile('../calc/ExcitedStateDissEnergyFromMorse.txt', 'w') as f:
+        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadOszillationConstants('../calc/ExcitedStateOszillationConstants.txt')))
+        
+    with TxtFile('../calc/GroundStateDissEnergyFromMorse.txt', 'w') as f:
+        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadOszillationConstants('../calc/GroundStateOszillationConstants.txt')))
+    
 
 def main():
     gROOT.Reset()
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    getExcitedStateOszillationConstants()
-    getGroundStateOszillationConstants()
+    #getExcitedStateOszillationConstants()
+    #getGroundStateOszillationConstants()
+    calculateDissEnergiesFromMorse()
 
 if __name__ == "__main__":
     main()

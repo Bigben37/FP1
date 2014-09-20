@@ -58,6 +58,8 @@ def evalProgressions():
     pg3.SetMarkerColor(4)
     pg3.Draw('P')
     
+    # TODO Legend
+    
     c.Update()
     c.Print('../img/I2_absorption.pdf', 'pdf')
     
@@ -84,7 +86,7 @@ def evalProgressions():
         fit2ord.saveData('../calc/prog%d_fit2ord.txt' % i, 'w')      
         l2 = TLegend(0.6, 0.7, 0.95, 0.95)
         l2.AddEntry(0, 'Fit 2nd. order', '')
-        l2.AddEntry(fit2ord.function, 'y = a - b*(2*x+2) + c*(3*x^2+6*x+13/4)')
+        l2.AddEntry(fit2ord.function, 'y = a - b*(2*x+2) + c*(3*x^2+6*x+13/4)', 'l')
         fit2ord.addParamsToLegend(l2)
         l2.SetTextSize(0.03)
         l2.Draw()
@@ -103,7 +105,7 @@ def evalProgressions():
         prog1ord['sb'].append(fit1ord.params[1]['error'])
         l1 = TLegend(0.125, 0.15, 0.5, 0.4)
         l1.AddEntry(0, 'Fit 1st. order', '')
-        l1.AddEntry(g.GetFunction('prog%d_1ord' % i), 'y = a - b*(2*x+2)')
+        l1.AddEntry(g.GetFunction('prog%d_1ord' % i), 'y = a - b*(2*x+2)', 'l')
         fit1ord.addParamsToLegend(l1)
         l1.SetTextSize(0.03)
         l1.Draw()

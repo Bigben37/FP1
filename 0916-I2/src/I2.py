@@ -1,9 +1,12 @@
 #!/usr/bin/python2.7
 import csv
 import os
+import numpy as np
 from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
                 
 class I2Data(DataErrors):
+    ERRORBIN = 0.097
+    
     def loadData(self):
         d = os.path.dirname(os.path.abspath(__file__))
         path = os.path.abspath(os.path.join(d, self.path))
@@ -36,8 +39,13 @@ class I2Data(DataErrors):
     
     def calcVacuumLambda(self):
         """changes wavelength to vacuum wavelength. The refraction index depends on wavelength, its approximated by a polynomial 
-        or first order (n(s) = a + b*s, where x is wavelength)."""
-        a = 1.00028678401
-        b = -1.60115242176e-08
+        or first order (n(x) = a + b*x, where x is wavelength)."""
+        a  = 1.00028678401
+        sa = 8.45822036344e-07
+        b  = -1.60115242176e-08
+        sb = 1.44700016609e-09
+        sl = I2Data.ERRORBIN
         for i in range(self.getLength()):
-            points[i][0] *= a + b*points[i][0]
+            l = self.points[i][0]
+            self.points[i] = (l*(a + b*l), self.points[i][1], np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2), 0) 
+           

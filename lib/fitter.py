@@ -38,16 +38,17 @@ class Fitter:
         self._function.SetParameter(index, startvalue)
         self._function.SetParName(index, name)
 
-    def fit(self, graph, xstart, xend):
+    def fit(self, graph, xstart, xend, options=''):
         """computes fit and stores calculated parameters with errors in parameter dict. 
         Also extracts covariance matrix and calculates correlation matrix
 
         Arguments:
-        graph  -- an instance of ROOTs TGraph with data to fit
-        xstart -- start value for x interval  
-        xend   -- end value for x interval
+        graph   -- an instance of ROOTs TGraph with data to fit
+        xstart  -- start value for x interval  
+        xend    -- end value for x interval
+        options -- fitting options (see ROOT documentation)
         """
-        graph.Fit(self._function, '', '', xstart, xend)
+        graph.Fit(self._function, 'Q'+options, '', xstart, xend)  # Q = quit mode, no print out on console
         self.virtualFitter = TVirtualFitter.GetFitter()
         for i in self.params:
             self.params[i]['value'] = self.virtualFitter.GetParameter(i)
@@ -129,3 +130,9 @@ class Fitter:
             f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
             f.writeline()
             f.close()
+            
+    def addParamsToLegend(self, legend):
+        legend.AddEntry(0, '#chi^{2} / DoF : %f' % self.getChisquareOverDoF(), '')
+        legend.AddEntry(0, 'Parameter', '')
+        for i, param in self.params.iteritems():
+            legend.AddEntry(0, '%s: %e #pm %e' % (param['name'], param['value'], param['error']), '')

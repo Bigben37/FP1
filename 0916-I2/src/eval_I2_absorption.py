@@ -71,6 +71,7 @@ def evalProgressions():
         
         # Calculate vacuum wavelength and create Birge-Sponer plot
         
+        prog.useEnergyGauge()
         prog.calcVacuumLambda()
         c = TCanvas('c%d' % i, '', 1280, 720)
         g = makeBirgeSponer(prog, start[i - 1]).makeGraph('prog%d_bs' % i, '#nu\' + 1/2', '#Delta G (#nu\' + 1/2) / (cm^{-1})')

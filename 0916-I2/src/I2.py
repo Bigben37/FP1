@@ -37,6 +37,16 @@ class I2Data(DataErrors):
                     data.addPoint(*self.points[i])
         return data
     
+    def useEnergyGauge(self):
+        a  = 0.905359171563
+        sa = 0.383787495854
+        b  = 0.998715697202
+        sb = 0.00071189084508
+        sl = I2Data.ERRORBIN
+        for i in range(self.getLength()):
+            l = self.points[i][0]
+            self.points[i] = (a + b*l, self.points[i][1], np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2), 0) 
+    
     def calcVacuumLambda(self):
         """changes wavelength to vacuum wavelength. The refraction index depends on wavelength, its approximated by a polynomial 
         or first order (n(x) = a + b*x, where x is wavelength)."""

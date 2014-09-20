@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, gStyle, TCanvas, TLegend
+from ROOT import gROOT, gStyle, TCanvas, TLegend, TGaxis
 import numpy as np
 from I2 import I2Data
 from txtfile import TxtFile
@@ -41,11 +41,15 @@ def evalProgressions():
         progression[i] = I2Data.fromPath('../data/prog%d.txt' % i)
 
     c = TCanvas('c', '', 1280, 720)
-    g = data.makeGraph('spectrum')
+    g = data.makeGraph('spectrum', 'wavelength #lambda / nm', 'intensity')
     g.SetMarkerStyle(1)
     g.GetXaxis().SetRangeUser(505, 620)
     g.SetMinimum(18000)
     g.SetMaximum(49000)
+    myY = TGaxis()
+    myY.ImportAxisAttributes(g.GetYaxis())
+    myY.SetMaxDigits(3)
+    
     g.Draw('AL')
     
     pg1 = progression[1].makeGraph('prog1')
@@ -58,7 +62,12 @@ def evalProgressions():
     pg3.SetMarkerColor(4)
     pg3.Draw('P')
     
-    # TODO Legend
+    l = TLegend(0.6, 0.15, 0.85, 0.4)
+    l.AddEntry('spectrum', 'measurement', 'l')
+    l.AddEntry('prog1', 'first progression (#nu\'\' = 1)', 'p')
+    l.AddEntry('prog2', 'second progression (#nu\'\' = 2)', 'p')
+    l.AddEntry('prog3', 'third progression (#nu\'\' = 3)', 'p')
+    l.Draw()
     
     c.Update()
     c.Print('../img/I2_absorption.pdf', 'pdf')

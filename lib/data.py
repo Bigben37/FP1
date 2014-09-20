@@ -46,6 +46,28 @@ class GeneralData(object):
     def getLength(self):
         """returns the number of points in the list"""
         return len(self._points)
+    
+    def getByX(self, xvalue):
+        """get point by x-value
+        
+        Arguments:
+        xvalue -- x-value of point
+        """
+        for point in self.points:
+            if point[0] == xvalue:
+                return point
+        return None
+    
+    def getByY(self, yvalue):
+        """get point by y-value
+        
+        Arguments:
+        yvalue -- y-value of point
+        """
+        for point in self.points:
+            if point[1] == yvalue:
+                return point
+        return None
 
     @classmethod
     def fromPath(cls, path):
@@ -318,15 +340,34 @@ class DataErrors(GeneralData):
         else:
             return None
         
-    def inverseX(self):
+    def invertX(self):
         """inverses x values"""
         for i in range(self.getLength()):
             self.points[i] = (1./self.points[i][0], self.points[i][1], 1./(self.points[i][0]**2)*self.points[i][2], self.points[i][3])
         
-    def inverseY(self):
+    def invertY(self):
         """inverses y values"""
         for i in range(self.getLength()):
             self.points[i] = (self.points[i][0], 1./self.points[i][1], self.points[i][2], 1./(self.points[i][1]**2)*self.points[i][3])
+            
+    def multiplyX(self, mult):
+        """multiply x-value with constant
+        
+        Arguments:
+        mult -- multiplier
+        """
+        for i in range(self.getLength()):
+            self.points[i] = (mult*self.points[i][0], self.points[i][1], mult*self.points[i][2], self.points[i][3])
+            
+    def multiplyY(self, mult):
+        """multiply y-value with constant
+        
+        Arguments:
+        mult -- multiplier
+        """
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], mult*self.points[i][1], self.points[i][2], mult*self.points[i][3])
+            
 
     def setXErrorAbs(self, error):
         """sets absolute x-error, same error for every data point

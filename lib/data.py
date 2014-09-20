@@ -317,6 +317,16 @@ class DataErrors(GeneralData):
             return graph
         else:
             return None
+        
+    def inverseX(self):
+        """inverses x values"""
+        for i in range(self.getLength()):
+            self.points[i] = (1./self.points[i][0], self.points[i][1], 1./(self.points[i][0]**2)*self.points[i][2], self.points[i][3])
+        
+    def inverseY(self):
+        """inverses y values"""
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], 1./self.points[i][1], self.points[i][2], 1./(self.points[i][1]**2)*self.points[i][3])
 
     def setXErrorAbs(self, error):
         """sets absolute x-error, same error for every data point

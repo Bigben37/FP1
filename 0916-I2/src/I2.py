@@ -37,17 +37,25 @@ class I2Data(DataErrors):
                     data.addPoint(*self.points[i])
         return data
     
-    def useEnergyGauge(self):
+    def correctValues(self, useX=True):
+        self.useEnergyGauge(useX)
+        self.calcVacuumLambda(useX)
+        
+    def useEnergyGauge(self, useX=True):
         a  = 0.905359171563
         sa = 0.383787495854
         b  = 0.998715697202
         sb = 0.00071189084508
         sl = I2Data.ERRORBIN
         for i in range(self.getLength()):
-            l = self.points[i][0]
-            self.points[i] = (a + b*l, self.points[i][1], np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2), 0) 
+            if useX:
+                l = self.points[i][0]
+                self.points[i] = (a + b*l, self.points[i][1], np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2), 0) 
+            else:
+                l = self.points[i][1]
+                self.points[i] = (self.points[i][0], a + b*l, 0, np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2))
     
-    def calcVacuumLambda(self):
+    def calcVacuumLambda(self, useX=True):
         """changes wavelength to vacuum wavelength. The refraction index depends on wavelength, its approximated by a polynomial 
         or first order (n(x) = a + b*x, where x is wavelength)."""
         a  = 1.00028678401
@@ -56,6 +64,10 @@ class I2Data(DataErrors):
         sb = 1.44700016609e-09
         sl = I2Data.ERRORBIN
         for i in range(self.getLength()):
-            l = self.points[i][0]
-            self.points[i] = (l*(a + b*l), self.points[i][1], np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2), 0) 
+            if useX:
+                l = self.points[i][0]
+                self.points[i] = (l*(a + b*l), self.points[i][1], np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2), 0) 
+            else:
+                l = self.points[i][1]
+                self.points[i] = (self.points[i][0], l*(a + b*l), 0, np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2))
            

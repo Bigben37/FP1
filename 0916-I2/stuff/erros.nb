@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5549,        195]
-NotebookOptionsPosition[      4984,        171]
-NotebookOutlinePosition[      5319,        186]
-CellTagsIndexPosition[      5276,        183]
+NotebookDataLength[      5953,        213]
+NotebookOptionsPosition[      5315,        186]
+NotebookOutlinePosition[      5650,        201]
+CellTagsIndexPosition[      5607,        198]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -138,6 +138,8 @@ Cell[BoxData[
  CellChangeTimes->{{3.620219631149314*^9, 3.620219659866544*^9}, {
   3.620219760444339*^9, 3.620219772206285*^9}}],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{
   RowBox[{"Sqrt", "[", 
@@ -167,7 +169,20 @@ Cell[BoxData[
           RowBox[{"l", ",", " ", "a", ",", " ", "b"}], "]"}], ",", " ", "l"}],
          "]"}], "*", "sl"}], ")"}], "^", "2"}]}], " ", "]"}], " ", "//", 
   "FullSimplify"}]], "Input",
- CellChangeTimes->{{3.6202196867444572`*^9, 3.6202196904151487`*^9}}]
+ CellChangeTimes->{{3.6202196867444572`*^9, 3.6202196904151487`*^9}}],
+
+Cell[BoxData[
+ SqrtBox[
+  RowBox[{
+   SuperscriptBox["sa", "2"], "+", 
+   RowBox[{
+    SuperscriptBox["l", "2"], " ", 
+    SuperscriptBox["sb", "2"]}], "+", 
+   RowBox[{
+    SuperscriptBox["b", "2"], " ", 
+    SuperscriptBox["sl", "2"]}]}]]], "Output",
+ CellChangeTimes->{3.620219780194367*^9}]
+}, Open  ]]
 },
 WindowSize->{808, 593},
 WindowMargins->{{278, Automatic}, {Automatic, 52}},
@@ -196,7 +211,10 @@ Cell[2771, 96, 596, 19, 32, "Input"],
 Cell[3370, 117, 258, 9, 74, "Output"]
 }, Open  ]],
 Cell[3643, 129, 382, 9, 32, "Input"],
-Cell[4028, 140, 952, 29, 55, "Input"]
+Cell[CellGroupData[{
+Cell[4050, 142, 952, 29, 55, "Input"],
+Cell[5005, 173, 294, 10, 42, "Output"]
+}, Open  ]]
 }
 ]
 *)

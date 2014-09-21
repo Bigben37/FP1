@@ -17,15 +17,18 @@ def readFileToList(path):
 
 def energyGauge():
     dataList = readFileToList('../calc/hg_lines.txt')
+    elemNames = ['Hg'] * len(dataList)
     dataList += readFileToList('../calc/na_lines.txt')
+    elemNames += ['Na'] * (len(dataList) - len(elemNames))
     litVals = readFileToList('../data/hg_litvals.txt')
     litVals += readFileToList('../data/na_litvals.txt')
+
     data = DataErrors()
     for val, litval in zip(dataList, litVals):
         data.addPoint(val, litval, I2Data.ERRORBIN, 0)
         
     c = TCanvas('c', '', 1280, 720)
-    g = data.makeGraph('g', 'measured wavelength / nm', 'literature value / nm')
+    g = data.makeGraph('g', 'measured wavelength #lambda_{exp} / nm', 'literature value #lambda_{lit} / nm')
     g.Draw('AP')
     
     fit = Fitter('f', '[0]+[1]*x')

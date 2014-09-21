@@ -280,7 +280,6 @@ def plotMorsePotential():
     #calculate values
     re = np.sqrt(h / (8 * pi**2 * c * M * Be))*1e10
     a = we * 100 * np.sqrt(2 * pi**2 * c* M / (h * De * 100))*1e-10
-    print De, a, re
     
     c = TCanvas('cmorse', '', 1280, 720)
     f = TF1('morse', '[0]*(1-exp(-1*[1]*(x-[2])))^2', 2, 7)
@@ -302,11 +301,11 @@ def main():
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    #getExcitedStateOszillationConstants()
-    #getGroundStateOszillationConstants()
-    #calculateDissEnergiesFromMorse()
-    #calculateExcitationEnergy()
-    #calculateGroundStateDissEnergyFromDiff()
+    getExcitedStateOszillationConstants()
+    getGroundStateOszillationConstants()
+    calculateDissEnergiesFromMorse()
+    calculateExcitationEnergy()
+    calculateGroundStateDissEnergyFromDiff()
     plotMorsePotential()
 
 if __name__ == "__main__":

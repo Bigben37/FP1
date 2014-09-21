@@ -47,13 +47,14 @@ class I2Data(DataErrors):
         b  = 0.998715697202
         sb = 0.00071189084508
         sl = I2Data.ERRORBIN
+        rho = -0.994676192736
         for i in range(self.getLength()):
             if useX:
                 l = self.points[i][0]
-                self.points[i] = (a + b*l, self.points[i][1], np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2), 0) 
+                self.points[i] = (a + b*l, self.points[i][1], np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2 + 2* l * rho *sa *sb), 0) 
             else:
                 l = self.points[i][1]
-                self.points[i] = (self.points[i][0], a + b*l, 0, np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2))
+                self.points[i] = (self.points[i][0], a + b*l, 0, np.sqrt(sa**2 + (l*sb)**2 + (b*sl)**2 + 2* l * rho *sa *sb))
     
     def calcVacuumLambda(self, useX=True):
         """changes wavelength to vacuum wavelength. The refraction index depends on wavelength, its approximated by a polynomial 
@@ -63,11 +64,14 @@ class I2Data(DataErrors):
         b  = -1.60115242176e-08
         sb = 1.44700016609e-09
         sl = I2Data.ERRORBIN
+        rho = -0.993097318731
         for i in range(self.getLength()):
             if useX:
                 l = self.points[i][0]
-                self.points[i] = (l*(a + b*l), self.points[i][1], np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2), 0) 
+                self.points[i] = (l*(a + b*l), self.points[i][1], 
+                                  np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2 + 2*l**3 * rho * sa * sb), 0) 
             else:
                 l = self.points[i][1]
-                self.points[i] = (self.points[i][0], l*(a + b*l), 0, np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2))
+                self.points[i] = (self.points[i][0], l*(a + b*l), 
+                                  0, np.sqrt((l * sa)**2 + (l**2 * sb)**2 + ((a + 2 * b * l) * sl)**2 + 2*l**3 * rho * sa * sb))
            

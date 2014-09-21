@@ -35,7 +35,7 @@ def avgerrors(values, errors):
     return avg, np.sqrt(var)
 
 
-def getExcitedStateOszillationConstants():
+def getExcitedStateOscillationConstants():
 
     # plot spectrum
 
@@ -125,9 +125,20 @@ def getExcitedStateOszillationConstants():
         c.Update()
         c.Print('../img/prog%d_birgesponer.pdf' % i, 'pdf')
 
+    # save vibrational constants to latex file
+    nus = [0, 1, 2]
+    f = TxtFile('../src/ExcitedStateOscillationConstants.tex', 'w')
+    f.write2DArrayToLatexTable(zip(nus, prog1ord['a'], prog1ord['ae'], prog1ord['b'], prog1ord['be']), 
+                               ['$\\nu\'\'$', '$\omega_e\' / \\text{cm}^{-1}$', '$s_{\omega_e\'} / \\text{cm}^{-1}$', 
+                                '$\omega_e\' x_e\' / \\text{cm}^{-1}$', '$s_{\omega_e\' x_e\'} / \\text{cm}^{-1}$'], 
+                               ['%0.f', '%3.1f', '%.1f', '%.3f', '%.3f'], 
+                               'Oscillation constants for first order fit of Birge-Sponer plots', 'tab:prog1ord')
+    f.close()
+
+
     # calculate weighted average for fit 1st- order
 
-    with TxtFile.fromRelPath('../calc/ExcitedStateOszillationConstants.txt', 'w') as f:
+    with TxtFile.fromRelPath('../calc/ExcitedStateOscillationConstants.txt', 'w') as f:
         f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['a'], prog1ord['ae'])))
         f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['b'], prog1ord['be'])))
 
@@ -163,12 +174,12 @@ def getAverageDeltaEnergy(lowprog, highprog):
     return avgerrors(deltas, deltas_errors)
 
 
-def getGroundStateOszillationConstants():
+def getGroundStateOscillationConstants():
     dg12, dg12e = getAverageDeltaEnergy('../data/prog2nl.txt', '../data/prog1nl.txt')
     dg32, dg32e = getAverageDeltaEnergy('../data/prog3nl.txt', '../data/prog2nl.txt')
     we, wee = 2 * dg12 - dg32, np.sqrt(4 * (dg12e ** 2) + dg32e ** 2)  # w_e, s_w_e
     wexe, wexee = 0.5 * (dg12 - dg32), 0.5 * np.sqrt(dg12e ** 2 + dg32e ** 2)  # w_e x_e, s_(w_e x_e)
-    with TxtFile('../calc/GroundStateOszillationConstants.txt', 'w') as f:
+    with TxtFile('../calc/GroundStateOscillationConstants.txt', 'w') as f:
         f.writeline('\t', str(we), str(wee))
         f.writeline('\t', str(wexe), str(wexee))
 
@@ -196,10 +207,10 @@ def calcualteDissEnergyFromMorse(w_e, w_ex_e):
 
 def calculateDissEnergiesFromMorse():
     with TxtFile('../calc/ExcitedStateDissEnergyFromMorse.txt', 'w') as f:
-        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadCSVToList('../calc/ExcitedStateOszillationConstants.txt')))
+        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadCSVToList('../calc/ExcitedStateOscillationConstants.txt')))
 
     with TxtFile('../calc/GroundStateDissEnergyFromMorse.txt', 'w') as f:
-        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadCSVToList('../calc/GroundStateOszillationConstants.txt')))
+        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadCSVToList('../calc/GroundStateOscillationConstants.txt')))
 
 
 def getParamsFromFittingInfo(path):
@@ -288,7 +299,7 @@ def plotMorsePotential():
     pi = np.pi
 
     # load variables
-    we, wee = loadCSVToList('../calc/ExcitedStateOszillationConstants.txt')[0]
+    we, wee = loadCSVToList('../calc/ExcitedStateOscillationConstants.txt')[0]
     De, Dee = loadCSVToList('../calc/ExcitedStateDissEnergyFromMorse.txt')[0]
 
     # calculate values
@@ -320,11 +331,13 @@ def makeProgTables():
         prog.correctValues(False)
         yc = prog.getY()
         yce = prog.getEY()
-        TxtFile('../src/prog%d.tex' % i, 'w').write2DArrayToLatexTable(zip(x, y, yc, yce),
-                                                                       ['$\\nu\'$', r'$\lambda_{\text{exp}}$ / nm', r'$\lambda_{\text{cor}}$ / nm', r'$s_{\lambda_{\text{cor}}}$ / nm'],
-                                                                       ['%0.f', '%3.2f', '%3.2f', '%.8f'],
-                                                                       'Measured position of transmission minima in $I_2$-spectrum and corrected values of progession %d.' % i,
-                                                                       'tab:prog%d' % i)
+        f = TxtFile('../src/prog%d.tex' % i, 'w')
+        f.write2DArrayToLatexTable(zip(x, y, yc, yce),
+                                   ['$\\nu\'$', r'$\lambda_{\text{exp}}$ / nm', r'$\lambda_{\text{cor}}$ / nm', r'$s_{\lambda_{\text{cor}}}$ / nm'],
+                                   ['%0.f', '%3.2f', '%3.2f', '%.8f'],
+                                   'Measured position of transmission minima in $I_2$-spectrum and corrected values of progession %d.' % i,
+                                   'tab:prog%d' % i)
+        f.close()
 
 
 def main():
@@ -332,8 +345,8 @@ def main():
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    getExcitedStateOszillationConstants()
-    getGroundStateOszillationConstants()
+    getExcitedStateOscillationConstants()
+    getGroundStateOscillationConstants()
     calculateDissEnergiesFromMorse()
     calculateExcitationEnergy()
     calculateGroundStateDissEnergyFromDiff()

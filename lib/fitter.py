@@ -132,7 +132,7 @@ class Fitter:
             f.close()
             
     def addParamsToLegend(self, legend):
-        legend.AddEntry(0, '#chi^{2} / DoF : %f' % self.getChisquareOverDoF(), '')
-        legend.AddEntry(0, 'Parameter', '')
+        legend.AddEntry(0, '#chi^{2} / DoF : %e' % self.getChisquareOverDoF(), '')
+        legend.AddEntry(0, 'parameters:', '')
         for i, param in self.params.iteritems():
             legend.AddEntry(0, '%s: %e #pm %e' % (param['name'], param['value'], param['error']), '')

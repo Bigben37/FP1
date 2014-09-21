@@ -149,6 +149,8 @@ The first oscillation constant $\overline{\omega_e'}$ includes the literature va
 $\overline{\omega_e' x_e'}$ lies far away from the literature value. This could be caused by the rough
 modelling in combination with not enough data points.
 
+
+
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/prog1_birgesponer.pdf}
@@ -178,10 +180,73 @@ modelling in combination with not enough data points.
 
 \subsection{Evaluation of the oscillation constants $\omega_e''$ and $\omega_e'' x_e''$ for the ground state}
 
+\autoref{eq:iho:energydiff} states for the energy level $G''$ of the ground state
+\begin{equation}
+  G'' \left( \nu''+\frac{1}{2} \right) = \omega_e'' \left( \nu'' + \frac{1}{2} \right) - \omega_e'' x_e'' \left( \nu'' + \frac{1}{2} \right)^2 
+\end{equation}
+
+Due to the Boltzmann statistics, we only have data for the three lowest ground state levels
+($\nu''=0,\nu''=1,\nu''=2$), which is
+not enough for a proper fit like we could do with the excited state.
+But we can express the energy differences between those levels by data we obtained from transitions
+to the excited electronic state with the energy level $\nu'$:
+\begin{equation}
+\begin{split}
+  \Delta G''\left( \frac{1}{2}\right)  &  =
+   G''\left( \frac{3}{2}\right)-G''\left( \frac{1}{2}\right)   \\
+ & = \left[G'\left(\nu'+\frac{1}{2}\right)-G''\left(\frac{1}{2}\right)\right]-
+\left[G'\left(\nu'+\frac{1}{2}\right)-G''\left(\frac{3}{2}\right)\right]\\
+& = \omega_e''-2\omega_e''x_e''\\
+  \Delta G''\left( \frac{3}{2}\right)  &  =
+   G''\left( \frac{5}{2}\right)-G''\left( \frac{3}{2}\right)\\
+   & = \left[G'\left(\nu'+\frac{1}{2}\right)-G''\left(\frac{3}{2}\right)\right]-
+\left[G'\left(\nu'+\frac{1}{2}\right)-G''\left(\frac{5}{2}\right)\right]\\
+& = \omega_e''-4\omega_e''x_e''\\
+  \end{split}
+\end{equation}
+We calculate the weighted mean (\autoref{eq:meanw}) of the values
+we get for all the pairs in different progressions
+with the same $\nu'$ in our measured data:
+\begin{equation}
+\begin{split}
+ & \overline{\Delta G''(1/2)}= (211.83 \pm 1.34)\,\text{cm}^{-1}\\
+ & \overline{\Delta G''(3/2)}= (208.87 \pm 1.11)\,\text{cm}^{-1}
+ \end{split}
+\end{equation}
 
 
+Multiplying and adding the equations above gives us a way to calculate the two oscillation constants:
+\begin{equation}
+\begin{split}
+  \omega_e'' & =2\overline{\Delta G''(1/2)}- \overline{\Delta G''(3/2)}\\
+  \omega_e''x_e'' & =\frac{1}{2}(\overline{\Delta G''(1/2)}- \overline{\Delta G''(3/2)})
+  \end{split}
+\end{equation}
+For the errors we have
+\begin{equation}
+\begin{split}
+  s_{\omega_e''} & =\sqrt{4s^2_{\overline{\Delta G''(1/2)}}+ s^2_{\overline{\Delta G''(3/2)}}}\\
+  s_{\omega_e''x_e''} & =\frac{1}{4}\sqrt{s^2_{\overline{\Delta G''(1/2)}}+ s^2_{\overline{\Delta G''(3/2)}}}
+\end{split}
+\end{equation}
+So we get the results
+\begin{equation}
+\begin{split}
+  \omega_e'' & =(215 \pm 3)\,\text{cm}^{-1}\\
+  \omega_e''x_e'' & =(1.5 \pm 0.9)\,\text{cm}^{-1}
+  \end{split}
+\end{equation}
+The literature values [RANK] are %TODO DO THAT!!!
+\begin{equation}
+\begin{split}
+  \omega_{e\text{,lit}}'' & =214.5\,\text{cm}^{-1}\\
+  \omega_e''x_{e\text{,lit}}'' & =0.61\,\text{cm}^{-1}
+  \end{split}
+\end{equation}
+Our results match the literature values well. The high error on the second oscillation constant
+arises, because we use quite a crude way to get information about a subtle constant.
 
-\subsection{Evaluation of the oscillation constants $\omega_e''$ and $\omega_e'' x_e''$ for the ground state}
+
 
 \subsection{Determination of the dissociation energies}
 

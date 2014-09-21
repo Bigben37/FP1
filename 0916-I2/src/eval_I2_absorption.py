@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, gStyle, TCanvas, TLegend, TGaxis
+from ROOT import gROOT, gStyle, TCanvas, TLegend, TGaxis, TF1
 import os
 import numpy as np
 from I2 import I2Data
@@ -75,7 +75,7 @@ def getExcitedStateOszillationConstants():
     # calculations
     
     start = [18, 7, 9]
-    prog1ord = {'a':[], 'sa':[], 'b':[], 'sb':[]}
+    prog1ord = {'a':[], 'ae':[], 'b':[], 'be':[]}
     for i, prog in progression.iteritems():
         
         # Calculate vacuum wavelength and create Birge-Sponer plot
@@ -109,9 +109,9 @@ def getExcitedStateOszillationConstants():
         g.GetFunction('prog%d_1ord' % i).SetLineColor(4)
         fit1ord.saveData('../calc/prog%d_fit1ord.txt' % i, 'w')
         prog1ord['a'].append(fit1ord.params[0]['value'])
-        prog1ord['sa'].append(fit1ord.params[0]['error'])
+        prog1ord['ae'].append(fit1ord.params[0]['error'])
         prog1ord['b'].append(fit1ord.params[1]['value'])
-        prog1ord['sb'].append(fit1ord.params[1]['error'])
+        prog1ord['be'].append(fit1ord.params[1]['error'])
         l1 = TLegend(0.125, 0.15, 0.5, 0.4)
         l1.AddEntry(0, 'Fit 1st. order', '')
         l1.AddEntry(g.GetFunction('prog%d_1ord' % i), 'y = a - b*(2*x+2)', 'l')
@@ -125,8 +125,8 @@ def getExcitedStateOszillationConstants():
     # calculate weighted average for fit 1st- order
         
     with TxtFile.fromRelPath('../calc/ExcitedStateOszillationConstants.txt', 'w') as f:
-        f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['a'], prog1ord['sa']))) 
-        f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['b'], prog1ord['sb'])))
+        f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['a'], prog1ord['ae']))) 
+        f.writeline('\t', *map(lambda x: str(x), avgerrors(prog1ord['b'], prog1ord['be'])))
     
 def intersect(listA, listB):
     return list(set(listA) & set(listB))
@@ -134,11 +134,11 @@ def intersect(listA, listB):
 def getAverageDeltaEnergy(lowprog, highprog):
     # load data
     lp = I2Data.fromPath(lowprog)
-    lp.correctValues(False)
+    lp.correctValues(useX=False)
     lp.invertY()
     lp.multiplyY(1e7)  # from 1/nm to 1/cm
     hp = I2Data.fromPath(highprog)
-    hp.correctValues(False)
+    hp.correctValues(useX=False)
     hp.invertY()
     hp.multiplyY(1e7)  # from 1/nm to 1/cm
     
@@ -166,14 +166,14 @@ def getGroundStateOszillationConstants():
         f.writeline('\t', str(we), str(wee))
         f.writeline('\t', str(wexe), str(wexee))
         
-def loadOszillationConstants(path):
+def loadCSVToList(path, delimiter='\t'):
     if path:
         d = os.path.dirname(os.path.abspath(__file__))
         p = os.path.abspath(os.path.join(d, path))
         consts = []
         with open(p, 'r') as f:
             for line in f:
-                consts.append(list(map(lambda x: float(x), line.strip().split('\t'))))  # remove \n, split by \t, convert to float
+                consts.append(list(map(lambda x: float(x), line.strip().split(delimiter))))  # remove \n, split by delimiter, convert to float
         return consts
 
 def calcualteDissEnergyFromMorse(w_e, w_ex_e):
@@ -187,11 +187,115 @@ def calcualteDissEnergyFromMorse(w_e, w_ex_e):
         
 def calculateDissEnergiesFromMorse():
     with TxtFile('../calc/ExcitedStateDissEnergyFromMorse.txt', 'w') as f:
-        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadOszillationConstants('../calc/ExcitedStateOszillationConstants.txt')))
+        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadCSVToList('../calc/ExcitedStateOszillationConstants.txt')))
         
     with TxtFile('../calc/GroundStateDissEnergyFromMorse.txt', 'w') as f:
-        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadOszillationConstants('../calc/GroundStateOszillationConstants.txt')))
+        f.writeline(' \t', *calcualteDissEnergyFromMorse(*loadCSVToList('../calc/GroundStateOszillationConstants.txt')))
+
+def getParamsFromFittingInfo(path):
+    if path:
+        d = os.path.dirname(os.path.abspath(__file__))
+        p = os.path.abspath(os.path.join(d, path))
+        params = dict()
+        with open(p, 'r') as f:
+            for line in f:
+                l = line.strip().split('\t')
+                if len(l) == 5:
+                    params[l[1]] = {'value': float(l[2]), 'error':float(l[2])}
+        return params
     
+def getCorrelationFrom2DMatrix(path):
+     if path:
+        d = os.path.dirname(os.path.abspath(__file__))
+        p = os.path.abspath(os.path.join(d, path))
+        inCorrSection = False
+        with open (p, 'r') as f:
+            for line in f:
+                if inCorrSection:
+                    l = line.strip().split('\t')
+                    if len(l) == 2:
+                        return float(l[1])
+                if 'correlation matrix' in line:
+                    inCorrSection = True
+
+def calculateExcitationEnergy():
+    prog = 1
+    n = 18
+    m = 0
+    
+    # get G'(nu = n)
+    absEnergy = I2Data.fromPath('../data/prog%dnl.txt' % prog)
+    absEnergy.correctValues(useX=False)
+    absEnergy.invertY()
+    absEnergy.multiplyY(1e7)
+    G = absEnergy.getByX(n)[1]
+    Ge = absEnergy.getByX(n)[3]
+
+    # get DeltaG from model
+    params = getParamsFromFittingInfo('../calc/prog%d_fit1ord.txt' % prog)
+    rho = getCorrelationFrom2DMatrix('../calc/prog%d_fit1ord.txt' % prog)
+    a  = params['a']['value']
+    ae = params['a']['error']
+    b  = params['b']['value']
+    be = params['b']['error']
+    dg = a - b*(2*m + 2)
+    dge = np.sqrt(ae**2 - 4*(1 + m)*rho*ae*be + 4*((1 + m) * be)**2)
+    dgn = a - b*(2*n + 2)
+    dgne = np.sqrt(ae**2 - 4*(1 + n)*rho*ae*be + 4*((1 + n) * be)**2)
+    
+    # calculate excitation energy
+    E = G - n/2*(dg + dgn)
+    Ee = np.sqrt(Ge**2 + (dge*n)**2 / 4 + (dgne*n)**2 / 4)
+    
+    # output to file
+    with TxtFile('../calc/ExcitationEnergy.txt', 'w') as f:
+        f.writeline('\t', str(E), str(Ee))
+    
+def calculateGroundStateDissEnergyFromDiff():
+    # get energies
+    excitedStateDissEnergy = loadCSVToList('../calc/ExcitedStateDissEnergyFromMorse.txt')[0]
+    excitationEnergy = loadCSVToList('../calc/ExcitationEnergy.txt')[0]
+    deltaP = 7603
+    
+    # calculate ground state dissoziation energy
+    E = excitationEnergy[0] + excitedStateDissEnergy[0] - deltaP
+    Ee = np.sqrt(excitationEnergy[1]**2 + excitedStateDissEnergy[1]**2)
+    
+    # write to file
+    with TxtFile('../calc/GroundStateDissEnergyFromDiff.txt', 'w') as f:
+        f.writeline('\t', str(E), str(Ee))
+
+def plotMorsePotential():
+    # constants
+    h  = 6.63e-34
+    c  = 3e8
+    M  = 0.5*126.9*1.66e-27
+    Be = 2.9
+    pi = np.pi
+    
+    #load variables
+    we, wee = loadCSVToList('../calc/ExcitedStateOszillationConstants.txt')[0]
+    De, Dee = loadCSVToList('../calc/ExcitedStateDissEnergyFromMorse.txt')[0]
+    
+    #calculate values
+    re = np.sqrt(h / (8 * pi**2 * c * M * Be))*1e10
+    a = we * 100 * np.sqrt(2 * pi**2 * c* M / (h * De * 100))*1e-10
+    print De, a, re
+    
+    c = TCanvas('cmorse', '', 1280, 720)
+    f = TF1('morse', '[0]*(1-exp(-1*[1]*(x-[2])))^2', 2, 7)
+    f.SetParameter(0, De)
+    f.SetParameter(1, a)
+    f.SetParameter(2, re)
+    f.SetMaximum(10000)
+    f.SetTitle("")
+    f.GetXaxis().SetTitle('Internuclear Seperation r / #AA')
+    f.GetXaxis().CenterTitle()
+    f.GetYaxis().SetTitle('Energy E/hc / (cm^{-1})')
+    f.GetYaxis().CenterTitle()
+    f.Draw()
+    c.Update()
+    c.Print('../img/morse.pdf', 'pdf')
 
 def main():
     gROOT.Reset()
@@ -200,7 +304,10 @@ def main():
     gStyle.SetPadTickX(1)
     #getExcitedStateOszillationConstants()
     #getGroundStateOszillationConstants()
-    calculateDissEnergiesFromMorse()
+    #calculateDissEnergiesFromMorse()
+    #calculateExcitationEnergy()
+    #calculateGroundStateDissEnergyFromDiff()
+    plotMorsePotential()
 
 if __name__ == "__main__":
     main()

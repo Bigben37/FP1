@@ -12,7 +12,7 @@
 |----------|------|---------------------------|------|  
 |Montag    | 08.09| Lange Halbwertszeiten     |  -   |  
 |Dienstag  | 16.09| I2-Molekül                | 6.5  |  
-|Freitag   | 19.09| Szinillationszähler       | 1.5  |  
+|Freitag   | 19.09| Szintillationszähler       | 1.5  |  
 |Mittwoch  | 24.09| Farady- und Pockelseffekt | 3.5  |  
 |Donnerstag| 02.10| Halbleiter                | 6.5  |  
 |Mittwoch  | 08.10| Ringlaser                 | 4.5  |  

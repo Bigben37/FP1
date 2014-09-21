@@ -7,6 +7,7 @@ Thus the electrons live in a much shorter time scale than the nuclei. They react
 changes of the nuclei and are only minimally affected by the proper motion of the nuclei. According to the \emph{Born-Oppenheimer approximation} 
 you can write the whole wave function as a product of the wave functions of the nuclei and the electrons:
 \begin{equation}
+\label{eq:boapprox}
   \Psi_{\text{total}} = \Psi_{\text{electrons}} \cdot \Psi_{\text{nuclei}}
 \end{equation}
 
@@ -15,11 +16,13 @@ In a two atomic molecule the two nuclei interact with each other in a mutual pot
 mechanics you can reduce the problem to a problem with only one particle with a reduced mass $\mu = \frac{m_1 m_2}{m_1 + m_2}$ and an effective 
 potential $V(r)$. The Schrödinger equation is 
 \begin{equation}
+\label{eq_schroedinger}
   \left( - \frac{\hbar^2}{2 \mu} \frac{\difd^2}{\difd r^2} + V(r) \right) \Psi(r) = E \Psi(r) .
 \end{equation}
 For small oscillations around the minimum $r_e$ you can perform a series expansion on the potential $V(r)$:
 \begin{equation}
 \begin{split}
+\label{eq_potential_series}
   V(r) = &  V(r_e) + \underbrace{\left. \frac{\partial V(r)}{\partial r} \right|_{r=r_e}}_{=0} (r-r_e)
      + \left. \frac{1}{2} \frac{\partial^2 V(r)}{\partial r^2} \right|_{r=r_e}(r-r_e)^2 \\
   & + \left. \frac{1}{6} \frac{\partial^3 V(r)}{\partial r^3} \right|_{r=r_e}(r-r_e)^3 + \ldots \\
@@ -29,14 +32,17 @@ For small oscillations around the minimum $r_e$ you can perform a series expansi
 If you approximate the potential only up to second order the potential equals the potential of a harmonic oscillator with known frequencies and 
 eigenenergies:
 \begin{equation}
+\label{eq:ho:freq}
   \omega = \sqrt{\frac{V''(r_e)}{m}}
 \end{equation}
 \begin{equation}
+\label{eq:ho:energy}
   E(\nu) =  \hbar \omega \left( \nu + \frac{1}{2} \right), \qquad \nu = 0, 1, 2, \ldots
 \end{equation}
 For higher energy levels this approximation is not good enough and you need to consider higher orders of the series expansion. You can solve the
 Schrödinger equation with perturbation theory and it yields the eigenenergies of an inharmonic oscillator:
 \begin{equation}
+\label{eq:iho:energy}
   G(\nu) = \omega_e \left( \nu + \frac{1}{2} \right) - \omega_e x_e \left( \nu + \frac{1}{2} \right)^2 
             + \omega_e y_e \left( \nu + \frac{1}{2} \right)^3 + \ldots, \qquad \nu = 0, 1, 2, \ldots
 \end{equation}
@@ -44,6 +50,7 @@ The factor $\omega_e$ corresponds to the oscillation frequency of the harmonic o
 describe the inharmonicity of the potential. \\
 The difference between two adjacent eigenenergies is
 \begin{equation}
+\label{eq:iho:energydiff}
   \Delta G \left( \nu + \frac{1}{2} \right) = G(\nu + 1) - G(\nu) = \omega_e - \omega_e x_e (2\nu + 2) + \omega_e y_e \left( 3\nu^2 + 6 \nu + \frac{13}{4} \right) + \ldots 
 \end{equation}
 Provided that $\omega_e x_e$ is positive (and it is for the $I_2$-molecule) there is an 
@@ -51,6 +58,7 @@ $\nu_{\text{diss}}$ with $\Delta G (\nu_{\text{diss}} + \frac{1}{2}) = 0$. If th
 is dissociated, the atoms split into two ions. \\
 The dissociation energy from the lowest energy level is
 \begin{equation}
+\label{eq_dissenergy}
   D_0 = \sum_{\nu=0}^{\nu_{\text{diss}}} \Delta G \left( \nu + \frac{1}{2} \right),
 \end{equation}
 and from the minimum of the potential
@@ -59,7 +67,6 @@ and from the minimum of the potential
 \end{equation} 
 Since $\hbar \omega = h f$, $f = \frac{c}{\lambda}$ and $\lambda = \frac{1}{\bar{\nu}}$ the energy of vibrational states often is denoted in 
 wavenumbers $\bar{\nu}$ (in multiples of $h c$, because $E = hc\bar{\nu}$) with the dimension $\text{cm}^{-1}$.
-
 
 \subsection{Morse potential}
 -formula

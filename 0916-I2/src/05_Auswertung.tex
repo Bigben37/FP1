@@ -1,18 +1,10 @@
 \section{Measurement Results and Evaluation}
 
 \subsection{Calibration of the setup with spectra of sodium and mercury}
-
+\label{sub:eval:calibration}
 
 The calibration of the setup has been carried out measuring the positions of known lines of Sodium and Mercury
 (\autoref{img:na:spectrum} and \autoref{img:hg:spectrum}).
-The measured data matches the literature values already well.
-However, as a small offset is visible over the measured range, a linear fit has been done
-to correct the data of the iodine absorption.
-The fit and the fitting parameters are shown on \autoref{img:calibrationsystem}.
-
-Furthermore the shortening of the measured wavelengths, which is caused by air, needs to be considered.
-Hence a linear fit on the literature values of the refractive index of air has been done and provides another
-correcting function which is applied on the measured data for iodine.
 
 \begin{figure}[H]
 \begin{center}
@@ -33,6 +25,38 @@ correcting function which is applied on the measured data for iodine.
 \end{center}
 \end{figure}
 
+\begin{savenotes} % to catch footnotes in table
+\begin{table}[H]
+\caption{Measured and literature values for known lines of Mercury and Sodium}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+  Element & $\lambda_{\text{exp}}$ / nm & $\lambda_{\text{lit}}$ / nm \\ \hline
+    Hg & 435.47 & 435.83 \\ \hline
+    Hg & 491.38 & 491.61\footnote{Found at \url{http://physics.nist.gov/ASD}} \\ \hline
+    Hg & 545.84 & 546.07 \\ \hline
+    Hg & 576.73 & 576.96 \\ \hline
+    Hg & 578.88 & 579.07 \\ \hline
+    Na & 589.14 & 589.20\footnote{This is the weighted mean over the $D_1$- and $D_2$-line of Sodium, the weights are the relative intensities, also found at NIST} \\ \hline
+\end{tabular}
+\end{center}
+\label{tab:energygauge}
+\end{table}
+\end{savenotes}
+
+As you can see in \autoref{tab:energygauge} the measured data matches the literature values already well.
+However, as a small offset is visible over the measured range, a linear fit has been done
+to correct the data of the iodine absorption:
+\begin{equation}
+  \lambda_{\text{lit}} = a + b \cdot \lambda_{\text{exp}}
+\end{equation}
+The fit and the fitting parameters are shown on \autoref{img:calibrationsystem}. \\
+Now an arbitrary measured wavelength $\lambda$ and its error can be corrected \footnote{The correlation coefficient between $a$ and $b$ is $\rho \approx -0.995$}:
+\begin{equation}
+  \lambda_{\text{corr}} = a + b \lambda, \qquad s_{\lambda_{\text{corr}}}^2 = 
+  s_a^2 + \lambda^2 \cdot s_b^2 + b^2 \cdot s_\lambda^2 + 2 \cdot \lambda \cdot \rho \cdot s_a \cdot s_b
+\end{equation}
+
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/energy_gauge.pdf}
@@ -42,6 +66,16 @@ correcting function which is applied on the measured data for iodine.
 \end{center}
 \end{figure}
 
+Furthermore the shortening of the measured wavelengths, which is caused by air, needs to be considered.
+\begin{equation}
+  \lambda_{\text{vac}} = n(\lambda_{\text{air}}) \cdot \lambda_{\text{air}}
+\end{equation}
+Hence a linear fit on the literature values of the refractive index of air has been done (see \autoref{img:refindex}) and provides another
+correcting function which is applied on the measured data for iodine:
+\begin{equation}
+  n(\lambda) = a + b \cdot \lambda
+\end{equation}
+
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/fit_lambda.pdf}
@@ -50,6 +84,15 @@ correcting function which is applied on the measured data for iodine.
   \label{img:refindex}
 \end{center}
 \end{figure}
+
+With this correction a measured wavelength $\lambda$ in air can now be calculated as a vaccum wavelength\footnote{The correlation coefficient between $a$ and $b$ is $\rho \approx -0.993$}:
+\begin{equation}
+\begin{split}
+  \lambda_{\text{vac}} &= a \cdot \lambda + b \cdot \lambda^2, \\
+  s_{\lambda_{\text{vac}}}^2 &= 
+  \lambda^2 \cdot s_a^2 + \lambda^4 \cdot s_b^2 + (a + 2 \cdot b \lambda)^2 s_{\lambda}^2 + 2 \cdot \lambda^3 \cdot \rho \cdot s_a \cdot s_b
+\end{split}
+\end{equation}
 
 
 

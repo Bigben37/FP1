@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, gStyle, TCanvas, TLegend
+from ROOT import gROOT, gStyle, TCanvas
 from I2 import I2Data
 from txtfile import TxtFile
 
@@ -17,8 +17,6 @@ def evalNaPeaks():
     g.GetYaxis().SetTitleOffset(1.2)
     g.SetMarkerStyle(1)
     g.Draw('AP')
-    
-    #TODO Legend
 
     m = mins.makeGraph()
     if m:

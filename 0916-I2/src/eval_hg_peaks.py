@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from ROOT import gROOT, gStyle, TCanvas, TLegend
+from ROOT import gROOT, gStyle, TCanvas
 from I2 import I2Data
 from txtfile import TxtFile
 
@@ -22,8 +22,6 @@ def evalHgPeaks():
     if m:
         m.SetMarkerColor(2)
         m.Draw('P')
-        
-    #TODO Legend
 
     c.Update()
     c.Print('../img/HgPeaks.pdf', 'pdf')

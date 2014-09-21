@@ -58,24 +58,47 @@ $\nu_{\text{diss}}$ with $\Delta G (\nu_{\text{diss}} + \frac{1}{2}) = 0$. If th
 is dissociated, the atoms split into two ions. \\
 The dissociation energy from the lowest energy level is
 \begin{equation}
-\label{eq_dissenergy}
+\label{eq:dissenergy}
   D_0 = \sum_{\nu=0}^{\nu_{\text{diss}}} \Delta G \left( \nu + \frac{1}{2} \right),
 \end{equation}
 and from the minimum of the potential
 \begin{equation}
+\label{eq:dissenergy2}
   D_e = G(0) + D_0
 \end{equation} 
 Since $\hbar \omega = h f$, $f = \frac{c}{\lambda}$ and $\lambda = \frac{1}{\bar{\nu}}$ the energy of vibrational states often is denoted in 
 wavenumbers $\bar{\nu}$ (in multiples of $h c$, because $E = hc\bar{\nu}$) with the dimension $\text{cm}^{-1}$.
 
 \subsection{Morse potential}
--formula
--schrödinger eq
--$w_e, w_e x_e$
+A good approximation of the real potential of a two atomic molecule is the \emph{Morse potential}
+\begin{equation}
+  V(r) = D_e \left( 1 - e^{-a(r-r_e)} \right)^2
+\end{equation}
+with dissociation energy (from minimum of potential) $D_e$ , a molecule specific constant $a$  and the internuclear distance $r_e$. \\
+The Schrödinger equation for this potential yields for the constants in \autoref{eq:iho:energy}:
+\begin{equation}
+\label{eq:morse_we}
+  w_e = a \sqrt{\frac{\hbar D_e}{\pi c \mu}}
+\end{equation}
+\begin{equation}
+\label{eq_morse_wexe}
+  w_e x_e = \frac{\hbar a^2}{2 \omega_e x_e}
+\end{equation}
+The Dissociation energy can be calculated with those two constants:
+\begin{equation}
+\label{eq:morse_dissenergy}
+  D_e = \frac{\omega_e^2}{4 \omega_e x_e}
+\end{equation}
+
 
 \subsection{Absorption of radiation}
 -Frank-Condon principle \\
 -progression
 
 \subsection{Statistics}
--unsertainty analysis
+\subsubsection{Weighted mean}
+Different values $x_i$ with individual errors $s_i$ are given. The weighted (arithmetic) mean and its error is:
+\begin{equation}
+\label{eq:meanw}
+  \bar{x} = \frac{\sum_i \frac{x_i}{s_i^2}}{\sum_i \frac{1}{s_i^2}}, \qquad s_{\bar{x}}^2 = \frac{1}{\sum_i \frac{1}{s_i^2}}
+\end{equation}

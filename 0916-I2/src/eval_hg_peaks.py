@@ -13,7 +13,8 @@ def evalHgPeaks():
 
     c = TCanvas('c1', '', 1280, 720)
     c.SetLogy()
-    g = data.makeGraph()
+    g = data.makeGraph('g', 'wavelength #lambda / nm', 'intensity / a.u.')
+    g.GetXaxis().SetRangeUser(415, 620)
     g.SetMarkerStyle(1)
     g.Draw('AP')
 

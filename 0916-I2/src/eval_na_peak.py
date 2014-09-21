@@ -12,7 +12,9 @@ def evalNaPeaks():
             f.writeline(str(min[0]))
 
     c = TCanvas('c1', '', 1280, 720)
-    g = data.makeGraph()
+    g = data.makeGraph('g', 'wavelength #lambda / nm', 'intensity / a.u.')
+    g.GetXaxis().SetRangeUser(415, 620)
+    g.GetYaxis().SetTitleOffset(1.2)
     g.SetMarkerStyle(1)
     g.Draw('AP')
     

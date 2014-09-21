@@ -12,8 +12,7 @@ def fitLambda():
     data.addPoint(682, 1.000276)
 
     c = TCanvas('c1', '', 1280, 720)
-    g = data.makeGraph('g', 'Wellenl#ddot{a}nge #lambda', 'Brechungsindex n')
-    # TODO custom labels
+    g = data.makeGraph('g', 'wavelength #lambda / nm', 'refraction index n')
     g.GetYaxis().SetLabelSize(0.03)
     g.GetYaxis().SetTitleOffset(1.39)
     g.Draw('AP')
@@ -30,12 +29,9 @@ def fitLambda():
     sb = fit.params[1]['error']
 
     l = TLegend(0.4, 0.6, 0.87, 0.87)
-    l.AddEntry('g', 'Brechungsindex in Abh#ddot{a}ngigkeit der Wellenl#ddot{a}nge', 'p')
-    l.AddEntry(fit.function, 'Fit mit n(#lambda)= a+b*#lambda', 'l')
-    l.AddEntry(0, '#chi^{2} / DoF : %f' % fit.getChisquareOverDoF(), '')
-    l.AddEntry(0, 'Paramter:', '')
-    l.AddEntry(0, 'a: %e #pm %e' % (a, sa), '')
-    l.AddEntry(0, 'b: %e #pm %e' % (b, sb), '')
+    l.AddEntry('g', 'refraction index n as a function of wavelength #lambda', 'p')
+    l.AddEntry(fit.function, 'fit with n(#lambda)= a+b*#lambda', 'l')
+    fit.addParamsToLegend(l)
     l.SetTextSize(0.03)
     l.Draw()
 

@@ -36,7 +36,7 @@ correcting function which is applied on the measured data for iodine.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/energy_gauge.pdf}
-  \caption[---]{Measured values for the lines of Sodium and Mercury versus literature values.
+  \caption[---]{Measured values for the lines of sodium and mercury versus literature values.
   The constant offset $a$ and the linear offset $b$ are used later to adjust the data of the iodine spectrum.}
   \label{img:calibrationsystem}
 \end{center}
@@ -103,13 +103,56 @@ one can see that on excitation the nuclei move away from each other.
 
 
 \subsection{Evaluation of the oscillation constants $\omega_e'$ and $\omega_e' x_e'$ for the excited state
-via Birge-Sponer plot}
+via Birge-Sponer plots}
+To make the Birge-Sponer plots,
+the difference $\Delta G(\nu' +1/2)$ between two energy levels of one progression,
+between $G(\nu' +1/2)$ and  $G(\nu' +3/2)$,
+has been calculated with
 
+\begin{equation}
+  \Delta G(\nu' +1/2)=\frac{1}{\lambda_{\text{cor}}(\nu'+1)}-\frac{1}{\lambda_{\text{cor}}(\nu')}
+\end{equation}
+and
+\begin{equation}
+  s_{\Delta G(\nu' +1/2)}=
+  \sqrt{\frac{s^2_{\lambda_{\text{cor}}(\nu'+1)}}{\lambda^4_{\text{cor}}(\nu'+1)}+
+  \frac{s^2_{\lambda_{\text{cor}}(\nu')}}{\lambda^4_{\text{cor}}(\nu')}}
+\end{equation}
+
+The theoretical model for $\Delta G(\nu' +1/2)$ is given in \autoref{eq:distanceG}:
+\begin{equation}
+  \Delta G(\nu' + \frac{1}{2})=\omega_e' - \omega_e' x_e'(2\nu'+2) + \omega_e' y_e'(3\nu'^2 + 6 \nu' +\frac{13}{4})
+\end{equation}
+This model was fitted on the data for the three progressions, as shown in \autoref{img:prog1},
+\autoref{img:prog2} and \autoref{img:prog3}.
+
+With the 2$^\text{nd}$-order model, there seems to appear a problem of overfitting,
+particularly for the third progression.
+So we decided to set the factor $\omega_e' y_e'$ to 0 and to use linear 1$^\text{st}$-order models
+for further calculations.
+
+The weighted mean (\autoref{eq:meanw}) of the $\omega_e'$ and $\omega_e' x_e'$ we obtain from the three fits are
+\begin{equation}
+\begin{split}
+    \overline{\omega_e'}		&   = (129.1 \pm 2.0)\,\text{cm}^{-1}\\
+    \overline{\omega_e' x_e'} 	&	= (0.97 \pm 0.04)\,\text{cm}^{-1}
+  \end{split}
+\end{equation}
+The literature values [STEINFELD] amount to %TODO make proper citation
+\begin{equation}
+\begin{split}
+    \omega_{e\text{,lit}}'			&   = 125.27\,\text{cm}^{-1}\\
+    \omega_e' x_{e\text{,lit}}' 	&	= 0.702\,\text{cm}^{-1}
+  \end{split}
+\end{equation}
+The first oscillation constant $\overline{\omega_e'}$ includes the literature value within its 2-$\sigma$-interval, but
+$\overline{\omega_e' x_e'}$ lies far away from the literature value. This could be caused by the rough
+modelling in combination with not enough data points.
 
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/prog1_birgesponer.pdf}
-  \caption[---]{---}
+  \caption[---]{Birge-Sponer plot for the first progression and fits with models of linear and quadratic order.}
   \label{img:prog1}
 \end{center}
 \end{figure}
@@ -118,7 +161,7 @@ via Birge-Sponer plot}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/prog2_birgesponer.pdf}
-  \caption[---]{---}
+  \caption[---]{Birge-Sponer plot for the second progression and fits with models of linear and quadratic order.}
   \label{img:prog2}
 \end{center}
 \end{figure}
@@ -127,13 +170,14 @@ via Birge-Sponer plot}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/prog3_birgesponer.pdf}
-  \caption[---]{---}
+  \caption[---]{Birge-Sponer plot for the third progression and fits with models of linear and quadratic order.}
   \label{img:prog3}
 \end{center}
 \end{figure}
 
 
 \subsection{Evaluation of the oscillation constants $\omega_e''$ and $\omega_e'' x_e''$ for the ground state}
+
 
 
 

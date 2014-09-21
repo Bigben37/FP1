@@ -42,7 +42,7 @@ def getExcitedStateOszillationConstants():
         progression[i] = I2Data.fromPath('../data/prog%d.txt' % i)
 
     c = TCanvas('c', '', 1280, 720)
-    g = data.makeGraph('spectrum', 'wavelength #lambda / nm', 'intensity')
+    g = data.makeGraph('spectrum', 'wavelength #lambda / nm', 'intensity / a.u.')
     g.SetMarkerStyle(1)
     g.GetXaxis().SetRangeUser(505, 620)
     g.SetMinimum(18000)

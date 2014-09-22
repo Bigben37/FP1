@@ -3,6 +3,7 @@ import os
 from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
 
 class SzintData(DataErrors):
+    BINERROR = 1
     
     def __init__(self):
         super(SzintData, self).__init__()

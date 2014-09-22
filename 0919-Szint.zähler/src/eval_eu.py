@@ -2,7 +2,7 @@
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 from szint import SzintData
 
-def evalNa():
+def evalEu():
     data = SzintData.fromPath('../data/eu.TKA')
     # TODO underground
     c = TCanvas('c', '', 1280, 720)
@@ -19,7 +19,7 @@ def main():
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    evalNa()
+    evalEu()
 
 if __name__ == "__main__":
     main()

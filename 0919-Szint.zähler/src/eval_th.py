@@ -2,7 +2,7 @@
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 from szint import SzintData
 
-def evalNa():
+def evalTh():
     data = SzintData.fromPath('../data/th.TKA')
     # TODO underground
     # TODO use energy gauge
@@ -21,7 +21,7 @@ def main():
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    evalNa()
+    evalTh()
 
 if __name__ == "__main__":
     main()

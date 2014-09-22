@@ -3,7 +3,7 @@ from ROOT import gROOT, gStyle, TCanvas, TLegend
 from szint import SzintData
 from fitter import Fitter
 
-def evalNa():
+def evalCo():
     data = SzintData.fromPath('../data/co.TKA')
     # TODO underground
     c = TCanvas('c', '', 1280, 720)
@@ -33,7 +33,7 @@ def main():
     gROOT.SetStyle('Plain')
     gStyle.SetPadTickY(1)
     gStyle.SetPadTickX(1)
-    evalNa()
+    evalCo()
 
 if __name__ == "__main__":
     main()

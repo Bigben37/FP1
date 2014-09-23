@@ -298,6 +298,7 @@ to calculate the dissociation energies for the ground state $D_e''$ and the exci
   D_e'' = \frac{\omega_e''^2}{4 \omega_e'' x_e''}= (8 \pm 5) \cdot 10^3\, \text{cm}^{-1}
 \end{equation}
 \begin{equation}
+\label{eq:dissen:exited}
   D_e' = \frac{\omega_e'^2}{4 \omega_e' x_e'}= (43 \pm 2) \cdot 10^2\, \text{cm}^{-1}
 \end{equation}
 For the errors the following equation has been employed
@@ -369,12 +370,35 @@ Graphik mit Energieniveaus
 \subsection{Determination of the energy for electronic excitation \texorpdfstring{$\sigma_{00}$}{s00}}
 
 \subsection{Morse potential for the excited state}
-
+The formula for the Morse potential of the excited state is according to \autoref{eq:morse}:
+\begin{equation}
+  V(r) = D_e' \left( 1 - e^{-a'(r-r_e)} \right)^2
+\end{equation}
+The dissociation energy $D_e'$ has following value
+\begin{equation}
+  D_e' = (43 \pm 2) \cdot 10^2\, \text{cm}^{-1},
+\end{equation}
+which was calculated in \autoref{eq:dissen:exited}. \\
+The molecular specific constant $a'$ can be calculated with \autoref{eq:morse_wexe} and \autoref{eq:morse_dissenergy}:
+\begin{equation}
+  a' = \omega_e' \cdot \sqrt{\frac{\pi c \mu}{\hbar D'_e}}, \qquad s_{a'} = 
+  a' \cdot \sqrt{\left( \frac{s_{\omega'_e}}{\omega_e'} \right)^2 +  \left( \frac{s_{D_e'}}{2 D_e'} \right)^2 }
+\end{equation}
+With the reduced mass $\mu = \frac{1}{2} \cdot 126.9 \cdot 1.66 \cdot 10^{-27}\,$kg of $I_2$ the constant $a'$ is:
+\begin{equation}
+  a' = (1.91 \pm 0.06)\, \frac{1}{\text{\AA}}
+\end{equation}
+The distance $r_e$ of the equilibrium position can be calculated with the given rotational constant $B_e' = 0.029\, \text{cm}^{-1}$ using 
+\autoref{eq:rotconst}:
+\begin{equation}
+  r_e = 3.027\,\text{\AA}
+\end{equation}
+The Morse potential with these values is shown in \autoref{img:morse}
 
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/morse.pdf}
-  \caption[---]{---}
+  \caption[---]{Morse potential of the excited state}
   \label{img:morse}
 \end{center}
 \end{figure}

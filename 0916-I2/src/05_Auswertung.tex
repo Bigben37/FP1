@@ -145,12 +145,11 @@ one can see that on excitation the nuclei move away from each other.
 %TODO Nulllinie-Bandenkopf ???
 
 
-\subsection{Evaluation of the oscillation constants \texorpdfstring{$\omega_e'$}{we'} and \texorpdfstring{$\omega_e' x_e'$}{we'xe'} for the excited state via Birge-Sponer plots}
+\subsection{Evaluation of the vibration constants \texorpdfstring{$\omega_e'$}{we'} and \texorpdfstring{$\omega_e' x_e'$}{we'xe'} for the excited state via Birge-Sponer plots}
 To make the Birge-Sponer plots,
 the difference $\Delta G(\nu' +1/2)$ between two energy levels of one progression,
 between $G(\nu' +1/2)$ and  $G(\nu' +3/2)$,
 has been calculated with
-
 \begin{equation}
   \Delta G(\nu' +1/2)=\frac{1}{\lambda_{\text{cor}}(\nu'+1)}-\frac{1}{\lambda_{\text{cor}}(\nu')}
 \end{equation}
@@ -160,7 +159,6 @@ and
   \sqrt{\frac{s^2_{\lambda_{\text{cor}}(\nu'+1)}}{\lambda^4_{\text{cor}}(\nu'+1)}+
   \frac{s^2_{\lambda_{\text{cor}}(\nu')}}{\lambda^4_{\text{cor}}(\nu')}}
 \end{equation}
-
 The theoretical model for $\Delta G(\nu' +1/2)$ is given in \autoref{eq:iho:energydiff}:
 \begin{equation}
   \Delta G(\nu' + \frac{1}{2})=\omega_e' - \omega_e' x_e'(2\nu'+2) + \omega_e' y_e'(3\nu'^2 + 6 \nu' +\frac{13}{4})
@@ -172,24 +170,26 @@ With the 2$^\text{nd}$-order model, there seems to appear a problem of overfitti
 particularly for the third progression.
 So we decided to set the factor $\omega_e' y_e'$ to 0 and to use linear 1$^\text{st}$-order models
 for further calculations.
-
-The weighted mean (\autoref{eq:meanw}) of the $\omega_e'$ and $\omega_e' x_e'$ we obtain from the three fits are
+The fitting parameters $\omega_e'$ and $\omega_e' x_e'$ we obtained from the three fits
+are shown in \autoref{tab:prog1ord}.
+\input{ExcitedStateOscillationConstants.tex}
+The weighted means (\autoref{eq:meanw}) of the values are
 \begin{equation}
 \begin{split}
     \overline{\omega_e'}		&   = (129.1 \pm 2.0)\,\text{cm}^{-1}\\
     \overline{\omega_e' x_e'} 	&	= (0.97 \pm 0.04)\,\text{cm}^{-1}
   \end{split}
 \end{equation}
-The literature values [STEINFELD] amount to %TODO make proper citation
+The literature values \cite{steinfeld} amount to
 \begin{equation}
 \begin{split}
     \omega_{e\text{,lit}}'			&   = 125.27\,\text{cm}^{-1}\\
     \omega_e' x_{e\text{,lit}}' 	&	= 0.702\,\text{cm}^{-1}
   \end{split}
 \end{equation}
-The first oscillation constant $\overline{\omega_e'}$ includes the literature value within its 2-$\sigma$-interval, but
+The first vibration constant $\overline{\omega_e'}$ includes the literature value within its 2-$\sigma$-interval, but
 $\overline{\omega_e' x_e'}$ lies far away from the literature value. This could be caused by the rough
-modelling in combination with not enough data points.
+modelling in combination with not enough data points for the fit.
 
 
 
@@ -220,19 +220,19 @@ modelling in combination with not enough data points.
 \end{figure}
 
 
-\subsection{Evaluation of the oscillation constants \texorpdfstring{$\omega_e''$}{we''} and \texorpdfstring{$\omega_e'' x_e''$}{we''xe''} for the ground state}
+\subsection{Evaluation of the vibration constants \texorpdfstring{$\omega_e''$}{we''} and \texorpdfstring{$\omega_e'' x_e''$}{we''xe''} for the ground state}
 
 \autoref{eq:iho:energydiff} states for the energy level $G''$ of the ground state
 \begin{equation}
   G'' \left( \nu''+\frac{1}{2} \right) = \omega_e'' \left( \nu'' + \frac{1}{2} \right) - \omega_e'' x_e'' \left( \nu'' + \frac{1}{2} \right)^2 
 \end{equation}
-
 Due to the Boltzmann statistics, we only have data for the three lowest ground state levels
 ($\nu''=0,\nu''=1,\nu''=2$), which is
 not enough for a proper fit like we could do with the excited state.
 But we can express the energy differences between those levels by data we obtained from transitions
 to the excited electronic state with the energy level $\nu'$:
 \begin{equation}
+\label{eq:DG}
 \begin{split}
   \Delta G''\left( \frac{1}{2}\right)  &  =
    G''\left( \frac{3}{2}\right)-G''\left( \frac{1}{2}\right)   \\
@@ -255,46 +255,112 @@ with the same $\nu'$ in our measured data:
  & \overline{\Delta G''(3/2)}= (208.87 \pm 1.11)\,\text{cm}^{-1}
  \end{split}
 \end{equation}
-
-
-Multiplying and adding the equations above gives us a way to calculate the two oscillation constants:
+Multiplying and adding the two expressions in \autoref{eq:DG}
+gives us a way to calculate the two vibration constants:
 \begin{equation}
 \begin{split}
   \omega_e'' & =2\overline{\Delta G''(1/2)}- \overline{\Delta G''(3/2)}\\
   \omega_e''x_e'' & =\frac{1}{2}(\overline{\Delta G''(1/2)}- \overline{\Delta G''(3/2)})
   \end{split}
 \end{equation}
-For the errors we have
+To determine the errors we use the law of error propagation
 \begin{equation}
 \begin{split}
   s_{\omega_e''} & =\sqrt{4s^2_{\overline{\Delta G''(1/2)}}+ s^2_{\overline{\Delta G''(3/2)}}}\\
   s_{\omega_e''x_e''} & =\frac{1}{4}\sqrt{s^2_{\overline{\Delta G''(1/2)}}+ s^2_{\overline{\Delta G''(3/2)}}}
 \end{split}
 \end{equation}
-So we get the results
+The two equations above yield the results
 \begin{equation}
 \begin{split}
   \omega_e'' & =(215 \pm 3)\,\text{cm}^{-1}\\
   \omega_e''x_e'' & =(1.5 \pm 0.9)\,\text{cm}^{-1}
   \end{split}
 \end{equation}
-The literature values [RANK] are %TODO DO THAT!!!
+The literature values \cite{rank} are %TODO DO THAT!!!
 \begin{equation}
 \begin{split}
   \omega_{e\text{,lit}}'' & =214.5\,\text{cm}^{-1}\\
   \omega_e''x_{e\text{,lit}}'' & =0.61\,\text{cm}^{-1}
   \end{split}
 \end{equation}
-Our results match the literature values well. The high error on the second oscillation constant
+Our results match the literature values well. The high error on the second vibration constant
 arises, because we use quite a crude way to get information about a subtle constant.
 
 
 
 \subsection{Determination of the dissociation energies}
 
-\subsubsection{Via Morse-Approximation for ground state ($D_e''$) and excited state ($D_e'$)}
+\subsubsection{Via Morse-Approximation for ground state and excited state}
+Having evaluated the vibration constants in the last two sections, \autoref{eq:morse_dissenergy} gives us now a way
+to calculate the dissociation energies for the ground state $D_e''$ and the excited state $D_e'$.
+\begin{equation}
+  D_e'' = \frac{\omega_e''^2}{4 \omega_e'' x_e''}= (8 \pm 5) \cdot 10^3\, \text{cm}^{-1}
+\end{equation}
+\begin{equation}
+  D_e' = \frac{\omega_e'^2}{4 \omega_e' x_e'}= (43 \pm 2) \cdot 10^2\, \text{cm}^{-1}
+\end{equation}
+For the errors the following equation has been employed
+\begin{equation}
+  s_{D_e} = \frac{\omega_e \ \sqrt{4(\omega_e x_e)^2 \ s_{\omega_e}^2 + \omega_e^2 \ s_{\omega_e x_e}^2}}{4 (\omega_e x_e)^2}
+\end{equation}
+The literature values (from \cite{bitsch} and \cite{steinfeld}) for the dissociation energies are the following:
+\begin{equation}
+  D_{e,\text{lit}}''= 12560 \, \text{cm}^{-1}
+\end{equation}
+\begin{equation}
+  D_{e,\text{lit}}' = 4391 \, \text{cm}^{-1}
+\end{equation}
+Our results match with the literature values.
+The high error on the dissociation energy of the ground state is caused by the uncertainty
+on the second vibration constant.
 
 \subsubsection{Graphically from the Birge-Sponer plot for the excited state ($D_0'$)}
+Calculating the dissociation energy $ D_0'$ of the excited state
+is also possible with the data shown in \autoref{img:prog1}:
+Summing up over all the
+the energy differences $\Delta G'$ (\autoref{eq:dissenergy}) from the non-vibrating state ($\nu'=0$) up to the last
+vibrational state ($\nu'=\nu'_{\text{diss}}$), from which, by further excitation, the molecule will separate:
+\begin{equation}
+\label{eq:dissenergy2}
+  D_0' = \sum_{\nu'=0}^{\nu'_{\text{diss}}} \Delta G' \left( \nu' + \frac{1}{2} \right),
+\end{equation}
+As we do not have measurement values for $\nu'<18$ and $\nu'>47$,
+we are forced to extrapolate to those values using our fitted model.
+And since the fit was calculated with a least-square-approximation,
+integrating the model over the range of the measured points should give a value
+very close to the sum of the measured points.
+So the equation above can be transformed into an integral form:
+\begin{equation}
+  D_0' = \int_{0}^{\nu'_{\text{diss}}} \Delta G'\left( \nu' + \frac{1}{2} \right) \difd \nu'
+\end{equation}
+Using our 1$^{\text{st}}$-order model, we get
+\begin{equation}
+D_0' = \int_{0}^{\nu'_{\text{diss}}} \omega_e' - \omega_e' x_e' (2\nu' + 2) \ \difd \nu'
+\end{equation}
+To find the $\nu'_{\text{diss}}$, we solve the equation
+\begin{equation}
+  \omega_e' - \omega_e' x_e' (2\nu'_{\text{diss}} + 2) = 0 \qquad \Leftrightarrow \qquad \nu'_{\text{diss}} =
+  \frac{\omega_e'}{2\omega_e' x_e'} - 1
+\end{equation}
+This result is used to solve the integral:
+\begin{equation}
+  D_0' = \frac{(\omega_e'-2\omega_e' x_e')^2}{4\omega_e' x_e'}
+\end{equation}
+From the error propagation law we get
+\begin{equation}
+  s_{D_0'} = \frac
+  {(\omega_e'-2\omega_e' x_e') \ \sqrt{4(\omega_e' x_e')^2 \ s_{\omega_e'}^2 + (\omega_e'+2\omega_e' x_e')^2 \ s_{\omega_e' x_e'}^2}}
+  {4(\omega_e' x_e')^2}
+\end{equation}
+Using the data for the first progression (\autoref{tab:prog1ord}), we obtain the following value:
+\begin{equation}
+    D_0' = (42 \pm 3) \cdot 10^2\, \text{cm}^{-1}
+    \end{equation}
+This matches well the literature value \cite{steinfeld} for the dissociation energy $D_{0,\text{lit}}'$
+\begin{equation}
+  D_{0,\text{lit}}' = 4391 \, \text{cm}^{-1}
+\end{equation}
 
 \subsubsection{Analytically for the ground state ($D_0''$)}
 

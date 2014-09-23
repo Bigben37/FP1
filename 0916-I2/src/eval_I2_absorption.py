@@ -305,6 +305,12 @@ def plotMorsePotential():
     # calculate values
     re = np.sqrt(h / (8 * pi ** 2 * c * M * Be)) * 1e10
     a = we * 100 * np.sqrt(2 * pi ** 2 * c * M / (h * De * 100)) * 1e-10
+    ae = a * np.sqrt((wee/we)**2 + (Dee/(2*De))**2)
+    
+    with TxtFile('../calc/morse.txt', 'w') as f:
+        f.writeline('\t', 'D_e', str(De), str(Dee))
+        f.writeline('\t', 'a', str(a), str(ae))
+        f.writeline('\t', 'r_e', str(re))
 
     c = TCanvas('cmorse', '', 1280, 720)
     f = TF1('morse', '[0]*(1-exp(-1*[1]*(x-[2])))^2', 2, 7)

@@ -20,7 +20,7 @@ def evalAngles():
     # load data and set errors
     datalist = loadCSVToList('../data/angles.txt')
     l = len(datalist)
-    data = DataErrors().fromLists(list(zip(*datalist)[0]), list(zip(*datalist)[1]), ex=[SzintData.BINERROR] * l, ey=[0] * l)
+    data = DataErrors().fromLists(list(zip(*datalist)[0]), list(zip(*datalist)[1]), ex=[0.5] * l, ey=[0] * l)
     data.setYErrorFunc(lambda x: np.sqrt(x))
     
     #draw graph

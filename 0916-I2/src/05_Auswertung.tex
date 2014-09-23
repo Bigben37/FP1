@@ -27,7 +27,7 @@ The calibration of the setup has been carried out measuring the positions of kno
 
 \begin{savenotes} % to catch footnotes in table
 \begin{table}[H]
-\caption{Measured and literature values for known lines of Mercury and Sodium}
+\caption{Measured and literature values for known lines of Mercury and Sodium.}
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \hline
@@ -53,7 +53,7 @@ to correct the data of the iodine absorption:
 The fit and the fitting parameters are shown on \autoref{img:calibrationsystem}. \\
 Now an arbitrary measured wavelength $\lambda$ and its error can be corrected \footnote{The correlation coefficient between $a$ and $b$ is $\rho \approx -0.995$}:
 \begin{equation}
-  \lambda_{\text{corr}} = a + b \lambda, \qquad s_{\lambda_{\text{corr}}}^2 = 
+  \lambda_{\text{corr}} = a + b \cdot \lambda, \qquad s_{\lambda_{\text{corr}}}^2 = 
   s_a^2 + \lambda^2 \cdot s_b^2 + b^2 \cdot s_\lambda^2 + 2 \cdot \lambda \cdot \rho \cdot s_a \cdot s_b
 \end{equation}
 
@@ -75,16 +75,6 @@ correcting function which is applied on the measured data for iodine:
 \begin{equation}
   n(\lambda) = a + b \cdot \lambda
 \end{equation}
-
-\begin{figure}[H]
-\begin{center}
-  \includegraphics[width=\textwidth]{../img/fit_lambda.pdf}
-  \caption[---]{Linear fit on the refraction index of air to obtain a function for adjusting
-  the measured wavelengths to their vacuum value.}
-  \label{img:refindex}
-\end{center}
-\end{figure}
-
 With this correction a measured wavelength $\lambda$ in air can now be calculated as a vaccum wavelength\footnote{The correlation coefficient between $a$ and $b$ is $\rho \approx -0.993$}:
 \begin{equation}
 \begin{split}
@@ -94,8 +84,14 @@ With this correction a measured wavelength $\lambda$ in air can now be calculate
 \end{split}
 \end{equation}
 
-
-
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_lambda.pdf}
+  \caption[---]{Linear fit on the refraction index of air to obtain a function for adjusting
+  the measured wavelengths to their vacuum value.}
+  \label{img:refindex}
+\end{center}
+\end{figure}
 
 \subsection{Spectrum of the halogen lamp}
 
@@ -134,7 +130,7 @@ The first three progressions
 could be identified and are marked in the
 figure\footnote{The exact positions of the lines and
 their corrected values (with calibration data of the setup and refraction index of air)
-are shown in the Appendix, \autoref{tab:prog1}, \autoref{tab:prog2} and \autoref{tab:prog3}.}.
+are shown in the appendix, \autoref{tab:prog1}, \autoref{tab:prog2} and \autoref{tab:prog3}.}.
 A closer look at the shape of those ''dips'' yields information about the ratio of the rotation constants
 of the ground state and the excited electronic state:
 The dips are slightly asymmetric and steeper on their left side. This so called
@@ -367,7 +363,6 @@ Using the data for the first progression (\autoref{tab:prog1ord}), we obtain the
 \begin{equation}
     D_0' = (42 \pm 3) \cdot 10^2\, \text{cm}^{-1}
     \end{equation}
-This matches well the literature value (\autoref{eq:litvaledissexcst}).
 
 \subsubsection{Analytical determination for the ground state}
 
@@ -396,7 +391,6 @@ With our data we obtain a value of
 \begin{equation}
   D_0''=(12.4 \pm 1.5) \cdot 10^3 \, \text{cm}^{-1}
 \end{equation}
-This matches the literature value (\autoref{eq:litvaledissgrst}).
 \subsection{Determination of the energy for electronic excitation \texorpdfstring{$\sigma_{00}$}{s00}}
 \label{sub:sigma00}
 An approximation of the energy $\sigma_{00}$ which is necessary for the electric excitation is given

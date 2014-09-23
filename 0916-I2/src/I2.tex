@@ -55,6 +55,8 @@
 
 \usepackage{footnote} % footnotes in table
 
+\usepackage[nottoc,numbib]{tocbibind} % bibliography in TOC
+
 % NEW COMMANDS
 \newcommand{\refeq}[1]{\overset{\text{\eqref{#1}}}{=}}
 \newcommand{\difd}{\mathrm{d}}
@@ -74,14 +76,15 @@
 \thispagestyle{empty}
 
 \newpage
-All calculations in this protocol were performed with Python 2.7 using the following libraries:
+All calculations in this protocol were performed either with Python 2.7 using the following libraries:
 \begin{itemize}
   \item PyROOT (\url{http://root.cern.ch/drupal/content/pyroot})
   \item NumPy (\url{http://www.numpy.org/})
 \end{itemize}
-All graphics were drawn with Inkscape (\url{http://www.inkscape.org}).\\[\baselineskip]  % TODO remove inkscape ref if not used
-The python-scripts, \LaTeX-scripts and svg-graphics can be accessed online under %TODO mention mathematica
-\url{https://github.com/Bigben37/FP1/tree/master/0908-LHWZ}.
+or with Mathematica 9.0 and 10.0 (\url{http://www.wolfram.com/mathematica/}). \\
+All graphics were drawn with Inkscape (\url{http://www.inkscape.org}).\\[\baselineskip]
+The python-scripts, \LaTeX-scripts, Mathematica notebooks and svg-graphics can be accessed online under
+\url{https://github.com/Bigben37/FP1/tree/master/0916-I2}.
 
 \newpage
 \tableofcontents
@@ -97,10 +100,11 @@ The python-scripts, \LaTeX-scripts and svg-graphics can be accessed online under
 \input{04_Durchfuerung}
 \input{05_Auswertung}
 
-
+\newpage
 \bibliographystyle{plain}
 \bibliography{refs}
 
+\newpage
 \appendix
 \section{Tables}
 \subsection{Progressions}

@@ -1,35 +1,38 @@
 \section{Physical Principles}
+The formulas and explanations in this section are based on \cite{bitsch} (p. 6 - 20) 
 \subsection{Born-Oppenheimer approximation}
 Since molecules have a much more complicated Hamiltonian than a hydrogen atom, it is not possible to solve the Schrödinger equation analytical. 
-A good approximation for this problem is the \emph{Born-Oppenheimer approximation}.  \\
+But there are ways to solve the Schrödinger equation for this problem anyway, if you use approximations for the wave function.
+A good approximation for molecules is the \emph{Born-Oppenheimer approximation}.  \\
 The reasoning is in the following way: The nuclei are much heavier than the electrons of the molecule ($m_{\text{nucleus}} >> m_{\text{electron}}$). 
-Thus the electrons live in a much shorter time scale than the nuclei. They react almost immediately to 
-changes of the nuclei and are only minimally affected by the proper motion of the nuclei. According to the \emph{Born-Oppenheimer approximation} 
+Thus the electrons have a much shorter time scale in which they react to changes of the potential of the molecule than the nuclei. Also they are 
+only minimally affected by the proper motion of the nuclei. According to the \emph{Born-Oppenheimer approximation} 
 you can write the whole wave function as a product of the wave functions of the nuclei and the electrons:
 \begin{equation}
 \label{eq:boapprox}
   \Psi_{\text{total}} = \Psi_{\text{electrons}} \cdot \Psi_{\text{nuclei}}
 \end{equation}
 
-\subsection{Energy levels of oscillation}
-In a two atomic molecule the two nuclei interact with each other in a mutual potential $V$. In analogy to the two-body problem in classical 
-mechanics you can reduce the problem to a problem with only one particle with a reduced mass $\mu = \frac{m_1 m_2}{m_1 + m_2}$ and an effective 
-potential $V(r)$. The Schrödinger equation is 
+\subsection{Energy levels of vibration}
+In a two atomic molecule the two nuclei interact with each other in a mutual potential, which is a function of the internuclear distance. 
+In analogy to the two-body problem in classical mechanics you can reduce the problem to a problem with only one particle with a 
+reduced mass $\mu = \frac{m_1 m_2}{m_1 + m_2}$ and an effective potential $V(r)$. The Schrödinger equation is 
 \begin{equation}
 \label{eq_schroedinger}
   \left( - \frac{\hbar^2}{2 \mu} \frac{\difd^2}{\difd r^2} + V(r) \right) \Psi(r) = E \Psi(r) .
 \end{equation}
-For small oscillations around the minimum $r_e$ you can perform a series expansion on the potential $V(r)$:
+For small vibrations around the minimum of the potential ($r = r_e$), the two nuclei are in equilibrium and you can perform a 
+series expansion on the potential $V(r)$:
 \begin{equation}
 \begin{split}
 \label{eq_potential_series}
-  V(r) = &  V(r_e) + \underbrace{\left. \frac{\partial V(r)}{\partial r} \right|_{r=r_e}}_{=0} (r-r_e)
+  V(r) = \, &  V(r_e) + \underbrace{\left. \frac{\partial V(r)}{\partial r} \right|_{r=r_e}}_{=0} (r-r_e)
      + \left. \frac{1}{2} \frac{\partial^2 V(r)}{\partial r^2} \right|_{r=r_e}(r-r_e)^2 \\
   & + \left. \frac{1}{6} \frac{\partial^3 V(r)}{\partial r^3} \right|_{r=r_e}(r-r_e)^3 + \ldots \\
-  = & V(r_e) + \frac{1}{2} V''(r_e)(r-r_e)^2 + \frac{1}{6} V'''(r_e)(r_re)^3 + \ldots
+  =: & V(r_e) + \frac{1}{2} V''(r_e)(r-r_e)^2 + \frac{1}{6} V'''(r_e)(r_re)^3 + \ldots
 \end{split}
 \end{equation}
-If you approximate the potential only up to second order the potential equals the potential of a harmonic oscillator with known frequencies and 
+If you approximate the potential only up to second order the potential equals the potential of a harmonic oscillator with known frequency and 
 eigenenergies:
 \begin{equation}
 \label{eq:ho:freq}
@@ -39,7 +42,8 @@ eigenenergies:
 \label{eq:ho:energy}
   E(\nu) =  \hbar \omega \left( \nu + \frac{1}{2} \right), \qquad \nu = 0, 1, 2, \ldots
 \end{equation}
-For higher energy levels this approximation is not good enough and you need to consider higher orders of the series expansion. You can solve the
+For higher energy levels this approximation is not good enough, since the potential is not symmetric around $r_e$, 
+and you need to consider higher orders of the series expansion. You can solve the
 Schrödinger equation with perturbation theory and it yields the eigenenergies of an inharmonic oscillator:
 \begin{equation}
 \label{eq:iho:energy}
@@ -47,15 +51,18 @@ Schrödinger equation with perturbation theory and it yields the eigenenergies o
             + \omega_e y_e \left( \nu + \frac{1}{2} \right)^3 + \ldots, \qquad \nu = 0, 1, 2, \ldots
 \end{equation}
 The factor $\omega_e$ corresponds to the oscillation frequency of the harmonic oscillator, the factors $\omega_e x_e$, $\omega_e y_e, \ldots$ 
-describe the inharmonicity of the potential. \\
+describe the inharmonicity of the potential. The order of magnitudes decrease with higher powers of $\nu$
+\begin{equation}
+  \omega_e >> \omega_e x_e >> \omega_e y_e >> \ldots
+\end{equation}
 The difference between two adjacent eigenenergies is
 \begin{equation}
 \label{eq:iho:energydiff}
   \Delta G \left( \nu + \frac{1}{2} \right) = G(\nu + 1) - G(\nu) = \omega_e - \omega_e x_e (2\nu + 2) + \omega_e y_e \left( 3\nu^2 + 6 \nu + \frac{13}{4} \right) + \ldots 
 \end{equation}
-Provided that $\omega_e x_e$ is positive (and it is for the $I_2$-molecule) there is an 
-$\nu_{\text{diss}}$ with $\Delta G (\nu_{\text{diss}} + \frac{1}{2}) = 0$. If the energy of the molecule is above this energy level it 
-is dissociated, the atoms split into two ions. \\
+Provided that $\omega_e x_e$ is positive (and it is for the $I_2$-molecule) there is a 
+$\nu_{\text{diss}}$ with ${\Delta G (\nu_{\text{diss}} + \frac{1}{2}) = 0}$. If the energy of the molecule is above this energy level it 
+is in a dissociated state, the atoms split into two ions. \\
 The dissociation energy from the lowest energy level is
 \begin{equation}
 \label{eq:dissenergy}
@@ -63,18 +70,19 @@ The dissociation energy from the lowest energy level is
 \end{equation}
 and from the minimum of the potential
 \begin{equation}
-\label{eq:dissenergy2}
+  \label{eq:dissenergy2}
   D_e = G(0) + D_0
 \end{equation} 
-Since $\hbar \omega = h f$, $f = \frac{c}{\lambda}$ and $\lambda = \frac{1}{\bar{\nu}}$ the energy of vibrational states often is denoted in 
-wavenumbers $\bar{\nu}$ (in multiples of $h c$, because $E = hc\bar{\nu}$) with the dimension $\text{cm}^{-1}$.
+Since $\hbar \omega = h f$, $f = \frac{c}{\lambda}$ and $\lambda = \frac{1}{\bar{\nu}}$ the energy of vibrational states and dissociation often 
+is denoted in wavenumbers $\bar{\nu}$ 
+(in multiples of $h c$, because $E = hc\bar{\nu}$) with the dimension $\text{cm}^{-1}$.
 
 \subsection{Morse potential}
 A good approximation of the real potential of a two atomic molecule is the \emph{Morse potential}
 \begin{equation}
   V(r) = D_e \left( 1 - e^{-a(r-r_e)} \right)^2
 \end{equation}
-with dissociation energy (from minimum of potential) $D_e$ , a molecule specific constant $a$  and the internuclear distance $r_e$. \\
+with dissociation energy (from the minimum of the potential) $D_e$	, a molecule specific constant $a$  and the internuclear distance $r_e$. \\
 The Schrödinger equation for this potential yields for the constants in \autoref{eq:iho:energy}:
 \begin{equation}
 \label{eq:morse_we}
@@ -84,20 +92,55 @@ The Schrödinger equation for this potential yields for the constants in \autore
 \label{eq_morse_wexe}
   w_e x_e = \frac{\hbar a^2}{2 \omega_e x_e}
 \end{equation}
-The Dissociation energy can be calculated with those two constants:
+The dissociation energy can be calculated with those two constants:
 \begin{equation}
 \label{eq:morse_dissenergy}
   D_e = \frac{\omega_e^2}{4 \omega_e x_e}
 \end{equation}
 
 \subsection{Absorption of radiation}
--Frank-Condon principle \\
--progression
+In the beginning the molecule is in the electronic ground state with vibration quantum number $\nu''$. If now light with a continuous spectrum is 
+irradiated, a electron can be lifted into an excited state with vibration quantum number $\nu'$. Since the spectrum of the used light is continuous, there is not only one 
+absorption line but many. The lines in their entirety are called a \emph{bond}, where every transition $\nu'' \leftrightarrow \nu'$ corresponds to 
+a definite wavelength. All transitions from the same ground state level $\nu''$ are summarized as a \emph{progression}.\\
+The probability $\alpha$, which is in accordance with the intensity and can be also found under the name of \emph{Franck-Condon factor}, 
+of a transition is calculated via the \emph{Franck-Condon principle}:
+\begin{equation}
+  \alpha = | \int \Psi_{\nu'}(R) \Psi_{\nu''}(R) \difd V |^2
+\end{equation}
+with wave functions of the electronic ground state $\Psi_{\nu''}$ and the excited state $\Psi_{\nu'}$.
+This integral is also called an overlap integral, because it describes the concentration of the two states in the same space.
+
+\subsection{Allowed transitions}
+Basically there is an infinite number of possible transitions into higher states, but not all are allowed. The theoretical foundation is provided 
+by \emph{Fermi's golden rule}, which leads to specific transition rules depending on which multipole for approximation is used. In this case the consideration of the 
+electric dipole is enough and leads to following rules:
+\begin{itemize}
+  \item $g \leftrightarrow u, g \nleftrightarrow g, u \nleftrightarrow u$
+  \item $\Delta M_j = 0, \pm 1$
+  \item $\Delta \Lambda = 0, \pm 1$
+  \item $\Delta S = 0$
+\end{itemize}
+$M_j$ is the magnetic quantum number, $\Lambda$ the total angular momentum and $S$ the total spin of the molecule. The parity is described with
+$g$ (even = ``gerade'') and $u$ (odd = ``ungerade''). The ground state of $I_2$ is ${}^{1}\Sigma_{0g}^+$. 
+If you use the transition rules onto this state, there are only two excited states which are 
+allowed: ${}^3 \Pi_{0u}^-$ and ${}^3 \Pi_{2u}$. But the transition to the second excited state is very weak so that only the transition to the 
+first one can be measured in this experiment.
+
 
 \subsection{Rotation}
--formula with rotational constant
+While the molecule is vibrating it can also rotate around its center of mass. The quantum-mechanical consideration of the angular momentum 
+operator $\hat{L}^2$ yields a correlation between the rotational constant $B_e$
+\footnote{With this rotational constant you can write the eigenenergies $\hat{L}^2$ as $E_l = B h c l (l+1)$, where l are the eigenvalues of $\hat{L}^2$. 
+But since this experiment does not include the experimental measurement of this constant, the theory has been kept to minimum.}, 
+the reduced mass $\mu$ and the equilibrium distance $r_e$ of the two nuclei:
+\begin{equation}
+  \label{eq:rotconst}
+  B_e = \frac{\hbar}{4 \pi \mu r_e^2}
+\end{equation}
 
 \subsection{Statistics}
+\label{sub:statistics}
 \subsubsection{Weighted mean}
 Different values $x_i$ with individual errors $s_i$ are given. The weighted (arithmetic) mean and its error is:
 \begin{equation}

@@ -175,6 +175,7 @@ are shown in \autoref{tab:prog1ord}.
 \input{ExcitedStateOscillationConstants.tex}
 The weighted means (\autoref{eq:meanw}) of the values are
 \begin{equation}
+\label{eq:exstatevibconsts}
 \begin{split}
     \overline{\omega_e'}		&   = (129.1 \pm 2.0)\,\text{cm}^{-1}\\
     \overline{\omega_e' x_e'} 	&	= (0.97 \pm 0.04)\,\text{cm}^{-1}
@@ -292,6 +293,7 @@ arises, because we use quite a crude way to get information about a subtle const
 \subsection{Determination of the dissociation energies}
 
 \subsubsection{Via Morse-Approximation for ground state and excited state}
+\label{subsub:dissmorse}
 Having evaluated the vibration constants in the last two sections, \autoref{eq:morse_dissenergy} gives us now a way
 to calculate the dissociation energies for the ground state $D_e''$ and the excited state $D_e'$.
 \begin{equation}
@@ -366,6 +368,7 @@ This matches well the literature value (\autoref{eq:litvaledissexcst}).
 Graphik mit Energieniveaus
 
 \subsection{Determination of the energy for electronic excitation \texorpdfstring{$\sigma_{00}$}{s00}}
+\label{sub:sigma00}
 
 \begin{equation}
   \sigma_{00} = G'(\nu = 0) = G'(\nu = n) - \frac{\Delta G' \left( \frac{1}{2} \right) + \Delta G' \left( n + \frac{1}{2} \right) }{2}
@@ -379,6 +382,23 @@ Graphik mit Energieniveaus
 \begin{equation}
   s_{G(\nu + \frac{1}{2})} = \sqrt{s_a^2 + 4 \cdot (n+1) \cdot \rho \cdot s_a \cdot s_b + 4 \cdot ((n+1) \cdot s_b)^2}
 \end{equation}
+
+\subsection{Calculation of the energy \texorpdfstring{$E_{\text{Diss}}$}{E diss} of the dissociated iodine molecule in the experiment}
+The dissociation energy $E_{\text{Diss}}$ can be calculated with:
+\begin{equation}
+  E_{\text{Diss}} = \sigma_{00} - \underbrace{G''(0)} + D_e'
+\end{equation}
+where $\sigma_{00}$ was calculated in \ref{sub:sigma00} and $D_e'$ in \ref{subsub:dissmorse}. 
+$\underbrace{G''(0)}$ is given with \autoref{eq:iho:energy} to first order:
+\begin{equation}
+  G''(0) \approx \frac{\omega_e'}{2} + \frac{\omega_e' x_e'}{4}
+\end{equation}
+with $\omega_e'$ and $\omega_e' x_e'$ from \autoref{eq:exstatevibconsts}.
+Therefore the dissociation energy $E_{\text{Diss}}$ is
+\begin{equation}
+  E_{\text{Diss}} = (20.0 \pm 1.5) \cdot 10^3\,\text{cm}^{-1}
+\end{equation}
+
 
 \subsection{Morse potential for the excited state}
 The formula for the Morse potential of the excited state is according to \autoref{eq:morse}:

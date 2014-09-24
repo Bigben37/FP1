@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas
-from I2 import I2Data
-from txtfile import TxtFile
+from I2 import I2Data       
+from txtfile import TxtFile # make sure to add ../../lib to your project path or copy file from there
 
 def evalNaPeaks():
     data = I2Data.fromPath('../data/01_Na_ngg13.txt')

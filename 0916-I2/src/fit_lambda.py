@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
-from data import Data
-from fitter import Fitter
+from data import Data       # make sure to add ../../lib to your project path or copy file from there
+from fitter import Fitter   # make sure to add ../../lib to your project path or copy file from there
 
 
 def fitLambda():

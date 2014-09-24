@@ -2,8 +2,8 @@
 import os
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 from I2 import I2Data
-from data import DataErrors
-from fitter import Fitter
+from data import DataErrors # make sure to add ../../lib to your project path or copy file from there
+from fitter import Fitter   # make sure to add ../../lib to your project path or copy file from there
 
 def readFileToList(path):
     if path:

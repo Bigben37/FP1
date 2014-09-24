@@ -2,7 +2,7 @@
 import csv
 import os
 import numpy as np
-from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
+from data import DataErrors  # make sure to add ../../lib to your project path or copy file from there
                 
 class I2Data(DataErrors):
     ERRORBIN = 0.097

@@ -3,8 +3,8 @@ from ROOT import gROOT, gStyle, TCanvas, TLegend, TGaxis, TF1
 import os
 import numpy as np
 from I2 import I2Data
-from txtfile import TxtFile
-from fitter import Fitter
+from txtfile import TxtFile # make sure to add ../../lib to your project path or copy file from there  
+from fitter import Fitter   # make sure to add ../../lib to your project path or copy file from there
 
 
 def makeBirgeSponer(data, start):

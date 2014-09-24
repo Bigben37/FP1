@@ -13,7 +13,7 @@
    height="420"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.5 r10040"
    sodipodi:docname="aufbau.pdf">
   <sodipodi:namedview
      id="base"
@@ -22,16 +22,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.74246212"
-     inkscape:cx="317.63657"
-     inkscape:cy="250.86557"
+     inkscape:zoom="5.939697"
+     inkscape:cx="87.055642"
+     inkscape:cy="315.99916"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1280"
-     inkscape:window-height="714"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1366"
+     inkscape:window-height="719"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true">
     <inkscape:grid
@@ -369,6 +369,6 @@
          id="tspan3823-9-4"
          y="740.05493"
          x="91.84774"
-         sodipodi:role="line">redioaktives Präparat</tspan></text>
+         sodipodi:role="line">radioaktives Präparat</tspan></text>
   </g>
 </svg>

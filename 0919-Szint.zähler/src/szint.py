@@ -2,14 +2,15 @@
 import os
 from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
 
+
 class SzintData(DataErrors):
     BINERROR = 1
-    
+
     def __init__(self):
         super(SzintData, self).__init__()
         self.time = 0
         self.timed = 0
-    
+
     def loadData(self):
         d = os.path.dirname(os.path.abspath(__file__))
         path = os.path.abspath(os.path.join(d, self.path))
@@ -21,5 +22,17 @@ class SzintData(DataErrors):
                 elif lines == 0:
                     self.timed == float(row)
                 else:
-                    self.addPoint(lines, float(row) , 0, 0)
+                    self.addPoint(lines, float(row), 0, 0)
                 lines += 1
+
+    def subtractUnderground(self):
+        u = SzintData.fromPath('../data/untergrund.TKA')
+        u.convertToCountrate()
+        self.points = (self - u).points
+
+    def convertToCountrate(self):
+        self.multiplyY(1. / self.time)
+
+    def prepare(self):
+        self.convertToCountrate()
+        self.subtractUnderground()

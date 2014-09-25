@@ -1,0 +1,9 @@
+#!/bin/sh
+PYTHONPATH=$PYTHONPATH':../../lib/'
+echo $PYTHONPATH
+python2.7 ./eval_na.py
+python2.7 ./eval_co.py
+python2.7 ./eval_eu.py
+python2.7 ./eval_energy_gauge.py
+python2.7 ./eval_th.py
+python2.7 ./eval_angles.py

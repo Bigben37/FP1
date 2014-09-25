@@ -16,7 +16,7 @@ erzeugt dort Photonen im sichtbaren Bereich, die von einem Photomultiplier regis
 Die Spannungsversorgung für den Photomultiplier erfolgt über ein Netzteil (HV).
 Im Gehäuse des Photomultipliers ist zusätzlich ein Vorverstärker untergebracht.
 Vom Vorverstärker gelangt das Signal in den Hauptverstärker und aus dessen unipolarem Ausgang
-in den \emph{multi-channel-analyser}.
+in den \emph{multi channel analyser}.
 Die Messdaten des MCAs werden mit dem Computer aufgenommen.
 
 
@@ -34,11 +34,13 @@ Die Messdaten des MCAs werden mit dem Computer aufgenommen.
 %TODO Winkelgeschichte beschreiben
 
 Auf \autoref{img:aufbau2} ist der komplexere Aufbau für die Messung von Koinzidenzen gezeigt.
-Es werden sowohl der Plastik- als auch der NaJ-Szintillator verwendet, deren Ausgangssignale
-verstärkt werden.
-Das bipolare Ausgangssignal der Verstärker gelangt in zwei \emph{single channel analyser},
+Es werden sowohl der Plastik- als auch der NaJ-Szintillator verwendet.
+Der Plastik-Szintillator ist um die Probe drehbar, so dass in der 180$^\circ$-Konfiguration zwei
+Photonen, die in entgegengesetzte Richtungen emittiert werden, an beiden Szintillatoren registriert werden können.
+Die Ausgangssignale der Szintillatoren werden verstärkt und die
+bipolaren Ausgangssignale der Verstärker gelangen in zwei \emph{single channel analyser},
 dann in zwei verschiedene Kanäle einer \emph{timing unit} und schließlich in eine Koinzidenzeinheit,
-die im Falle einer Koinzidenz ein Signal an einen Zähler gibt.
+die im Falle einer Koinzidenz ein Signal an einen Zähler gibt.\\
 Der unipolare Ausgang des Verstärkers nach dem NaJ-Kristall wird wie in \autoref{img:aufbau}
 für die Energiemessung mit dem MCA verbunden. Vor dem MCA befindet sich allerdings eine Weiche,
 die vom SCA gesteuert wird und daher nur Signale mit geeigneter Amplitude passieren lässt.

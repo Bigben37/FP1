@@ -10,7 +10,6 @@ def evalNa():
     data.prepare()
 
     c = TCanvas('c', '', 1280, 720)
-    c.SetLogy()
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     g.SetMarkerStyle(1)
     g.SetMinimum(-0.01)

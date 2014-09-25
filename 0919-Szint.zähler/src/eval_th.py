@@ -4,14 +4,17 @@ from szint import SzintData
 
 def evalTh():
     data = SzintData.fromPath('../data/th.TKA')
-    # TODO underground
+    data.prepare()
     # TODO use energy gauge
     c = TCanvas('c', '', 1280, 720)
     c.SetLogy()
-    g = data.makeGraph()
-    g.SetMinimum(10)
+    g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
+    g.SetMinimum(1e-5)
     g.SetMarkerStyle(1)
     g.Draw('AP')
+    
+    #TODO Fits
+    
     c.Update()
     c.Print('../img/th_peaks.pdf')
     

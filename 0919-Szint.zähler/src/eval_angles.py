@@ -30,12 +30,13 @@ def evalAngles():
     g.Draw('AP')
     
     #fit function
-    fit = Fitter('f', '[0] + gaus(1)')
+    fit = Fitter('f', '[0]+1/2*[4]*(TMath::Erf(([1]+2*x-2*[2])/(2*sqrt(2)*[3]))+TMath::Erf(([1]-2*x+2*[2])/(2*sqrt(2)*[3])))')
     fit.function.SetNpx(1000)  # for smoother curve
-    fit.setParam(0, 'offset', 35)
-    fit.setParam(1, 'ampl', 350)
+    fit.setParam(0, 'offset', 20)
+    fit.setParam(1, 'breite', 20)
     fit.setParam(2, 'theta', 180)
-    fit.setParam(3, 'sigma', 20)
+    fit.setParam(3, 'sigma', 5)
+    fit.setParam(4, 'amplitude', 350)
     fit.fit(g, 80, 280)
     fit.saveData('../calc/angles.txt', 'w')
     

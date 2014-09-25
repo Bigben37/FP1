@@ -10,6 +10,7 @@ def evalNa():
     data.prepare()
 
     c = TCanvas('c', '', 1280, 720)
+    c.SetLogy()
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     g.SetMarkerStyle(1)
     g.SetMinimum(-0.01)
@@ -17,10 +18,10 @@ def evalNa():
     g.Draw('AP')
 
     fit = Fitter('f', 'pol1(0) + gaus(2)')
-    fit.setParam(0, 'a', 0.1)
-    fit.setParam(1, 'b', -0.005)
+    fit.setParam(0, 'a', 0)
+    fit.setParam(1, 'b', 0)
     fit.setParam(2, 'A', 0.05)
-    fit.setParam(3, 'c', 1300)
+    fit.setParam(3, 'c', 1250)
     fit.setParam(4, 's', 50)
     fit.fit(g, 1200, 1390)
     fit.saveData('../calc/na_peak.txt', 'w')

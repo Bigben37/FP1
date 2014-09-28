@@ -1,5 +1,6 @@
 #!/usr/bin/python2.7
 import os
+import numpy as np
 from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
 
 
@@ -15,14 +16,14 @@ class SzintData(DataErrors):
         d = os.path.dirname(os.path.abspath(__file__))
         path = os.path.abspath(os.path.join(d, self.path))
         with open(path, 'r') as f:
-            lines = -1
+            lines = -1  # lines 1 and 2 are time information, line 3 starts with channel 1
             for row in f:
                 if lines == -1:
                     self.time = float(row)
                 elif lines == 0:
                     self.timed == float(row)
-                else:
-                    self.addPoint(lines, float(row), 0, 0)
+                else:                                                   # TODO wieviel binerror?
+                    self.addPoint(lines, float(row), 0, self.BINERROR)  # TODO poisson error auf y-werte?
                 lines += 1
 
     def subtractUnderground(self):

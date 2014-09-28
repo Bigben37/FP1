@@ -14,7 +14,7 @@ def evalCo():
     g.SetMarkerStyle(1)
     g.SetMinimum(-0.01)
     g.GetXaxis().SetRangeUser(0, 8200)
-    g.Draw('AP')
+    g.Draw('APX')
 
     fit = Fitter('f', 'pol1(0) + gaus(2) + gaus(5)')
     fit.setParam(0, 'a', 0)

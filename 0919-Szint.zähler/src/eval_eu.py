@@ -13,7 +13,7 @@ def evalEu():
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     g.SetMarkerStyle(1)
     g.GetXaxis().SetRangeUser(0, 4000)
-    g.Draw('AP')
+    g.Draw('APX')
     
     fit1 = Fitter('f1', 'pol1(0)+gaus(2)')
     fit1.setParam(0, 'a', 0.5)

@@ -48,17 +48,36 @@ def singlePeakFit(g, debug=False):
     return params
 
 
-def multiPeakFit(g, uf, up, ): # TODO TBI
+def multiPeakFit(g, ufunc, uparams, params, xstart, xend):  # TODO TBI
     """fits all peaks with one function
-    
+
     Arguments:
     g      -- graph
-    uf     -- underground function
-    up     -- start parameter for underground function
-    count  -- number of peaks
+    ufunc     -- underground function
+    uparams     -- start parameter for underground function
     params -- params for peaks
+    xstart -- start x value
+    xend   -- end x value
     """
-    return None
+    # build fit function
+    fitfunc = ufunc
+    pstart = len(uparams)
+    for i in xrange(len(params)):
+        fitfunc += ' + gaus(%d)' % (pstart + 3 * i)
+    # create fitter, change npx to high value
+    fit = Fitter('f', fitfunc)
+    fit.function.SetNpx(10000)
+    # set underground params
+    for i, param in enumerate(uparams):
+        fit.setParam(i, chr(97 + i), param)  # params of underground are enumerated with a, b, c, ...
+    # set peak params
+    for i, param in enumerate(params):
+        fit.setParam(3 * i + pstart + 0, 'A%d' % (i + 1), param[0])
+        fit.setParam(3 * i + pstart + 1, 'c%d' % (i + 1), param[1])
+        fit.setParam(3 * i + pstart + 2, 's%d' % (i + 1), param[3])
+    # fit
+    fit.fit(g, xstart, xend)
+    return fit
 
 
 def channelToEnergy(c, sc, gauge):
@@ -80,7 +99,7 @@ def channelToEnergy(c, sc, gauge):
     return E, sE
 
 
-def makeLegend(): #TODO TBI
+def makeLegend():  # TODO TBI
     pass
 
 
@@ -108,24 +127,26 @@ def printGraph(c, g, path, xstart, xend, ystart, yend, isLog=False):
 
 
 def evalTh():
+    # load data
     data = SzintData.fromPath('../data/th.TKA')
     data.prepare()
+    gauge = funcs.loadCSVToList('../calc/energy_gauge_raw.txt')
+
+    # prepare canvas and graph
     c = TCanvas('c', '', 1280, 720)
-    c.SetLogy()
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     g.SetMarkerStyle(1)
-    
+
     printGraph(c, g, '../img/th_energyspectrum.pdf', 0, 6711, 1e-4, 2, True)
 
     params = singlePeakFit(g)  # single peak fit
 
-    # calculate energies for peaks
-    gauge = funcs.loadCSVToList('../calc/energy_gauge_raw.txt')
+    # calculate energies for single peaks
     energies = []
     for param in params:
         energies.append(channelToEnergy(param[1], param[2], gauge))
 
-    # save peak and energy data
+    # save peak and energy data from single peaks
     with TxtFile('../calc/th_peaks_single.txt', 'w') as f:
         for i, param in enumerate(params):
             f.writeline('\t', 'Peak% 2d' % (i + 1), str(param[1]), str(param[2]), str(energies[i][0]), str(energies[i][1]))
@@ -136,23 +157,29 @@ def evalTh():
     printGraph(c, g, '../img/th_peaks_single_07-09.pdf', 1200, 2250, 0, 0.075)
     printGraph(c, g, '../img/th_peaks_single_10.pdf', 6100, 6700, 0, 0.01)
 
-    """
-    # make multi-peak fit
-    fit = Fitter('f', 'pol2(0) + gaus(3) + gaus(6) + gaus(9) + gaus(12) + gaus(15) + gaus(18)')
-    fit.function.SetNpx(10000)
-    fit.setParam(0, 'a', 0.1)
-    fit.setParam(1, 'b', 0)
-    fit.setParam(2, 'c', 0)
-    params = params[:6]
-    for i, param in enumerate(params):
-        fit.setParam(3 * (i + 1) + 0, 'A%d' % (i + 1), param[0])
-        fit.setParam(3 * (i + 1) + 1, 'c%d' % (i + 1), param[1])
-        fit.setParam(3 * (i + 1) + 2, 's%d' % (i + 1), param[3])
-    fit.fit(g, 190, 1150)
-    fit.saveData('../calc/th_peaks.txt', 'w')"""
+    multichannels = []
+    # make multi peak fit -- 1 to 6
+    fit = multiPeakFit(g, 'pol2(0)', [0.1, 0, 0], params[:6], 190, 1150)
+    fit.saveData('../calc/th_peaks_multi_01-06.txt', 'w')
+    printGraph(c, g, '../img/th_peaks_multi_01-06.pdf', 0, 1200, 0, 1.1)
+    for i in xrange(4, 20, 3):
+        multichannels.append([fit.params[i]['value'], fit.params[i]['error']])
+    # make multi peak fit -- 7 to 8
+    fit = multiPeakFit(g, 'pol2(0)', [0.02, 0, 0], params[6:8], 1250, 1650)
+    fit.saveData('../calc/th_peaks_multi_07-08.txt', 'w')
+    printGraph(c, g, '../img/th_peaks_multi_07-08.pdf', 1225, 1675, 0.01, 0.05)
+    for i in xrange(4, 8, 3):
+        multichannels.append([fit.params[i]['value'], fit.params[i]['error']])
 
-    # c.Update()
-    # c.Print('../img/th_peaks.pdf')
+    # calculate energies for multi peaks
+    energies = []
+    for channel in multichannels:
+        energies.append(channelToEnergy(channel[0], channel[1], gauge))
+
+    # save peak and energy data from multi peaks
+    with TxtFile('../calc/th_peaks_multi.txt', 'w') as f:
+        for i, channel in enumerate(multichannels):
+            f.writeline('\t', 'Peak% 2d' % (i + 1), str(channel[0]), str(channel[1]), str(energies[i][0]), str(energies[i][1]))
 
 
 def main():

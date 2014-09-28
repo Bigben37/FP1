@@ -15,7 +15,7 @@ def evalUnderground():
     # make canvas and graph
     c = TCanvas('c', '', 1280, 720)
     c.SetLogy()
-    g = data.makeGraph()
+    g = data.makeGraph('', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     g.SetMarkerStyle(1)
     g.Draw('APX')
 

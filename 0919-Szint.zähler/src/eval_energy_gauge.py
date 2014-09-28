@@ -4,22 +4,13 @@ from ROOT import gROOT, gStyle, TCanvas, TLegend
 from data import DataErrors
 from fitter import Fitter
 from txtfile import TxtFile
-
-def loadCSVToList(path, delimiter='\t'):
-    if path:
-        d = os.path.dirname(os.path.abspath(__file__))
-        p = os.path.abspath(os.path.join(d, path))
-        data = []
-        with open(p, 'r') as f:
-            for line in f:
-                data.append(list(map(lambda x: float(x), line.strip().split(delimiter))))  # remove \n, split by delimiter, convert to float
-        return data
+import functions as funcs
     
         
 def evalEnergyGauge():
-    datalist  = loadCSVToList('../calc/energy_na.txt')
-    datalist += loadCSVToList('../calc/energy_co.txt')
-    datalist += loadCSVToList('../calc/energy_eu.txt')
+    datalist  = funcs.loadCSVToList('../calc/energy_na.txt')
+    datalist += funcs.loadCSVToList('../calc/energy_co.txt')
+    datalist += funcs.loadCSVToList('../calc/energy_eu.txt')
     datalist = zip(*datalist)
     data = DataErrors.fromLists(datalist[1], datalist[0], datalist[2], [0] * len(datalist[0]))
     

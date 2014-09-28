@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
-from szint import SzintData
+from szint import SzintData, channelToEnergy
 from fitter import Fitter
 from txtfile import TxtFile
 import functions as funcs
@@ -78,25 +78,6 @@ def multiPeakFit(g, ufunc, uparams, params, xstart, xend):  # TODO TBI
     # fit
     fit.fit(g, xstart, xend)
     return fit
-
-
-def channelToEnergy(c, sc, gauge):
-    """convert channel to energy with calculated energy gauge
-
-    Arguments:
-    c     -- channel
-    sc    -- error of channel
-    gauge -- fit parameter of energy-channel fit
-    """
-    # set params and erros of E = a + b*c
-    a, sa = gauge[0]
-    b, sb = gauge[1]
-    rho = gauge[2][0]
-    # calculate energy and error
-    E = a + b * c
-    sE = np.sqrt(sa ** 2 + c * rho * sa * sb + (c * sb) ** 2 + (b * sc) ** 2)
-
-    return E, sE
 
 
 def makeLegend():  # TODO TBI

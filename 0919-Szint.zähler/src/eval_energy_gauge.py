@@ -24,7 +24,10 @@ def evalEnergyGauge():
     fit.setParam(0, 'a', 0)
     fit.setParam(1, 'b', 0.4)
     fit.fit(g, 0, 3500)
-    fit.saveData('../calc/energy_gauge.txt', 'w')
+    fit.saveData('../calc/energy_gauge_lin.txt', 'w')
+    # TODO Legend
+    c.Update()
+    c.Print('../img/energy_gauge_lin.pdf', 'pdf')
     
     fit2 = Fitter('f', 'pol2(0)')
     fit2.function.SetNpx(1000)
@@ -32,17 +35,17 @@ def evalEnergyGauge():
     fit2.setParam(0, 'a', 0)
     fit2.setParam(1, 'b', fit.params[1]['value'])
     fit2.setParam(2, 'c', 0)
-    fit2.fit(g, 0, 3500, '+')
-    fit2.saveData('../calc/energy_gauge_quadratic.txt')
+    fit2.fit(g, 0, 3500)
+    fit2.saveData('../calc/energy_gauge_lin.txt')
+    # TODO Legend
+    c.Update()
+    c.Print('../img/energy_gauge_quad.pdf', 'pdf')
     
     #write raw data for reuse
     with TxtFile('../calc/energy_gauge_raw.txt', 'w') as f:
         f.writeline('\t', str(fit.params[0]['value']), str(fit.params[0]['error']))
         f.writeline('\t', str(fit.params[1]['value']), str(fit.params[1]['error']))
         f.writeline(str(fit.getCorrMatrixElem(0, 1)))
-    
-    c.Update()
-    c.Print('../img/energy_gauge.pdf', 'pdf')
         
 
 def main():

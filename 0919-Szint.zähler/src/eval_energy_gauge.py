@@ -3,6 +3,7 @@ import os
 from ROOT import gROOT, gStyle, TCanvas, TLegend
 from data import DataErrors
 from fitter import Fitter
+from txtfile import TxtFile
 
 def loadCSVToList(path, delimiter='\t'):
     if path:
@@ -24,13 +25,21 @@ def evalEnergyGauge():
     
     c = TCanvas('c', '', 1280, 720)
     g = data.makeGraph('g', 'Kanalnummer', 'Energie / keV')
+    g.GetXaxis().SetRangeUser(0, 3500)
     g.Draw('AP')
     
     fit = Fitter('f', 'pol1(0)')
+    fit.function.SetNpx(1000)
     fit.setParam(0, 'a', 0)
     fit.setParam(1, 'b', 0.4)
     fit.fit(g, 0, 3500)
     fit.saveData('../calc/energy_gauge.txt', 'w')
+    
+    #write raw data for reuse
+    with TxtFile('../calc/energy_gauge_raw.txt', 'w') as f:
+        f.writeline('\t', str(fit.params[0]['value']), str(fit.params[0]['error']))
+        f.writeline('\t', str(fit.params[1]['value']), str(fit.params[1]['error']))
+        f.writeline(str(fit.getCorrMatrixElem(0, 1)))
     
     c.Update()
     c.Print('../img/energy_gauge.pdf', 'pdf')

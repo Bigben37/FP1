@@ -27,7 +27,7 @@ Konvention\footnote{gemäß der Funktionenbenennung in ROOT} eingeführt:
 wobei $\gaus(x; A, c, s)$ eine Funktion von $x$ mit Parametern $A$ (Amplitude), $c$ (Erwartungswert\footnote{$c=$ channel}) und 
 $s$ (Standardabweichung) ist.
 
-\subsection{\textgamma-Spektrum des Untergrunds}
+\subsection{\textgamma-Spektrum des Untergrundes}
 Das Untergrundspektrum ist in \autoref{img:underground:spectrum} abgebildet. Man erkennt einen Peak bei Kanal 3600, der aufgrund der noch 
 fehlenden Energieeichung erst in \ref{sub:eval:undergroundpeak} diskutiert wird. Bei kleineren Kanälen (was einer kleineren Energie entspricht) ist 
 die Zählrate tendenziell höher, was auf eine höhere Anzahl von niederenergetischer Strahlung zurückzuführen ist. 
@@ -45,7 +45,10 @@ somit untergrundbereinigte Messwerte $n$. Der Fehler auf diese wird mit der Gau�
 \end{equation}
 Im folgenden sind alle Spektren untergrundbereinigt.
 
-\subsection{Energieeichung des MCAs}
+\subsection{Energieeichung des Vielkanalanalysators}
+Um eine Beziehung der Kanäle des Vielkanalanalysator(MCA) und der den Kanälen entsprechenden Energien herzustellen, wurden die Spektren von Elementen 
+mit bekannten Energien von den Peaks gemessen. Diese Peaks werden nun analysiert um letztendlich eine Funktion für die Energie in Abhängigkeit des 
+Kanals des MCAs zu finden.
 \subsubsection{Peaks von \na}
 \label{subsub:eval:na}
 Das gesamte Spektrum von \na\,ist in \autoref{img:na:spectrum} dargestellt. Da sich die Probe von \na\, von den anderen unterscheidet, konnten nicht die 
@@ -66,7 +69,7 @@ den zweiten Peak als Folge des Untergrundes (und nicht vollständiger Abschirmun
 Die beiden Peaks von \na\, werden nun jeweils mit einer Gauß-Verteilung (Kapitel \ref{subsub:gaus}), verziert mit einem linearen Untergrund, 
 gefittet, um den genauen Kanal des Maximums zu bestimmen:
 \begin{equation}
-  y = a_i + b_i \cdot x + \gaus(x, A_i, c_i, s_i), \qquad i = 1, 2
+  y_i = a_i + b_i \cdot x + \gaus(x; A_i, c_i, s_i), \qquad i = 1, 2
 \end{equation}
 Der Fit ist in \autoref{img:na:peaks} zu sehen. Man erhält folgende Werte für die Kanäle:
 \begin{equation}
@@ -129,7 +132,7 @@ ihrer Position und Zählrate identifziert.
 \end{figure}
 Die beiden Peaks wurden separat mit der gleichen Funktion wie bei \na\,(Kapitel \ref{subsub:eval:na}) gefittet:
 \begin{equation}
-  y = a + b\cdot x + \gaus(x; A_1, c_1, s_1) + \gaus(x; A_2, c_2, s_2)
+  y_i = a_i + b_i \cdot x + \gaus(x; A_i, c_i, s_i), \qquad i = 1, 2
 \end{equation}
 Der Fit ist in \autoref{img:eu:peak} dargestellt und die Werte für die Peaks lauten:
 \begin{equation}
@@ -175,18 +178,18 @@ Die Parameter ergeben sich zu:
 \begin{equation}
 \begin{split}
   \label{eq:energygauge:params}
-  a &= -11.50 \pm 0.07 \\
-  b &= 0.39004 \pm 0.00017 \\
-  c &= (6.05 \pm 0.06) \cdot 10^{-6}
+  a &= (-11.50 \pm 0.07) \,\text{keV} \\
+  b &= (0.39004 \pm 0.00017) \,\text{keV} \\
+  c &= (6.05 \pm 0.06) \cdot 10^{-6} \,\text{keV}
 \end{split}
 \end{equation}
 mit Korrelationen
 \begin{equation}
 \begin{split}
   \label{eq:energygauge:corr}
-  \rho_{a, b} &= -0.93 \\
-  \rho_{a, c} &=  0.85 \\
-  \rho_{b, c} &= -0.95 \\
+  \rho_{a, b} &= -0.93 \, \frac{1}{\text{keV}^2} \\
+  \rho_{a, c} &=  0.85 \, \frac{1}{\text{keV}^2} \\
+  \rho_{b, c} &= -0.95 \, \frac{1}{\text{keV}^2} \\
 \end{split}
 \end{equation}
 \begin{figure}[H]
@@ -198,26 +201,35 @@ mit Korrelationen
 \end{figure}
 Nun kann man einen Kanal $k$ in die entsprechende Energie umrechnen:
 \begin{equation}
-\label{eq:energygauge}
+  \label{eq:energygauge}
   E(k) = a + b \cdot k + c \cdot k^2
 \end{equation}
 Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter Berücksichtigung der Korrelationen:
 \begin{equation}
-\label{eq:energygauge:error}
+	\label{eq:energygauge:error}
   s_E^2 = s_{k}^2 \cdot (b + 2 \cdot c \cdot k)^2 + 2 \cdot \rho_{a, b} \cdot s_{a} \cdot s_{b} \cdot k + 2 \cdot \rho_{a, c} \cdot s_{a} \cdot s_{c} \cdot k^2 +
   2 \cdot \rho_{b, c} \cdot s_{b} \cdot s_{c} \cdot k^3 + s_{a}^2 + s_{b}^2 \cdot k^2 + s_{c}^2 \cdot k^4
 \end{equation}
 
-\subsection{\textgamma-Spektrum von \chemel{Th}{228}}
+\subsection{\textgamma-Spektrum von \th}
+Das gesamte Spektrum von \th ist in \autoref{img:th:spectrum} zu sehen.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/th_energyspectrum.pdf}
-  \caption{\textgamma-Spektrum von \chemel{Th}{228}}
+  \caption{\textgamma-Spektrum von \th.}
   \label{img:th:spectrum}
 \end{center}
 \end{figure}
+Man erkennt eine Vielzahl von Peaks, welche im Folgenden analysiert werden. Dazu wird zuerst jeder Peak separat betrachtet. Anschließend werden 
+größere Gruppen von Peaks gemeinsam gefittet, um etwaige Überlagerungen zu berücksichtigen.
 
-\subsubsection{Single-Peak Fit} % TODO Benennung
+\subsubsection{Separate Betrachtung der Peaks}
+Jeder der zehn erkennbaren Peak wird mit einer Gauß-Verteilung (\autoref{eq:gaus}) und einem linearen Untergrund gefittet.
+\begin{equation}
+  y_i = a_i + b_i \cdot x + \gaus(x; A_i, c_i, s_i), \qquad i=1, 2, \ldots, 10
+\end{equation}
+In \autoref{img:th:peaks:single:0106}, \autoref{img:th:peaks:single:0709} und \autoref{img:th:peaks:single:10} sind die einzelnen Fits der Peaks 
+dargestellt.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/th_peaks_single_01-06.pdf}
@@ -242,7 +254,19 @@ Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter B
 \end{center}
 \end{figure}
 
+Die Ergebnisse der Fits und die zugehörigen Energien (entsprechend \autoref{eq:energygauge}) sind in \autoref{tab:th:single} aufgelistet.
+Der große Fehler auf den Kanal bei Peak 7 könnte sich durch einen Doppelpeak, der sich nicht mehr auflösen lässt, erklären.
+\input{th_peaks_single}
+
 \subsubsection{Multi-Peak Fit} % TODO Benennung
+Da die Peaks 1 bis 6 und 7 bis 8 nahe beieinander liegen, könnte ein gemeinsamer Fit der Peaks gegenseitige Einflüsse ausgleichen.
+Dazu wird ein quadratischer Untergrund angesetzt und über die verschieden Gauß-Verteilungen der Peaks summiert:
+\begin{equation}
+  y = a + b\cdot x + c\cdot x^2 + \sum_{i=N_0}^{N} \gaus(x; A_i, c_i, s_i)
+\end{equation}
+wobei $N_0$ den ersten und $N$ den letzten Peak bezeichnet. Als Startparameter für den Fit wurden die Ergebnisse der separaten Fits benutzt.\\
+Der Fit für die Peaks 1 bis 6 ist in \autoref{img:th:peaks:multi:0106} und der Fit für Peak 7 und 8 in 
+\autoref{img:th:peaks:multi:0708} dargestellt.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/th_peaks_multi_01-06.pdf}
@@ -258,6 +282,10 @@ Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter B
   \label{img:th:peaks:multi:0708}
 \end{center}
 \end{figure}
+Die Werte für die Kanäle der Peaks und die entsprechenden Energien sind in \autoref{tab:th:multi} dargestellt.
+\input{th_peaks_multi}
+
+\subsubsection{Zuordnung der Peaks}
 
 \subsection{Untergrundpeak}
 \label{sub:eval:undergroundpeak}

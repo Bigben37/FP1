@@ -40,7 +40,7 @@ def singlePeakFit(g, debug=False):
         for param in peak[0]:
             fit.setParam(*param)
         fit.fit(g, peak[1], peak[2], '+')
-        params.append([fit.params[2]['value'], fit.params[3]['value'], fit.params[3]['error'], fit.params[4]['value']])
+        params.append([fit.params[2]['value'], fit.params[3]['value'], fit.params[3]['error'], fit.params[4]['value'], fit.function])
         if debug:
             for j, par in fit.params.iteritems():
                 print(par['name'], par['value'], par['error'])
@@ -80,8 +80,12 @@ def multiPeakFit(g, ufunc, uparams, params, xstart, xend):  # TODO TBI
     return fit
 
 
-def makeLegend():  # TODO TBI
-    pass
+def makeLegend(xmin, ymin, xmax, ymax, peaks):  # TODO TBI
+    l = TLegend(xmin, ymin, xmax, ymax)
+    l.AddEntry('g', 'Messwerte', 'p')
+    for peak in peaks:
+        l.AddEntry(peak[0], peak[1], 'l')
+    return l
 
 
 def printGraph(c, g, path, xstart, xend, ystart, yend, options='P', isLog=False):
@@ -132,22 +136,38 @@ def evalTh():
         for i, param in enumerate(params):
             f.writeline('\t', 'Peak% 2d' % (i + 1), str(param[1]), str(param[2]), str(energies[i][0]), str(energies[i][1]))
 
+
     # make graphs for single peaks
+    peaklegend = zip(zip(*params)[4], map(lambda i: "Peak % 2d" % i, xrange(1, 11)))
     printGraph(c, g, '../img/th_peaks_single_01-10.pdf', 0, 6711, 1e-4, 2, isLog=True)
+    
+    l = makeLegend(0.6, 0.6, 0.85, 0.85, peaklegend[:6])
+    l.Draw()
     printGraph(c, g, '../img/th_peaks_single_01-06.pdf', 150, 1175, 0.05, 1.15)
+    
+    l = makeLegend(0.15, 0.6, 0.3, 0.85, peaklegend[6:9])
+    l.Draw()
     printGraph(c, g, '../img/th_peaks_single_07-09.pdf', 1200, 2250, 0, 0.075)
+    
+    l = makeLegend(0.7, 0.7, 0.85, 0.85, peaklegend[9:10])
+    l.Draw()
     printGraph(c, g, '../img/th_peaks_single_10.pdf', 6100, 6700, 0, 0.01)
+    
 
     multichannels = []
     # make multi peak fit -- 1 to 6
     fit = multiPeakFit(g, 'pol2(0)', [0.1, 0, 0], params[:6], 190, 1150)
     fit.saveData('../calc/th_peaks_multi_01-06.txt', 'w')
-    printGraph(c, g, '../img/th_peaks_multi_01-06.pdf', 0, 1200, 0, 1.1)
+    l = makeLegend(0.7, 0.7, 0.85, 0.85, [[fit.function, 'Peaks 1 bis 6']])
+    l.Draw()
+    printGraph(c, g, '../img/th_peaks_multi_01-06.pdf', 150, 1175, 0.05, 1.15)
     for i in xrange(4, 20, 3):
         multichannels.append([fit.params[i]['value'], fit.params[i]['error']])
     # make multi peak fit -- 7 to 8
     fit = multiPeakFit(g, 'pol2(0)', [0.02, 0, 0], params[6:8], 1250, 1650)
     fit.saveData('../calc/th_peaks_multi_07-08.txt', 'w')
+    l = makeLegend(0.7, 0.7, 0.85, 0.85, [[fit.function, 'Peaks 7 und 8']])
+    l.Draw()
     printGraph(c, g, '../img/th_peaks_multi_07-08.pdf', 1225, 1675, 0.01, 0.05)
     for i in xrange(4, 8, 3):
         multichannels.append([fit.params[i]['value'], fit.params[i]['error']])

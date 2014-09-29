@@ -198,10 +198,12 @@ mit Korrelationen
 \end{figure}
 Nun kann man einen Kanal $k$ in die entsprechende Energie umrechnen:
 \begin{equation}
+\label{eq:energygauge}
   E(k) = a + b \cdot k + c \cdot k^2
 \end{equation}
 Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter Berücksichtigung der Korrelationen:
 \begin{equation}
+\label{eq:energygauge:error}
   s_E^2 = s_{k}^2 \cdot (b + 2 \cdot c \cdot k)^2 + 2 \cdot \rho_{a, b} \cdot s_{a} \cdot s_{b} \cdot k + 2 \cdot \rho_{a, c} \cdot s_{a} \cdot s_{c} \cdot k^2 +
   2 \cdot \rho_{b, c} \cdot s_{b} \cdot s_{c} \cdot k^3 + s_{a}^2 + s_{b}^2 \cdot k^2 + s_{c}^2 \cdot k^4
 \end{equation}
@@ -260,6 +262,29 @@ Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter B
 \subsection{Untergrundpeak}
 \label{sub:eval:undergroundpeak}
 
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/underground_peaks.pdf}
+  \caption{\chemel{Ka}{40}-Peak in der Untergrundmessung, Vergrößerung aus \autoref{img:underground:spectrum}.}
+  \label{img:eval:undergroundpeak}
+\end{center}
+\end{figure}
+
+\autoref{img:eval:undergroundpeak} zeigt vergrößert
+den markanten Peak des Untergrunds von \autoref{img:underground:spectrum}.
+Mit den Ergebnissen der Energieeichung kann auch hier jetzt die Energie der Strahlung bestimmt werden.
+Wie oben wurde eine Gaußkurve über linearem Untergrund angepasst:
+\begin{equation}
+  y = a + b \cdot x + \gaus(x, A, c, s)
+\end{equation}
+Für das Zentrum der Verteilung $c_{\,{}^{40}\text{Ka}}$ erhält man aus dem Fit
+\begin{equation}
+  c_{\,{}^{40}\text{Ka}} = 3630.2 \pm 0.4	
+\end{equation}
+und damit für die Energie $E_{\,{}^{40}\text{Ka}}$ gemäß \autoref{eq:energygauge} und \autoref{eq:energygauge:error}
+\begin{equation}
+  E_{\,{}^{40}\text{Ka}} = (1484.2 \pm 0.6)\,\text{keV}
+\end{equation}
 \subsection{Winkelkorrelation der \chemel{Na}{22} Vernichtungsphotonen}
 \begin{figure}[H]
 \begin{center}

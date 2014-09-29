@@ -282,10 +282,37 @@ Der Fit für die Peaks 1 bis 6 ist in \autoref{img:th:peaks:multi:0106} und der 
   \label{img:th:peaks:multi:0708}
 \end{center}
 \end{figure}
-Die Werte für die Kanäle der Peaks und die entsprechenden Energien sind in \autoref{tab:th:multi} dargestellt.
+Die Werte für die Kanäle der Peaks und die entsprechenden Energien sind in \autoref{tab:th:multi} dargestellt. Diese Werte sind genauer, da sie 
+gegenseitige Einflüsse berücksichtigen und werden in der Zuordnung verwendet.
 \input{th_peaks_multi}
 
 \subsubsection{Zuordnung der Peaks}
+Für Peak 1 bis 8 wurden die Werte der gemeinsamen Fits genommen, die Werte von Peak 9 und 10 stammen aus den separaten Fits.
+Die Zuordung wurde in \autoref{tab:assign} durchgeführt.\\[\baselineskip]
+\begin{table}
+\caption{Zuordung der Peaks zu den Elementen}
+\begin{center}
+\begin{tabularx}{\textwidth}{|c|c|X|}
+  \hline 
+    Peak & $E$ / keV & Kernenergieniveaus und Tochterkern des Zerfalls, Literaturwert \\ \hline
+      1 & $  80.84 \pm 0.11 $ &  $\gamma_{1,0}(\text{Ra})$, $84.373$\,keV \\ \hline
+      2 & $ 149.97 \pm 0.16 $ &  $\gamma_{2,1}(\text{Ra})$, $131.612$\,keV oder $\gamma_{3,1}(\text{Ra})$, $166.41$\,keV \\ \hline
+      3 & $ 234.13 \pm 0.19 $ &  $\gamma_{2,0}(\text{Ra})$, $215.985$\,keV \\ \hline
+      4 & $ 266.14 \pm 0.16 $ &  $\gamma_{1,0}(\text{Rn})$, $240.986$\,keV oder $\gamma_{2,0}(\text{Bi})$, $238.637$\,keV \\ \hline
+      5 & $ 340.06 \pm 0.17 $ &  $\gamma_{3,1}(\text{Bi})$, $300.09$\,keV \\ \hline
+      6 & $ 404.63 \pm 0.19 $ &  $\gamma_{4,1}(\text{Tl})$, $452.8$\,keV \\ \hline
+      7 & $ 510.9  \pm 0.7  $ &  $\gamma_{4,2}(\text{Pb})$, $510.7$\,keV \\ \hline
+      8 & $ 583.1  \pm 0.5  $ &  $\gamma_{2,1}(\text{Pb})$, $583.187$\,keV \\ \hline
+      9 & $ 829.6  \pm 0.4  $ &  $\gamma_{1,0}(\text{Pb})$, $804.9$\,keV \\ \hline
+     10 & $ 2711.2 \pm 1.6  $ &  $\gamma_{1,0}(\text{Pb})$, $2614.511$\,keV \\ \hline
+\end{tabularx}
+\end{center}
+\label{tab:assign}
+\end{table}
+Die Zuordnung wurde unter Berücksichtigung der Intensitäten der einzelnen Übergänge und Position im Spektrum durchgeführt. Die Literaturwerte 
+wurden aus der Kemkartei übernommen (Auzüge im Anhang der Vorbereitung). Es fällt auf, dass einige Werte sehr genau mit den Literaturwerten 
+übereinstimmen (z.B. Peak 7 und 8). Für andere lies sich kein besserer Literaturwert finden. Unter der Annahme der Korrektheit der Zuordnungen wäre 
+eine Erklärung für die hohe Diskrepanz Verschiebung der Maxima aufgrund von Comptonstreuung höherenergetischer Photonen.
 
 \subsection{Untergrundpeak}
 \label{sub:eval:undergroundpeak}

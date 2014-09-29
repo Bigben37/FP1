@@ -15,9 +15,12 @@ def evalUnderground():
     # make canvas and graph
     c = TCanvas('c', '', 1280, 720)
     c.SetLogy()
-    g = data.makeGraph('', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
+    g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     g.SetMarkerStyle(1)
     g.Draw('APX')
+    
+    c.Update()
+    c.Print('../img/underground_spectrum.pdf')
 
     # fit
     fit = Fitter('f', 'pol1(0) + gaus(2)')
@@ -29,15 +32,24 @@ def evalUnderground():
     fit.fit(g, 3250, 4050)
     fit.saveData('../calc/underground_peak.txt', 'w')
 
-    p, pc = fit.params[3]['value'], fit.params[4]['error']
-    E, sE = channelToEnergy(p, pc, gauge)
+    p, sp = fit.params[3]['value'], fit.params[3]['error']
+    E, sE = channelToEnergy(p, sp, gauge)
     with TxtFile('../calc/underground_peak_energy.txt', 'w') as f:
-        f.writeline('\t', *map(lambda x: str(x), (p, pc, E, sE)))
+        f.writeline('\t', *map(lambda x: str(x), (p, sp, E, sE)))
 
-    # TODO Legend
+    l = TLegend(0.6, 0.7, 0.85, 0.85)
+    l.AddEntry('g', 'Messwerte', 'p')
+    l.AddEntry(fit.function, 'Fit mit y = a + b*x + gaus(x; A, c, s)', 'l')
+    l.AddEntry(0, 'Peak: ', '')
+    l.AddEntry(0, 'c1 = %.2f #pm %.2f' % (p, sp), '')
+    l.Draw()
 
+    c.SetLogy(False)
+    g.GetXaxis().SetRangeUser(3200, 4100)
+    g.SetMinimum(0.00025)
+    g.SetMaximum(0.016)
     c.Update()
-    c.Print('../img/underground.pdf')
+    c.Print('../img/underground_peaks.pdf')
 
 
 def main():

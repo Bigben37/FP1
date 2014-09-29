@@ -49,6 +49,7 @@ def evalUnderground():
     g.GetXaxis().SetRangeUser(3200, 4100)
     g.SetMinimum(0.00025)
     g.SetMaximum(0.016)
+    g.GetYaxis().SetTitleOffset(1.2)
     g.Draw('P')
     c.Update()
     c.Print('../img/underground_peaks.pdf')

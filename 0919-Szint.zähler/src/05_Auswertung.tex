@@ -30,7 +30,7 @@ $s$ (Standardabweichung) ist.
 \subsection{\textgamma-Spektrum des Untergrundes}
 Das Untergrundspektrum ist in \autoref{img:underground:spectrum} abgebildet. Man erkennt einen Peak bei Kanal 3600, der aufgrund der noch 
 fehlenden Energieeichung erst in \ref{sub:eval:undergroundpeak} diskutiert wird. Bei kleineren Kanälen (was einer kleineren Energie entspricht) ist 
-die Zählrate tendenziell höher, was auf eine höhere Anzahl von niederenergetischer Strahlung zurückzuführen ist. 
+die Zählrate tendenziell höher, was auf eine höhere Anzahl von niederenergetischen Photonen zurückzuführen ist. 
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/underground_spectrum.pdf}
@@ -43,17 +43,17 @@ somit untergrundbereinigte Messwerte $n$. Der Fehler auf diese wird mit der Gau�
 \begin{equation}
   n = n' - u, \qquad s_n = \sqrt{s_{n'}^2 + s_u^2}
 \end{equation}
-Im folgenden sind alle Spektren untergrundbereinigt.
+Im Folgenden sind alle Spektren untergrundbereinigt.
 
 \subsection{Energieeichung des Vielkanalanalysators}
-Um eine Beziehung der Kanäle des Vielkanalanalysator(MCA) und der den Kanälen entsprechenden Energien herzustellen, wurden die Spektren von Elementen 
-mit bekannten Energien von den Peaks gemessen. Diese Peaks werden nun analysiert um letztendlich eine Funktion für die Energie in Abhängigkeit des 
+Um eine Beziehung der Kanäle des Vielkanalanalysators (MCA) und der den Kanälen entsprechenden Energien herzustellen, wurden die Spektren von Elementen 
+mit bekannten Energien von den Peaks gemessen. Diese Peaks werden nun analysiert, um letztendlich eine Funktion für die Energie in Abhängigkeit des 
 Kanals des MCAs zu finden.
 \subsubsection{Peaks von \na}
 \label{subsub:eval:na}
 Das gesamte Spektrum von \na\,ist in \autoref{img:na:spectrum} dargestellt. Da sich die Probe von \na\, von den anderen unterscheidet, konnten nicht die 
 gleichen Bedingungen wie bei der Untergrundmessung hergestellt werden. Der als Halterung und zur Abschirmung verwendete Bleiblock konnte nicht 
-benutzt werden. Deshalb ist trotz Bereinigung des Untergrundes noch ein Untergrund zu sehen. Vor allem die ansonsten vom Bleiblock abgeschirmte 
+benutzt werden. Deshalb ist trotz Subtraktion des gemessenen Untergrundes noch ein restlicher Untergrund zu sehen. Vor allem die ansonsten vom Bleiblock abgeschirmte 
 niederenergetische Strahlung sticht dabei besonders hervor. Außerdem gibt es aus dem gleichen Grund auch einige negative Zählraten, welche jedoch 
 außerhalb von den für uns relevanten Bereichen liegen.
 \begin{figure}[H]
@@ -63,9 +63,9 @@ außerhalb von den für uns relevanten Bereichen liegen.
   \label{img:na:spectrum}
 \end{center}
 \end{figure}
-Trotz des nichtverschwindenden Untergrundes lässt sich der 511\,keV-PEak gut erkennen. Des weiteren sind zwei weitere Peaks mit geringerer 
-Zählrate bei Kanal 3100 und 3500 zu erkennen. Ein Vergleich mit dem Spektrum des Untergrundes \autoref{img:underground:spectrum} identifiziert 
-den zweiten Peak als Folge des Untergrundes (und nicht vollständiger Abschirmung dessen). Damit kann der erste Peak \na\,zugeordnet werden.\\[\baselineskip]
+Trotz des nichtverschwindenden Untergrundes lässt sich der 511\,keV-Peak gut erkennen. Des Weiteren sind noch zwei Peaks mit geringerer 
+Zählrate bei Kanal 3100 und 3500 zu erkennen. Ein Vergleich mit dem Spektrum des Untergrundes (\autoref{img:underground:spectrum}) identifiziert 
+den rechten Peak als Folge des Untergrundes (und nicht vollständiger Abschirmung dessen). Damit kann der linke Peak \na\,zugeordnet werden.\\[\baselineskip]
 Die beiden Peaks von \na\, werden nun jeweils mit einer Gauß-Verteilung (Kapitel \ref{subsub:gaus}), verziert mit einem linearen Untergrund, 
 gefittet, um den genauen Kanal des Maximums zu bestimmen:
 \begin{equation}
@@ -89,7 +89,7 @@ Der Fit ist in \autoref{img:na:peaks} zu sehen. Man erhält folgende Werte für 
 
 \subsubsection{Peaks von \co}
 \label{subsub:eval:co}
-In \autoref{img:co:spectrum} ist das Spektrum von \co abgebildet. Man erkennt gut den Doppelpeak zwischen den Kanälen 2800 und 3400.
+In \autoref{img:co:spectrum} ist das Spektrum von \co\, abgebildet. Man erkennt gut den Doppelpeak zwischen den Kanälen 2800 und 3400.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/co_spectrum.pdf}
@@ -172,10 +172,11 @@ Allerdings erkennt man, dass der Fit die Daten nicht besonders gut beschreibt. D
 \begin{equation}
   y = a + b\cdot x + c\cdot x^2
 \end{equation}
-Der Fit ist in \autoref{img:gauge:quad} dargestellt. Der Fit beschreibt nun besser die gemessenen Daten. Dies erkennt man auch, 
-wenn man die $\chi^2$-Werte der beiden Graphen vergleicht. Das $\chi^2$ von dem linearen Fit beträgt ca. 2968, das des quadratischen Fits 
+Dies kann mit einer nichtlinearen Verstärkung des Photomultipliers begründet werden.\\
+Der Fit ist in \autoref{img:gauge:quad} dargestellt. Er beschreibt nun die gemessenen Daten besser. Dies erkennt man auch, 
+wenn man die $\chi^2$-Werte der beiden Fits vergleicht. Das $\chi^2$ des linearen Fits beträgt 2968, das des quadratischen Fits 
 nur noch 95. Da den beiden Fits die gleichen Daten vorliegen, kann man diese beiden Werte gegenüberstellen\footnote{Dies ist im Allgemeinen nicht so,
-da der $\chi^2$-Wert eines Fits von der y-Skalierung der gegebenen Daten abängt.}.
+da der $\chi^2$-Wert eines Fits von der y-Skalierung der gegebenen Daten abhängt.}.
 Die Parameter ergeben sich zu:
 \begin{equation}
 \begin{split}
@@ -215,7 +216,10 @@ Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter B
 \end{equation}
 
 \subsection{\textgamma-Spektrum von \th}
-Das gesamte Spektrum von \th ist in \autoref{img:th:spectrum} zu sehen.
+Das gesamte Spektrum von \th\, ist auf \autoref{img:th:spectrum} zu sehen. Man erkennt eine Vielzahl von Peaks, 
+welche im Folgenden analysiert werden. Dazu wird zuerst jeder Peak separat betrachtet. Anschließend werden 
+größere Gruppen von Peaks gemeinsam gefittet, um etwaige Überlagerungen zu berücksichtigen.
+
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/th_energyspectrum.pdf}
@@ -223,11 +227,9 @@ Das gesamte Spektrum von \th ist in \autoref{img:th:spectrum} zu sehen.
   \label{img:th:spectrum}
 \end{center}
 \end{figure}
-Man erkennt eine Vielzahl von Peaks, welche im Folgenden analysiert werden. Dazu wird zuerst jeder Peak separat betrachtet. Anschließend werden 
-größere Gruppen von Peaks gemeinsam gefittet, um etwaige Überlagerungen zu berücksichtigen.
 
 \subsubsection{Separate Betrachtung der Peaks}
-Jeder der zehn erkennbaren Peak wird mit einer Gauß-Verteilung (\autoref{eq:gaus}) und einem linearen Untergrund gefittet.
+Jeder der zehn erkennbaren Peaks wird mit einer Gauß-Verteilung (\autoref{eq:gaus}) und einem linearen Untergrund gefittet.
 \begin{equation}
   y_i = a_i + b_i \cdot x + \gaus(x; A_i, c_i, s_i), \qquad i=1, 2, \ldots, 10
 \end{equation}
@@ -261,7 +263,7 @@ Die Ergebnisse der Fits und die zugehörigen Energien (entsprechend \autoref{eq:
 Der große Fehler auf den Kanal bei Peak 7 könnte sich durch einen Doppelpeak, der sich nicht mehr auflösen lässt, erklären.
 \input{th_peaks_single}
 
-\subsubsection{Multi-Peak Fit} % TODO Benennung
+\subsubsection{Gleichzeitiger Fit mehrerer Peaks}
 Da die Peaks 1 bis 6 und 7 bis 8 nahe beieinander liegen, könnte ein gemeinsamer Fit der Peaks gegenseitige Einflüsse ausgleichen.
 Dazu wird ein quadratischer Untergrund angesetzt und über die verschieden Gauß-Verteilungen der Peaks summiert:
 \begin{equation}
@@ -291,9 +293,9 @@ gegenseitige Einflüsse berücksichtigen und werden in der Zuordnung verwendet.
 
 \subsubsection{Zuordnung der Peaks}
 Für Peak 1 bis 8 wurden die Werte der gemeinsamen Fits genommen, die Werte von Peak 9 und 10 stammen aus den separaten Fits.
-Die Zuordung wurde in \autoref{tab:assign} durchgeführt.\\[\baselineskip]
+Die Zuordnung zu den verursachenden Zerfällen wurde in \autoref{tab:assign} durchgeführt.\\[\baselineskip]
 \begin{table}
-\caption{Zuordung der Peaks zu den Elementen}
+\caption{Zuordnung der Peaks zu den Elementen.}
 \begin{center}
 \begin{tabularx}{\textwidth}{|c|c|X|}
   \hline 
@@ -313,7 +315,7 @@ Die Zuordung wurde in \autoref{tab:assign} durchgeführt.\\[\baselineskip]
 \label{tab:assign}
 \end{table}
 Die Zuordnung wurde unter Berücksichtigung der Intensitäten der einzelnen Übergänge und Position im Spektrum durchgeführt. Die Literaturwerte 
-wurden aus der Kemkartei übernommen (Auzüge im Anhang der Vorbereitung). Es fällt auf, dass einige Werte sehr genau mit den Literaturwerten 
+wurden aus der Kemkartei übernommen (Auszüge im Anhang der Vorbereitung). Es fällt auf, dass einige Werte sehr genau mit den Literaturwerten 
 übereinstimmen (z.B. Peak 7 und 8). Für andere lies sich kein besserer Literaturwert finden. Unter der Annahme der Korrektheit der Zuordnungen wäre 
 eine Erklärung für die hohe Diskrepanz Verschiebung der Maxima aufgrund von Comptonstreuung höherenergetischer Photonen.
 
@@ -343,9 +345,14 @@ und damit für die Energie $E_{\,{}^{40}\text{Ka}}$ gemäß \autoref{eq:energyga
 \begin{equation}
   E_{\,{}^{40}\text{Ka}} = (1484.2 \pm 0.6)\,\text{keV}
 \end{equation}
+Der Literaturwert\footnote{Staatsexamensarbeit von T. Kotyk, in den Unterlagen zur Vorbereitung} beträgt
+\begin{equation}
+  E_{\,{}^{40}\text{Ka}}^{\text{lit}} = 1460.8\,\text{keV}
+\end{equation}
+Die Abweichung des gemessen Wertes vom Literaturwert lässt sich wie oben begründen.
 
 
-\subsection{Winkelkorrelation der \chemel{Na}{22} Vernichtungsphotonen}
+\subsection{Winkelkorrelation der \chemel{Na}{22}-Vernichtungsphotonen}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/angles.pdf}
@@ -361,6 +368,9 @@ Für die Berechnung des Fehlers wurde gemäß der Poissonverteilung \autoref{eq:
 Deutlich sichtbar ist die Häufung der Zählereignisse um den Winkelbereich bei 180$^\circ$.
 Dieser Bereich wurde zuerst mit einer Gaußfunktion modelliert,
 der Untergrund mit der Addition einer konstanten Funktion $a$.
+\begin{equation}
+  N = a + \gaus(\alpha; A, \alpha_0, s)
+\end{equation}
 Die Parameter des Fits befinden sich auf \autoref{tab:angfit}.
 Da allerdings von den fünf höchsten Messwerten keiner die Fitfunktion innerhalb seiner Fehlergrenzen einschließt,
 wurde nach einem besseren Modell gesucht.\\

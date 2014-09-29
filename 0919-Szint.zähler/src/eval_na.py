@@ -12,7 +12,7 @@ def evalNa():
     c = TCanvas('c', '', 1280, 720)
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     prepareGraph(g)
-    g.SetMinimum(-0.01)
+    g.SetMinimum(-0.008)
     g.GetXaxis().SetRangeUser(0, 8200)
     g.Draw('APX')
 

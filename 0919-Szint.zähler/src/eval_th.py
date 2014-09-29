@@ -137,10 +137,10 @@ def evalTh():
             f.writeline('\t', 'Peak% 2d' % (i + 1), str(param[1]), str(param[2]), str(energies[i][0]), str(energies[i][1]))
 
     # save peak data as latex file
-    peaknames = map(lambda i: 'Peak% 2d' % i, xrange(1, 11))
+    peaknames = map(lambda i: '% 2d' % i, xrange(1, 11))
     with TxtFile('../src/th_peaks_single.tex', 'w') as f:
         f.write2DArrayToLatexTable(zip(*([peaknames] + zip(*params)[1:3] + zip(*energies))),
-                                   ['', 'Kanal c', '$s_c$', 'Energie $E$ / keV', '$s_E$ / keV'],
+                                   ['Peak', 'Kanal $c$', '$s_c$', 'Energie $E$ / keV', '$s_E$ / keV'],
                                    ['%s', '%.3f', '%.3f', '%.2f', '%.2f'],
                                    'Kan\\"ale und Energien von \\th, bestimmt mit separaten Fits.', 'tab:th:single')
 
@@ -154,11 +154,13 @@ def evalTh():
 
     l = makeLegend(0.15, 0.6, 0.3, 0.85, peaklegend[6:9])
     l.Draw()
-    printGraph(c, g, '../img/th_peaks_single_07-09.pdf', 1200, 2250, 0, 0.075)
+    printGraph(c, g, '../img/th_peaks_single_07-09.pdf', 1200, 2250, 0.005, 0.075)
 
     l = makeLegend(0.7, 0.7, 0.85, 0.85, peaklegend[9:10])
     l.Draw()
-    printGraph(c, g, '../img/th_peaks_single_10.pdf', 6100, 6700, 0, 0.01)
+    g.GetYaxis().SetTitleOffset(1.2)
+    printGraph(c, g, '../img/th_peaks_single_10.pdf', 6100, 6700, 0.0001, 0.006)
+    g.GetYaxis().SetTitleOffset(1)
 
     multichannels = []
     # make multi peak fit -- 1 to 6
@@ -174,6 +176,7 @@ def evalTh():
     fit.saveData('../calc/th_peaks_multi_07-08.txt', 'w')
     l = makeLegend(0.7, 0.7, 0.85, 0.85, [[fit.function, 'Peaks 7 und 8']])
     l.Draw()
+    g.GetYaxis().SetTitleOffset(1.2)
     printGraph(c, g, '../img/th_peaks_multi_07-08.pdf', 1225, 1675, 0.01, 0.05)
     for i in xrange(4, 8, 3):
         multichannels.append([fit.params[i]['value'], fit.params[i]['error']])
@@ -186,7 +189,7 @@ def evalTh():
     # save multi peak data to latex table
     with TxtFile('../src/th_peaks_multi.tex', 'w') as f:
         f.write2DArrayToLatexTable(zip(*([peaknames[:8]] + zip(*multichannels)+ zip(*energies))),
-                                   ['', 'Kanal c', '$s_c$', 'Energie $E$ / keV', '$s_E$ / keV'],
+                                   ['Peak', 'Kanal $c$', '$s_c$', 'Energie $E$ / keV', '$s_E$ / keV'],
                                    ['%s', '%.3f', '%.3f', '%.2f', '%.2f'],
                                    'Kan\\"ale und Energien von \\th, bestimmt mit gemeinsamen Fits.', 'tab:th:multi')
 

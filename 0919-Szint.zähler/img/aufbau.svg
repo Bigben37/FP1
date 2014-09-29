@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="angles.pdf">
+   sodipodi:docname="aufbau.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -22,9 +22,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.74246212"
-     inkscape:cx="317.63657"
-     inkscape:cy="250.86557"
+     inkscape:zoom="1.05"
+     inkscape:cx="332.68463"
+     inkscape:cy="232.34294"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -230,7 +230,7 @@
          y="765.14789"
          x="292.78574"
          id="tspan3821-0"
-         sodipodi:role="line">NaJ-Szintillationszähler + </tspan><tspan
+         sodipodi:role="line">NaI-Szintillationszähler + </tspan><tspan
          style="font-size:14px;text-align:center;text-anchor:middle"
          id="tspan3823-9"
          y="782.64789"

@@ -1,7 +1,7 @@
 \section{Versuchsdurchführung}
 
 \subsection{Aufnahme der \textgamma-Spektren und des Untergrunds}
-Der NaJ-Szintillationszähler wird, wie auf \autoref{img:aufbau} gezeigt, über den Verstärker mit
+Der NaI-Szintillationszähler wird, wie auf \autoref{img:aufbau} gezeigt, über den Verstärker mit
 dem MCA verbunden.
 Um den passenden Verstärkungsfaktor für den Verstärker zu finden, wird die Thoriumprobe verwendet
 und die Verstärkung so eingestellt, dass der höchste sichtbare Peak bei Kanal 6500 des MCAs liegt.
@@ -28,7 +28,7 @@ Die Messung an ${}^{228}$Th wird mit dem selben Aufbau 64~Stunden lang über das
 Da für die Messung der Koinzidenzen eine sehr genaue Einstellung der Geräteparameter notwendig ist,
 wird zunächst mit dem Oszilloskop das Signal an einzelnen Punkten der Schaltung beobachtet,
 um dann die passenden Einstellungen zu finden.\\
-\autoref{img:najunip} zeigt das Ausgangssignal des NaJ-Szintillators und das verstärkte unipolare Signal,
+\autoref{img:najunip} zeigt das Ausgangssignal des NaI-Szintillators und das verstärkte unipolare Signal,
 das (im zweiten Versuchsteil durch das \emph{gate}) in den MCA gelangt.
 Die Länge des Szintillatorsignals beträgt für das hier registrierte \textgamma-Photon ca.~1\,\textmu s,
 seine Amplitude etwas mehr als 200\,mV.
@@ -38,12 +38,12 @@ sein Maximum liegt 120\,ns nach dem Einsatzpunkt des Szintillatorsignals.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=0.65\textwidth]{../img/SCR0013.PNG}
-  \caption[---]{Ausgangssignal des NaJ-Szintillators (gelb) und Signal am unipolaren Ausgang des Verstärkers (blau).}
+  \caption[---]{Ausgangssignal des NaI-Szintillators (gelb) und Signal am unipolaren Ausgang des Verstärkers (blau).}
   \label{img:najunip}
 \end{center}
 \end{figure}
 
-\autoref{img:najbiptu} zeigt ebenfalls ein Signal des NaJ-Kristalls,
+\autoref{img:najbiptu} zeigt ebenfalls ein Signal des NaI-Kristalls,
 dann aber das verstärkte Signal am \emph{bipolaren} Ausgang des Verstärkers.
 Man erkennt, dass das Maximum des bipolaren Signals schneller erreicht ist als das des unipolaren Signals;
 der Abstand zum Einsatz des Szintillatorsignals beträgt hier nur 80\,ns (dies liegt daran,
@@ -59,7 +59,7 @@ gut ablesen: Sie beträgt 130\,ns.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=0.65\textwidth]{../img/SCR0023.PNG}
-  \caption[---]{Ausgangssignal des NaJ-Szintillators (gelb),
+  \caption[---]{Ausgangssignal des NaI-Szintillators (gelb),
   Signal am bipolaren Ausgang des Verstärkers (blau)
   und Rechteckspuls nach der \emph{timing unit} (rosa).}
   \label{img:najbiptu}
@@ -85,9 +85,9 @@ gut ablesen: Sie beträgt 130\,ns.
 \end{figure}
 
 
-Analog zum Anschluss der Geräte nach dem NaJ-Szintillator wird der gleiche Aufbau nach dem Plastikszintillator
+Analog zum Anschluss der Geräte nach dem NaI-Szintillator wird der gleiche Aufbau nach dem Plastikszintillator
 aufgebaut. Das Signal des Plastikszintillators ist auf \autoref{img:plastiktu} zu sehen:
-Im Vergleich zum NaJ-Szintillator ist die Amplitude hier viel höher (ca.~3\,V),
+Im Vergleich zum NaI-Szintillator ist die Amplitude hier viel höher (ca.~3\,V),
 die Signallänge beträgt aber nur wenig mehr als 10\,ns.\\
 Als Verstärkungsfaktor am Verstärker nach dem Plastik-Szintillator wurde auf 10\,$\cdot$\,100 eingestellt.
 Die Überlegung dafür war folgende: Die Verstärkung sollte möglichst hoch sein,
@@ -128,7 +128,7 @@ Signal-zu-Rausch-Verhältnis berechnet werden:
 \end{equation}
 Ein Vergleich der beiden Werte zeigt, warum der Verstärkungsfaktor 1000 für die weiteren Messungen gewählt wird.\\
 
-Wir bei dem NaJ-Szintillator wird das bipolare Ausgangssignal des Verstärkers in einen SCA
+Wir bei dem NaI-Szintillator wird das bipolare Ausgangssignal des Verstärkers in einen SCA
 und dann in die \emph{timing unit} geleitet.
 Der Rechteckspuls nach der \emph{timing unit} ist ebenfalls auf \autoref{img:plastiktu} zu sehen.
 Er kommt hier schneller an als beim anderen Szintillator, 
@@ -159,7 +159,7 @@ Das Signal am rechten Rand ist zufällig, aber weit genug entfernt, um nicht reg
 Um die Anzahl der zufälligen Koinzidenzen zu verringern
 und den Messaufbau empfindlicher für die Vernichtungsphotonen mit einer Energie von 511\,keV zu machen,
 wird die Tatsache genutzt, dass mit den vorherigen Messungen bereits eine Möglichkeit zur
-Energiemessung der Photonen im NaJ-Szintillationszähler vorliegt.
+Energiemessung der Photonen im NaI-Szintillationszähler vorliegt.
 Wie bei der 1. Messung wird am Computer das Messsignal des MCA beobachtet.
 Wird nun am SCA die obere und die untere Schwelle geändert, so lassen sich ihre Positionen
 am Computer verfolgen, da das \emph{gate} nur Signale passieren lässt, die auch den SCA passieren.
@@ -172,10 +172,10 @@ Tabelle \autoref{tab:params} gibt einen zusammenfassenden Überblick über die E
 \begin{center}
 \begin{tabular}{|c|c|c|}
   \hline
-  \multicolumn{3}{|l|}{\textbf{NaJ-Verstärker}} \\ \hline  
+  \multicolumn{3}{|l|}{\textbf{NaI-Verstärker}} \\ \hline  
   Verstärkung & \multicolumn{2}{|c|}{shaping time} \\ \hline
   5.5\,$\cdot$\,20 = 110 & \multicolumn{2}{|c|}{20\,\textmu s}   \\ \hline
-   \multicolumn{3}{|l|}{\textbf{NaJ-SCA}} \\ \hline  
+   \multicolumn{3}{|l|}{\textbf{NaI-SCA}} \\ \hline  
   lower threshold & window & delay \\ \hline
   1.3 & 3.0 & 0  \\ \hline
   \multicolumn{3}{|l|}{\textbf{Plastik-Verstärker}} \\ \hline  

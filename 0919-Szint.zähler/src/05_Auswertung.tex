@@ -264,7 +264,74 @@ Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter B
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/angles.pdf}
-  \caption{Winkelkorrelation der \chemel{Na}{22} Vernichtungsphotonen}
+  \caption{Winkelkorrelation der \na-Vernichtungsphotonen.
+  Modellierung mit Gaußverteilung (rot) und
+  mit Faltung von Rechtecksfunktion und Gaußkurve (blau), beide auf linearem Untergrund.}
   \label{img:angles}
 \end{center}
 \end{figure}
+
+\autoref{img:angles} zeigt die Winkelabhängkeit der Zählereignisse bei der Messung an \na.
+Für die Berechnung des Fehlers wurde gemäß der Poissonverteilung \autoref{eq:poisson:error} verwendet.
+Deutlich sichtbar ist die Häufung der Zählereignisse um den Winkelbereich bei 180$^\circ$.
+Dieser Bereich wurde zuerst mit einer Gaußfunktion modelliert,
+der Untergrund mit der Addition einer konstanten Funktion $a$.
+Die Parameter des Fits befinden sich auf \autoref{tab:angfit}.
+Da allerdings von den fünf höchsten Messwerten keiner die Fitfunktion innerhalb seiner Fehlergrenzen einschließt,
+wurde nach einem besseren Modell gesucht.\\
+Der Messaufbau legt nahe, eine Rechtecksfunktion $R$ mit Breite $b$ zur Modellierung zu verwenden,
+da der NaI-Szintillationszähler einen relativ großen Öffnungswinkel besitzt,
+innerhalb dessen Photonen registriert werden können:
+\begin{equation}
+  R(x;b) =
+\begin{cases}
+1 & \text{für }\frac{-b}{2} \leq x \leq \frac{b}{2}\\
+0 & \text{sonst}
+\end{cases}
+\end{equation}
+Fallen die Photonen allerdings auf den Rand des Szintillators,
+so nimmt die Wahrscheinlichkeit ab, dass genügend Sekundärphotonen erzeugt werden,
+um einen Zählpuls auszulösen.
+Diese Überlegung führt dazu, dass als Modell für die Anzahl der Zählereignisse~$N$ in Abhängigkeit des Winkels~$x$
+das \emph{Faltungsprodukt} einer Rechtecksfunktion mit einer
+Gaußfunktion verwendet wird:
+\begin{equation}
+\begin{split}
+  N(x;b,A,\alpha_0,s)&=R(x;b)*\gaus(x;A,\alpha_0,s)\\
+  & = \int_{-\infty}^{\infty}{R(\tau;b) \cdot  \gaus(x-\tau;A,\alpha_0,s) \, \difd\tau}\\
+  & =   \frac{A}{2} \left(\text{erf}\left(\frac{b+2 \alpha_0 -2 x}{\sqrt{8} s }\right)+
+  \text{erf}\left(\frac{b-2 \alpha_0 +2 x}{\sqrt{8} s }\right)\right)
+\end{split}
+\end{equation}
+Die Funktion erf ist hier die Gaußsche Fehlerfunktion.
+Die Werte für die vier Parameter der Fitfunktion und für den linearen Untergrund sind ebenfalls
+in \autoref{tab:angfit} aufgeführt.
+
+\begin{table}[H]
+\caption{Fitparameter für die Messung der Winkelkorrelation.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+   & $\chi^2 / \text{DoF}$ & $b$ & $A$ & $\alpha_0$ & $s$ & $a$ \\ \hline  
+ Gaußkurve  & 4.9 & - & 339 $\pm$ 16 & 179.5 $\pm$ 0.4 & 4.7 $\pm$ 0.3 & 20 $\pm$ 2 \\ \hline  
+ Faltungsprodukt & 3.3 & 13.6 $\pm$ 0.9 & 309 $\pm$ 18  & 179.7 $\pm$ 0.3 & 2.1 $\pm$ 0.3 & 22 $\pm$ 2 \\ \hline 
+ 
+\end{tabular}
+\end{center}
+\label{tab:angfit}
+\end{table}
+
+Der niedrigere, auf die Zahl der Freiheitsgrade normierte Wert für $\chi^2$ des Fits für das zweite Modell
+gibt einen Hinweis darauf, dass dieses Modell besser für die Beschreibung der Daten geeignet ist.
+Um das aber eindeutig zu zeigen, wären mehr Messungen um das Intensitätsmaximum notwendig gewesen.\\
+Warum der Untergrund nicht gut durch eine lineare Funktion beschrieben werden kann,
+konnte nicht geklärt werden.
+Für die Entscheidung, ob es sich hier um eine statistische Schwankung oder eine wirkliche
+Inhomogenität des Untergrunds handelt, wären ebenfalls mehr Messungen notwendig gewesen.\\
+Beide Fits liefern aber eine enge Verteilung der Strahlungsintensität um das Maximum bei 180$^\circ$
+und eine Breite der Verteilung, die mit den geometrischen Gegebenheiten des Aufbaus in Verbindung gebracht
+werden kann.
+Mit dem Experiment konnte also gezeigt werden, dass bei der Annihilation eines Positron-Elektron-Paars
+zwei \textgamma-Photonen in entgegengesetzte Richtung emittiert werden.
+
+

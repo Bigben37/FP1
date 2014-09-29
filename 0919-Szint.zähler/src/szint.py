@@ -22,8 +22,8 @@ class SzintData(DataErrors):
                     self.time = float(row)
                 elif lines == 0:
                     self.timed == float(row)
-                else:                                                   # TODO wieviel binerror?
-                    self.addPoint(lines, float(row), 0, self.BINERROR)  # TODO poisson error auf y-werte?
+                else:
+                    self.addPoint(lines, float(row), 0, 0)  # TODO Errors?
                 lines += 1
 
     def subtractUnderground(self):

@@ -25,27 +25,46 @@ def evalEnergyGauge():
     fit.setParam(1, 'b', 0.4)
     fit.fit(g, 0, 3500)
     fit.saveData('../calc/energy_gauge_lin.txt', 'w')
-    # TODO Legend
+    
+    l = TLegend(0.15, 0.7, 0.4, 0.85)
+    l.AddEntry('g', 'Referenzpeaks', 'p')
+    l.AddEntry(fit.function, 'Fit mit y = a + b*x', 'l')
+    l.AddEntry(0, 'Parameter:', '')
+    l.AddEntry(0, 'a = %.2f #pm %.2f' % (fit.params[0]['value'], fit.params[0]['error']), '')
+    l.AddEntry(0, 'b = %.5f #pm %.5f' % (fit.params[1]['value'], fit.params[1]['error']), '')
+    l.Draw()
+
     c.Update()
     c.Print('../img/energy_gauge_lin.pdf', 'pdf')
     
     fit2 = Fitter('f', 'pol2(0)')
     fit2.function.SetNpx(1000)
-    fit2.function.SetLineColor(4)
     fit2.setParam(0, 'a', 0)
     fit2.setParam(1, 'b', fit.params[1]['value'])
     fit2.setParam(2, 'c', 0)
     fit2.fit(g, 0, 3500)
     fit2.saveData('../calc/energy_gauge_lin.txt')
-    # TODO Legend
+    
+    l = TLegend(0.15, 0.675, 0.4, 0.85)
+    l.AddEntry('g', 'Referenzpeaks', 'p')
+    l.AddEntry(fit2.function, 'Fit mit y = a + b*x + c*x^2', 'l')
+    l.AddEntry(0, 'Parameter:', '')
+    l.AddEntry(0, 'a = %.2f #pm %.2f' % (fit2.params[0]['value'], fit2.params[0]['error']), '')
+    l.AddEntry(0, 'b = %.5f #pm %.5f' % (fit2.params[1]['value'], fit2.params[1]['error']), '')
+    l.AddEntry(0, 'c = %.8f #pm %.8f' % (fit2.params[2]['value'], fit2.params[2]['error']), '')
+    l.Draw()
+    
     c.Update()
     c.Print('../img/energy_gauge_quad.pdf', 'pdf')
     
     #write raw data for reuse
     with TxtFile('../calc/energy_gauge_raw.txt', 'w') as f:
-        f.writeline('\t', str(fit.params[0]['value']), str(fit.params[0]['error']))
-        f.writeline('\t', str(fit.params[1]['value']), str(fit.params[1]['error']))
-        f.writeline(str(fit.getCorrMatrixElem(0, 1)))
+        f.writeline('\t', str(fit2.params[0]['value']), str(fit2.params[0]['error']))
+        f.writeline('\t', str(fit2.params[1]['value']), str(fit2.params[1]['error']))
+        f.writeline('\t', str(fit2.params[2]['value']), str(fit2.params[2]['error']))
+        f.writeline(str(fit2.getCorrMatrixElem(0, 1)))
+        f.writeline(str(fit2.getCorrMatrixElem(0, 2)))
+        f.writeline(str(fit2.getCorrMatrixElem(1, 2)))
         
 
 def main():

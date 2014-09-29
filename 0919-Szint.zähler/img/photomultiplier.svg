@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="photomultiplier.pdf">
+   sodipodi:docname="photomultiplier.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -321,7 +321,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -729,5 +729,17 @@
          x="-62.232231"
          y="703.86548"
          style="font-size:20px">Elektron</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="253.6049"
+       y="652.26038"
+       id="text5300-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5302-7"
+         x="253.6049"
+         y="652.26038"
+         style="font-size:20px">Dynode</tspan></text>
   </g>
 </svg>

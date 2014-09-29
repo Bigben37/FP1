@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
-from szint import SzintData, channelToEnergy
+from szint import SzintData, channelToEnergy, prepareGraph
 from fitter import Fitter
 from txtfile import TxtFile
 import functions as funcs
@@ -84,7 +84,7 @@ def makeLegend():  # TODO TBI
     pass
 
 
-def printGraph(c, g, path, xstart, xend, ystart, yend, isLog=False):
+def printGraph(c, g, path, xstart, xend, ystart, yend, options='P', isLog=False):
     """prints graph with given parameters
 
     Arguments:
@@ -101,7 +101,7 @@ def printGraph(c, g, path, xstart, xend, ystart, yend, isLog=False):
     g.GetXaxis().SetRangeUser(xstart, xend)
     g.SetMinimum(ystart)
     g.SetMaximum(yend)
-    g.Draw('APX')  # X = no error bars
+    g.Draw(options)  # X = no error bars
 
     c.Update()
     c.Print(path, 'pdf')
@@ -116,9 +116,9 @@ def evalTh():
     # prepare canvas and graph
     c = TCanvas('c', '', 1280, 720)
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
-    g.SetMarkerStyle(1)
+    prepareGraph(g)
 
-    printGraph(c, g, '../img/th_energyspectrum.pdf', 0, 6711, 1e-4, 2, True)
+    printGraph(c, g, '../img/th_energyspectrum.pdf', 0, 6711, 1e-4, 2, 'APX', True)
 
     params = singlePeakFit(g)  # single peak fit
 
@@ -133,7 +133,7 @@ def evalTh():
             f.writeline('\t', 'Peak% 2d' % (i + 1), str(param[1]), str(param[2]), str(energies[i][0]), str(energies[i][1]))
 
     # make graphs for single peaks
-    printGraph(c, g, '../img/th_peaks_single_01-10.pdf', 0, 6711, 1e-4, 2, True)
+    printGraph(c, g, '../img/th_peaks_single_01-10.pdf', 0, 6711, 1e-4, 2, isLog=True)
     printGraph(c, g, '../img/th_peaks_single_01-06.pdf', 150, 1175, 0.05, 1.15)
     printGraph(c, g, '../img/th_peaks_single_07-09.pdf', 1200, 2250, 0, 0.075)
     printGraph(c, g, '../img/th_peaks_single_10.pdf', 6100, 6700, 0, 0.01)

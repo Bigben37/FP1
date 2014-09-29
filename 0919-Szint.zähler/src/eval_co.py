@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
-from szint import SzintData
+from szint import SzintData, prepareGraph
 from fitter import Fitter
 from txtfile import TxtFile
 
@@ -11,7 +11,7 @@ def evalCo():
 
     c = TCanvas('c', '', 1280, 720)
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
-    g.SetMarkerStyle(1)
+    prepareGraph(g)
     g.SetMinimum(-0.01)
     g.GetXaxis().SetRangeUser(0, 8200)
     g.Draw('APX')
@@ -47,6 +47,7 @@ def evalCo():
     l.Draw()
 
     g.GetXaxis().SetRangeUser(2400, 3800)
+    g.Draw('P')
     c.Update()
     c.Print('../img/co_peaks.pdf')
 

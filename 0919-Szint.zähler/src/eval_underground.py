@@ -1,6 +1,6 @@
 #!/usr/bin/python2.7
 from ROOT import gROOT, gStyle, TCanvas, TLegend
-from szint import SzintData, channelToEnergy
+from szint import SzintData, channelToEnergy, prepareGraph
 from fitter import Fitter
 import functions as funcs
 from txtfile import TxtFile
@@ -16,7 +16,7 @@ def evalUnderground():
     c = TCanvas('c', '', 1280, 720)
     c.SetLogy()
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
-    g.SetMarkerStyle(1)
+    prepareGraph(g)
     g.Draw('APX')
     
     c.Update()
@@ -48,6 +48,7 @@ def evalUnderground():
     g.GetXaxis().SetRangeUser(3200, 4100)
     g.SetMinimum(0.00025)
     g.SetMaximum(0.016)
+    g.Draw('P')
     c.Update()
     c.Print('../img/underground_peaks.pdf')
 

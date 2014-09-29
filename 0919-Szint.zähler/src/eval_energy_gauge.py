@@ -8,9 +8,18 @@ import functions as funcs
     
         
 def evalEnergyGauge():
+    # get data
     datalist  = funcs.loadCSVToList('../calc/energy_na.txt')
     datalist += funcs.loadCSVToList('../calc/energy_co.txt')
     datalist += funcs.loadCSVToList('../calc/energy_eu.txt')
+    
+    #make latex table
+    elems = ['Na', 'Na', 'Co', 'Co', 'Eu', 'Eu']
+    with TxtFile('../src/energygauge.tex', 'w') as f:
+        f.write2DArrayToLatexTable(zip(*([elems] + zip(*datalist))), ['Element', 'Literaturwert / keV', 'Kanal', 'Fehler auf Kanal'], 
+                                   ['%s', '%.0f', '%.2f', '%.2f'], 'Referenzpeaks mit Literaturwerten', 'tab:energygauge')
+    
+    #convert do DataErrors
     datalist = zip(*datalist)
     data = DataErrors.fromLists(datalist[1], datalist[0], datalist[2], [0] * len(datalist[0]))
     
@@ -26,7 +35,7 @@ def evalEnergyGauge():
     fit.fit(g, 0, 3500)
     fit.saveData('../calc/energy_gauge_lin.txt', 'w')
     
-    l = TLegend(0.15, 0.7, 0.4, 0.85)
+    l = TLegend(0.15, 0.6, 0.5, 0.85)
     l.AddEntry('g', 'Referenzpeaks', 'p')
     l.AddEntry(fit.function, 'Fit mit y = a + b*x', 'l')
     l.AddEntry(0, '#chi^{2} / DoF : %.0f' % fit.getChisquareOverDoF(), '')
@@ -46,7 +55,7 @@ def evalEnergyGauge():
     fit2.fit(g, 0, 3500)
     fit2.saveData('../calc/energy_gauge_lin.txt')
     
-    l = TLegend(0.15, 0.675, 0.4, 0.85)
+    l = TLegend(0.15, 0.575, 0.5, 0.85)
     l.AddEntry('g', 'Referenzpeaks', 'p')
     l.AddEntry(fit2.function, 'Fit mit y = a + b*x + c*x^2', 'l')
     l.AddEntry(0, '#chi^{2} / DoF : %.0f' % fit2.getChisquareOverDoF(), '')
@@ -64,9 +73,9 @@ def evalEnergyGauge():
         f.writeline('\t', str(fit2.params[0]['value']), str(fit2.params[0]['error']))
         f.writeline('\t', str(fit2.params[1]['value']), str(fit2.params[1]['error']))
         f.writeline('\t', str(fit2.params[2]['value']), str(fit2.params[2]['error']))
-        f.writeline(str(fit2.getCorrMatrixElem(0, 1)))
-        f.writeline(str(fit2.getCorrMatrixElem(0, 2)))
-        f.writeline(str(fit2.getCorrMatrixElem(1, 2)))
+        f.writeline(str(fit2.getCorrMatrixElem(0, 1))) #a, b
+        f.writeline(str(fit2.getCorrMatrixElem(0, 2))) #a, c
+        f.writeline(str(fit2.getCorrMatrixElem(1, 2))) #b, c
         
 
 def main():

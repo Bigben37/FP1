@@ -19,7 +19,7 @@ auf eine Zählrate $n$ normiert. Dementsprechend werden auch die Fehler $s_N$ an
 \subsubsection{Gauß-Verteilung}
 \label{subsub:gaus}
 Bei der Auswertung wird oft die Gauß-Verteilung als theoretisches Modell (also auch als Fit-Modell) der Messwerte verwendet. Es wird folgende 
-Konvention eingeführt:
+Konvention\footnote{gemäß der Funktionenbenennung in ROOT} eingeführt:
 \begin{equation}
   \label{eq:gaus}
   \gaus(x; A, c, s) = A \cdot e^{-\frac{1}{2} \left( \frac{x - c}{s} \right)^2}
@@ -34,7 +34,7 @@ die Zählrate tendenziell höher, was auf eine höhere Anzahl von niederenergeti
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/underground_spectrum.pdf}
-  \caption{Untergrund}
+  \caption{\textgamma-Spektrum des Untergrundes}
   \label{img:underground:spectrum}
 \end{center}
 \end{figure}
@@ -46,7 +46,8 @@ somit untergrundbereinigte Messwerte $n$. Der Fehler auf diese wird mit der Gau�
 Im folgenden sind alle Spektren untergrundbereinigt.
 
 \subsection{Energieeichung des MCAs}
-\subsubsection{\na-Peaks}
+\subsubsection{Peaks von \na}
+\label{subsub:eval:na}
 Das gesamte Spektrum von \na\,ist in \autoref{img:na:spectrum} dargestellt. Da sich die Probe von \na\, von den anderen unterscheidet, konnten nicht die 
 gleichen Bedingungen wie bei der Untergrundmessung hergestellt werden. Der als Halterung und zur Abschirmung verwendete Bleiblock konnte nicht 
 benutzt werden. Deshalb ist trotz Bereinigung des Untergrundes noch ein Untergrund zu sehen. Vor allem die ansonsten vom Bleiblock abgeschirmte 
@@ -62,37 +63,99 @@ außerhalb von den für uns relevanten Bereichen liegen.
 Trotz des nichtverschwindenden Untergrundes lässt sich der 511\,keV-PEak gut erkennen. Des weiteren sind zwei weitere Peaks mit geringerer 
 Zählrate bei Kanal 3100 und 3500 zu erkennen. Ein Vergleich mit dem Spektrum des Untergrundes \autoref{img:underground:spectrum} identifiziert 
 den zweiten Peak als Folge des Untergrundes (und nicht vollständiger Abschirmung dessen). Damit kann der erste Peak \na\,zugeordnet werden.\\[\baselineskip]
-Die beiden Peaks von \na\, werden nun jeweils mit einer Gauß-Verteilung \\(\autoref{eq:gaus}), verziert mit einem linearen Untergrund, 
-gefittet, um den genauen Kanal des Maximums zu bestimmen.
+Die beiden Peaks von \na\, werden nun jeweils mit einer Gauß-Verteilung (Kapitel \ref{subsub:gaus}), verziert mit einem linearen Untergrund, 
+gefittet, um den genauen Kanal des Maximums zu bestimmen:
 \begin{equation}
-  y = a + b\cdot x + \gaus()
+  y = a_i + b_i \cdot x + \gaus(x, A_i, c_i, s_i), \qquad i = 1, 2
+\end{equation}
+Der Fit ist in \autoref{img:na:peaks} zu sehen. Man erhält folgende Werte für die Kanäle:
+\begin{equation}
+\begin{split}
+  \label{eq:na:channels}
+  c_1 &= 1302.4  \pm 1.7 \\
+  c_2 &= 3135  \pm 5 
+\end{split}
 \end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/na_peaks.pdf}
-  \caption{\textgamma-Spektrum von \chemel{Na}{22} mit 511\,keV- und 1274\,keV-Peak}
+  \caption{Fit der beiden Peaks (511\,keV und 1274\,keV) von \na\, mit jeweils einem linearen Untergrund und einer Gauß-Verteilung.}
   \label{img:na:peaks}
 \end{center}
 \end{figure}
 
-\subsubsection{\co-Peaks}
+\subsubsection{Peaks von \co}
+\label{subsub:eval:co}
+In \autoref{img:co:spectrum} ist das Spektrum von \co abgebildet. Man erkennt gut den Doppelpeak zwischen den Kanälen 2800 und 3400.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/co_spectrum.pdf}
+  \caption{\textgamma-Spektrum von \chemel{Co}{60}}
+  \label{img:co:spectrum}
+\end{center}
+\end{figure}
+Die beiden Peaks wurden mit folgender Funktion gefittet:
+\begin{equation}
+  y = a + b\cdot x + \gaus(x; A_1, c_1, s_1) + \gaus(x; A_2, c_2, s_2)
+\end{equation}
+Es wurde wieder ein linearer Untergrund angesetzt, jedoch wurden diesmal im Gegensatz zu den Peaks von \na\, beide Peaks gleichzeitig gefittet. 
+Dies wird mit der Nähe der beiden Peaks zueinander begründet, da sie sich womöglich überlappen und somit gegenseitig ihre Form beeinflussen.\\
+Der Fit ist in \autoref{img:co:peaks} angezeigt und liefert folgende Werte:
+\begin{equation}
+\begin{split}
+  \label{eq:co:channels}
+  c_1 &= 2897.3 \pm 0.5 \\
+  c_2 &= 3283.3 \pm 0.6
+\end{split}
+\end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/co_peaks.pdf}
-  \caption{\textgamma-Spektrum von \chemel{Co}{60}}
-  \label{img:co:peak}
+  \caption{Fit der beiden Peaks (1172\,keV und 1332\,keV) von \co\, mit einem linearen Untergrund und sich zwei überlagernden Gauß-Verteilungen.}
+  \label{img:co:peaks}
 \end{center}
 \end{figure}
 
-\subsubsection{\eu-Peaks}
+\subsubsection{Peaks von \eu}
+\label{subsub:eval:eu}
+Das \textgamma-Spektrum von \eu\, ist in \autoref{img:eu:spectrum} gezeigt. Die beiden relevante Peaks bei Kanal 350 und Kanal 900 wurden aufgrund 
+ihrer Position und Zählrate identifziert.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/eu_spectrum.pdf}
+  \caption{\textgamma-spektrum von \chemel{Eu}{152}}
+  \label{img:eu:spectrum}
+\end{center}
+\end{figure}
+Die beiden Peaks wurden separat mit der gleichen Funktion wie bei \na\,(Kapitel \ref{subsub:eval:na}) gefittet:
+\begin{equation}
+  y = a + b\cdot x + \gaus(x; A_1, c_1, s_1) + \gaus(x; A_2, c_2, s_2)
+\end{equation}
+Der Fit ist in \autoref{img:eu:peak} dargestellt und die Werte für die Peaks lauten:
+\begin{equation}
+\begin{split}
+  \label{eq:eu:peaks}
+  c_1 &= 340.41 \pm 0.07 \\
+  c_2 &= 899.33 \pm 0.14
+\end{split}
+\end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/eu_peaks.pdf}
-  \caption{\textgamma-spektrum von \chemel{Eu}{152}}
+  \caption{Fit der beiden Peaks (122\,keV und 344\,keV) von \eu\, mit jeweils einem linearen Untergrund und einer Gauß-Verteilung.}
   \label{img:eu:peak}
 \end{center}
 \end{figure}
 
+\subsubsection{Energieeichung}
+Die Werte für die Energieeichung aus Kapitel \ref{subsub:eval:na}, \ref{subsub:eval:co} und \ref{subsub:eval:eu} wurden in 
+\autoref{tab:energygauge} zusammengefasst.
+\input{energygauge}
+Es wurde zuerst ein linearer Fit durchgeführt, welcher in \autoref{img:gauge:lin} zu sehen ist.
+\begin{equation}
+  y = a + b\cdot x
+\end{equation}
+\label{subsub:energygauge}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/energy_gauge_lin.pdf}
@@ -100,7 +163,32 @@ gefittet, um den genauen Kanal des Maximums zu bestimmen.
   \label{img:gauge:lin}
 \end{center}
 \end{figure}
-
+Allerdings erkennt man, dass der Fit die Daten nicht besonders gut beschreibt. Deshalb wurde ein Polynom zweiten Grades angesetzt:
+\begin{equation}
+  y = a + b\cdot x + c\cdot x^2
+\end{equation}
+Der Fit ist in \autoref{img:gauge:quad} dargestellt. Der Fit beschreibt nun besser die gemessenen Daten. Dies erkennt man auch, 
+wenn man die $\chi^2$-Werte der beiden Graphen vergleicht. Das $\chi^2$ von dem linearen Fit beträgt ca. 2968, das des quadratischen Fits 
+nur noch 95. Da den beiden Fits die gleichen Daten vorliegen, kann man diese beiden Werte gegenüberstellen\footnote{Dies ist im Allgemeinen nicht so,
+da der $\chi^2$-Wert eines Fits von der y-Skalierung der gegebenen Daten abängt.}.
+Die Parameter ergeben sich zu:
+\begin{equation}
+\begin{split}
+  \label{eq:energygauge:params}
+  a &= -11.50 \pm 0.07 \\
+  b &= 0.39004 \pm 0.00017 \\
+  c &= (6.05 \pm 0.06) \cdot 10^{-6}
+\end{split}
+\end{equation}
+mit Korrelationen
+\begin{equation}
+\begin{split}
+  \label{eq:energygauge:corr}
+  \rho_{a, b} &= -0.93 \\
+  \rho_{a, c} &=  0.85 \\
+  \rho_{b, c} &= -0.95 \\
+\end{split}
+\end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/energy_gauge_quad.pdf}
@@ -108,6 +196,15 @@ gefittet, um den genauen Kanal des Maximums zu bestimmen.
   \label{img:gauge:quad}
 \end{center}
 \end{figure}
+Nun kann man einen Kanal $k$ in die entsprechende Energie umrechnen:
+\begin{equation}
+  E(k) = a + b \cdot k + c \cdot k^2
+\end{equation}
+Der Fehler berechnet sich mit dem Gauß'schen Fehlerfortpflanzungsgesetz unter Berücksichtigung der Korrelationen:
+\begin{equation}
+  s_E^2 = s_{k}^2 \cdot (b + 2 \cdot c \cdot k)^2 + 2 \cdot \rho_{a, b} \cdot s_{a} \cdot s_{b} \cdot k + 2 \cdot \rho_{a, c} \cdot s_{a} \cdot s_{c} \cdot k^2 +
+  2 \cdot \rho_{b, c} \cdot s_{b} \cdot s_{c} \cdot k^3 + s_{a}^2 + s_{b}^2 \cdot k^2 + s_{c}^2 \cdot k^4
+\end{equation}
 
 \subsection{\textgamma-Spektrum von \chemel{Th}{228}}
 \begin{figure}[H]

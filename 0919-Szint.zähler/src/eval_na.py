@@ -51,8 +51,8 @@ def evalNa():
     l.AddEntry(fit2.function, 'Fit des zweiten Peaks', 'l')
     l.AddEntry(0, 'y = a2 + b2*x + gaus(x; A2, c2, s2)', '')
     l.AddEntry(0, 'Peaks:', '')
-    l.AddEntry(0, 'c = %.2f #pm %.2f' % (fit1.params[3]['value'], fit1.params[3]['error']), '')
-    l.AddEntry(0, 'c = %.2f #pm %.2f' % (fit2.params[3]['value'], fit2.params[3]['error']), '')
+    l.AddEntry(0, 'c1 = %.2f #pm %.2f' % (fit1.params[3]['value'], fit1.params[3]['error']), '')
+    l.AddEntry(0, 'c2 = %.2f #pm %.2f' % (fit2.params[3]['value'], fit2.params[3]['error']), '')
     l.Draw()
 
     g.GetXaxis().SetRangeUser(1000, 3600)

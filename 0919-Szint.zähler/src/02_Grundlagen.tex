@@ -33,10 +33,10 @@ Das Positron kann in Materie für nur sehr kurze Zeit existieren und zerstrahlt 
 in zwei Photonen mit je 511\,keV Energie, die in einem Winkel von 180$^\circ$ emittiert werden.
 
 Die emittierten \textgamma-Photonen können auf verschiedene Arten mit Materie wechselwirken:
-Beim \emph{Photoeffekt} absorbieren gebundene Elektronen das Photon und verlassen mit hoher Geschwindigkeit das Atom.
+Beim \emph{Photoeffekt} absorbieren gebundene Elektronen das Photon und verlassen das ionisierte Atom.
 Beim \emph{Comptoneffekt} findet elastische Streuung von Photonen an freien Elektronen statt.
 Ein Teil der Photonenenergie wird so auf das Elektron übertragen.
-Eine weitere Möglichkeit ist die \emph{Paarbildung}, bei der im Feld eines Atomkerns aus einem energiereichen
+Eine weitere Möglichkeit der Wechselwirkung ist die \emph{Paarbildung}, bei der im Feld eines Atomkerns aus einem energiereichen
 Photon ein Elektron-Positron-Paar entsteht.
 
 
@@ -48,23 +48,26 @@ Die Anregungsenergie beträgt dabei wenige Elektronenvolt und die Zahl der anger
 ist (im Idealfall, bei vollständiger Absorption) proportional zur Energie der Strahlung.
 Um das sichtbare Licht, das emittiert wird, wenn die Elektronen in den Grundzustand zurückfallen,
 messen zu können, muss das Szintillatormaterial für das Licht dieser Wellenlänge transparent sein.\\
-Dies wird im NaI-Kristall durch eine Dotierung mit Thallium erreicht.
+Dies wird im \emph{NaI-Kristall} durch eine Dotierung mit Thallium erreicht.
 Die Störstellen, die dadurch im Gitter entstehen,
 erzeugen neue Energieniveaus zwischen Valenzband und Leitungsband und wirken als
 Rekombinationszentren, an denen ein Übergang angeregter Elektronen in den Grundzustand erfolgen kann.
-Ein Photon, das dabei emittiert wird, wird nur zu einer sehr geringen Wahrscheinlichkeit
+Ein Photon, das dabei emittiert wird, wird nur mit einer sehr geringen Wahrscheinlichkeit
 wieder absorbiert.\\
-Die Lebensdauer der angeregten Zustände bestimmt dabei die Zeitauflösung des Szintillators:
+Die Zeitauflösung des Szintillators wird durch die Lebensdauer der angeregten Zustände bestimmt.
 Bei dem anorganischen NaI-Kristall liegt sie im \textmu s-Bereich und ist damit deutlich
 höher als bei organischen Szintillatoren.
-Bei der Lichtausbeute und damit der möglichen Energieauflösung ist sind anorganische
-Szintillatoren allerdings besser.\\
-Bei dem Plastik-Szintillator wird die Transparenz durch Zugabe von Anthracen als Aktivatorsubstanz erreicht.
-Einfallende Strahlung regt Moleküle des Plasikmaterials an und diese Anregungsenergie wird auf die Anthracenmoleküle
+Die Lichtausbeute und damit die möglichen Energieauflösung ist bei anorganischen
+Szintillatoren allerdings höher.\\
+Bei dem organischen \emph{Plastik-Szintillator} wird die Transparenz durch Zugabe
+von Anthracen als Aktivatorsubstanz erreicht.
+Einfallende Strahlung regt Moleküle des Plasikmaterials an und diese Anregungsenergie wird
+dann auf die Anthracenmoleküle
 übertragen. Beim Übergang der Moleküle in den Grundzustand wird Strahlung emittiert,
 für die das Material transparent ist.\\
 Die Strahlung, die aus dem Szintillationszähler austritt,
-gelangt dann in einen Photomultiplier und wird dort in einen Strom proportional zur Intensität umgewandelt.
+gelangt in einen Photomultiplier und wird dort in einen Strom proportional zur Intensität
+des Lichts umgewandelt.
 
 \subsection{Photomultiplier}
 
@@ -72,6 +75,16 @@ gelangt dann in einen Photomultiplier und wird dort in einen Strom proportional 
 \begin{center}
   \includegraphics[width=\textwidth]{../img/photomultiplier.pdf}
   \caption[---]{Aufbau eines Photomultipliers zur Umwandlung von schwachen Lichtsignalen in Strompulse.}
-  \label{img:aufbau}
+  \label{img:photomultiplier}
 \end{center}
 \end{figure}
+
+Im Photomultiplier fallen Photonen auf eine Photokathode und erzeugen dort durch den Photoeffekt freie Elektronen.
+Diese Elektronen werden im elektrischen Feld zur ersten Dynode des
+Photomultipliers beschleunigt (\autoref{img:photomultiplier}).
+Die weiteren Dynoden sind so an einen Spannungsteiler (mehrere Widerstände in Reihe) angeschlossen,
+dass die jeweils nächste Dynode auf positiverem Potential liegt.
+Dadurch wird die Elektronenlawine, die von einem Photon verursacht wird, verstärkt:
+Ein Elektron, das auf eine Dynode trifft, schlägt dort mehrere Elektronen heraus.
+Am Ende des Photomultipliers entsteht so ein Strom-Ausgangssignal, dessen Stärke proportional
+zur Zahl der eingefallenen Photonen ist.

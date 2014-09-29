@@ -73,6 +73,48 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
     </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4066-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-1-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4066-7-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-1-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path4066-7-8" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -82,8 +124,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.05"
-     inkscape:cx="357.75742"
-     inkscape:cy="417.79931"
+     inkscape:cx="286.42854"
+     inkscape:cy="488.30854"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -109,7 +151,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -628,5 +670,37 @@
        d="m 357.5,431.86218 0,30"
        id="path6536"
        inkscape:connector-curvature="0" />
+    <g
+       transform="translate(147.50569,-289.01916)"
+       id="g3036">
+      <path
+         id="path3869"
+         title="t sin(5*t)"
+         d="m 138.9414,765.77737 c 0.91866,-0.82062 1.83733,-1.25517 2.756,-1.08902 0.91867,0.16614 1.83733,0.92847 2.756,1.90475 0.91867,0.97627 1.83734,2.12498 2.75601,2.87342 0.91867,0.74845 1.83734,1.06225 2.756,0.78713 0.91867,-0.27511 1.83734,-1.12985 2.75601,-2.13603 0.91867,-1.00618 1.83734,-2.12072 2.756,-2.7882 0.91867,-0.66749 1.83734,-0.85687 2.756,-0.476 0.91867,0.38087 1.83734,1.31799 2.75601,2.34227 0.91867,1.0243 1.83734,2.09159 2.756,2.67029 0.91867,0.5787 1.83734,0.64144 2.756,0.15929 0.91867,-0.48215 1.83734,-1.49067 2.75601,-2.52106"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:100;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:none"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccsscssssssc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow2Lend-1)"
+         d="M 180.57143,769.50504 z"
+         id="path6324"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       transform="matrix(-1,0,0,-1,403.78586,1250.0945)"
+       id="g3036-8">
+      <path
+         id="path3869-2"
+         title="t sin(5*t)"
+         d="m 138.9414,765.77737 c 0.91866,-0.82062 1.83733,-1.25517 2.756,-1.08902 0.91867,0.16614 1.83733,0.92847 2.756,1.90475 0.91867,0.97627 1.83734,2.12498 2.75601,2.87342 0.91867,0.74845 1.83734,1.06225 2.756,0.78713 0.91867,-0.27511 1.83734,-1.12985 2.75601,-2.13603 0.91867,-1.00618 1.83734,-2.12072 2.756,-2.7882 0.91867,-0.66749 1.83734,-0.85687 2.756,-0.476 0.91867,0.38087 1.83734,1.31799 2.75601,2.34227 0.91867,1.0243 1.83734,2.09159 2.756,2.67029 0.91867,0.5787 1.83734,0.64144 2.756,0.15929 0.91867,-0.48215 1.83734,-1.49067 2.75601,-2.52106"
+         style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:100;stroke-opacity:1;stroke-dasharray:none;marker-mid:none;marker-end:none"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccsscssssssc" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow2Lend-1)"
+         d="M 180.57143,769.50504 z"
+         id="path6324-4"
+         inkscape:connector-curvature="0" />
+    </g>
   </g>
 </svg>

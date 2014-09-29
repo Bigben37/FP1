@@ -17,6 +17,7 @@ def evalUnderground():
     c.SetLogy()
     g = data.makeGraph('g', 'Kanalnummer', 'Z#ddot{a}hlrate / (1/s)')
     prepareGraph(g)
+    g.GetXaxis().SetRangeUser(0, 8200)
     g.Draw('APX')
     
     c.Update()

@@ -48,7 +48,7 @@ def singlePeakFit(g, debug=False):
     return params
 
 
-def multiPeakFit(g, ufunc, uparams, params, xstart, xend):  # TODO TBI
+def multiPeakFit(g, ufunc, uparams, params, xstart, xend):
     """fits all peaks with one function
 
     Arguments:
@@ -80,7 +80,7 @@ def multiPeakFit(g, ufunc, uparams, params, xstart, xend):  # TODO TBI
     return fit
 
 
-def makeLegend(xmin, ymin, xmax, ymax, peaks):  # TODO TBI
+def makeLegend(xmin, ymin, xmax, ymax, peaks):
     l = TLegend(xmin, ymin, xmax, ymax)
     l.AddEntry('g', 'Messwerte', 'p')
     for peak in peaks:

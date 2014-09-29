@@ -98,7 +98,7 @@ class TxtFile(object):
             self.writeline(i + r'\hline')
             self.writeline(i + ' & '.join(thead) + r' \\ \hline')
             for row in data:
-                self.writeline(i + ' & '.join(format) % row + r' \\ \hline')
+                self.writeline(i + ' & '.join(format) % tuple(row) + r' \\ \hline')
             self.writeline('\\end{tabular}')
             self.writeline('\\end{center}')
             self.writeline('\\label{' + label + '}')

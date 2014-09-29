@@ -25,7 +25,7 @@ def evalAngles():
     
     #draw graph
     c = TCanvas('c', '', 1280, 720)
-    g = data.makeGraph()
+    g = data.makeGraph('g', 'Winkel #alpha / #circ', 'Counts N')
     g.SetMarkerStyle(1)
     g.Draw('AP')
     
@@ -49,6 +49,16 @@ def evalAngles():
     fit2.setParam(4, 'amplitude', 350)
     fit2.fit(g, 80, 280, '+')
     fit2.saveData('../calc/angles_convolution.txt', 'w')
+    
+    l = TLegend(0.65, 0.55, 0.85, 0.85)
+    l.AddEntry('g', 'Messwerte', 'p')
+    l.AddEntry(fit.function, 'Fit mit Gaussverteilung', 'l')
+    l.AddEntry(0, '#chi^2 / DoF = %.1f' % fit.getChisquareOverDoF(), '')
+    l.AddEntry(0, '#alpha_{0,g} = (%.1f #pm %.1f) #circ' % (fit.params[2]['value'], fit.params[2]['error']), '')
+    l.AddEntry(fit2.function, 'Fit mit Faltungsprodukt', 'l')
+    l.AddEntry(0, '#chi^2 / DoF = %.1f' % fit2.getChisquareOverDoF(), '')
+    l.AddEntry(0, '#alpha_{0,f} = (%.1f #pm %.1f) #circ' % (fit2.params[2]['value'], fit2.params[2]['error']), '')
+    l.Draw()
     
     #print to file
     c.Update()

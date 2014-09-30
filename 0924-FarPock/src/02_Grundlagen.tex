@@ -1,2 +1,47 @@
 \section{Physikalische Grundlagen}
-Einführung der wesentlichen physikalischen Begriffe und Herleitung der verwendeten Formeln.
+Die Gleichungen und Erklärungen dieses Kapitels beruhen auf \cite{herrmann}
+\subsection{Teil I: Pockels-Effekt}
+
+\subsubsection{Elektrooptischer Effekt}
+Die elektrische Flussdichte $D$ ändert sich, wenn man ein äußeres elektrisches Feld anlegt. Die Veränderung wird 
+durch den \emph{elektrooptischen Effekt} beschrieben:
+\begin{equation}
+\label{eq:eoeff}
+  D = a \cdot E + b \cdot E^2 + c \cdot E^3 + \ldots
+\end{equation}
+Die Dielektrizitätskonstante\footnote{Wie man hier sieht, ist die Dielektrizitätskonstante keine Konstante, der Name hat historische Ursachen} 
+$\epsilon$ lässt sich durch Differentiation von $D$ nach $E$ berechnen.
+\begin{equation}
+\label{eq:dielconst}
+  \epsilon = \frac{\difd D}{\difd E} = a + 2 \cdot b \cdot E + 3 \cdot c \cdot E^2 + \ldots
+\end{equation}
+Der lineare elektrooptische Effekt oder \emph{Pockels-Effekt} tritt bei Kristallen ohne Symmetriezentrum auf, was zur Folge hat, dass 
+der lineare Teil $2 \cdot b \cdot E$ nicht verschwindet. Der Einfluss von höheren Potenzen von $E$ ist sehr gering, da die Konstanten $b, c, \ldots$ sehr 
+kleine Werte annehmen, und kommt nur bei sehr hohen elektrischen Feldstärken zum tragen. 
+Für $b = 0$ und $c \neq 0$ spricht man vom \emph{Kerr-Effekt}.
+
+
+\subsubsection{Doppelbrechung in Kristallen}
+
+\subsubsection{Piezoelektrischer Effekt}
+
+\subsection{Teil II: Faraday-Effekt}
+\subsubsection{Faraday-Effekt}
+Der \emph{Faraday-Effekt} tritt auf, wenn linear polarisiertes Licht durch ein isotropes Medium, welches mit ein Magnetfeld in 
+Ausbreitungsrichtung des Lichts durchflossen ist, propagiert. Das Magnetfeld verursacht eine zirkulare Doppelbrechung, das heißt links- und 
+rechtsdrehende elektromagnetische Wellen haben einen unterschiedlichen Brechungsindex. \\
+Da linear polarisiertes Licht als Überlagerung von zwei, in entgegengesetzter Richtung zirkular polarisierten elektromagnetischen Wellen 
+beschrieben werden kann, eilt eine Welle der anderen voraus und das Licht, welches das Medium durchläuft, wird um einen Winkel $\alpha$ gedreht. 
+Die Stärke der Drehung hängt proportional von der magnetischen Feldstärke $H$ der Spule ab, welche das Magnetfeld erzeugt. 
+Dies bedeutet, dass bei Umkehrung des Spulenstroms, was einer Umpolung entspricht, das Licht in entgegengesetzte Richtung gedreht wird. 
+Die Drehung ist also nicht reversibel, spiegelt man das Licht und lässt es das Medium in anderer Richtung durchqueren, 
+so verdoppelt sich die Drehung\footnote{Im Gegensatz zu optisch aktiven Substanzen, die eine ausgezeichnete Drehrichtung haben 
+und die erste Drehung rückgängig machen}. Weiterhin hängt der Drehwinkel $\alpha$ proportional von der Länge $l$ des Mediums ab.
+Es gilt also:
+\begin{equation}
+\label{eq:faraday}
+  \alpha = V \cdot l \cdot H
+\end{equation}
+wobei $V$ eine Materialkonstante, auch \emph{Verdet-Konstante} genannt, ist.
+
+\subsubsection{Bestimmung der magnetischen Feldstärke einer langen Spule}

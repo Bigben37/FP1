@@ -4,7 +4,7 @@
 \newcommand{\exptitle}{Farady- und Pockelseffekt}       % long name of experiment 
 \newcommand{\exptitleshort}{FarPock} % short name of experiment
 \newcommand{\expdate}{24. und 25. September, 2014}           % date of experiment
-\newcommand{\exptutor}{Betreuer}
+\newcommand{\exptutor}{Florian Ki\ss}
 
 % PACKAGES + MODIFICATIONS
 \usepackage[ngerman]{babel} %standard language stuff
@@ -53,7 +53,10 @@
 
 \usepackage{pdfpages} % include pdf files
 
+\usepackage[nottoc,numbib]{tocbibind} % bibliography in TOC
+
 % NEW COMMANDS
+\newcommand{\difd}{\mathrm{d}}
 
 % DOCUMENT SETTINGS
 
@@ -94,11 +97,13 @@ Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
 \input{04_Durchfuerung}
 \input{05_Auswertung}
 
-%TODO add when finished
-%\appendix
-%\section{Anhang}
-%\subsection{Messprotokoll}
-%\includepdf[pages={-}]{../data/protokoll.pdf}
+\newpage
+\bibliographystyle{plain}
+\bibliography{refs}
 
+\appendix
+\section{Anhang}
+\subsection{Messprotokoll}
+\includepdf[pages={-}]{../data/protocol.pdf}
 
 \end{document}

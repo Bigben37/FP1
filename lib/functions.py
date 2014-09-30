@@ -4,6 +4,7 @@
 __author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
 
 import os
+import numpy as np
 
 
 def loadCSVToList(path, delimiter='\t'):
@@ -21,3 +22,15 @@ def loadCSVToList(path, delimiter='\t'):
             for line in f:
                 data.append(list(map(lambda x: float(x), line.strip().split(delimiter))))  # remove \n, split by delimiter, convert to float
         return data
+
+
+def avgerrors(values, errors):
+    """calculates weighted average with error
+
+    Arguments:
+    values -- list of values
+    errors -- list of errors
+    """
+    var = 1. / sum(map(lambda e: 1. / (e ** 2), errors))
+    avg = sum(map(lambda v, e: v / (e ** 2), values, errors)) * var
+    return avg, np.sqrt(var)

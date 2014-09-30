@@ -34,9 +34,9 @@ Unfortunatley we cant sync our `.pydevproject` configuration file, because PyDev
 
 ####directory structure
 Every experiment has its own directory. In this directory you may find following subdirectories:
--`bin`: binary file of protocol (not final version), excluded from commits
--`calc`: results of fits and raw data for further calculation
--`data`: measured data from experiment, also includes pictures made in the experiment
--`img`: rendered graphs from ROOT and self-made svg-graphics
--`src`: source dir for python and latex code
--`stuff`: mostly mathematica files for on-the-fly evaluation and error calculation
+- `bin`: binary file of protocol (not final version), excluded from commits
+- `calc`: results of fits and raw data for further calculation
+- `data`: measured data from experiment, also includes pictures made in the experiment
+- `img`: rendered graphs from ROOT and self-made svg-graphics
+- `src`: source dir for python and latex code
+- `stuff`: mostly mathematica files for on-the-fly evaluation and error calculation

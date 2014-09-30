@@ -7,7 +7,7 @@
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/pock_saege_winkel0.pdf}
-  \caption{Deformiertes Photodiodensignal (blau) bei Einstellung der Achse des Analysators in
+  \caption{Deformiertes Photodiodensignal (blau) bei Einstellung der Polarisationsachse des Analysators in
   Richtung höchster Transmission der Pockelszelle.}
   \label{img:pock_saege_winkel0}
 \end{center}
@@ -18,17 +18,6 @@ wie in der Versuchsanleitung beschrieben, so dass die Amplitude des Photodiodens
 Diese Einstellung ist zum Ablesen von Maximum und Minimum des Signals nicht geeignet.
 \autoref{img:pock_saege_winkel1}, \autoref{img:pock_saege_winkel2} und \autoref{img:pock_saege_winkel3}
 zeigen Messungen mit niedrigerer Amplitude, die für die Auswertung verwendet wurden.
-In \autoref{tab:minmax} sind die Positionen von Maximum und Minimum für die drei Messungen aufgeführt.
-Diese Positionen wurden durch Fits von Parabeln (mit den Fitparametern $a$, $b$ und $s$) an die Messdaten gewonnen:
-\begin{equation}
-  y = a \cdot (x-s)^2+b
-\end{equation}
-$s$ ist die Position des Minimums auf der x-Achse.\\
-Die Steigung der Sägezahnfunktion wird mit einem Steigungsdreieck abgeschätzt:
-Mit den Werten am Einsatzpunkt und am höchsten Punkt der Spannung erhält man folgende Steigung:
-\begin{equation}
-  m_s = \frac{U_2-U_1}{t_2-t_1} = 50 \,\frac{\text{V}}{\text{s}}
-\end{equation}
 
 \begin{figure}[H]
 \begin{center}
@@ -53,6 +42,75 @@ Mit den Werten am Einsatzpunkt und am höchsten Punkt der Spannung erhält man f
   \label{img:pock_saege_winkel3}
 \end{center}
 \end{figure}
+
+In \autoref{tab:minmax} sind die Positionen von Maximum und Minimum für die drei Messungen aufgeführt.
+Diese Positionen wurden durch Fits von Parabeln (mit den Fitparametern $a$, $b$ und $c$) an die Messdaten gewonnen:
+\begin{equation}
+  y = a \cdot (x-b)^2 + c
+\end{equation}
+Minimum und Maximum wurden hier mit separaten Parabeln gefittet,
+weil das Signal offensichtlich kein Sinus ist und ein sinusförmiger Fit keine gute Beschreibung liefert.
+Der Parameter $b$ ist die Position des Extremums auf der x-Achse, die für die weitere Auswertung relevant ist.\\
+Aus der Position des Maximums $b_{\text{max}}$ und der des Minimums $b_{\text{min}}$
+wurde die Differenz $\Delta b$ gebildet:
+\begin{equation}
+  \Delta b = b_{\text{max}} - b_{\text{min}} \ , \qquad s_{\Delta b} = \sqrt{s_{b_{\text{max}}}^2 + s_{b_{\text{min}}}^2}
+\end{equation}
+Auch die drei Werte für $\Delta b$ sind in \autoref{tab:minmax} aufgeführt.
+\begin{table}[H]
+\caption{Position von Maximum und Minimum auf der x-Achse und Positionsdifferenz für die
+drei Messungen.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+  \hline
+ Messung		& $b_{\text{min}}$ / s 	& $s_{b_{\text{min}}}$ / s 	& $b_{\text{max}}$ / s 	& $s_{b_{\text{max}}}$ / s 	& $\Delta b$ / s 	& $s_{\Delta b}$ / s \\ \hline  
+ 1 				& 0.017574      		& 0.000004     				& 0.023843   			& 0.000004        			& 0.006269   		& 0.000006       \\ \hline  
+ 2   		  	& 0.017608       		& 0.000004     				& 0.023910     			& 0.000004        			& 0.006302      	& 0.000005       \\ \hline  
+ 3 	    		& 0.017606       		& 0.000005     				& 0.023894    			& 0.000004       			& 0.006288    		& 0.000006      \\ \hline   
+ 
+\end{tabular}
+\end{center}
+\label{tab:minmax}
+\end{table}
+Im Experiment wurde die Amplitudenabhängigkeit der Messwerte untersucht.
+Es ist kein signifikanter Trend erkennbar; die Werte für $\Delta b$ stimmen im 3-\textsigma -Intervall
+überein.
+Deshalb erscheint es gerechtfertigt,
+den gewichteten Mittelwert $\overline{\Delta b}$ aus den drei Werten zu bilden. Man erhält
+\begin{equation}
+  \overline{\Delta b} = (0.006287 \pm 0.000003)\,\text{s}
+\end{equation}
+
+
+
+
+Die Steigung der Sägezahnfunktion wird mit einem Steigungsdreieck abgeschätzt,
+die Positionen der Ecken des Dreiecks befinden sich in \autoref{tab:steigungsdreieck}.
+\begin{table}[H]
+\caption{Messwerte zur Berechnung der Steigung der Sägezahnfunktion.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+  \hline
+   				& $U$ / V 	& $s_U$ / V & $t$ / s 	& $s_t$ / s \\ \hline  
+ Einsatzpunkt 	& -0.8      & 0.1     	& 0.0149   	& 0.0002       \\ \hline  
+ Maximum     	& 4.1      	& 0.1     	& 0.0291    & 0.0002       \\ \hline   
+ 
+\end{tabular}
+\end{center}
+\label{tab:steigungsdreieck}
+\end{table}
+Man erhält mit den Messwerten für die Steigung der Sägezahnfunktion $m_s$:
+\begin{equation}
+  m_s = \frac{U_M-U_E}{t_M-t_E} = 50 \,\frac{\text{V}}{\text{s}}
+\end{equation}
+Für den Fehler darauf folgt mit dem Gaußschen Fehlerfortpflanzungsgesetz
+\begin{equation}
+  s_{m_s}=1
+\end{equation}
+
+
+
+
 
 \subsubsection{Modulierte Gleichspannung}
 

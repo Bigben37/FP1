@@ -20,15 +20,19 @@ def main():
         if fitlist[i]:
             params.append(param)
             
+    print(params)
+    
+    with TxtFile('../calc/fitparams_parabolas.txt', 'w') as f:
+        for par in params:
+            f.writeline('\t', *map(lambda x: '%.6f\t%.6f' % x, par))
 
     difflist = []            
     for i in xrange(3):
         difflist.append((params[i][1][0]-params[i][0][0],np.sqrt(params[i][1][1]**2 + params[i][0][1]**2)))
     
-    print(difflist)
-    print(zip(*difflist))
+   
     av = avgerrors(*zip(*difflist))
-    print(av)
+
     
     with TxtFile('../calc/diff_minmax.txt', 'w') as f:
         for dif in difflist:
@@ -95,16 +99,17 @@ def eval(name,f):
         fit3.fit(g2, 0.0202, 0.0275, '+')
         #fit3.saveData('../calc/fit3.txt', 'w')
     
-        l = TLegend(0.635, 0.52, 0.87, 0.87)
-        l.AddEntry('g1', 'S#ddot{a}gezahnspannung', 'p')
+        l = TLegend(0.63, 0.48, 0.87, 0.87)
+        l.SetTextSize(0.027)
+        l.AddEntry('g1', 'Saegezahnspannung', 'p')
         #l.AddEntry(fit1.function, 'Fit mit y = a + b*x', 'l')
         #l.AddEntry(0, 'a = %.3f #pm %.3f' % (fit1.params[0]['value'], fit1.params[0]['error']), '')
         #l.AddEntry(0, 'b = %.1f #pm %.1f' % (fit1.params[1]['value'], fit1.params[1]['error']), '')
         l.AddEntry('g2', 'Signal der Photodiode', 'p')
-        l.AddEntry(fit2.function, 'Fit mit y = a1 * (x-s1)^2 + b1', 'l')
-        l.AddEntry(0, 's1 = %.6f #pm %.6f' % (fit2.params[1]['value'], fit2.params[1]['error']), '')
-        l.AddEntry(fit3.function, 'Fit mit y = a2 * (x-s2)^2 + b2', 'l')
-        l.AddEntry(0, 's2 = %.6f #pm %.6f' % (fit3.params[1]['value'], fit3.params[1]['error']), '')
+        l.AddEntry(fit2.function, 'Fit mit U = a_{1} * (t-b_{min})^{2} + c_{1}', 'l')
+        l.AddEntry(0, 'b_{min} = %.6f #pm %.6f' % (fit2.params[1]['value'], fit2.params[1]['error']), '')
+        l.AddEntry(fit3.function, 'Fit mit U = a_{2} * (t-b_{max})^{2} + c_{2}', 'l')
+        l.AddEntry(0, 'b_{max} = %.6f #pm %.6f' % (fit3.params[1]['value'], fit3.params[1]['error']), '')
         l.SetFillColor(0)
         l.Draw()
         
@@ -113,7 +118,8 @@ def eval(name,f):
         
     else:
         l = TLegend(0.635, 0.72, 0.85, 0.87)
-        l.AddEntry('g1', 'S#ddot{a}gezahnspannung', 'p')
+        l.SetTextSize(0.027)
+        l.AddEntry('g1', 'Saegezahnspannung', 'p')
         l.AddEntry('g2', 'Signal der Photodiode', 'p')
         l.SetFillColor(0)
         l.Draw()

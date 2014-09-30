@@ -57,3 +57,55 @@ Mit den Werten am Einsatzpunkt und am höchsten Punkt der Spannung erhält man f
 \subsubsection{Modulierte Gleichspannung}
 
 \subsection{Teil II: Faraday-Effekt}
+\subsubsection{Bestimmung der Verdet-Konstante}
+Für jede Spannung wurde vier mal ($N=4$) der entsprechende Winkel gemessen. Der Fehler einer Einzelmessung des Winkels wurde auf
+\begin{equation}
+  s_{\alpha_i} = 0.2^\circ
+\end{equation}  % TODO Fehler auf Strom
+geschätzt. Es wird zunächst der Mittelwert der Winkel gebildet:
+\begin{equation}
+  \alpha = \sum_{i=1}^{N} \alpha_i, \qquad s_{\alpha} = \frac{s_{\alpha_i}}{\sqrt{N}}
+\end{equation}
+Die Spannungen und gemittelten Winkel werden nun mit einer Geraden gefittet:
+\begin{equation}
+  \alpha(I) = a + b \cdot I
+\end{equation}
+Die Werte und der Fit sind in \autoref{img:faraday} dargestellt. Der Fit ergab folgende Werte:
+\begin{equation}
+\begin{split}
+  \label{eq:faraday:params}
+  a &= (-0.28 \pm 0.06)\,{}^\circ \\
+  b &= (2.5769 \pm 0.0199)\,\frac{{}^\circ}{\text{A}}
+\end{split}
+\end{equation}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/faraday.pdf}
+  \caption{Winkel $\alpha$ in Abhängigkeit des Stroms $I$ mit Fit einer Geraden.}
+  \label{img:faraday}
+\end{center}
+\end{figure}
+Mit \autoref{eq:verdet} wird nun die Verdet-Konstante $V$ berechnet:
+\begin{equation}
+  V = \frac{m}{2556}, \qquad s_V = \frac{s_m}{2556}
+\end{equation}
+\begin{equation}
+  V = (1.008 \pm 0.008) \cdot 10^{-3}\,\frac{{}^\circ}{\text{A}}
+\end{equation}
+Die Verdet-Konstante rechnet man folgendermaßen in $\frac{\text{min}}{\text{Oe}\cdot \text{cm}}$ um:
+\begin{equation}
+  1\,\frac{{}^\circ}{\text{A}} = \frac{60\cdot 79.58}{100}\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
+\end{equation}
+Es folgt für den berechneten Wert:
+\begin{equation}
+  V = (0.0481 \pm 0.0004)\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
+\end{equation}
+Der Hersteller gibt:
+\begin{equation}
+  V^{\text{Herst.}} = 0.05\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
+\end{equation}
+als Wert an. Der gemessene Wert stimmt innerhalb des $5-\sigma$-Intervalls mit 
+
+
+
+\subsubsection{Bestimmung von $\epsilon$}

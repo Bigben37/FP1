@@ -5,6 +5,7 @@
 - [information (2014)](http://portal.uni-freiburg.de/jakobs/Lehre/ss2014/fp2014-2)
 - [information (general)](http://portal.uni-freiburg.de/jakobs/Fortgeschrittenen-Praktikum)
 - [instructions](http://hacol13.physik.uni-freiburg.de/fp/)
+- [list of tutors](http://hacol13.physik.uni-freiburg.de/fp/fp2014-2/Assistenten.pdf)
 
 ####Schedule
 
@@ -31,3 +32,11 @@ You can import the existing project with Eclipse. You can check our configuratio
 #####Running Python scripts
 Unfortunatley we cant sync our `.pydevproject` configuration file, because PyDev saves absolute paths. You need to add the `lib` folder by yourself to the `PYTHONPATH` (for example add it to the `external libraries` list of the project).
 
+####directory structure
+Every experiment has its own directory. In this directory you may find following subdirectories:
+-`bin`: binary file of protocol (not final version), excluded from commits
+-`calc`: results of fits and raw data for further calculation
+-`data`: measured data from experiment, also includes pictures made in the experiment
+-`img`: rendered graphs from ROOT and self-made svg-graphics
+-`src`: source dir for python and latex code
+-`stuff`: mostly mathematica files for on-the-fly evaluation and error calculation

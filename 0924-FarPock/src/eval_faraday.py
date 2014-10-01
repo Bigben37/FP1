@@ -37,14 +37,19 @@ def evalFaraday():
     c.Update()
     c.Print('../img/faraday.pdf', 'pdf')
 
-    m = (fit.params[1]['value'], fit.params[1]['error'])
-    c = 2556
-    v = map(lambda x: x / c, m)  # verdet constant
+    b = (fit.params[1]['value'], fit.params[1]['error'])
+    c = 2554.85
+    N = 3600
+    v = map(lambda x: x / c, b)  # verdet constant
     oe = 60 * 79.58 / 100  # factor for min/(Oe*cm)
     voe = map(lambda x: x * oe, v)  # verdet in min/(Oe*cm)
+    vi = map(lambda x: x / N, b)  # ideal 
+    vioe = map(lambda x: x * oe, vi)
     with TxtFile('../calc/faraday_verdet.txt', 'w') as f:
         f.writeline('\t', *map(str, v))
         f.writeline('\t', *map(str, voe))
+        f.writeline('\t', *map(str, vi))
+        f.writeline('\t', *map(str, vioe))
 
 
 def main():

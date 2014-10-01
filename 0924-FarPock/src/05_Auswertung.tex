@@ -130,7 +130,7 @@ Man erhält dann für den Verstärkungsfaktor $A$
 \end{equation}
 und für seinen Fehler
 \begin{equation}
-  s_A=\sqrt{\frac{(U_0-U_1)^2 \left(s_{U_E}^2+s_{U_M}^2\right)+(U_E-U_M)^2 \left(s_{U_0}^2+s_{U_1}^2\right)}{(U_E-U_M)^4}}
+  s_A=\sqrt{\frac{(U_0-U_1)^2 \cdot \left(s_{U_E}^2+s_{U_M}^2\right)+(U_E-U_M)^2 \cdot \left(s_{U_0}^2+s_{U_1}^2\right)}{(U_E-U_M)^4}}
   =15
 \end{equation}
 Nun kann die Halbwellenspannung $U_{\lambda / 2}$ berechnet werden:
@@ -154,7 +154,7 @@ Im nächsten Abschnitt wird ein genaueres Messverfahren vorgestellt.
 
 \subsection{Teil II: Faraday-Effekt}
 \subsubsection{Bestimmung der Verdet-Konstante}
-Für jede Spannung wurde vier mal ($N=4$) der entsprechende Winkel gemessen. Der Fehler einer Einzelmessung des Winkels wurde auf
+Für jede Spannung $I$ wurde $N=4$ mal der entsprechende Winkel $\alpha_i$ gemessen. Der Fehler einer Einzelmessung des Winkels wurde auf
 \begin{equation}
   s_{\alpha_i} = 0.2^\circ
 \end{equation}  % TODO Fehler auf Strom
@@ -166,7 +166,7 @@ Die Spannungen und gemittelten Winkel werden nun mit einer Geraden gefittet:
 \begin{equation}
   \alpha(I) = a + b \cdot I
 \end{equation}
-Die Werte und der Fit sind in \autoref{img:faraday} dargestellt. Der Fit ergab folgende Werte:
+Die Werte und der Fit sind in \autoref{img:faraday} dargestellt. Die Kurvenanpassung ergab folgende Werte:
 \begin{equation}
 \begin{split}
   \label{eq:faraday:params}
@@ -183,25 +183,42 @@ Die Werte und der Fit sind in \autoref{img:faraday} dargestellt. Der Fit ergab f
 \end{figure}
 Mit \autoref{eq:verdet} wird nun die Verdet-Konstante $V$ berechnet:
 \begin{equation}
-  V = \frac{m}{2556}, \qquad s_V = \frac{s_m}{2556}
+  \label{eq:eval:verdet}
+  V = \frac{b}{2556}, \qquad s_V = \frac{s_b}{2556}
 \end{equation}
 \begin{equation}
-  V = (1.008 \pm 0.008) \cdot 10^{-3}\,\frac{{}^\circ}{\text{A}}
+  V = (1.009 \pm 0.008) \cdot 10^{-3}\,\frac{{}^\circ}{\text{A}}
 \end{equation}
+
+\paragraph{Vergleich mit der Herstellerangabe}
 Die Verdet-Konstante rechnet man folgendermaßen in $\frac{\text{min}}{\text{Oe}\cdot \text{cm}}$ um:
 \begin{equation}
   1\,\frac{{}^\circ}{\text{A}} = \frac{60\cdot 79.58}{100}\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
 \end{equation}
 Es folgt für den berechneten Wert:
 \begin{equation}
-  V = (0.0481 \pm 0.0004)\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
+  V = (0.0482 \pm 0.0004)\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
 \end{equation}
 Der Hersteller gibt:
 \begin{equation}
   V^{\text{Herst.}} = 0.05\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
 \end{equation}
-als Wert an. Der gemessene Wert stimmt innerhalb des $5-\sigma$-Intervalls mit 
+als Wert an. Der gemessene Wert stimmt innerhalb des $5-\sigma$-Intervalls mit der Herstellerangabe überein, vorausgesetzt dass diese keinen Fehler 
+besitzt. Betrachtet man die Rundung, so kann die Herstellerangabe zwischen $(0.045 \leq 0.05 < 0.054\bar{9})\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}$ liegen. 
+Mit diesem Fehler von $0.005\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}$  würden die beiden Werte innerhalb ihrer Fehler übereinstimmen.
 
-
-
+\paragraph{Vergleich mit einer idealen Zylinderspule}
+Hätte man anstelle einer realen Zylinderspule eine ideale Spule ($H^{\text{ideal}} = \frac{N \cdot I}{l}$) angenommen, 
+so berechnet sich der Drehwinkel nach \autoref{eq:faraday} mit:
+\begin{equation}
+  \label{eq:alpha:ideal}
+  \alpha = V \cdot N \cdot I \quad \Rightarrow b = V \cdot N \Leftrightarrow V = \frac{b}{N}
+\end{equation}
+Es ergibt sich nun äquivalent zu \autoref{eq:eval:verdet} eine Verdet-Konstante von:
+\begin{equation}
+  V^{\text{ideal}} = (0.716 \pm 0.006) \cdot 10^{-3}\,\frac{{}^\circ}{\text{A}} = (0.0342 \pm 0.0003)\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
+\end{equation}
+Sie weicht sehr weit von dem Wert der realen Spule und der Herstellerangabe ab, weshalb die Näherung einer idealen Spule nicht gerechtfertigt ist. \\
+Des Weiteren sieht man an \autoref{eq:alpha:ideal}, dass die in den Grundlagen (Kapitel \ref{subsub:alpha}) berechnete Konstante 
+$c = 2554.85$ eine effektive Windungsanzahl darstellt, die eine ideale Spule besitzen müsste, um das Licht um den gleichen Winkel zu drehen.
 \subsubsection{Bestimmung von $\epsilon$}

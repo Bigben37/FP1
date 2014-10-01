@@ -1,0 +1,128 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3618,        118]
+NotebookOptionsPosition[      3241,        100]
+NotebookOutlinePosition[      3574,        115]
+CellTagsIndexPosition[      3531,        112]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"H", "[", "z_", "]"}], ":=", " ", 
+  RowBox[{
+   FractionBox["\[CapitalNu]", 
+    RowBox[{"2", " ", "L", " ", 
+     RowBox[{"(", 
+      RowBox[{"ra", " ", "-", " ", "ri"}], ")"}]}]], 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"L", "-", "z"}], ")"}], 
+      RowBox[{"Log", "[", 
+       FractionBox[
+        RowBox[{"ra", "+", 
+         SqrtBox[
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"L", "-", "z"}], ")"}], "2"], "+", 
+           SuperscriptBox["ra", "2"]}]]}], 
+        RowBox[{"ri", "+", 
+         SqrtBox[
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{"L", "-", "z"}], ")"}], "2"], "+", 
+           SuperscriptBox["ri", "2"]}]]}]], "]"}]}], "+", 
+     RowBox[{"z", " ", 
+      RowBox[{"Log", "[", 
+       FractionBox[
+        RowBox[{"ra", "+", 
+         SqrtBox[
+          RowBox[{
+           SuperscriptBox["z", "2"], "+", 
+           SuperscriptBox["ra", "2"]}]]}], 
+        RowBox[{"ri", "+", 
+         SqrtBox[
+          RowBox[{
+           SuperscriptBox["z", "2"], "+", 
+           SuperscriptBox["ri", "2"]}]]}]], "]"}]}]}], ")"}]}]}]], "Input",
+ CellChangeTimes->{{3.621158672438798*^9, 3.62115872820229*^9}, {
+  3.621159495311364*^9, 3.621159495838128*^9}, {3.6211595606157217`*^9, 
+  3.621159677121957*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"\[CapitalNu]", " ", ":=", " ", "3600"}], "\[IndentingNewLine]", 
+ RowBox[{"l", " ", ":=", " ", "150"}], "\[IndentingNewLine]", 
+ RowBox[{"L", " ", ":=", "175"}], "\[IndentingNewLine]", 
+ RowBox[{"ri", ":=", "10"}], "\[IndentingNewLine]", 
+ RowBox[{"ra", ":=", "75"}]}], "Input",
+ CellChangeTimes->{{3.6211592364847383`*^9, 3.621159265882369*^9}, {
+  3.621159309128442*^9, 3.621159375643992*^9}, {3.621159550815044*^9, 
+  3.6211595547585697`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{"H", "[", "z", "]"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"z", ",", " ", 
+      FractionBox[
+       RowBox[{"L", "-", "l"}], "2"], ",", 
+      FractionBox[
+       RowBox[{"L", "+", "l"}], "2"]}], "}"}]}], " ", "]"}], "//", 
+  "N"}]], "Input",
+ CellChangeTimes->{{3.6211593861032543`*^9, 3.621159451313065*^9}, 
+   3.62115972041669*^9, {3.621159751374398*^9, 3.6211597527675877`*^9}}],
+
+Cell[BoxData["2554.8479138208104`"], "Output",
+ CellChangeTimes->{{3.621159438527464*^9, 3.6211594519946413`*^9}, 
+   3.621159498676524*^9, {3.62115960808812*^9, 3.621159621370268*^9}, 
+   3.621159680079719*^9, {3.621159743122232*^9, 3.621159768303685*^9}, {
+   3.62115987686411*^9, 3.621159896397132*^9}}]
+}, Open  ]]
+},
+WindowSize->{1366, 719},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Linux x86 (64-bit) (June 27, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1393, 44, 85, "Input"],
+Cell[1954, 66, 471, 8, 121, "Input"],
+Cell[CellGroupData[{
+Cell[2450, 78, 466, 13, 56, "Input"],
+Cell[2919, 93, 306, 4, 32, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

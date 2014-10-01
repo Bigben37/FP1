@@ -20,11 +20,4 @@
 		<nature>net.sourceforge.texlipse.builder.TexlipseNature</nature>
 		<nature>org.python.pydev.pythonNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/refs.bib</name>
-			<type>1</type>
-			<location>C:/fpgithub/0924-FarPock/src/refs.bib</location>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -8,7 +8,7 @@
 \begin{center}
   \includegraphics[width=15cm]{../img/pock_saege_winkel0.pdf}
   \caption{Deformiertes Photodiodensignal (blau) bei Einstellung der Polarisationsachse des Analysators in
-  Richtung höchster Transmission der Pockelszelle.}
+  Richtung höchster Transmission der Pockelszelle. An der Zelle liegt ein Sägezahnsignal (rot) an.}
   \label{img:pock_saege_winkel0}
 \end{center}
 \end{figure}
@@ -22,7 +22,8 @@ zeigen Messungen mit niedrigerer Amplitude, die für die Auswertung verwendet wu
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/pock_saege_winkel1.pdf}
-  \caption{capt.}
+  \caption{1. Messung der Transmission durch den Analysator nach der Pockelszelle mit höchster Signalamplitude
+  an der Photodiode (blau). An der Zelle liegt ein Sägezahnsignal (rot) an.}
   \label{img:pock_saege_winkel1}
 \end{center}
 \end{figure}
@@ -30,7 +31,8 @@ zeigen Messungen mit niedrigerer Amplitude, die für die Auswertung verwendet wu
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/pock_saege_winkel2.pdf}
-  \caption{capt.}
+  \caption{2. Messung der Transmission durch den Analysator nach der Pockelszelle mit mittlerer Signalamplitude
+  an der Photodiode (blau). An der Zelle liegt ein Sägezahnsignal (rot) an.}
   \label{img:pock_saege_winkel2}
 \end{center}
 \end{figure}
@@ -38,15 +40,16 @@ zeigen Messungen mit niedrigerer Amplitude, die für die Auswertung verwendet wu
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=15cm]{../img/pock_saege_winkel3.pdf}
-  \caption{capt.}
+  \caption{3. Messung der Transmission durch den Analysator nach der Pockelszelle mit geringster Signalamplitude
+  an der Photodiode (blau). An der Zelle liegt ein Sägezahnsignal (rot) an.}
   \label{img:pock_saege_winkel3}
 \end{center}
 \end{figure}
 
-In \autoref{tab:minmax} sind die Positionen von Maximum und Minimum für die drei Messungen aufgeführt.
+In \autoref{tab:minmax} sind die Positionen von Maximum und Minimum für die drei verschiedenen Messungen aufgeführt.
 Diese Positionen wurden durch Fits von Parabeln (mit den Fitparametern $a$, $b$ und $c$) an die Messdaten gewonnen:
 \begin{equation}
-  y = a \cdot (x-b)^2 + c
+  U = a \cdot (t-b)^2 + c
 \end{equation}
 Minimum und Maximum wurden hier mit separaten Parabeln gefittet,
 weil das Signal offensichtlich kein Sinus ist und ein sinusförmiger Fit keine gute Beschreibung liefert.
@@ -74,18 +77,18 @@ drei Messungen.}
 \end{table}
 Im Experiment wurde die Amplitudenabhängigkeit der Messwerte untersucht.
 Es ist kein signifikanter Trend erkennbar; die Werte für $\Delta b$ stimmen im 3-\textsigma -Intervall
-überein.
+überein. Dies entspricht unserer Erwartung, da es keinen Grund für eine Amplitudenabhängigkeit
+der Position der Extrema gibt.
 Deshalb erscheint es gerechtfertigt,
 den gewichteten Mittelwert $\overline{\Delta b}$ aus den drei Werten zu bilden. Man erhält
 \begin{equation}
   \overline{\Delta b} = (0.006287 \pm 0.000003)\,\text{s}
 \end{equation}
-
-
-
-
-Die Steigung der Sägezahnfunktion wird mit einem Steigungsdreieck abgeschätzt,
-die Positionen der Ecken des Dreiecks befinden sich in \autoref{tab:steigungsdreieck}.
+\\[\baselineskip]
+Die Steigung der Sägezahnfunktion (rote Kurve auf den Abbildungen) wird mit einem Steigungsdreieck abgeschätzt.
+Die Positionen der Ecken des Dreiecks
+(Spannung am Einsatzpunkt $U_E$, Spannung am Maximum $U_M$, Einsatzzeitpunkt $t_E$ und Maximumszeitpunkt $t_M$)
+befinden sich in \autoref{tab:steigungsdreieck}.
 \begin{table}[H]
 \caption{Messwerte zur Berechnung der Steigung der Sägezahnfunktion.}
 \begin{center}
@@ -101,15 +104,50 @@ die Positionen der Ecken des Dreiecks befinden sich in \autoref{tab:steigungsdre
 \end{table}
 Man erhält mit den Messwerten für die Steigung der Sägezahnfunktion $m_s$:
 \begin{equation}
-  m_s = \frac{U_M-U_E}{t_M-t_E} = 50 \,\frac{\text{V}}{\text{s}}
+  m_s = \frac{U_M-U_E}{t_M-t_E} = 345 \,\frac{\text{V}}{\text{s}}
 \end{equation}
 Für den Fehler darauf folgt mit dem Gaußschen Fehlerfortpflanzungsgesetz
 \begin{equation}
-  s_{m_s}=1
+  s_{m_s}=\sqrt{\frac{(t_E-t_M)^2 \left(s_{U_E}^2+s_{U_M}^2\right)+(U_E-U_M)^2 \left(s_{t_E}^2+s_{t_M}^2\right)}{(t_E-t_M)^4}}
+  =12\,\frac{\text{V}}{\text{s}}
 \end{equation}
-
-
-
+Die Steigung der Spannung, die an der Pockelszelle anliegt, ist allerdings noch ungefähr um den Faktor 100 höher,
+da das Oszilloskop über einen Spannungsteiler mit der Pockelszelle verbunden ist.
+Der genaue Dämpfungsfaktor der Schaltung ist aber nicht bekannt und kann nur grob abgeschätzt werden.\\
+Wir gehen davon aus, dass während des Sägezahnimpulses
+die Spannung an der Zelle von $U_0$ = 0\,V auf $U_1$ = 500\,V steigt,
+so wie es im Aufbau vorgesehen ist.
+Da wir diese Annahme aber nicht überprüfen können,
+die Sägezahnspannung eine leichte Drift zeigt, wo sie konstant 0 sein sollte
+und außerdem das nicht-sinusförmige
+Signal an der Fotodiode dafür spricht, dass der Aufbau nicht optimal arbeitet
+(es ist zum Beispiel an den Einfluss von Kapazitäten zu denken,
+die das Sägezahnsignal in der Zelle verformen können),
+nehmen wir auf beide Werte einen hohen Fehler von $s_{U_{0,1}}$ = 50\,V an.
+Man erhält dann für den Verstärkungsfaktor $A$
+\begin{equation}
+  A=\frac{U_1-U_0}{U_M-U_E}=102
+\end{equation}
+und für seinen Fehler
+\begin{equation}
+  s_A=\sqrt{\frac{(U_0-U_1)^2 \left(s_{U_E}^2+s_{U_M}^2\right)+(U_E-U_M)^2 \left(s_{U_0}^2+s_{U_1}^2\right)}{(U_E-U_M)^4}}
+  =15
+\end{equation}
+Nun kann die Halbwellenspannung $U_{\lambda / 2}$ berechnet werden:
+\begin{equation}
+  U_{\lambda / 2}  = \overline{\Delta b} \cdot m_s \cdot A = 221\,\text{V}
+\end{equation}
+Für den Fehler $s_{U_{\lambda / 2}}$ gilt
+\begin{equation}
+  s_{U_{\lambda / 2}} = A \cdot \sqrt{\left(\frac{s_{\overline{\Delta b}}}{\overline{\Delta b}}\right)^2+\left(\frac{s_{m_s}}{m_s}\right)^2+\left(\frac{s_{A}}{A_{\,}}\right)^2}
+  = 33 \,\text{V}
+\end{equation}
+Aufgrund des ungenauen Messverfahrens hat das Ergebnis für die Halbwellenspannung
+\begin{equation}
+  U_{\lambda / 2}  = (22 \pm 3) \cdot 10^1\,\text{V}
+\end{equation}
+einen relativ großen Fehler.
+Im nächsten Abschnitt wird ein genaueres Messverfahren vorgestellt.
 
 
 \subsubsection{Modulierte Gleichspannung}

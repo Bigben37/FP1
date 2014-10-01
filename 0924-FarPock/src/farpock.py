@@ -49,3 +49,14 @@ class FaraData(DataErrors):
                     y = y + 180
                 ye = 0.2 / np.sqrt(len(data[1:]))
                 self.addPoint(x, y, xe, ye)
+
+
+def calcr41(u, su):
+    la = 632.8e-9
+    d = 2.4e-3
+    l = 20e-3
+    n1 = 1.522
+    n3 = 1.477
+    r41 = la * d / (4 * l * u) * np.sqrt(0.5 * (1. / (n1 ** 2)) + 1. / (n3 ** 2)) ** 3
+    sr41 = r41 * su / u
+    return r41, sr41

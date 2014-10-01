@@ -204,7 +204,7 @@ Der Hersteller gibt:
   V^{\text{Herst.}} = 0.05\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}
 \end{equation}
 als Wert an. Der gemessene Wert stimmt innerhalb des $5-\sigma$-Intervalls mit der Herstellerangabe überein, vorausgesetzt dass diese keinen Fehler 
-besitzt. Betrachtet man die Rundung, so kann die Herstellerangabe zwischen $(0.045 \leq 0.05 < 0.054\bar{9})\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}$ liegen. 
+besitzt. Betrachtet man die Rundung, so kann die Herstellerangabe zwischen $(0.045 \leq 0.05 < 0.055)\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}$ liegen. 
 Mit diesem Fehler von $0.005\,\frac{\text{min}}{\text{Oe}\cdot \text{cm}}$  würden die beiden Werte innerhalb ihrer Fehler übereinstimmen.
 
 \paragraph{Vergleich mit einer idealen Zylinderspule}
@@ -221,4 +221,19 @@ Es ergibt sich nun äquivalent zu \autoref{eq:eval:verdet} eine Verdet-Konstante
 Sie weicht sehr weit von dem Wert der realen Spule und der Herstellerangabe ab, weshalb die Näherung einer idealen Spule nicht gerechtfertigt ist. \\
 Des Weiteren sieht man an \autoref{eq:alpha:ideal}, dass die in den Grundlagen (Kapitel \ref{subsub:alpha}) berechnete Konstante 
 $c = 2554.85$ eine effektive Windungsanzahl darstellt, die eine ideale Spule besitzen müsste, um das Licht um den gleichen Winkel zu drehen.
-\subsubsection{Bestimmung von $\epsilon$}
+\subsubsection{Bestimmung von $2\epsilon$}
+Der Winkel $\alpha$ der Stellungen "`innen maximal dunkel"' ($\alpha_i$) und "`außen maximal dunkel"' ($\alpha_a$) wurde 
+jeweils $N = 4$ mal gemessen. Der Fehler einer Einzelmessung wurde auf $s_{\alpha_i} = 2^\circ$ geschätzt. 
+Es wird der Mittelwert gebildet
+\begin{equation}
+  \alpha = \frac{1}{N} \sum_{i=1}^{N} \alpha_i, \qquad s_{\alpha} = \frac{s_{\alpha_i}}{\sqrt{N}}
+\end{equation}
+und die Differenz der beiden Winkel gebildet:\footnote{Die Fehler der beiden Winkel sind gleich ($s_{\alpha_a} = s_{\alpha_b}$), weil hier der 
+Messfehler und nicht die Standardabweichung der Messwerte benutzt wurde, da die Standardabweichungen mit dem Fehler $s_\alpha$ übereinstimmen.}
+\begin{equation}
+  2 \epsilon = \alpha_a - \alpha_i, \qquad s_{2\epsilon} = \sqrt{s_{\alpha_i}^2 + s_{\alpha_a}^2} = \sqrt{2} s_\alpha
+\end{equation}
+Man erhält für den Winkel $2\epsilon$:
+\begin{equation}
+  2\epsilon = (11.1 \pm 1.4)^\circ
+\end{equation}

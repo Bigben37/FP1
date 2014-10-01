@@ -463,7 +463,7 @@ class DataErrors(GeneralData):
                 ys = self.getY()
                 yse = self.getEY()
                 yo = other.getY()
-                yoe = other.getYE()
+                yoe = other.getEY()
                 for i in range(self.getLength()):
                     y.append(ys[i] + yo[i])
                     yerror.append(np.sqrt((yse[i]) ** 2 + (yoe[i]) ** 2))

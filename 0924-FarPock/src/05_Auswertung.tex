@@ -146,12 +146,44 @@ Aufgrund des ungenauen Messverfahrens hat das Ergebnis für die Halbwellenspannu
 \begin{equation}
   U_{\lambda / 2}  = (22 \pm 3) \cdot 10^1\,\text{V}
 \end{equation}
-einen relativ großen Fehler. %TODO r41 bestimmen
+einen relativ großen Fehler. \\
+Der \emph{elektrooptische Koeffizient} $r_41$ lässt sich nun mit \autoref{eq:r41} bestimmen:
+\begin{equation}
+  r_{41} = (25 \pm 4)\, \frac{\text{pm}}{\text{V}}
+\end{equation}
+Der Herstellerwert bei $21^\circ\,$C 
+\begin{equation}
+  r_{41}^{\text{Herst.}} = 23.4 \, \frac{\text{pm}}{\text{V}}
+\end{equation} 
+liegt innerhalb des $1$-$\sigma$-Intervalls unseres Messwerts, was jedoch auf den großen Fehler zurückzuführen ist.\\
 Im nächsten Abschnitt wird ein genaueres Messverfahren vorgestellt.
-\\ TODO: elektrooptischer Koeffizient $r_{41}$ bestimmen.
-
 \subsubsection{Modulierte Gleichspannung}
-
+Von jedem Spannungswertepaar wird die Differenz berechnet. 
+Der Fehler auf eine Einzelmessung beträgt $s_U = 1$\,V.\footnote{Geschätzter Ablese- / Einstellfehler.}
+\begin{equation}
+  U = U_{\text{pos}} - U_{\text{neg}}, \qquad s_U = \sqrt{2} \cdot s_U
+\end{equation}
+Es wird dann über alle Spannungen (Anzahl $N$) gemittelt.
+\begin{equation}
+  \bar{U} = \frac{1}{N} \sum_{i=1}^{N} U_i, \qquad s_{\bar{U}} = \frac{s_U}{\sqrt{N}}
+\end{equation}
+Mit der Spannung $\bar{U}$ als Halbwellenspannung und \autoref{eq:r41} wird nun der \emph{elektrooptische Koeffizient} für beide Frequenzen bestimmt:
+\begin{equation}
+  \begin{split}
+    r_{41,\, 1\,\text{kHz}}  &= (22.54 \pm 0.05) \, \frac{\text{pm}}{\text{V}} \\
+    r_{41,\, 10\,\text{kHz}} &= (22.50 \pm 0.05) \, \frac{\text{pm}}{\text{V}} 
+  \end{split}
+\end{equation}
+Wie erwartet, ist der \emph{elektrooptische Koeffizient} nicht von der Frequenz der verwendeten Spannung abhängig. Aus den zwei Werten wird 
+nun noch ein gewichteter Mittelwert gebildet\footnote{Es wird hier mit den genauen Werten gerechnet, nicht den gerundeten.}:
+\begin{equation}
+  r_{41} = (22.52 \pm 0.04) \, \frac{\text{pm}}{\text{V}}
+\end{equation}
+Dieser Wert ist nun sehr viel genauer als der mit der Sägezahnmethode bestimmte Wert und stimmt nicht mehr mit dem Wert des Herstellers überein.
+\begin{equation}
+  r_{41}^{\text{Herst.}} = 23.4 \, \frac{\text{pm}}{\text{V}}
+\end{equation}
+Dies liegt daran, dass der \emph{elektrooptische Koeffizient} temperaturabhängig ist.
 \subsection{Teil II: Faraday-Effekt}
 \subsubsection{Bestimmung der Verdet-Konstante}
 Für jede Spannung $I$ wurde $N=4$ mal der entsprechende Winkel $\alpha_i$ gemessen. Der Fehler einer Einzelmessung des Winkels wurde auf
@@ -162,6 +194,7 @@ geschätzt. Es wird zunächst der Mittelwert der Winkel gebildet:
 \begin{equation}
   \alpha = \frac{1}{N} \sum_{i=1}^{N} \alpha_i, \qquad s_{\alpha} = \frac{s_{\alpha_i}}{\sqrt{N}}
 \end{equation}
+Der Fehler auf den Strom wurde auf $s_I = 0.1$\,A geschätzt.\\
 Die Spannungen und gemittelten Winkel werden nun mit einer Geraden gefittet:
 \begin{equation}
   \alpha(I) = a + b \cdot I

@@ -1,15 +1,15 @@
 \section{Physikalische Grundlagen}
-Die Gleichungen und Erklärungen dieses Kapitels beruhen auf \cite{herrmann}
+Die Gleichungen und Erklärungen dieses Kapitels beruhen auf \cite{herrmann}.
 \subsection{Teil I: Pockels-Effekt}
 
 \subsubsection{Elektrooptischer Effekt}
-Die elektrische Flussdichte $D$ ändert sich, wenn man ein äußeres elektrisches Feld anlegt. Die Veränderung wird 
-durch den \emph{elektrooptischen Effekt} beschrieben:
+Die elektrische Flussdichte $D$ ändert sich, wenn man ein äußeres elektrisches Feld anlegt. Diese Veränderung wird 
+\emph{elektrooptischer Effekt} genannt und durch folgende Formel beschrieben:
 \begin{equation}
 \label{eq:eoeff}
   D = a \cdot E + b \cdot E^2 + c \cdot E^3 + \ldots
 \end{equation}
-Die Dielektrizitätskonstante\footnote{Wie man hier sieht, ist die Dielektrizitätskonstante keine Konstante, der Name hat historische Ursachen.} 
+Die Dielektrizitätskonstante\footnote{Wie man hier sieht, ist die Dielektrizitätskonstante keine Konstante, der Name hat historischen Ursprung.} 
 $\epsilon$ lässt sich durch Differentiation von $D$ nach $E$ berechnen.
 \begin{equation}
 \label{eq:dielconst}
@@ -21,12 +21,84 @@ $b, c, \ldots$ sehr kleine Werte annehmen, und kommt nur bei sehr hohen elektris
 Für $b = 0$ und $c \neq 0$ spricht man vom \emph{Kerr-Effekt}. \\
 Da der Brechungsindex $n$ von der Dielektrizitätskonstante abhängt, wirkt sich der Po"-ckels-Effekt auf die Brecheigenschaften des Kristalls aus.
 \begin{equation}
-  n = \sqrt{\epsilon}
+  n = \sqrt{\epsilon \mu}
 \end{equation}
 
 \subsubsection{Doppelbrechung in Kristallen}
+In einem optisch isotropen Medium ist die Lichtausbreitung unabhängig von der Ausbreitungsrichtung und Polarisation des Lichtes. Dies gilt bei 
+einem optisch anisotropen Medium nicht mehr, man spricht von \emph{Doppelbrechung}. Bei optisch anisotropen Medien unterscheidet man zwischen 
+optisch einachsigen und optisch zweiachsigen. Ja nach Typ gibt es eine oder zwei ausgezeichnete Richtungen, in denen ein Lichtstrahl für alle 
+Polarisationen die gleiche Ausbreitungsgeschwindigkeit besitzt. \\
+Man führt die Bezeichnung ordentlicher und außerordentlicher Strahl ein. Der ordentliche Strahl ist die Komponente des $E$-Feldes, die senkrecht 
+auf dem Hauptschnitt (Ebene, die durch den $\vec{k}$-Vektor und die optische Achse des Kristalls aufgespannt wird) steht. Der außerordentliche 
+Strahl liegt in der Ebene des Hauptschnitts.\\
+Der Formalismus des Brechungsindex-Ellipsoids ist eine einfache Möglichkeit zur Beschreibung der Doppelbrechung. 
+\begin{equation}
+  \frac{x_1^2}{n_1^2 } +\frac{x_2^2}{n_2^2 } +\frac{x_3^2}{n_3^2 } = 1 
+\end{equation}
+Die Koordinaten $x_1, x_2, x_3$ spannen ein kartesisches Koordinatensystem auf. Mindestens eine Achse muss parallel zu einer kristallographischen 
+Achse des Kristalls liegen. Die Brechungsindizes $n_1, n_2, n_3$ gelten für Licht, das sich parallel zu den entsprechenden Achsen ausbreitet. 
+Kennt man das Brechungsindex-Ellipsoid, so kann man die unterschiedlichen Ausbreitungsrichtungen mit 
+$v=\frac{c}{n}$ bestimmen. Die Form des Brechungsindex-Ellipsoid eines optisch isotropen Mediums ist eine Kugel, es verformt sich zu einer 
+Ellipse bei einem anisotropen Medium.
 
-\subsubsection{ADP-Pockelszelle}
+\subsubsection{Konfiguration der Pockelszelle}
+\paragraph{Bestimmung der Brechungsindizes}
+In diesem Versuch wird eine Pockelszelle, die aus vier ADP\footnote{Ammoniumdihydrogenphosphat}-Kristallen mit einem $45^\circ Y$-Cut besteht, 
+verwendet. Legt man an eine normale ADP-Zelle einen Spannung $E_1$ entlang der $x_1$ Achse an, so lautet das Indexellipsoid nach \cite{manual}:
+\begin{equation}
+  \frac{x_1^2}{n_1^2} + 2 \cdot r_{41} \cdot E_1 \cdot x_3 + \frac{x_2^2}{n_1^2} + \frac{x_3^2}{n_3^2} = 1
+\end{equation}
+mit $r_{41}$ als \emph{elektrooptischer Koeffizient}. Man erkennt, dass der Kristall optisch einachsig ist und die $x_3$-Achse die optische Achse ist. \\
+Der $45^\circ Y$-Cut wird mit Hilfe einer Koordinatentransformation berücksichtigt:
+\begin{equation}
+  x_2 = \frac{1}{\sqrt{2}} \left( x_2' + x_3' \right), \qquad x_3 = \frac{1}{\sqrt{2}}(x_2' - x_3')
+\end{equation}
+Daraus folgt nach \cite{manual} für den Brechungsindex der $x_2'$-Achse:
+\begin{equation}
+  \label{eq:refindex:x2new}
+  n_{x_2'} \approx n_x + \frac{1}{2} \cdot r_{41} \cdot E_1 \cdot n_x^3
+\end{equation}
+mit
+\begin{equation}
+  \label{eq:nxdef}
+  \frac{1}{n_x^2} = \frac{1}{2} \left( \frac{1}{n_2^2} + \frac{1}{n_3^2} \right)
+\end{equation}
+\paragraph{Bestimmung der Phasenverschiebung}
+Die ortsabhängige Amplitude des sich im Kristall ausbreitenden Lichts lässt sich mit
+\begin{equation}
+  A(x) = A_0 \cdot e^{ikx} = A_0 \cdot e^{i \varphi(x)}
+\end{equation}
+beschreiben. Mit der \emph{Dispersionsrelation} $\omega = v\cdot k$ und den Beziehungen $\omega = 2 \pi f$, $c = f \cdot \lambda$ 
+und $v = \frac{c}{n}$ folgt für die Phase $\varphi$ der Welle.
+\begin{equation}
+  \varphi(x) = \frac{2 \pi}{\lambda} \cdot n \cdot x
+\end{equation}
+Es ergibt sich eine Phasendifferenz $\Delta \varphi$ in einem Kristall der Länge $l$ von
+\begin{equation}
+  \Delta \varphi = \frac{2 \pi}{\lambda} \cdot l \cdot \left( n_1 - n_{x_2'} \right) 
+\end{equation}
+Durch die Lage der optischen Achse laufen jetzt jedoch ordentlicher und außerordentlicher Strahl auseinander. Sie werden mit einem zweiten, 
+um $180^\circ$ gedrehten ADP-Kristall wieder zusammengeführt. Die Phasendifferenz verdoppelt sich.
+\begin{equation}
+  \Delta \varphi = \frac{4 \pi}{\lambda} \cdot l \cdot \left( n_1 - n_{x_2'} \right) 
+\end{equation}
+Da der ADP-Kristall ein optisch einachsiger Kristall ist, besitzt er auch natürliche Doppelbrechung $n_1 - n_x$. Diese wird durch ein zweites 
+Kristallpaar, das um $90^\circ$ gedreht ist ausgeglichen. Um Pockels-Effekt nicht auch aufzuheben, wird das zweite Paar mit invertierter Spannung 
+betrieben. Dadurch verdoppelt sich die Phasendifferenz noch einmal. Es gilt also:
+\begin{equation}
+  \begin{split}
+    \Delta \varphi &= \frac{8 \pi}{\lambda} \cdot l \cdot \left( n_1 - n_{x_2'} \right) \\
+    &\refeq{eq:refindex:x2new} \frac{8 \pi}{\lambda} \cdot l \cdot \left( \underbrace{n_1 - n_x}_{=0} + \frac{1}{2} \cdot r_{41} \cdot E_1 \cdot n_x^3 \right) \\
+    & = \frac{4 \pi}{\lambda} \cdot l \cdot r_{41} \cdot E_1 \cdot n_x^3  
+  \end{split}
+\end{equation}
+Legt man nun die Halbwellenspannung $U_{\lambda/2}$ an, so beträgt die Phasendifferen gerade $\Delta \varphi = \pi$.
+Unter Verwendung von $E=\frac{U_{\lambda/2}}{d}$ und \autoref{eq:nxdef} lässt sich der \emph{elektrooptische Koeffizient} $r_{41}$ folgendermaßen bestimmen:
+\begin{equation}
+  r_{41} = \frac{\lambda \cdot d}{4 \cdot l \cdot U_{\lambda/2}} \sqrt{\frac{1}{2} \left( \frac{1}{n_1^2} + \frac{1}{n_3^2} \right) }^3
+\end{equation}
+mit $l$ Länge und $d$ Dicke (Kantenlänge) der Pockelszelle, sowie der Brechungsindizes $n_1$ und $n_3$.
 
 \subsection{Teil II: Faraday-Effekt}
 \subsubsection{Faraday-Effekt}

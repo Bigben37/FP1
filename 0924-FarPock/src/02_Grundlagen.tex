@@ -129,7 +129,15 @@ am Ort $\vec{r}'$ lässt sich mit Hilfe des \emph{Biot-Savart}-Gesetzes bestimme
   \difd \vec{B}(\vec{r}) = \frac{\mu_0 \cdot I}{4 \pi} \cdot \difd \vec{l} \times \frac{\vec{r} - \vec{r}'}{\abs{\vec{r} - \vec{r}'}^3}
 \end{equation}
 \paragraph{Kreisförmige Leiterschleife}
-Es wird zuerst eine kreisförmige Leiterschleife parallel zu der $x$-$y$-Ebene mit dem Radius $R$ betrachtet (\autoref{img:circloop}) \cite{dem2}. %TODO Skizze
+Es wird zuerst eine kreisförmige Leiterschleife parallel zu der $x$-$y$-Ebene mit dem Radius $R$ betrachtet (\autoref{img:circloop}) \cite{dem2}.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=0.3\textwidth]{../img/circloop.pdf}
+  \caption{Kreisförmige Leiterschleife mit Radius $R$, parallel zur $x$-$y$-Ebene}
+  \label{img:circloop}
+\end{center}
+\end{figure}
+
 Da die Komponente $\difd B_\perp = \difd B \cdot \sin \alpha$ senkrecht zur $z-$Achse bei der Integration über $\difd l$ verschwindet 
 (Rotationssymmetrie), bleibt es nur die parallele Komponente $\difd B_\parallel = \difd B \cdot \cos \alpha$ zu betrachten. Wie in 
 \autoref{img:bvector} zu erkennen ist, gilt
@@ -138,6 +146,13 @@ Da die Komponente $\difd B_\perp = \difd B \cdot \sin \alpha$ senkrecht zur $z-$
   \abs{\difd \vec{l} \times \left( \vec{r} - \vec{r}' \right)} = \abs{\vec{r} - \vec{r}'} \cdot \difd l \cdot \underbrace{\sin \varphi}_{= 1} 
   = \abs{\vec{r} - \vec{r}'} \cdot \difd l = \frac{R}{\cos \alpha} \cdot \difd l
 \end{equation}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=0.3\textwidth]{../img/bvector.pdf}
+  \caption{Komponenten des $\vec{B}$-Vektors und Dreieck zwischen $R$, $\vec{r}-\vec{r}'$ und $\vec{r}$}
+  \label{img:bvector}
+\end{center}
+\end{figure}
 Es folgt für $B_\parallel$:
 \begin{equation}
 \begin{split}

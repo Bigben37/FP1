@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Fri Oct 03 20:38:41 CEST 2014
+markTmpDer=true
+builderNum=2
+outputDir=bin
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=halbleiter.tex
+outputFile=halbleiter.pdf
+langSpell=de
+markDer=true
+srcDir=src

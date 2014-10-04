@@ -5,6 +5,7 @@ __author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
 
 import os
 import numpy as np
+from ROOT import gROOT, gStyle
 
 
 def loadCSVToList(path, delimiter='\t'):
@@ -34,3 +35,10 @@ def avgerrors(values, errors):
     var = 1. / sum(map(lambda e: 1. / (e ** 2), errors))
     avg = sum(map(lambda v, e: v / (e ** 2), values, errors)) * var
     return avg, np.sqrt(var)
+
+def setupROOT():
+    """sets up ROOT """
+    gROOT.Reset()
+    gROOT.SetStyle('Plain')
+    gStyle.SetPadTickY(1)
+    gStyle.SetPadTickX(1)

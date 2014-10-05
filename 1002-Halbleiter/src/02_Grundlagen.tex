@@ -1,2 +1,87 @@
 \section{Physikalische Grundlagen}
-Einführung der wesentlichen physikalischen Begriffe und Herleitung der verwendeten Formeln.
+
+\subsection{Das Bändermodell}
+
+Ähnlich zur Beschreibung der Aufenthaltswahrscheinlichkeit von Elektronen mit Molekülorbitalen
+wird bei Festkörpern das Bändermodell verwendet.\\
+Für die physikalischen Eigenschaften eines Materials
+ist die Besetzung von \emph{Valenzband} und \emph{Leitungsband} entscheidend:
+Das Valenzband ist (bei 0\,K) das oberste mit Elektronen besetze Band.
+Das Leitungsband liegt energetisch darüber und Elektronen im Leitungsband werden als \emph{quasifrei}
+bezeichnet.\\
+Die Energiedifferenz zwischen Valenz- und Leitungsband wird \emph{Bandlücke} genannt.
+Energiewerte, die in der Bandlücke liegen, sind für Elektronen nicht erlaubt.
+Es finden nur Übergänge zwischen den Bändern statt,
+bei denen die Elektronen mindestens die Bandlückenenergie aufnehmen oder abgeben.
+Ist die Bandlücke klein (weniger als 1\,eV), so wird der Festkörper als \emph{Metall} bezeichnet.
+Bei Metallen befinden sich bei Raumtemperatur viele Elektronen im Leitungsband und stehen 
+für den Ladungstransport zur Verfügung.
+Ist die Bandlücke eines Materials größer als 4\,eV, handelt es sich um einen \emph{Isolator},
+bei fast alle Elektronen
+fest an die Atomrümpfe gebunden sind und kein Ladungstransport stattfinden kann.
+Die Stoffe, deren Bandlücke mittelgroß ist, werden als \emph{Halbleiter} bezeichnet.
+Bei ihnen wird die Ladungsträgerdichte sehr stark durch Dotierung und Temperatur beeinflusst.\
+Elektronische Übergänge zwischen den beiden Bändern sind \emph{direkt} und \emph{indirekt} möglich.
+Bei einer direkten Bandlücke liegt im Energie-Wellenvektor-Diagramm das Minimum des Leitungsbandes
+genau über dem Maximum des Valenzbandes.
+Beim Übergang bleibt daher die Länge des Wellenvektors konstant und
+es findet keine Impulsänderung des Elektrons statt.
+Bei einer indirekten Bandlücke liegen Minimum und Maximum nicht übereinander.
+Ein Elektronenübergang kann hier nur stattfinden,
+wenn ein Phonon (Quasiteilchen einer Gitterschwingung) für den Ausgleich der Impulsbilanz sorgt.\\[0.1cm]
+Die Bandlücke beeinflusst nicht nur elektrische, sondern auch optische Eigenschaften des Festkörpers:
+Transmission von Strahlung ist nur möglich,
+wenn die Energie der Photonen kleiner ist als die Bandlücke.
+Bei größerer Energie können Elektronen ins Leitungsband gehoben werden und die Photonen werden absorbiert.
+
+
+\subsection{Dotierung von Halbleitern}
+
+Dotierung Leitfähigkeit
+pn-Übergang->RLZ
+Sperrrichtung, Durchlassrichtung
+Diodenkennlinie
+Halbleiterdetektoren
+
+
+\subsection{Ladungsträger in Halbleitern}
+
+Die Bewegung der Ladungsträger in einem Halbleiter wird durch zwei Prozesse bestimmt:
+\emph{Drift} und \emph{Diffision}.
+Der Driftstrom $j_{\text{drift}}$ wird durch ein äußeres elektrisches Feld $E$ verursacht
+und beträgt
+\begin{equation}
+\label{}
+j_{\text{drift}}=\mu_{\text{n}} \cdot n \cdot E
+\end{equation}
+Die Mobilität der Elektronen (Verhältnis von Driftgeschwindigkeit zum angelegtem Feld) ist $\mu_{\text{n}}$,
+die Ladungsträgerdichte wird als $n$ bezeichnet.
+Eine räumliche Inhomogenität von $n$ führt zu einem Diffusionsstrom $j_{\text{diff}}$:
+\begin{equation}
+\label{}
+j_{\text{diff}}=D_{\text{n}} \cdot \frac{\partial n}{\partial x}
+\end{equation}
+$D_{\text{n}}$ ist die materialspezifische Diffusionskonstante.\
+Wegen Ladungserhaltung muss die Ladungsträgerdichte $n(t)$ die \emph{Kontinuitätsgleichung} erfüllen:
+Die zeitliche Änderung der Elektronen im Leitungsband wird durch die Zahl der ins Valenzband
+zurückfallenden Elektronen und die Divergenz des Stromes $j$ bestimmt:
+\begin{equation}
+\label{}
+\frac{\partial n}{\partial t}= -\frac{n-n_0}{\tau_{\text{n}}}-\frac{\partial j}{\partial x}
+\end{equation}
+Die Ladungsträgerdichte im Gleichgewicht ist $n_0$, die mittlere Lebensdauer der Elektronen
+im Leitungsband $\tau_{\text{n}}$.\\
+
+
+DGLs lösen für Gaußkurve
+
+
+
+TODO:Quelle: engl wiki, Haynes–Shockley experiment
+
+
+
+\subsection{Lock-in-Verstärker}
+
+
+Bilder mit Mathematica + Formeln

@@ -2,9 +2,9 @@
 
 % CONFIG
 \newcommand{\exptitle}{Halbleiter}       % long name of experiment 
-\newcommand{\exptitleshort}{ShortExp} % short name of experiment
-\newcommand{\expdate}{Date}           % date of experiment
-\newcommand{\exptutor}{Betreuer}
+\newcommand{\exptitleshort}{Halbleiter} % short name of experiment
+\newcommand{\expdate}{2. und 6. Oktober, 2014}           % date of experiment
+\newcommand{\exptutor}{Marc \textsc{Hauser}}
 
 % PACKAGES + MODIFICATIONS
 \usepackage[ngerman]{babel} %standard language stuff
@@ -54,6 +54,7 @@
 \usepackage{pdfpages} % include pdf files
 
 % NEW COMMANDS
+\newcommand{\difd}{\mathrm{d}}
 
 % DOCUMENT SETTINGS
 
@@ -80,6 +81,8 @@ Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
 \url{https://github.com/Bigben37/FP1/tree/master/0908-LHWZ} abgerufen werden.
 \thispagestyle{empty}
 
+%TODO: Mathematica?
+
 \newpage
 \tableofcontents
 \thispagestyle{empty}
@@ -88,11 +91,25 @@ Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
 \hypersetup{pageanchor=true} %start page numbering again
 \setcounter{page}{1} %set to page 1
 
-\input{01_Ziel} 
+\input{01_Ziel}
 \input{02_Grundlagen}
-\input{03_Aufbau}
-\input{04_Durchfuerung}
-\input{05_Auswertung}
+
+\section{Vermessung der Bandlücke}
+\input{03_Aufbau_BL}
+\input{04_Durchfuerung_BL}
+\input{05_Auswertung_BL}
+
+\section{Haynes-Shockley-Experiment}
+\input{03_Aufbau_HS}
+\input{04_Durchfuerung_HS}
+\input{05_Auswertung_HS}
+
+\section{Halbleiterdetektoren}
+\input{03_Aufbau_HD}
+\input{04_Durchfuerung_HD}
+\input{05_Auswertung_HD}
+
+
 
 %TODO add when finished
 %\appendix

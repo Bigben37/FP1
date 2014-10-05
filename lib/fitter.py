@@ -131,8 +131,10 @@ class Fitter:
             f.writeline()
             f.close()
             
-    def addParamsToLegend(self, legend):
-        legend.AddEntry(0, '#chi^{2} / DoF : %e' % self.getChisquareOverDoF(), '')
-        legend.AddEntry(0, 'parameters:', '')
+    def addParamsToLegend(self, legend, lang='de'):
+        lang_param = 'Parameter:'
+        if lang == 'en':
+            lang_param = 'parameters:'
+        legend.AddEntry(0, lang_param, '')
         for i, param in self.params.iteritems():
             legend.AddEntry(0, '%s: %e #pm %e' % (param['name'], param['value'], param['error']), '')

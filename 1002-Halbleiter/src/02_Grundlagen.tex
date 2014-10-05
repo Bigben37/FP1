@@ -29,20 +29,68 @@ es findet keine Impulsänderung des Elektrons statt.
 Bei einer indirekten Bandlücke liegen Minimum und Maximum nicht übereinander.
 Ein Elektronenübergang kann hier nur stattfinden,
 wenn ein Phonon (Quasiteilchen einer Gitterschwingung) für den Ausgleich der Impulsbilanz sorgt.\\[0.15cm]
-Die Bandlücke beeinflusst nicht nur elektrische, sondern auch optische Eigenschaften des Festkörpers:
+Die Bandlücke beeinflusst nicht nur elektrische, sondern auch \emph{optische Eigenschaften} des Festkörpers:
 Transmission von Strahlung ist nur möglich,
 wenn die Energie der Photonen kleiner ist als die Bandlücke.
 Bei größerer Energie können Elektronen ins Leitungsband gehoben werden und die Photonen werden absorbiert.
 
 
-\subsection{Dotierung von Halbleitern}
+\subsection{Dotierung von Halbleitern und p-n-Übergang}
 
-Dotierung Leitfähigkeit
-pn-Übergang->RLZ
-Sperrrichtung, Durchlassrichtung
-Diodenkennlinie
-Halbleiterdetektoren
-
+Der Stromleitungsmechanismus bei hochreinen, monokristallinen Halbleiterkristallen
+wird als \emph{intrinsisch} bezeichnet:
+Das Fermi-Niveau liegt ungefähr (bei 0\,K genau) in der Mitte zwischen den beiden Bändern,
+und nur die äußersten Randbereiche der Fermi-Verteilung ragen in die Bänder
+und sorgen dort für eine Besetzung der Zustände.\\
+Werden in den Kristall nun Atome aus einer anderen Hauptgruppe eindiffundiert,
+ändert sich sich die Lage des Fermi-Niveaus:
+Zum Beispiel führt eine Phosphordotierung (5.\,HG) von Silizium (4.\,HG) dazu,
+dass Energieniveaus knapp unter der Kante des Leitungsbandes entstehen.
+Durch die Dotierung verschiebt sich das Fermi-Niveau nach oben in Richtung der Donatorniveaus und
+Elektronen gelangen ins Leitungsband.\\
+Dieser Mechanismus ist auch umgekehrt (z.B. durch Bordotierung, 3.\,HG) möglich.
+Es entstehen dann Fehlstellen ("Löcher") im Valenzband,
+die ebenfalls eine Erhöhung der Leitfähigkeit verursachen.
+Leitfähigkeit aufgrund von Fremdatomen wird als \emph{extrinsisch} bezeichnet.\\[0.15cm]
+Werden nun zwei unterschiedlich dotierte Halbleiter in Kontakt gebracht,
+so entsteht ein \emph{p-n-Übergang}.
+In den ursprünglich neutralen Halbleitern entsteht dadurch ein geladener Bereich, die Raumladungszone.
+Die Strom-Spannungs-Charakteristik eines p-n-Übergangs ist im Gegensatz zu einem ohmschen Widerstand
+nicht linear. Man spricht hier von einer Diodenkennlinie, wie auf \autoref{img:diode} gezeigt.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=0.6\textwidth]{../img/diode.pdf}
+  \caption{Strom-Spannungskennlinie eins pn-Übergangs.
+  Die Achsenskalierung ist nicht einheitlich.}
+  \label{img:diode}
+\end{center}
+\end{figure}
+Die asymmetrische Kennlinie kommt dadurch zustande,
+dass der p-n-Übergang eine Durchlassrichtung (rechter Bereich der Abbildung) und eine Sperrrichtung
+(linker Bereich) besitzt.
+In Sperrrichtung fließt nur ein sehr kleiner Leckstrom, bis es bei hoher Spannung zum Durchbruch kommt.\\
+Die Existenz einer Sperr- und einer Durchlassrichtung lässt sich anschaulich durch Vergrößerung
+oder Verkleinerung der Raumladungszone erklären.
+\autoref{img:pn} zeigt den Übergang zwischen einem p-dotierten und einem n-dotierten Halbleiter.
+In der Kontaktzone wandern die Elektronen aus dem n-dotierten Material in das p-dotierte und hinterlassen
+geladene Fehlstellen.
+Die n-Seite ist dann positiv geladen, die p-Seite negativ.
+Wird nun an den Halbleiter eine Spannung angelegt, so dass weitere Elektronen in die p-Schicht fließen,
+vergrößert sich die Raumladungszone und es bildet sich ein Feld aus,
+das der anliegenden Spannung entgegen wirkt.
+Dieser Zustand herrscht in dem Halbleiter-Strahlungs-Detektor,
+mit dem im dritten Versuchsteil Messungen durchgeführt werden.\\
+Umgekehrt kann die Raumladungszone verkleinert werden,
+wenn an die n-dotierte Schicht das negativere Potential angelegt wird.
+Der p-n-Übergang wird dann leitend und sein Widerstand nimmt mit zunehmender Spannung ab.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=0.6\textwidth]{../img/pn.pdf}
+  \caption{Ausbildung einer Raumladungszone durch Verbindung von n- und p-dotierten Halbleitern
+  und Vergrößerung der Raumladungszone durch Anlegen einer Spannung in Sperrrichtung.}
+  \label{img:pn}
+\end{center}
+\end{figure}
 
 \subsection{Ladungsträger in Halbleitern}
 
@@ -85,3 +133,7 @@ TODO:Quelle: engl wiki, Haynes–Shockley experiment
 
 
 Bilder mit Mathematica + Formeln
+
+\subsection{++}
+optisches Gitter\\
+Energie(alpha)

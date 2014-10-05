@@ -5,6 +5,8 @@ import csv
 
 
 class P2SemiCon(DataErrors):
+    
+    UERROR = 1
 
     def loadData(self):
         d = os.path.dirname(os.path.abspath(__file__))

@@ -8,7 +8,7 @@ from numpy import append
 from data import DataErrors
 
 
-def getParams():
+def getDistanceParams():
     params = []
     params.append([[0.00875, 0, 0.001, 25e-6, 2.5e-6], 15e-6, 35e-6])
     params.append([[0.00875, 0, 0.001, 20e-6, 2.5e-6], 15e-6, 30e-6])
@@ -24,7 +24,7 @@ def getParams():
     return params
 
 
-def getLenghts():
+def getDistances():
     # load data
     f = lambda x: x[0]
     lengths = loadCSVToList('../data/part2/length/lengths.txt')
@@ -40,7 +40,7 @@ def getLenghts():
     return map(lambda x: (x + offset[0], np.sqrt(sl ** 2 + offset[1] ** 2)), lengths)
 
 
-def evalLength(n, params):
+def evalDistance(n, params):
     data = P2SemiCon.fromPath('../data/part2/length/ALL%04.d/F%04dCH1.CSV' % (n, n))
     g = data.makeGraph()
     c = TCanvas('c%d' % n, '', 1280, 720)
@@ -53,18 +53,18 @@ def evalLength(n, params):
         fit.setParam(i, paramname[i], param)
     fit.fit(g, params[1], params[2])
 
-    c.Update()
-    c.Print('../img/part2/length%02d.pdf' % n, 'pdf')
+    #c.Update()
+    #c.Print('../img/part2/length%02d.pdf' % n, 'pdf')
 
     return data, fit.params, fit.getCorrMatrix(), params[1], params[2]
 
 
-def evalLengths():
-    params = getParams()
-    lengths = getLenghts()
+def evalDistances():
+    params = getDistanceParams()
+    lengths = getDistances()
     fittedData = []   
     for i, param in enumerate(params):
-        fittedData.append(evalLength(i, param))
+        fittedData.append(evalDistance(i, param))
     
     graphs = []
     for data, param, corrMatrix, xmin, xmax in fittedData:
@@ -76,7 +76,7 @@ def evalLengths():
     
     c = TCanvas('cL', '', 1280, 720)
     l = TLegend(0.65, 0.3, 0.85, 0.85)
-    l.AddEntry(0, 'Distanzen l / mm', '')
+    l.AddEntry(0, 'Distanzen x / mm', '')
     first = True
     for i, g in enumerate(graphs):
         g.SetMarkerStyle(1)
@@ -89,7 +89,7 @@ def evalLengths():
             first = False
         else:
             g.Draw('PX')
-        l.AddEntry(g, 'l = %.2f' % lengths[i][0], 'p')
+        l.AddEntry(g, 'x = %.2f' % lengths[i][0], 'p')
     l.Draw()
     c.Update()
     c.Print('../img/part2/lengths.pdf', 'pdf')
@@ -98,7 +98,7 @@ def evalLengths():
 
 def main():
     setupROOT()
-    evalLengths()
+    evalDistances()
 
 
 if __name__ == "__main__":

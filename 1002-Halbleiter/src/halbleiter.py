@@ -13,7 +13,7 @@ class P2SemiCon(DataErrors):
             reader = csv.reader(f, delimiter=',')
             for row in reader:
                 x, y = row[3:5]
-                self.addPoint(float(x), float(y), 0, 0)
+                self.addPoint(float(x), float(y), 0, 0.0001)
 
     def subtractUnderground(self, a, b, sa, sb, rho):
         u = DataErrors()

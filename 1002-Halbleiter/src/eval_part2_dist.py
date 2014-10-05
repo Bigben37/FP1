@@ -4,7 +4,6 @@ from functions import setupROOT, loadCSVToList, avgerrors
 from halbleiter import P2SemiCon
 from ROOT import TCanvas, TLegend
 from fitter import Fitter
-from numpy import append
 from data import DataErrors
 from txtfile import TxtFile
 
@@ -12,7 +11,7 @@ from txtfile import TxtFile
 PRINTGRAPHS = True  # set False for quicker testing
 
 
-def getDistanceParams():
+def getParams():
     params = []
     params.append([[0.008, 0, 2.5e-8, 22e-6, 3e-6], 12e-6, 35e-6])
     params.append([[0.00675, 0, 6e-9, 20e-6, 2.5e-6], 10e-6, 32e-6])
@@ -42,7 +41,7 @@ def evalDistance(n, params):
     g = data.makeGraph()
     c = TCanvas('c%d' % n, '', 1280, 720)
     g.SetMarkerStyle(1)
-    g.Draw('AP')
+    g.Draw('APX')
 
     fit = Fitter('f', 'pol1(0) + 1/(sqrt(2*pi*[4]^2))*gaus(2)')
     paramname = ['a', 'b', 'A', 'tm', 's']
@@ -178,7 +177,7 @@ def fitSigma(sigs, times):
 
 
 def evalDistances():
-    params = getDistanceParams()
+    params = getParams()
     distances = getDistances()
     fittedData = []
     for i, param in enumerate(params):

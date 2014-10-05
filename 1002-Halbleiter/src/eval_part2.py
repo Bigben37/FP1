@@ -10,34 +10,34 @@ from data import DataErrors
 
 def getDistanceParams():
     params = []
-    params.append([[0.00875, 0, 0.001, 25e-6, 2.5e-6], 15e-6, 35e-6])
-    params.append([[0.00875, 0, 0.001, 20e-6, 2.5e-6], 15e-6, 30e-6])
-    params.append([[0, 0, 0.0015, 17.5e-6, 2.5e-6], 13e-6, 22e-6])
-    params.append([[0.0025, 0, 0.002, 16e-6, 2.5e-6], 12.5e-6, 20e-6])
-    params.append([[-0.003, 0, 0.003, 14e-6, 2.5e-6], 10e-6, 20e-6])
-    params.append([[0.003, 0, 0.004, 12.5e-6, 2.5e-6], 7.5e-6, 17.5e-6])
-    params.append([[-0.0005, 0, 0.006, 10e-6, 2.5e-6], 5e-6, 15e-6])
-    params.append([[-0.003, 0, 0.008, 7.5e-6, 2.5e-6], 3e-6, 12.5e-6])
-    params.append([[-0.001, 0, 0.0012, 6e-6, 2e-6], 4e-6, 8e-6])
-    params.append([[-0.005, 0, 0.002, 4e-6, 1.5e-6], 2e-6, 6e-6])
-    params.append([[-0.0015, 0, 0.003, 2.5e-6, 1e-6], 1e-6, 3.65e-6])
+    params.append([[0.008, 0, 2.5e-8, 22e-6, 3e-6], 12e-6, 35e-6])
+    params.append([[0.00675, 0, 6e-9, 20e-6, 2.5e-6], 10e-6, 32e-6])
+    params.append([[0, 0, 9e-9, 17.5e-6, 2.5e-6], 13e-6, 22e-6])
+    params.append([[0.0025, 0, 1e-8, 16e-6, 2.5e-6], 10e-6, 22e-6])
+    params.append([[-0.003, 0, 2e-8, 14e-6, 2.5e-6], 8e-6, 20e-6])
+    params.append([[0.003, 0, 2.5e-8, 12.5e-6, 2.5e-6], 6e-6, 20e-6])
+    params.append([[-0.0005, 0, 4e-8, 10e-6, 2.5e-6], 5e-6, 17.5e-6])
+    params.append([[-0.003, 0, 5e-8, 7.5e-6, 2.5e-6], 3e-6, 15e-6])
+    params.append([[-0.001, 0, 6e-8, 6e-6, 2e-6], 3e-6, 9e-6])
+    params.append([[-0.005, 0, 7e-8, 4e-6, 1.5e-6], 1e-6, 8e-6])
+    params.append([[-0.0015, 0, 8e-8, 2.5e-6, 1e-6], 1e-6, 3.55e-6])
     return params
 
 
 def getDistances():
     # load data
     f = lambda x: x[0]
-    lengths = loadCSVToList('../data/part2/length/lengths.txt')
-    lengths = map(f, lengths)
+    distances = loadCSVToList('../data/part2/length/lengths.txt')
+    distances = map(f, distances)
     offsets = loadCSVToList('../data/part2/length/length_offset.txt')
     offsets = map(f, offsets)
-    sl = 0.005
+    sd = 0.005
 
     # calculate average offset:
-    offset = avgerrors(offsets, [sl] * len(offsets))
+    offset = avgerrors(offsets, [sd] * len(offsets))
 
     # add offset
-    return map(lambda x: (x + offset[0], np.sqrt(sl ** 2 + offset[1] ** 2)), lengths)
+    return map(lambda x: (x + offset[0], np.sqrt(sd ** 2 + offset[1] ** 2)), distances)
 
 
 def evalDistance(n, params):
@@ -47,14 +47,14 @@ def evalDistance(n, params):
     g.SetMarkerStyle(1)
     g.Draw('AP')
 
-    fit = Fitter('f', 'pol1(0) + gaus(2)')
-    paramname = ['a', 'b', 'A', 'xc', 's']
+    fit = Fitter('f', 'pol1(0) + 1/(sqrt(2*pi*[4]^2))*gaus(2)')
+    paramname = ['a', 'b', 'A', 'tm', 's']
     for i, param in enumerate(params[0]):
         fit.setParam(i, paramname[i], param)
     fit.fit(g, params[1], params[2])
 
-    #c.Update()
-    #c.Print('../img/part2/length%02d.pdf' % n, 'pdf')
+    c.Update()
+    c.Print('../img/part2/dist%02d.pdf' % n, 'pdf')
 
     return data, fit.params, fit.getCorrMatrix(), params[1], params[2]
 
@@ -92,9 +92,7 @@ def evalDistances():
         l.AddEntry(g, 'x = %.2f' % lengths[i][0], 'p')
     l.Draw()
     c.Update()
-    c.Print('../img/part2/lengths.pdf', 'pdf')
-    
-    # fitAmplitude(lengths, fitparams)
+    c.Print('../img/part2/distances.pdf', 'pdf')
 
 def main():
     setupROOT()

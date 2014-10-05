@@ -49,6 +49,11 @@ def evalDistance(n, params):
     for i, param in enumerate(params[0]):
         fit.setParam(i, paramname[i], param)
     fit.fit(g, params[1], params[2])
+    
+    l = TLegend(0.15, 0.7, 0.3, 0.85)
+    l.AddEntry(g, 'Messung', 'p')
+    l.AddEntry(fit.function, 'Fit mit Gausskurve', 'l')
+    l.Draw()
 
     if PRINTGRAPHS:
         c.Update()
@@ -86,7 +91,7 @@ def fitXc(dists, times):
     data = DataErrors.fromLists(listx, listy, listsx, listsy)
 
     c = TCanvas('cXc', '', 1280, 720)
-    g = data.makeGraph('xc', 'Zeit / s', 'x_{c} / mm')
+    g = data.makeGraph('xc', 'Zeit t / s', 'x_{c} / mm')
     g.Draw('AP')
     
     fit = Fitter('fitXc', 'pol1(0)')
@@ -94,6 +99,14 @@ def fitXc(dists, times):
     fit.setParam(1, 'm', 0.5e-6)
     fit.fit(g, 1e-6, 23e-6)
     fit.saveData('../calc/part2/dist_fit_xc.txt')
+    
+    l = TLegend(0.15, 0.7, 0.4, 0.85)
+    l.AddEntry('xc', 'Messung', 'p')
+    l.AddEntry(fit.function, 'Fit mit y = x_{0}+m*t', 'l')
+    l.AddEntry(0, 'Parameter:', '')
+    l.AddEntry(0, 'x_{0} = %.3f #pm %.3f' % (fit.params[0]['value'], fit.params[0]['error']), '')
+    l.AddEntry(0, 'm = %.3e #pm %.0e' % (fit.params[1]['value'], fit.params[1]['error']), '')
+    l.Draw()
 
     if PRINTGRAPHS:
         c.Update()
@@ -109,6 +122,61 @@ def fitXc(dists, times):
         f.writeline('\t', str(mu), str(smu))
 
 
+def fitA(amps, times):
+    listx, listsx = zip(*times)
+    listy, listsy = zip(*amps)
+    data = DataErrors.fromLists(listx, listy, listsx, listsy)
+
+    c = TCanvas('cA', '', 1280, 720)
+    g = data.makeGraph('A', 'Zeit t / s', 'A / V')
+    g.Draw('AP')
+    
+    fit = Fitter('A', '[0]*exp(-(x)/[1])')
+    fit.setParam(0, 'C', 5e-8)
+    fit.setParam(1, 't_n', 45e-6)
+    fit.fit(g, 1e-6, 23e-6)
+    fit.saveData('../calc/part2/dist_fit_A.txt')
+    
+    l = TLegend(0.65, 0.65, 0.85, 0.85)
+    l.AddEntry('A', 'Messung', 'p')
+    l.AddEntry(fit.function, 'Fit mit y = C*exp(-t/#tau_{n})', 'l')
+    l.AddEntry(0, 'Parameter:', '')
+    l.AddEntry(0, 'C = %.3e #pm %.0e' % (fit.params[0]['value'], fit.params[0]['error']), '')
+    l.AddEntry(0, '#tau_{n} = %.3e #pm %.0e' % (fit.params[1]['value'], fit.params[1]['error']), '')
+    l.Draw()
+    
+    if PRINTGRAPHS:
+        c.Update()
+        c.Print('../img/part2/dist_fitA.pdf', 'pdf')
+        
+
+def fitSigma(sigs, times):
+    listx, listsx = zip(*times)
+    listy, listsy = zip(*sigs)
+    listy = map(abs, listy)   # fits can yield negative sigma, because it only occurse to 
+    data = DataErrors.fromLists(listx, listy, listsx, listsy)
+
+    c = TCanvas('cSigma', '', 1280, 720)
+    g = data.makeGraph('Sigma', 'Zeit t / s', 'Standardabweichung #sigma / m')
+    g.Draw('AP')
+    
+    fit = Fitter('fitS', 'sqrt(2*[0]*x)')
+    fit.setParam(0, 'D_{n}', 5e-8)
+    fit.fit(g, 1e-6, 23e-6)
+    fit.saveData('../calc/part2/dist_fit_sigma.txt')
+    
+    l = TLegend(0.15, 0.7, 0.4, 0.85)
+    l.AddEntry('Sigma', 'Messung', 'p')
+    l.AddEntry(fit.function, 'Fit mit y = #sqrt{2*D_{n}*t}', 'l')
+    l.AddEntry(0, 'Parameter:', '')
+    l.AddEntry(0, 'D_{n} = %.3e #pm %.0e' % (fit.params[0]['value'], fit.params[0]['error']), '')
+    l.Draw()
+    
+    if PRINTGRAPHS:
+        c.Update()
+        c.Print('../img/part2/dist_fitSigma.pdf', 'pdf')
+
+
 def evalDistances():
     params = getDistanceParams()
     distances = getDistances()
@@ -117,10 +185,14 @@ def evalDistances():
         fittedData.append(evalDistance(i, param))
 
     graphs = []  # list of graphs
-    tms = []  # list of t_m's
+    amps = []  # amplitudes
+    times = []   # times
+    sigs = []  # sigmas
     for data, param, corrMatrix, xmin, xmax in fittedData:
         # get data for further fits
-        tms.append((param[3]['value'], param[3]['error']))
+        amps.append((param[2]['value'], param[2]['error']))
+        times.append((param[3]['value'], param[3]['error']))
+        sigs.append((param[4]['value'], param[4]['error']))
 
         # for plotting all data in one graph
         data.filterX(xmin, xmax)
@@ -133,7 +205,9 @@ def evalDistances():
     plotDistances(graphs, distances)
 
     # fit params of gauss
-    fitXc(distances, tms)
+    fitXc(distances, times)
+    fitA(amps, times)
+    fitSigma(sigs, times)
 
 
 def main():

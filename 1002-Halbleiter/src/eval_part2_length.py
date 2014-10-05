@@ -58,18 +58,6 @@ def evalLength(n, params):
 
     return data, fit.params, fit.getCorrMatrix(), params[1], params[2]
 
-"""
-def fitAmplitude(lengths, params):
-    data = DataErrors()
-    for i in range(len(lengths)):
-        data.addPoint(lengths[i][0], params[i][2]['value'], lengths[i][1], params[i][2]['error'])
-    
-    c = TCanvas('cA', '', 1280, 720)
-    g = data.makeGraph('amplitude', 'L#ddot{a}nge / mm', 'Amplitude / V')
-    g.Draw('AP')
-    c.Update()    
-    c.Print('../img/part2/amplitude.pdf', 'pdf')"""
-
 
 def evalLengths():
     params = getParams()
@@ -87,6 +75,8 @@ def evalLengths():
         graphs.append(data.makeGraph('g', 'Zeit t / #mu s', 'Spannung U / V'))
     
     c = TCanvas('cL', '', 1280, 720)
+    l = TLegend(0.65, 0.3, 0.85, 0.85)
+    l.AddEntry(0, 'Distanzen l / mm', '')
     first = True
     for i, g in enumerate(graphs):
         g.SetMarkerStyle(1)
@@ -99,6 +89,8 @@ def evalLengths():
             first = False
         else:
             g.Draw('PX')
+        l.AddEntry(g, 'l = %.2f' % lengths[i][0], 'p')
+    l.Draw()
     c.Update()
     c.Print('../img/part2/lengths.pdf', 'pdf')
     

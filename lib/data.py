@@ -46,10 +46,10 @@ class GeneralData(object):
     def getLength(self):
         """returns the number of points in the list"""
         return len(self._points)
-    
+
     def getByX(self, xvalue):
         """get point by x-value
-        
+
         Arguments:
         xvalue -- x-value of point
         """
@@ -57,10 +57,10 @@ class GeneralData(object):
             if point[0] == xvalue:
                 return point
         return None
-    
+
     def getByY(self, yvalue):
         """get point by y-value
-        
+
         Arguments:
         yvalue -- y-value of point
         """
@@ -85,6 +85,24 @@ class GeneralData(object):
             except NameError:
                 print(data.__class__.__name__ + ".loadData() not in scope! Please implement. ")
         return data
+
+    def filterX(self, lower=None, upper=None):
+        """deletes all values with are lower then the lower bound or higher than the higher bound
+
+        Arguments:
+        lower -- lower bound
+        higher -- higher bound
+        """
+        marks = []
+        for i, point in enumerate(self.points):
+            if lower:
+                if point[0] < lower:
+                    marks.append(i)
+            if upper:
+                if point[0] > upper:
+                    marks.append(i)
+        for mark in reversed(marks):
+            del self._points[mark]
 
     def filterY(self, lower=None, upper=None):
         """deletes all values with are lower then the lower bound or higher than the higher bound
@@ -339,35 +357,34 @@ class DataErrors(GeneralData):
             return graph
         else:
             return None
-        
+
     def invertX(self):
         """inverses x values"""
         for i in range(self.getLength()):
-            self.points[i] = (1./self.points[i][0], self.points[i][1], 1./(self.points[i][0]**2)*self.points[i][2], self.points[i][3])
-        
+            self.points[i] = (1. / self.points[i][0], self.points[i][1], 1. / (self.points[i][0] ** 2) * self.points[i][2], self.points[i][3])
+
     def invertY(self):
         """inverses y values"""
         for i in range(self.getLength()):
-            self.points[i] = (self.points[i][0], 1./self.points[i][1], self.points[i][2], 1./(self.points[i][1]**2)*self.points[i][3])
-            
+            self.points[i] = (self.points[i][0], 1. / self.points[i][1], self.points[i][2], 1. / (self.points[i][1] ** 2) * self.points[i][3])
+
     def multiplyX(self, mult):
         """multiply x-value with constant
-        
+
         Arguments:
         mult -- multiplier
         """
         for i in range(self.getLength()):
-            self.points[i] = (mult*self.points[i][0], self.points[i][1], mult*self.points[i][2], self.points[i][3])
-            
+            self.points[i] = (mult * self.points[i][0], self.points[i][1], mult * self.points[i][2], self.points[i][3])
+
     def multiplyY(self, mult):
         """multiply y-value with constant
-        
+
         Arguments:
         mult -- multiplier
         """
         for i in range(self.getLength()):
-            self.points[i] = (self.points[i][0], mult*self.points[i][1], self.points[i][2], mult*self.points[i][3])
-            
+            self.points[i] = (self.points[i][0], mult * self.points[i][1], self.points[i][2], mult * self.points[i][3])
 
     def setXErrorAbs(self, error):
         """sets absolute x-error, same error for every data point

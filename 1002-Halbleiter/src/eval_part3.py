@@ -1,33 +1,28 @@
 #!/usr/bin/python2.7
 from functions import setupROOT
 from halbleiter import P3SemiCon, prepareGraph
-from ROOT import TCanvas, TLegend, TF1
+from ROOT import TCanvas, TLegend
 from fitter import Fitter
+from data import DataErrors
+from txtfile import TxtFile
+import numpy as np
 
 
-def getParamsAmCdTe():
+PRINTGRAPHS = True  # set false for faster debugging
+
+
+def getParams(detector, element):
     params = []
-    params.append([(0, 0, 500, 285, 25), (260, 310), (200, 350), (0, 560)])
-    return params
-
-
-def getParamsAmSi():
-    params = []
-    params.append([(0, 0, 50, 300, 25), (260, 330), (250, 340), (0, 60)])
-    return params
-
-
-def getParamsCoCdTe():
-    params = []
-    params.append([(70, 0, 200, 600, 20), (580, 620), (560, 630), (0, 280)])
-    params.append([(20, 675, 40), (640, 700), (620, 720), (0, 30)])
-    return params
-
-
-def getParamsCoSi():
-    params = []
-    params.append([(0, 0, 20, 600, 20), (580, 650), (570, 660), (0, 30)])
-    params.append([(), (670, 710), (650, 750), (0, 3)])
+    if detector == 'CdTe' and element == 'Am':
+        params.append([(0, 0, 1e4, 285, 10), (260, 310), (200, 350), (0, 560)])
+    elif detector == 'Si' and element == 'Am':
+        params.append([(0, 0, 800, 300, 10), (260, 330), (250, 340), (0, 60)])
+    elif detector == 'CdTe' and element == 'Co':
+        params.append([(70, 0, 3750, 600, 10), (580, 620), (560, 630), (0, 280)])
+        params.append([(600, 675, 20), (640, 700), (620, 720), (0, 30)])
+    elif detector == 'Si' and element == 'Co':
+        params.append([(0, 0, 250, 600, 20), (580, 650), (570, 660), (0, 30)])
+        params.append([(), (670, 710), (650, 750), (0, 3)])
     return params
 
 
@@ -39,73 +34,161 @@ def printTotalSpectrum(data, element, detector, logy=True):
     g.GetXaxis().SetRangeUser(0, 2500)
     g.Draw('APX')
     c.Update()
-    c.Print('../img/part3/%s-%s_spectrum.pdf' % (element, detector), 'pdf')
+    if PRINTGRAPHS:
+        c.Print('../img/part3/%s-%s_spectrum.pdf' % (element, detector), 'pdf')
 
 
-def fitSpectrum(element, detector, params, logy=True):
+def fitSpectrum(detector, element, params, logy=True):
     data = P3SemiCon.fromPath('../data/part3/%s-%s.mca' % (element, detector))
     printTotalSpectrum(data, element, detector, logy)
 
-    if params:
-        for i, peak in enumerate(params):
-            c = TCanvas('cpeakl_%s-%s_%d' % (element, detector, i))
-            g = data.makeGraph('g%s-%s_%d' % (element, detector, i), 'Kanal k', 'Counts N')
-            prepareGraph(g)
-            g.GetXaxis().SetRangeUser(peak[2][0], peak[2][1])
-            g.SetMinimum(peak[3][0])
-            g.SetMaximum(peak[3][1])
-            g.Draw('AP')
+    fitresults = []
+    for i, peak in enumerate(params):
+        c = TCanvas('cpeakl_%s-%s_%d' % (element, detector, i))
+        g = data.makeGraph('g%s-%s_%d' % (element, detector, i), 'Kanal k', 'Counts N')
+        prepareGraph(g)
+        g.GetXaxis().SetRangeUser(peak[2][0], peak[2][1])
+        g.SetMinimum(peak[3][0])
+        g.SetMaximum(peak[3][1])
+        g.Draw('AP')
 
-            fit = None
-            paramnames = []
+        fit = None
+        paramnames = []
+        if len(peak[0]) == 5:
+            fit = Fitter('fit%d' % i, 'pol1(0) + 1/(sqrt(2*pi*[4]^2))*gaus(2)')
+            paramnames = ['a', 'b', 'A', 'c', 's']
+        elif len(peak[0]) == 4:
+            fit = Fitter('fit%d' % i, '[0] + 1/(sqrt(2*pi*[3]^2))*gaus(1)')
+            paramnames = ['a', 'A', 'c', 's']
+        elif len(peak[0]) == 3:
+            fit = Fitter('fit%d' % i, '1/(sqrt(2*pi*[2]^2))*gaus(0)')
+            paramnames = ['A', 'c', 's']
+
+        l = None
+        if len(peak[0]) > 0:
+            for j, param in enumerate(peak[0]):
+                fit.setParam(j, paramnames[j], param)
+            fit.fit(g, *peak[1])
+
+            fitname = ''
             if len(peak[0]) == 5:
-                fit = Fitter('fit%d' % i, 'pol1(0) + gaus(2)')
-                paramnames = ['a', 'b', 'A', 'c', 's']
+                fitname = 'N(k) = a + b*k + #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{x-x_{c}}{#sigma})^{2})'
             elif len(peak[0]) == 4:
-                fit = Fitter('fit%d' % i, '[0] + gaus(1)')
-                paramnames = ['a', 'A', 'c', 's']
+                fitname = 'N(k) = a + #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{x-x_{c}}{#sigma})^{2})'
             elif len(peak[0]) == 3:
-                fit = Fitter('fit%d' % i, 'gaus(0)')
-                paramnames = ['A', 'c', 's']
+                fitname = 'N(k) = #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{x-x_{c}}{#sigma})^{2})'
+            fit.saveData('../calc/part3/fit_%s-%s_%02d.txt' % (element, detector, i), 'w')
+            results = []
+            for j, param in fit.params.iteritems():
+                results.append((param['value'], param['error']))
+            fitresults.append(results)
 
-            l = None
-            if len(peak[0]) > 0:
-                for j, param in enumerate(peak[0]):
-                    fit.setParam(j, paramnames[j], param)
-                fit.fit(g, *peak[1])
+            # legend
+            l = TLegend(0.675, 0.5, 0.995, 0.85)
+            l.SetTextSize(0.02)
+            l.AddEntry(g, 'Messwerte', 'p')
+            l.AddEntry(fit.function, 'Fit mit', 'l')
+            l.AddEntry(0, fitname, '')
+            l.AddEntry(0, '', '')
+            fit.addParamsToLegend(l, chisquareformat='%.2f')
+            l.Draw()
 
-                fitname = ''
-                if len(peak[0]) == 5:
-                    fitname = 'Fit mit N(k) = a + b*k + A*exp(-#frac{1}{2}(#frac{x-c}{#sigma})^{2})'
-                elif len(peak[0]) == 4:
-                    fitname = 'Fit mit N(k) = a + A*exp(-0.5((k-c)/#sigma)^2)'
-                elif len(peak[0]) == 3:
-                    fitname = 'Fit mit N(k) = A*exp(-0.5((k-c)/#sigma)^2)'
-                fit.saveData('../calc/part3/fit_%s-%s_%02d.txt' % (element, detector, i), 'w')
-
-                # legend
-                l = TLegend(0.675, 0.55, 0.99, 0.85)
-                l.SetTextSize(0.02)
-                l.AddEntry(g, 'Messwerte', 'p')
-                l.AddEntry(fit.function, fitname, 'l')
-                fit.addParamsToLegend(l, chisquareformat='%.2f')
-                l.Draw()
-
-            """
-            f = TF1('f', 'pol1(0)', peak[1][0], peak[1][1])
-            f.SetParameter(0, fit.params[0]['value'])
-            f.SetParameter(1, fit.params[1]['value'])
-            f.Draw('SAME')"""
-
-            c.Update()
+        c.Update()
+        if PRINTGRAPHS:
             c.Print('../img/part3/%s-%s_%02d.pdf' % (element, detector, i), 'pdf')
+    return fitresults
+
+
+def getEnergyLitVals(elem):
+    litvals = []
+    if elem == 'Am':
+        litvals.append(59.5)
+    elif elem == 'Co':
+        litvals.append(122.06)
+        litvals.append(136.47)
+    return litvals
+
+
+def makeEnergyGauge(detector, peaks, litvals):
+    x, sx = zip(*peaks)
+    data = DataErrors.fromLists(x, litvals, sx, [0] * len(x))
+    c = TCanvas('c_eg_%s' % detector, '', 1280, 720)
+    g = data.makeGraph('g_eg_%s' % detector, 'Kanal k', 'Energie E / eV')
+    g.Draw('AP')
+
+    fit = Fitter('f_eg_%s' % detector, 'pol1(0)')
+    fit.setParam(0, 'a', 0)
+    fit.setParam(1, 'b')
+    fit.fit(g, x[0] - 20, x[-1] + 20)
+    fit.saveData('../calc/part3/energygauge_%s.txt' % detector, 'w')
+
+    l = TLegend(0.15, 0.6, 0.4, 0.85)
+    l.AddEntry(g, 'Messwerte', 'p')
+    l.AddEntry(fit.function, 'Fit mit E(k) = a + b*k', 'l')
+    fit.addParamsToLegend(l, [('%.2f', '%.2f'), ('%.4f', '%.4f')], chisquareformat='%.2f')
+    l.Draw()
+
+    c.Update()
+    if PRINTGRAPHS:
+        c.Print('../img/part3/energygauge_%s.pdf' % detector, 'pdf')
+
+
+def calcAbsorpProb(params, area):
+    A, sA = params[len(params) - 3]  # get Amplitude + error
+    C = A * area
+    sC = C * sA / A
+    return [C, sC]
+
+
+def calcAbsorbProbRatio(la, lb):
+    a, sa = la
+    b, sb = lb
+    r = a / b
+    sr = r * np.sqrt((sa / a) ** 2 + (sb / b) ** 2)
+    return r, sr
 
 
 def evalPart3():
-    fitSpectrum('Am', 'CdTe', getParamsAmCdTe())
-    fitSpectrum('Am', 'Si', getParamsAmSi())
-    fitSpectrum('Co', 'CdTe', getParamsCoCdTe())
-    fitSpectrum('Co', 'Si', getParamsCoSi())
+    detectors = [('CdTe', 23), ('Si', 100)]  # detectors with areas in mm
+    elements = ['Am', 'Co']
+
+    absProbs = []
+    for det, area in detectors:
+        # fits
+        fitresults = []
+        litvals = []  # literature values for energies of peaks
+        for elem in elements:
+            fitresults.append(fitSpectrum(det, elem, getParams(det, elem)))
+            # add manually peak for Si-Co
+            if det == 'Si' and elem == 'Co':
+                fitresults.append([[(46, 20), (690, 10), (15, 5)]])  # TODO get good values
+            litvals += getEnergyLitVals(elem)
+
+        # make energy gauge and calculate absorption probabilities
+        peaks = []
+        absProbs_det = []
+        for fit in fitresults:
+            for peak in fit:
+                c, sc = peak[-2]
+                peaks.append((c, sc))
+                absProbs_det.append(calcAbsorpProb(peak, area))
+        makeEnergyGauge(det, peaks, litvals)
+        absProbs.append(absProbs_det)
+        with TxtFile('../calc/part3/AbsProbs_%s.txt' % det, 'w') as f:
+            for i, absProb in enumerate(absProbs_det):
+                f.writeline('\t', str(litvals[i]), *map(str, absProb))
+
+    # calculate absorption rations for peaks
+    detnames = zip(*detectors)[0]
+    for i, det1 in enumerate(detnames):
+        for j, det2 in enumerate(detnames):
+            if not det1 == det2:
+                absProbs1 = absProbs[i]
+                absProbs2 = absProbs[j]
+                with TxtFile('../calc/part3/AbsRatio_%s_%s.txt' % (det1, det2), 'w') as f:
+                    for k, lists in enumerate(zip(absProbs1, absProbs2)):
+                        la, lb = lists
+                        f.writeline('\t', str(litvals[k]), *map(str, calcAbsorbProbRatio(la, lb)))
 
 
 def main():

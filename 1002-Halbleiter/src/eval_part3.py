@@ -68,11 +68,28 @@ def fitSpectrum(element, detector, params, logy=True):
                 fit = Fitter('fit%d' % i, 'gaus(0)')
                 paramnames = ['A', 'c', 's']
 
+            l = None
             if len(peak[0]) > 0:
                 for j, param in enumerate(peak[0]):
                     fit.setParam(j, paramnames[j], param)
                 fit.fit(g, *peak[1])
+
+                fitname = ''
+                if len(peak[0]) == 5:
+                    fitname = 'Fit mit N(k) = a + b*k + A*exp(-#frac{1}{2}(#frac{x-c}{#sigma})^{2})'
+                elif len(peak[0]) == 4:
+                    fitname = 'Fit mit N(k) = a + A*exp(-0.5((k-c)/#sigma)^2)'
+                elif len(peak[0]) == 3:
+                    fitname = 'Fit mit N(k) = A*exp(-0.5((k-c)/#sigma)^2)'
                 fit.saveData('../calc/part3/fit_%s-%s_%02d.txt' % (element, detector, i), 'w')
+
+                # legend
+                l = TLegend(0.675, 0.55, 0.99, 0.85)
+                l.SetTextSize(0.02)
+                l.AddEntry(g, 'Messwerte', 'p')
+                l.AddEntry(fit.function, fitname, 'l')
+                fit.addParamsToLegend(l, chisquareformat='%.2f')
+                l.Draw()
 
             """
             f = TF1('f', 'pol1(0)', peak[1][0], peak[1][1])
@@ -85,10 +102,10 @@ def fitSpectrum(element, detector, params, logy=True):
 
 
 def evalPart3():
-    #fitSpectrum('Am', 'CdTe', getParamsAmCdTe())
-    #fitSpectrum('Am', 'Si', getParamsAmSi())
+    fitSpectrum('Am', 'CdTe', getParamsAmCdTe())
+    fitSpectrum('Am', 'Si', getParamsAmSi())
     fitSpectrum('Co', 'CdTe', getParamsCoCdTe())
-    #fitSpectrum('Co', 'Si', getParamsCoSi())
+    fitSpectrum('Co', 'Si', getParamsCoSi())
 
 
 def main():

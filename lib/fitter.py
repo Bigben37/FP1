@@ -48,7 +48,7 @@ class Fitter:
         xend    -- end value for x interval
         options -- fitting options (see ROOT documentation)
         """
-        graph.Fit(self._function, 'Q'+options, '', xstart, xend)  # Q = quit mode, no print out on console
+        graph.Fit(self._function, 'Q' + options, '', xstart, xend)  # Q = quit mode, no print out on console
         self.virtualFitter = TVirtualFitter.GetFitter()
         for i in self.params:
             self.params[i]['value'] = self.virtualFitter.GetParameter(i)
@@ -130,11 +130,21 @@ class Fitter:
             f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
             f.writeline()
             f.close()
-            
-    def addParamsToLegend(self, legend, lang='de'):
+
+    def addParamsToLegend(self, legend, format='', chisquare='True', chisquareformat='%e', lang='de'):
+        # chi squared
+        if chisquare:
+            legend.AddEntry(0, '#chi^{2} / DoF = ' + chisquareformat % self.getChisquareOverDoF(), '')
+        # parameter label
         lang_param = 'Parameter:'
         if lang == 'en':
             lang_param = 'parameters:'
         legend.AddEntry(0, lang_param, '')
+        # add params
         for i, param in self.params.iteritems():
-            legend.AddEntry(0, '%s: %e #pm %e' % (param['name'], param['value'], param['error']), '')
+            label = '%s #pm %s'
+            if format:
+                label = '%s: ' + label % format[i]
+            else:
+                label = '%s: ' + label % ('%e', '%e')
+            legend.AddEntry(0, label % (param['name'], param['value'], param['error']), '')

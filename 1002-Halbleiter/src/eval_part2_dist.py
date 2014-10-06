@@ -8,7 +8,7 @@ from data import DataErrors
 from txtfile import TxtFile
 
 
-PRINTGRAPHS = True  # set False for quicker testing
+PRINTGRAPHS = False # set False for quicker testing
 
 
 def getParams():
@@ -161,7 +161,7 @@ def fitSigma(sigs, times):
     
     fit = Fitter('fitS', 'sqrt(2*[0]*x)')
     fit.setParam(0, 'D_{n}', 5e-8)
-    fit.fit(g, 1e-6, 23e-6)
+    fit.fit(g, 1e-6, 21e-6)
     fit.saveData('../calc/part2/dist_fit_sigma.txt')
     
     l = TLegend(0.15, 0.7, 0.4, 0.85)
@@ -171,7 +171,7 @@ def fitSigma(sigs, times):
     l.AddEntry(0, 'D_{n} = %.3e #pm %.0e' % (fit.params[0]['value'], fit.params[0]['error']), '')
     l.Draw()
     
-    if PRINTGRAPHS:
+    if PRINTGRAPHS or True:
         c.Update()
         c.Print('../img/part2/dist_fitSigma.pdf', 'pdf')
 

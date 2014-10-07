@@ -14,14 +14,14 @@ PRINTGRAPHS = True  # set false for faster debugging
 def getParams(detector, element):
     params = []
     if detector == 'CdTe' and element == 'Am':
-        params.append([(0, 0, 1e4, 285, 10), (260, 310), (200, 350), (0, 560)])
+        params.append([(1e4, 285, 10), (272.5, 300), (200, 350), (0, 560)])
     elif detector == 'Si' and element == 'Am':
-        params.append([(0, 0, 800, 300, 10), (260, 330), (250, 340), (0, 60)])
+        params.append([(800, 300, 10), (270, 330), (250, 340), (0, 60)])
     elif detector == 'CdTe' and element == 'Co':
-        params.append([(70, 0, 3750, 600, 10), (580, 620), (560, 630), (0, 280)])
+        params.append([(3750, 600, 10), (585, 610), (560, 630), (0, 280)])
         params.append([(600, 675, 20), (640, 700), (620, 720), (0, 30)])
     elif detector == 'Si' and element == 'Co':
-        params.append([(0, 0, 250, 600, 20), (580, 650), (570, 660), (0, 30)])
+        params.append([(250, 600, 20), (580, 650), (570, 660), (0, 30)])
         params.append([(), (670, 710), (650, 750), (0, 3)])
     return params
 
@@ -135,9 +135,9 @@ def makeEnergyGauge(detector, peaks, litvals):
 
 def calcAbsorpProb(params, area):
     A, sA = params[len(params) - 3]  # get Amplitude + error
-    C = A * area
+    C = A / area
     sC = C * sA / A
-    return [C, sC]
+    return C, sC
 
 
 def calcAbsorbProbRatio(la, lb):
@@ -161,7 +161,7 @@ def evalPart3():
             fitresults.append(fitSpectrum(det, elem, getParams(det, elem)))
             # add manually peak for Si-Co
             if det == 'Si' and elem == 'Co':
-                fitresults.append([[(46, 20), (690, 10), (15, 5)]])  # TODO get good values
+                fitresults.append([[(46., 20.), (690., 10.), (15., 5.)]])  # TODO get good values
             litvals += getEnergyLitVals(elem)
 
         # make energy gauge and calculate absorption probabilities

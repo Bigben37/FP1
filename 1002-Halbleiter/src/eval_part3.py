@@ -1,5 +1,5 @@
 #!/usr/bin/python2.7
-from functions import setupROOT
+from functions import setupROOT, loadCSVToList
 from halbleiter import P3SemiCon, prepareGraph
 from ROOT import TCanvas, TLegend
 from fitter import Fitter
@@ -56,13 +56,13 @@ def fitSpectrum(detector, element, params, logy=True):
         paramnames = []
         if len(peak[0]) == 5:
             fit = Fitter('fit%d' % i, 'pol1(0) + 1/(sqrt(2*pi*[4]^2))*gaus(2)')
-            paramnames = ['a', 'b', 'A', 'c', 's']
+            paramnames = ['a', 'b', 'A', 'x_{c}', 's']
         elif len(peak[0]) == 4:
             fit = Fitter('fit%d' % i, '[0] + 1/(sqrt(2*pi*[3]^2))*gaus(1)')
-            paramnames = ['a', 'A', 'c', 's']
+            paramnames = ['a', 'A', 'x_{c}', 's']
         elif len(peak[0]) == 3:
             fit = Fitter('fit%d' % i, '1/(sqrt(2*pi*[2]^2))*gaus(0)')
-            paramnames = ['A', 'c', 's']
+            paramnames = ['A', 'x_{c}', 's']
 
         l = None
         if len(peak[0]) > 0:
@@ -161,7 +161,7 @@ def evalPart3():
             fitresults.append(fitSpectrum(det, elem, getParams(det, elem)))
             # add manually peak for Si-Co
             if det == 'Si' and elem == 'Co':
-                fitresults.append([[(46., 20.), (690., 10.), (15., 5.)]])  # TODO get good values
+                fitresults.append([loadCSVToList('../calc/part3/fit_Co-Si_01_mergedbins_raw.txt')])
             litvals += getEnergyLitVals(elem)
 
         # make energy gauge and calculate absorption probabilities
@@ -187,8 +187,7 @@ def evalPart3():
                 absProbs2 = absProbs[j]
                 with TxtFile('../calc/part3/AbsRatio_%s_%s.txt' % (det1, det2), 'w') as f:
                     for k, lists in enumerate(zip(absProbs1, absProbs2)):
-                        la, lb = lists
-                        f.writeline('\t', str(litvals[k]), *map(str, calcAbsorbProbRatio(la, lb)))
+                        f.writeline('\t', str(litvals[k]), *map(str, calcAbsorbProbRatio(*lists)))
 
 
 def main():

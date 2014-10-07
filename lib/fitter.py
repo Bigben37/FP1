@@ -131,7 +131,16 @@ class Fitter:
             f.writeline()
             f.close()
 
-    def addParamsToLegend(self, legend, format='', chisquare='True', chisquareformat='%e', lang='de'):
+    def addParamsToLegend(self, legend, format='', chisquare=True, chisquareformat='%e', lang='de'):
+        """adds fit information to legend
+
+        Arguments:
+        legend          -- TLegend object
+        format          -- format of values and errors, list of two entry tuples, if empty ('%e', '%e') will be used
+        chisquare       -- show chi^2 (Default=True)
+        chisquareformat -- format string for chi^2 value (Default='%e')
+        lang            -- langeuage for parameter heading, 'de' or 'en' (default='de')         
+        """
         # chi squared
         if chisquare:
             legend.AddEntry(0, '#chi^{2} / DoF = ' + chisquareformat % self.getChisquareOverDoF(), '')

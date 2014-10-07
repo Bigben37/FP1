@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     59048,       1193]
-NotebookOptionsPosition[     58104,       1157]
-NotebookOutlinePosition[     58442,       1172]
-CellTagsIndexPosition[     58399,       1169]
+NotebookDataLength[     60867,       1236]
+NotebookOptionsPosition[     59794,       1197]
+NotebookOutlinePosition[     60132,       1212]
+CellTagsIndexPosition[     60089,       1209]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1147,12 +1147,52 @@ Cell[BoxData[
   3.62166881060677*^9, 3.62166891826171*^9}, {3.621675916226356*^9, 
   3.621675916795272*^9}, {3.621676810770446*^9, 3.621676839164231*^9}}],
 
-Cell[BoxData["\<\"/home/moritz/FP1/1002-Halbleiter/src/../calc/part3/Co-Si_\
-mergedbins.txt\"\>"], "Output",
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"NotebookDirectory", "::", "nosv"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"The notebook \
+\[NoBreak]\\!\\(\\*TemplateBox[List[FrontEndObject[LinkObject[\\\"7h9z3_shm\\\
+\", 3, 1]], 16, \\\"FrontEndObject[LinkObject[\\\\\\\"7h9z3_shm\\\\\\\", 3, \
+1]]\\\", \\\"16\\\", \\\"\\\\\\\"Untitled-1\\\\\\\"\\\"], \
+\\\"NotebookObjectUnsaved\\\"]\\)\[NoBreak] is not saved. \\!\\(\\*ButtonBox[\
+\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/NotebookDirectory\\\", ButtonNote -> \
+\\\"NotebookDirectory::nosv\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.621677296744521*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"StringJoin", "::", "string"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"String expected at position \[NoBreak]\\!\\(1\\)\[NoBreak] \
+in \[NoBreak]\\!\\($Failed <> \\\"../calc/part3/Co-Si_mergedbins.txt\\\"\\)\
+\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/StringJoin\\\", ButtonNote -> \
+\\\"StringJoin::string\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.621677296892681*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Export", "::", "chtype"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"First argument \[NoBreak]\\!\\($Failed <> \
+\\\"../calc/part3/Co-Si_mergedbins.txt\\\"\\)\[NoBreak] is not a valid file \
+specification. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Export/chtype\\\", ButtonNote -> \
+\\\"Export::chtype\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.62167729691571*^9}],
+
+Cell[BoxData["$Failed"], "Output",
  CellChangeTimes->{
   3.621668785594748*^9, {3.621668823118069*^9, 3.621668919055484*^9}, 
    3.621669290206024*^9, 3.621669352258374*^9, {3.621676823068948*^9, 
-   3.621676840358347*^9}}]
+   3.621676840358347*^9}, 3.621677296918018*^9}]
 }, Open  ]]
 },
 WindowSize->{998, 675},
@@ -1193,10 +1233,14 @@ Cell[53400, 1045, 3892, 87, 237, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[57329, 1137, 459, 10, 55, "Input"],
-Cell[57791, 1149, 297, 5, 32, "Output"]
+Cell[57791, 1149, 686, 13, 36, "Message"],
+Cell[58480, 1164, 529, 11, 23, "Message"],
+Cell[59012, 1177, 518, 11, 23, "Message"],
+Cell[59533, 1190, 245, 4, 32, "Output"]
 }, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
+

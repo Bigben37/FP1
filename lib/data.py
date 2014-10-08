@@ -95,10 +95,10 @@ class GeneralData(object):
         """
         marks = []
         for i, point in enumerate(self.points):
-            if lower:
+            if not lower is None:
                 if point[0] < lower:
                     marks.append(i)
-            if upper:
+            if not upper is None:
                 if point[0] > upper:
                     marks.append(i)
         for mark in reversed(marks):
@@ -113,10 +113,10 @@ class GeneralData(object):
         """
         marks = []
         for i, point in enumerate(self.points):
-            if lower:
+            if not lower is None:
                 if point[1] < lower:
                     marks.append(i)
-            if upper:
+            if not upper is None:
                 if point[1] > upper:
                     marks.append(i)
         for mark in reversed(marks):

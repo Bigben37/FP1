@@ -11,14 +11,18 @@ class Fitter:
 
     """This class is a tool for fitting experimental data"""
 
-    def __init__(self, name, function):
+    def __init__(self, name, function, own=None):
         """Constructor, sets some constants for fitting function and initializes fields
 
         Arguments:
         name     -- ROOT internal name of function
         function -- function to fit, use conventions from ROOT
         """
-        self._function = TF1(name, function)
+        if not own is None:
+            xmin, xmax, npar = own
+            self._function = TF1(name, function, xmin, xmax, npar)
+        else:
+            self._function = TF1(name, function)
         self._function.SetLineColor(2)  # red
         self._function.SetLineWidth(1)
         self.params = dict()

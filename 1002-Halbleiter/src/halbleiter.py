@@ -64,14 +64,31 @@ class P1SemiCon(DataErrors):
         x2, y2 = higher[:2]
         m = (y2 - y1) / (x2 - x1)
         y = y1 + m * (x - x1)
-        return y, 0.5 * (lower[4] + higher[4])
+        return y, 0.5 * (lower[3] + higher[3])
 
     def subtractUnderground(self, underground):
         for i in xrange(0, self.getLength()):
             x, y, sx, sy = self.points[i]
-            print(x, y, underground.getNeighbors(x))
-            #u, su = underground.getIntpolYValue(x, *underground.getNeighbors(x))
-            #self.points[i] = (x, y - u, sx, np.sqrt(sy ** 2 + su ** 2))
+            n1, n2 = underground.getNeighbors(x)
+            if not n1[0] == n2[0]:
+                u, su = underground.getIntpolYValue(x, *underground.getNeighbors(x))
+            else:
+                u, su = n1[1], n1[3]
+            self.points[i] = (x, y - u, sx, np.sqrt(sy ** 2 + su ** 2))
+
+    def normalize(self, lamp):
+        for i in xrange(0, self.getLength()):
+            x, y, sx, sy = self.points[i]
+            n1, n2 = lamp.getNeighbors(x)
+            if not n1[0] == n2[0]:
+                n, sn = lamp.getIntpolYValue(x, *lamp.getNeighbors(x))
+            else:
+                n, sn = n1[1], n1[3]
+            if not n == 0:
+                if not y == 0:
+                    self.points[i] = (x, y / n, sx, y / n * np.sqrt((sy / y) ** 2 + (sn / n) ** 2))
+            else:
+                del self.points[i]
 
 
 class P2SemiCon(DataErrors):

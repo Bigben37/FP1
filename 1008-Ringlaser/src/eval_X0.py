@@ -18,19 +18,22 @@ def fitX0(period):
     vline = TLine(0, 33, 0, 60)
     vline.Draw()
 
+    # fit
     fit = Fitter('fit_%d' % period, 'pol1(0)')
     fit.setParam(0, 'x_{m}', 47)
     fit.setParam(1, 'm')
     fit.fit(g, min(data.getX()) - 3, max(data.getX()) + 3)
     fit.saveData('../calc/fit_T_%dms.txt' % period, 'w')
 
+    # legend
     l = TLegend(0.15, 0.65, 0.4, 0.85)
     l.SetTextSize(0.025)
     l.AddEntry(g, 'Messreihe bei T = %d ms' % period, 'p')
-    l.AddEntry(fit.function, 'Fit mit x_{0}(#Delta #nu) = x_{m} + m * #Delta #nu', 'l')
+    l.AddEntry(fit.function, 'Fit mit x_{0}(#Delta#nu) = x_{m} + m * #Delta#nu', 'l')
     fit.addParamsToLegend(l, [('%.3f', '%.3f'), ('%.4f', '%.4f')], chisquareformat='%.2f')
     l.Draw()
 
+    # print
     c.Update()
     c.Print('../img/fit_T_%dms.pdf' % period, 'pdf')
 
@@ -61,7 +64,6 @@ def main():
     with TxtFile('../calc/fixed_T_xm.txt', 'w') as f:
         for i, result in enumerate(fitresults):
             f.writeline('\t', str(periods[i]), *map(str, result[0]))
-        f.writeline()
         f.writeline('\t', *map(str, avgerrors(*zip(*zip(*fitresults)[0]))))  # weighted average
 
     # calculate + output alphas
@@ -71,7 +73,6 @@ def main():
     with TxtFile('../calc/fixed_T_alpha.txt', 'w') as f:
         for i, alpha in enumerate(alphas):
             f.writeline('\t', str(periods[i]), *map(str, alpha))
-        f.writeline()
         f.writeline('\t', *map(str, avgerrors(*zip(*alphas))))
 
 

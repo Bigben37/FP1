@@ -57,7 +57,7 @@ def getAbsTransFitFunction(elem):
 def getFitParams(elem):
     params = []
     if elem == 'Si':
-        params = [(0.8, 1.12, 180, 1, 1.3), (0.8, 1.12, 180, 1.05, 1.3)]
+        params = [(0.8, 1.12, 180, 1, 1.3), (0.2, 1.12, 180, 1.075, 1.2)]
     return params
 
 def fitAbsTrans(elem, filterx, ymax):
@@ -73,7 +73,7 @@ def fitAbsTrans(elem, filterx, ymax):
     # make Graphs
     c = TCanvas('c_%s' % elem, '', 1280, 720)
     graphs = []
-    colors = [(1, 16), (4, 36)]
+    colors = [(1, 16, 2), (4, 36, 6)]
     for i, data in enumerate(datas):
         g = data.makeGraph('g_%s_abstrans_%d' % (elem, i), P1SemiCon.LABELS[P1SemiCon.CENERGY], 'Intensit#ddot{a}t / b.E.')
         g.SetMinimum(0)
@@ -89,25 +89,42 @@ def fitAbsTrans(elem, filterx, ymax):
     
     # fit methods
     fabs, ftrans = getAbsTransFitFunction(elem)
+    paramsabs, paramstrans = getFitParams(elem)
+    
     fitterabs = Fitter('fit_abs_%s' % elem, fabs, (filterx[0], filterx[1], 3))
-    fitterabs.setParam(0, 'A0', 0.8)
-    fitterabs.setParam(1, 'Eg', 1.12)
-    fitterabs.setParam(2, 'T', 180)
-    fitterabs.fit(graphs[0], 1, 1.3)
+    fitterabs.function.SetLineColor(colors[0][2])
+    fitterabs.setParam(0, 'A_{0}', paramsabs[0])
+    fitterabs.setParam(1, 'E_{g}', paramsabs[1])
+    fitterabs.setParam(2, 'T', paramsabs[2])
+    fitterabs.fit(graphs[0], paramsabs[3], paramsabs[4])
+    fitterabs.saveData('../calc/part1/%s_fit_Abs.txt' % elem, 'w')
     
     fittertrans = Fitter('fit_trans_%s' % elem, ftrans, (filterx[0], filterx[1], 3))
-    fittertrans.setParam(0, 'A0', 0.8)
-    fittertrans.setParam(1, 'Eg', 1.12)
-    fittertrans.setParam(2, 'T', 180)
-    fittertrans.fit(graphs[1], 1.05, 1.3, '+')
+    fittertrans.function.SetLineColor(colors[1][2])
+    fittertrans.setParam(0, 'T_{0}', paramstrans[0])
+    fittertrans.setParam(1, 'E_{g}', paramstrans[1])
+    fittertrans.setParam(2, 'T', paramstrans[2])
+    fittertrans.fit(graphs[1], paramstrans[3], paramstrans[4], '+')
+    fittertrans.saveData('../calc/part1/%s_fit_Trans.txt' % elem, 'w')
     """
-    f = TF1('fit_abs_%s' % elem, fabs, filterx[0], filterx[1], 3)
-    f.SetParameter(0, 0.8)
-    f.SetParameter(1, 1.12)
-    f.SetParameter(2, 180.)
-    f.Draw('SAME')"""
-    #fittertrans = Fitter('fit_trans_%s' % elem, trans, *filterx, npar = 3)
-
+    f = TF1('fit_trans_%s' % elem, ftrans, filterx[0], filterx[1], 3)
+    f.SetParameter(0, 0.185)
+    f.SetParameter(1, 1.15)
+    f.SetParameter(2, 300)
+    f.Draw('SAME')
+    """
+    
+    l = TLegend(0.7, 0.4, 0.99, 0.85)
+    l.SetTextSize(0.02)
+    l.AddEntry(graphs[0], 'Absorption Abs(E)', 'p')
+    l.AddEntry(fitterabs.function, 'Fit mit Abs(E) = A_{0}*e^{-#alpha(E, E_{g}, T)*l} (1 - e^{-#alpha(E, E_{g}, T)*l})', 'l')
+    fitterabs.addParamsToLegend(l, [('%.4f', '%.4f'), ('%.4f', '%.4f'), ('%.1f', '%.1f')], chisquareformat='%.2f')
+    l.AddEntry(0, '', '')
+    l.AddEntry(graphs[1], 'Transmission T(E)', 'p')
+    l.AddEntry(fittertrans.function, 'Fit mit Trans(E) = T_{0}*e^{-#alpha(E, E_{g}, T)*l}', 'l')
+    fittertrans.addParamsToLegend(l, [('%.4f', '%.4f'), ('%.4f', '%.4f'), ('%.1f', '%.1f')], chisquareformat='%.2f')
+    l.Draw()
+    
     c.Update()
     c.Print('../img/part1/%s_fit_AbsTrans.pdf' % elem, 'pdf')
 

@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Thu Oct 09 11:46:19 CEST 2014
+markTmpDer=true
+builderNum=2
+outputDir=bin
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=ringlaser.tex
+outputFile=ringlaser.pdf
+langSpell=de
+markDer=true
+srcDir=src

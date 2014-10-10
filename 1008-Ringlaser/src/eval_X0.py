@@ -80,11 +80,11 @@ def main():
         f.write2DArrayToLatexTable(zip(*([(periods)] + zip(*zip(*fitresults)[0]) + zip(*zip(*fitresults)[1]))),
                                    ['$T$ / ms', '$x_m$ / mm', '$s_{x_m}$ / mm', '$m$ / (mm / kHz)', '$s_m$ / (mm / kHz)'],
                                    ['%d', '%.3f', '%.3f', '%.4f', '%.4f'],
-                                   'Fitergebnisse von $x_0\'(\Delta \\nu)$ bei festen Perioden $T$.', 'tab:fit:x0')
+                                   'Fitergebnisse von $x_0\'(\Delta \\nu)$ bei festen Periodendauern $T$.', 'tab:fit:x0')
     
     with TxtFile('../src/fit_x0_alpha.tex', 'w') as f:
         f.write2DArrayToLatexTable(zip(*([(periods)] + zip(*alphas))), ['$T$ / ms', '$\\alpha$', '$s_{\\alpha}$'], 
-                                   ['%d', '%.3f', '%.3f'], 'Mitf\\"uhrungskoeffizienten bei festen Perioden $T$. ', 
+                                   ['%d', '%.3f', '%.3f'], 'Mitf\\"uhrungskoeffizienten bei festen Periodendauern $T$. ', 
                                    'tab:x0:alpha')
 
 

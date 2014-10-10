@@ -1,6 +1,163 @@
 \section{Messergebnisse und Auswertung}
-Tabellen mit Messergebnissen
+\subsection{Variabler Auftreffpunkt \texorpdfstring{$x_0$}{x0}}
+Für jede Messreihe (konstante Periodendauer $T$) werden die Differenzenfrequenzen $\Delta \nu$ aus der Anzahl der Maxima $N$ und dem zeitlichen 
+Abstand $\Delta t$ berechnet.
+\begin{equation}
+  \label{eq:delta_nu}
+  \Delta \nu = \frac{N}{\Delta t}, \qquad s_{\Delta \nu} = \Delta \nu \cdot \frac{s_{\Delta t}}{\Delta t} = \frac{N \cdot s_{\Delta t}}{\Delta t^2}
+\end{equation}
+Der Fehler der Zeitdifferenz wurde auf $s_{\Delta t} = 10$\,\textmu s abgeschätzt.\footnote{Dies ist das 5-fache des protokollierte Fehlers, da 
+zusätzliche Fehler auftreten, die nicht von der Bestimmung des Maximums herrühren.} \\
+Aus \autoref{eq:alpha:exp} folgt:
+\begin{equation}
+  \label{eq:x0:m}
+  x_0(\Delta \nu) = \frac{\lambda \cdot L}{2 \cdot n \cdot d \cdot \omega \cdot \alpha} \cdot \Delta \nu =: m \cdot \Delta \nu
+\end{equation}
+Allerdings unterscheidet sich der gemessene Auftreffpunkt $x_0'$ aufgrund des Messaufbaus um einem Offset $x_m$, 
+welcher noch berücksichtigt werden muss.
+\begin{equation}
+  x_0' = x_0 - x_m
+\end{equation}
+Die Daten können also mit folgender Formel beschrieben werden:
+\begin{equation}
+  x_0(\Delta \nu) = m \Delta \nu + x_m
+\end{equation}
+Die gemessenen Werte werden nun in ein $x_0'$ - $\Delta \nu$ -Diagramm eingetragen und mit der obigen Formel gefittet 
+(\autoref{img:fit:x0:30ms}, \autoref{img:fit:x0:45ms}, \autoref{img:fit:x0:60ms}). Durch diese Wahl der Koordinatenachsen kann der Offset $x_m$ 
+nun direkt abgelesen werden.
+Der geschätzte Fehler auf $x_0'$ beträgt $s_{x_0'} = 0.05$mm. Die Ergebnisse sind in \autoref{tab:fit:x0} dargestellt.
 
-Abbildungen
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_T_30ms.pdf}
+  \caption{Linearer Fit von $x_0'$ bei $T = 30$\,ms.}.
+  \label{img:fit:x0:30ms}
+\end{center}
+\end{figure}
 
-Auswertung, in der die Analyse der Messdaten beschrieben wird und die Ergebnisse mit ihren Fehlern zusammengestellt werden.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_T_45ms.pdf}
+  \caption{Linearer Fit von $x_0'$ bei $T = 45$\,ms.}.
+  \label{img:fit:x0:45ms}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_T_60ms.pdf}
+  \caption{Linearer Fit von $x_0'$ bei $T = 60$\,ms.}.
+  \label{img:fit:x0:60ms}
+\end{center}
+\end{figure}
+
+\input{fit_x0}
+
+Der gewichtete Mittelwert aus den Offsets $x_m$ für verschiedene Periodendauern $T$ liefert:
+\begin{equation}
+  \label{eq:xm}
+  \bar{x}_{m} = (46.886 \pm 0.019)\,\text{mm}
+\end{equation}
+Aus den einzelnen Steigungen $m$ lässt sich nun der Mitführungskoeffizient $\alpha$ nach \autoref{eq:x0:m} bestimmen. Die Werte der Konstanten des 
+Versuchaufbaus sind in \autoref{sec:aufbau} aufgelistet.
+\begin{equation}
+  \alpha = \frac{\lambda \cdot L}{2 \cdot n \cdot d \cdot \omega \cdot m}, \qquad
+  s_{\alpha} = \alpha \cdot \sqrt{\left(\frac{s_m}{m}\right)^2 + \left(\frac{s_T}{T}\right)^2}
+\end{equation}
+Die Kreisfrequenz $\omega$ lässt sich aus der Periodendauer folgendermaßen bestimmen:
+\begin{equation}
+  \label{eq:omega}
+  \omega = \frac{2 \pi}{T}, \qquad s_{\omega} = \omega \cdot \frac{s_T}{T}
+\end{equation}
+Die berechneten Mitführungskoeffizienten sind in \autoref{tab:x0:alpha} aufgelistet.
+\input{fit_x0_alpha}
+Da alle Mitführungskoeffizienten innerhalb einer Standardabweichung übereinstimmen, kann der gewichtete Mittelwert $\bar{\alpha}$ gebildet werden.
+\begin{equation}
+  \label{eq:x0:alpha:avg}
+  \bar{\alpha} = 0.536 \pm 0.002
+\end{equation}
+
+\subsection{Variabler Periodendauer \texorpdfstring{$T$}{T}}
+Es werden wieder die einzelnen Differenzenfrequenzen mit \autoref{eq:delta_nu} berechnet. Hier ist der Fehler $s_{\Delta t}$ 
+auf die Zeitdifferenz $\Delta t$ entweder 5 oder 10 \textmu s, je nach verwendeter Auflösung des Oszilloskops. \\
+Die gemessenen Werte werden in einem $\Delta \nu$-$\omega$-Diagramm dargestellt. 
+Dazu werden die einstellten Periodendauern $T$ mit \autoref{eq:omega} in Kreisfrequenzen $\omega$ umgerechnet. \\
+Die Daten können wieder mit einer Geraden beschrieben werden:
+\begin{equation}
+  \Delta \nu (\omega) = a + \frac{2 \cdot n \cdot d \cdot x_0 \cdot \alpha}{\lambda \cdot L} \cdot \Delta \nu  =: a + b \Delta \nu
+\end{equation}
+Der Offset $a$ sollte im Idealfall beim Fit verschwinden, ist er jedoch nicht 0, so gibt er Information über eventuelle systematischen Fehler.
+Die Fits für die verschiedenen, festen Auftreffpunkte $x_0$ sind in \autoref{img:fit:T:36mm}, \autoref{img:fit:T:40mm}, \autoref{img:fit:T:53mm} 
+und \autoref{img:fit:T:57mm} dargestellt. Die Ergebnisse für den Offset $a$ und die Steigung $b$ sind in \autoref{tab:fit:T} aufgelistet.
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_x0_36mm.pdf}
+  \caption{Linearer Fit von $\Delta \nu$ bei $x_0' = 36$\,mm.}
+  \label{img:fit:T:36mm}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_x0_40mm.pdf}
+  \caption{Linearer Fit von $\Delta \nu$ bei $x_0' = 40$\,mm.}
+  \label{img:fit:T:40mm}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_x0_53mm.pdf}
+  \caption{Linearer Fit von $\Delta \nu$ bei $x_0' = 53$\,mm.}
+  \label{img:fit:T:53mm}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_x0_57mm.pdf}
+  \caption{Linearer Fit von $\Delta \nu$ bei $x_0' = 57$\,mm.}
+  \label{img:fit:T:57mm}
+\end{center}
+\end{figure}
+
+\input{fit_T}
+
+Die Offsets $a$ verschwinden alle innerhalb von maximal 4 Standardabweichungen. Aus den Steigungen $b$ lässt sich nun der Mitführungskoeffizient 
+$\alpha$ bestimmen:
+\begin{equation}
+  \alpha = \frac{b \cdot \lambda L}{2 \cdot n \cdot d \cdot x_0}, \qquad
+  s_\alpha = \alpha \cdot \sqrt{ \left( \frac{s_b}{b} \right)^2 + \left( \frac{s_{x_0}}{x_0} \right)^2 }
+\end{equation}
+Der Auftreffpunkt $x_0$ berechnet sich aus dem gemessenen Auftreffpunkt $s_0'$ und dem Offset des Auftreffpunkts $x_m$, welcher oben 
+(\autoref{eq:xm}) bestimmt wurde.
+\begin{equation}
+  x_0 = x_0' - x_m, \qquad s_{x_0} = \sqrt{s_{x_0'}^2 + s_{x_m}^2}
+\end{equation}
+Die verschiedenen Mitführungskoeffizienten sind in \autoref{tab:T:alpha} aufgelistet.
+\input{fit_T_alpha}
+Sie stimmen innerhalb von drei Standardabweichungen überein, deshalb kann wieder der gewichtete Mittelwert $\bar{\alpha}$ gebildet werden.
+\begin{equation}
+  \bar{\alpha} = 0.526 \pm 0.007
+\end{equation}
+
+\subsection{Vergleich der verschiedenen Mitführungskoeffizienten}
+Der theoretsiche Mitführungskoeffizient $\alpha_{\text{theo}}$ lässt sich mit \autoref{eq:alpha:theo} mit dem Brechungsindex von Quarz $n=1.457$ 
+und der Dispersion $\frac{\difd n}{\difd \lambda} = -300\,\text{cm}^{-1}$ bei der Wellenlänge $\lambda = 632.8$\,nm berechnen.
+\begin{equation}
+  \alpha_{\text{theo}} \approx 0.542
+\end{equation}
+Es werden zum Vergleich nochmal die berechneten Mitführungskoeffizienten bei variablen Periodendauern $\alpha_T$ und bei variablen Auftreffpunkten 
+$\alpha_{x_0}$ aufgelistet.
+\begin{equation}
+\begin{split}
+  \alpha_T = 0.526 \pm 0.007 \\
+  \alpha_{x_0} = 0.536 \pm 0.002
+\end{split}
+\end{equation}
+Sie stimmen innerhalb von zwei Standardabweichungen überein und der gewichtete Mittelwert lautet:
+\begin{equation}
+  \alpha_{\text{exp}} = 0.535 \pm 0.002
+\end{equation}
+Der theoretische Wert liegt innerhalb des $4$-$\sigma$-Intervalls dieses Wertes.

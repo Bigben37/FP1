@@ -11,7 +11,7 @@ def fitX0(period):
     # get data and make graph
     data = X0Data.fromPath('../data/T_%dms.txt' % period)
     c = TCanvas('c_%d' % period, '', 1280, 720)
-    g = data.makeGraph('g_%d' % period, 'Differenzenfrequenz #Delta #nu / kHz', 'Auftreffpunkt x_{0} / mm')
+    g = data.makeGraph('g_%d' % period, 'Differenzenfrequenz #Delta#nu / kHz', 'Auftreffpunkt x_{0}\' / mm')
     g.Draw('AP')
 
     # axis cross
@@ -29,7 +29,7 @@ def fitX0(period):
     l = TLegend(0.15, 0.65, 0.4, 0.85)
     l.SetTextSize(0.025)
     l.AddEntry(g, 'Messreihe bei T = %d ms' % period, 'p')
-    l.AddEntry(fit.function, 'Fit mit x_{0}(#Delta#nu) = x_{m} + m * #Delta#nu', 'l')
+    l.AddEntry(fit.function, 'Fit mit x_{0}\'(#Delta#nu) = x_{m} + m * #Delta#nu', 'l')
     fit.addParamsToLegend(l, [('%.3f', '%.3f'), ('%.4f', '%.4f')], chisquareformat='%.2f')
     l.Draw()
 
@@ -74,6 +74,18 @@ def main():
         for i, alpha in enumerate(alphas):
             f.writeline('\t', str(periods[i]), *map(str, alpha))
         f.writeline('\t', *map(str, avgerrors(*zip(*alphas))))
+        
+    # make latex tables for fit results an alphas
+    with TxtFile('../src/fit_x0.tex', 'w') as f:
+        f.write2DArrayToLatexTable(zip(*([(periods)] + zip(*zip(*fitresults)[0]) + zip(*zip(*fitresults)[1]))),
+                                   ['$T$ / ms', '$x_m$ / mm', '$s_{x_m}$ / mm', '$m$ / (mm / kHz)', '$s_m$ / (mm / kHz)'],
+                                   ['%d', '%.3f', '%.3f', '%.4f', '%.4f'],
+                                   'Fitergebnisse von $x_0\'(\Delta \\nu)$ bei festen Perioden $T$.', 'tab:fit:x0')
+    
+    with TxtFile('../src/fit_x0_alpha.tex', 'w') as f:
+        f.write2DArrayToLatexTable(zip(*([(periods)] + zip(*alphas))), ['$T$ / ms', '$\\alpha$', '$s_{\\alpha}$'], 
+                                   ['%d', '%.3f', '%.3f'], 'Mitf\\"uhrungskoeffizienten bei festen Perioden $T$. ', 
+                                   'tab:x0:alpha')
 
 
 if __name__ == '__main__':

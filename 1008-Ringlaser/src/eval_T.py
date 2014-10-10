@@ -26,14 +26,14 @@ def fitT(x0):
     l.SetTextSize(0.025)
     l.AddEntry(g, 'Messreihe bei x_{0}\' = %d mm' % x0, 'p')
     l.AddEntry(fit.function, 'Fit mit #Delta#nu (#omega) = a + b*#omega', 'l')
-    fit.addParamsToLegend(l, [('%.1f', '%.1f'), ('%.1f', '%.1f')], chisquareformat='%.2f')
+    fit.addParamsToLegend(l, [('%.0f', '%.0f'), ('%.0f', '%.0f')], chisquareformat='%.2f')
     l.Draw()
 
     # print
     c.Update()
     c.Print('../img/fit_x0_%dmm.pdf' % x0, 'pdf')
 
-    return fit.params[1]['value'], fit.params[1]['error']
+    return [(fit.params[0]['value'], fit.params[0]['error']), (fit.params[1]['value'], fit.params[1]['error'])]
 
 
 def getXm(path):
@@ -64,11 +64,23 @@ def main():
     xm, sxm = getXm('../calc/fixed_T_xm.txt')
     alphas = []
     for i, result in enumerate(fitresults):
-        alphas.append(calcAlpha(x0s[i], TData.SX, xm, sxm, *result))
+        alphas.append(calcAlpha(x0s[i], TData.SX, xm, sxm, *result[1]))
     with TxtFile('../calc/fixed_x0_alpha.txt', 'w') as f:
         for i, alpha in enumerate(alphas):
             f.writeline('\t', str(x0s[i]), *map(str, alpha))
         f.writeline('\t', *map(str, avgerrors(*zip(*alphas))))
+    
+    # make latex tables for fit results an alphas
+    with TxtFile('../src/fit_T.tex', 'w') as f:
+        f.write2DArrayToLatexTable(zip(*([(x0s)] + zip(*zip(*fitresults)[0]) + zip(*zip(*fitresults)[1]))),
+                                   ['$x_0\'$ / mm', '$a$ / kHz', '$s_{a}$ / kHz', '$b$ / (kHz $\cdot$ ms)', '$s_b$ / (kHz $\cdot$ ms)'],
+                                   ['%d', '%.1f', '%.1f', '%.0f', '%.0f'],
+                                   'Fitergebnisse von $\Delta \\nu(\\omega)$ bei festen Auftrittpunkten $x_0\'$.', 'tab:fit:T')
+
+    with TxtFile('../src/fit_T_alpha.tex', 'w') as f:
+        f.write2DArrayToLatexTable(zip(*([(x0s)] + zip(*alphas))), ['$T$ / ms', '$\\alpha$', '$s_{\\alpha}$'], 
+                                   ['%d', '%.3f', '%.3f'], 'Mitf\\"uhrungskoeffizienten bei festen Auftreffpunkten $x_0\'$. ', 
+                                   'tab:T:alpha')
 
 
 if __name__ == '__main__':

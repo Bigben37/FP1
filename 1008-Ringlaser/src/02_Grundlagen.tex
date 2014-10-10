@@ -11,13 +11,12 @@
 \end{center}
 \end{figure}
 
-%TODO cite Demtr
-
 Ein Laser besteht aus drei Komponenten: Einer \emph{Pumpe},
 die in einem \emph{aktiven Medium} Besetzungsinversion verursacht und \emph{Spiegeln},
 die emittierte Strahlung zurück in das Medium reflektierten.
 Die reflektierte Strahlung stimuliert im Medium Emission und verstärkt sich dadurch selbst.\\
-Der im Versuch verwendete Laser ist ein Helium-Neon-Gaslaser.
+Der im Versuch verwendete Laser ist ein Helium-Neon-Gaslaser.\footnote{
+Die Ausführungen in diesem Abschnitt orientieren sich an \cite{dem3}.}
 Der eigentliche Laserübergang findet beim Neon statt, das Helium dient nur zur Übertragung der Energie
 auf das Neon:
 Eine an der Röhre angelegte Spannung führt zu Gasentladung und Anregung der Heliumatome
@@ -77,9 +76,20 @@ Dies entspricht dem Zusammenhang, den A. J. Fresnel aus der Äthertheorie ableit
 
 \subsubsection*{Relativistischer Dopplereffekt}
 Die Relativitätstheorie liefert aber noch einen weiteren Beitrag zum Mitführungskoeffizienten.
-
-
-
+Der relativistische Dopplereffekt, der die Frequenzveränderung einer E/M-Welle
+bei einer Relativbewegung zwischen Sender und Empfänger beschreibt,
+führt zur Aufnahme eines weiteren Terms in die Gleichung für den Koeffizienten.
+Die Frequenz des empfangenen Signals $f_\text{E}$ beiträgt bei der Senderfrequenz $f_\text{S}$
+\begin{equation}
+\label{}
+f_\text{E} = f_\text{S} \cdot \sqrt{\frac{c \pm w}{c \mp w}}
+\end{equation}
+Der Mitführungskoeffizient unter Berücksichtigung des Dopplereffekts lautet (Herleitung siehe \cite{staatsex})
+\begin{equation}
+\label{}
+\alpha = 1 - \frac{1}{n^2} - \frac{\lambda}{n} \cdot \frac{\Delta n}{\Delta \lambda}
+\end{equation}
+$\lambda$ ist die Wellenlänge des Lichts und $\Delta n / \Delta \lambda$ die lineare Dispersion im Medium.
 
 \subsection{Bestimmung des Mitführungskoeffizienten mit dem Ringlaser}
 

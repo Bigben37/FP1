@@ -39,7 +39,7 @@ dass Strahlung von bewegten, optisch dichten Medien zum Teil mitgeführt wird.
 Für die Geschwindigkeit $v$ der Strahlung im bewegten Medium mit Brechungsindex $n$, gemessen vom Ruhesystem,
 gilt
 \begin{equation}
-\label{}
+\label{eq:mitf}
 v = v' \pm \alpha \cdot w = \frac{c}{n} \pm \alpha \cdot w
 \end{equation}
 Die Geschwindigkeit des bewegten Systems ist $w$, $c$ die Lichtgeschwindigkeit,
@@ -86,12 +86,50 @@ f_\text{E} = f_\text{S} \cdot \sqrt{\frac{c \pm w}{c \mp w}}
 \end{equation}
 Der Mitführungskoeffizient unter Berücksichtigung des Dopplereffekts lautet (Herleitung siehe \cite{staatsex})
 \begin{equation}
-\label{}
+\label{eq:alpha:theo}
 \alpha = 1 - \frac{1}{n^2} - \frac{\lambda}{n} \cdot \frac{\Delta n}{\Delta \lambda}
 \end{equation}
 $\lambda$ ist die Wellenlänge des Lichts und $\Delta n / \Delta \lambda$ die lineare Dispersion im Medium.
 
 \subsection{Bestimmung des Mitführungskoeffizienten mit dem Ringlaser}
+Die Herleitung der Formel für die Bestimmung des Mitführungskoeffizienten mit dem vorliegenden Aufbau erfordert
+aufwändige geometrische Überlegungen und findet sich in \cite{staatsex}.
+Hier werden nur kurz die Grundzüge der Herleitung dargelegt.\\
+Die optische Gesamtlänge des Resonators $L$ ist die Summe des Produkts aller Teilstreckenlängen $l_i$ mit dem 
+jeweiligen Brechungsindex $n_i$
+\begin{equation}
+\label{}
+L = \sum_i{l_i \cdot n_i}
+\end{equation}
+Für den Laser gilt die Randbedingung, dass eine ganze Zahl $N$ von Wellenzügen mit der Wellenlänge $\lambda$
+in $L$ liegen muss:
+\begin{equation}
+\label{}
+L = N \cdot \lambda
+\end{equation}
+Für die Bestimmung des Mitführungskoeffizienten ist die Änderung der optischen Gesamtlänge $\Delta L$ interessant.
+Diese Änderung wird nur durch die Änderung des effektiven Brechungsindex $n_\text{Q}$
+in der rotierenden Quarzscheibe
+verursacht. Für die optische Länge $L_\text{Q}$ des Quarz mit der Dicke $l_\text{Q}$ gilt
+\begin{equation}
+\label{}
+L_\text{Q} = n_\text{Q} \cdot l_\text{Q} \refeq{eq:mitf} \frac{c}{\frac{c}{n_\text{Q}} \pm \alpha \cdot w}
+\end{equation}
+Wenn man davon ausgeht, dass eine kleine Änderung der opt. Länge $\Delta L$ die Anzahl $N$ der Wellenzüge
+im Resonator nicht ändert, so gilt
+\begin{equation}
+\label{}
+\frac{\Delta L}{L} = \frac{\Delta \lambda}{\lambda}
+\end{equation}
+Es wird also eine Änderung $\Delta \lambda$ der Wellenlänge des Laserlichts verursacht,
+die für eine Strahlkomponente positiv, für die andere negativ ist.
+Dieser kleine Unterschied der Wellenlängen führt zur Ausbildung einer Schwebung mit der Frequenz
+$\Delta \nu$, die mit der Photodiode gemessen werden kann.
+Der Mitführungskoeffizient $\alpha$ kann dann mit folgendem Zusammenhang bestimmt werden:
+\begin{equation}
+\label{eq:alpha:exp}
+\alpha = \frac{L \cdot \lambda \cdot \Delta \nu}{2 \cdot n_\text{Q} \cdot \omega \cdot d \cdot x_0}
+\end{equation}
+$\omega$, $d$ und $x_0$ sind Größen am Versuchsaufbau, die in \autoref{sec:aufbau} erklärt werden.
 
 
-Formel für $\alpha$ mit Verweis auf Stex

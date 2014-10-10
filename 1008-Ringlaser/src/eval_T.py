@@ -26,7 +26,7 @@ def fitT(x0):
     l.SetTextSize(0.025)
     l.AddEntry(g, 'Messreihe bei x_{0}\' = %d mm' % x0, 'p')
     l.AddEntry(fit.function, 'Fit mit #Delta#nu (#omega) = a + b*#omega', 'l')
-    fit.addParamsToLegend(l, [('%.0f', '%.0f'), ('%.0f', '%.0f')], chisquareformat='%.2f')
+    fit.addParamsToLegend(l, [('%.1f', '%.1f'), ('%.0f', '%.0f')], chisquareformat='%.2f')
     l.Draw()
 
     # print
@@ -78,7 +78,7 @@ def main():
                                    'Fitergebnisse von $\Delta \\nu(\\omega)$ bei festen Auftrittpunkten $x_0\'$.', 'tab:fit:T')
 
     with TxtFile('../src/fit_T_alpha.tex', 'w') as f:
-        f.write2DArrayToLatexTable(zip(*([(x0s)] + zip(*alphas))), ['$T$ / ms', '$\\alpha$', '$s_{\\alpha}$'], 
+        f.write2DArrayToLatexTable(zip(*([(x0s)] + zip(*alphas))), ['$x_0\'$ / mm', '$\\alpha$', '$s_{\\alpha}$'], 
                                    ['%d', '%.3f', '%.3f'], 'Mitf\\"uhrungskoeffizienten bei festen Auftreffpunkten $x_0\'$. ', 
                                    'tab:T:alpha')
 

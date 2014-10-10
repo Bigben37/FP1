@@ -6,26 +6,26 @@ Abstand $\Delta t$ berechnet.
   \label{eq:delta_nu}
   \Delta \nu = \frac{N}{\Delta t}, \qquad s_{\Delta \nu} = \Delta \nu \cdot \frac{s_{\Delta t}}{\Delta t} = \frac{N \cdot s_{\Delta t}}{\Delta t^2}
 \end{equation}
-Der Fehler der Zeitdifferenz wurde auf $s_{\Delta t} = 10$\,\textmu s abgeschätzt.\footnote{Dies ist das 5-fache des protokollierte Fehlers, da 
+Der Fehler der Zeitdifferenz $\Delta t$ wurde auf $s_{\Delta t} = 10$\,\textmu s abgeschätzt.\footnote{Dies ist das 5-fache des protokollierte Fehlers, da 
 zusätzliche Fehler auftreten, die nicht von der Bestimmung des Maximums herrühren.} \\
 Aus \autoref{eq:alpha:exp} folgt:
 \begin{equation}
   \label{eq:x0:m}
   x_0(\Delta \nu) = \frac{\lambda \cdot L}{2 \cdot n \cdot d \cdot \omega \cdot \alpha} \cdot \Delta \nu =: m \cdot \Delta \nu
 \end{equation}
-Allerdings unterscheidet sich der gemessene Auftreffpunkt $x_0'$ aufgrund des Messaufbaus um einem Offset $x_m$, 
+Allerdings unterscheidet sich der gemessene Auftreffpunkt $x_0'$ aufgrund des Messaufbaus um einem Skalenoffset $x_m$, 
 welcher noch berücksichtigt werden muss.
 \begin{equation}
   x_0' = x_0 - x_m
 \end{equation}
 Die Daten können also mit folgender Formel beschrieben werden:
 \begin{equation}
-  x_0(\Delta \nu) = m \Delta \nu + x_m
+  x_0(\Delta \nu) = m \cdot \Delta \nu + x_m
 \end{equation}
 Die gemessenen Werte werden nun in ein $x_0'$ - $\Delta \nu$ -Diagramm eingetragen und mit der obigen Formel gefittet 
-(\autoref{img:fit:x0:30ms}, \autoref{img:fit:x0:45ms}, \autoref{img:fit:x0:60ms}). Durch diese Wahl der Koordinatenachsen kann der Offset $x_m$ 
+(\autoref{img:fit:x0:30ms}, \autoref{img:fit:x0:45ms} und \autoref{img:fit:x0:60ms}). Durch diese Wahl der Koordinatenachsen kann der Offset $x_m$ 
 nun direkt abgelesen werden.
-Der geschätzte Fehler auf $x_0'$ beträgt $s_{x_0'} = 0.05$mm. Die Ergebnisse sind in \autoref{tab:fit:x0} dargestellt.
+Der geschätzte Fehler auf $x_0'$ beträgt $s_{x_0'} = 0.05$\,mm. Die Ergebnisse sind in \autoref{tab:fit:x0} dargestellt.
 
 \begin{figure}[H]
 \begin{center}
@@ -61,8 +61,8 @@ Der gewichtete Mittelwert aus den Offsets $x_m$ für verschiedene Periodendauern
 Aus den einzelnen Steigungen $m$ lässt sich nun der Mitführungskoeffizient $\alpha$ nach \autoref{eq:x0:m} bestimmen. Die Werte der Konstanten des 
 Versuchaufbaus sind in \autoref{sec:aufbau} aufgelistet.
 \begin{equation}
-  \alpha = \frac{\lambda \cdot L}{2 \cdot n \cdot d \cdot \omega \cdot m}, \qquad
-  s_{\alpha} = \alpha \cdot \sqrt{\left(\frac{s_m}{m}\right)^2 + \left(\frac{s_T}{T}\right)^2}
+  \alpha = \frac{\lambda \cdot L}{2 \cdot n \cdot d} \cdot \frac{1}{\omega \cdot m}, \qquad
+  s_{\alpha} = \alpha \cdot \sqrt{\left(\frac{s_m}{m}\right)^2 + \left(\frac{s_\omega}{\omega}\right)^2}
 \end{equation}
 Die Kreisfrequenz $\omega$ lässt sich aus der Periodendauer folgendermaßen bestimmen:
 \begin{equation}
@@ -84,9 +84,10 @@ Die gemessenen Werte werden in einem $\Delta \nu$-$\omega$-Diagramm dargestellt.
 Dazu werden die einstellten Periodendauern $T$ mit \autoref{eq:omega} in Kreisfrequenzen $\omega$ umgerechnet. \\
 Die Daten können wieder mit einer Geraden beschrieben werden:
 \begin{equation}
-  \Delta \nu (\omega) = a + \frac{2 \cdot n \cdot d \cdot x_0 \cdot \alpha}{\lambda \cdot L} \cdot \Delta \nu  =: a + b \Delta \nu
+  \label{eq:nu_omega}
+  \Delta \nu (\omega) = a + \frac{2 \cdot n \cdot d \cdot x_0 \cdot \alpha}{\lambda \cdot L} \cdot \omega  =: a + b \cdot \omega
 \end{equation}
-Der Offset $a$ sollte im Idealfall beim Fit verschwinden, ist er jedoch nicht 0, so gibt er Information über eventuelle systematischen Fehler.
+Der Offset $a$ sollte im Idealfall verschwinden, ist er jedoch nicht 0, so gibt er Information über eventuelle systematischen Fehler.
 Die Fits für die verschiedenen, festen Auftreffpunkte $x_0$ sind in \autoref{img:fit:T:36mm}, \autoref{img:fit:T:40mm}, \autoref{img:fit:T:53mm} 
 und \autoref{img:fit:T:57mm} dargestellt. Die Ergebnisse für den Offset $a$ und die Steigung $b$ sind in \autoref{tab:fit:T} aufgelistet.
 
@@ -124,14 +125,14 @@ und \autoref{img:fit:T:57mm} dargestellt. Die Ergebnisse für den Offset $a$ und
 
 \input{fit_T}
 
-Die Offsets $a$ verschwinden alle innerhalb von maximal 4 Standardabweichungen. Aus den Steigungen $b$ lässt sich nun der Mitführungskoeffizient 
-$\alpha$ bestimmen:
+Die Offsets $a$ verschwinden alle innerhalb von maximal 4 Standardabweichungen. Aus den Steigungen $b$ lässt sich nun mit \autoref{eq:nu_omega} 
+der Mitführungskoeffizient $\alpha$ bestimmen (alle Konstanten aus \autoref{sec:aufbau}):
 \begin{equation}
-  \alpha = \frac{b \cdot \lambda L}{2 \cdot n \cdot d \cdot x_0}, \qquad
+  \alpha = \frac{\lambda \cdot L}{2 \cdot n \cdot d} \cdot \frac{b}{x_0}, \qquad
   s_\alpha = \alpha \cdot \sqrt{ \left( \frac{s_b}{b} \right)^2 + \left( \frac{s_{x_0}}{x_0} \right)^2 }
 \end{equation}
-Der Auftreffpunkt $x_0$ berechnet sich aus dem gemessenen Auftreffpunkt $s_0'$ und dem Offset des Auftreffpunkts $x_m$, welcher oben 
-(\autoref{eq:xm}) bestimmt wurde.
+Der Auftreffpunkt $x_0$ berechnet sich aus dem gemessenen Auftreffpunkt $s_0'$ (Fehler $s_{x_0'} = 0.05$\,mm) und dem 
+Offset des Auftreffpunkts $x_m$, welcher oben (\autoref{eq:xm}) bestimmt wurde.
 \begin{equation}
   x_0 = x_0' - x_m, \qquad s_{x_0} = \sqrt{s_{x_0'}^2 + s_{x_m}^2}
 \end{equation}

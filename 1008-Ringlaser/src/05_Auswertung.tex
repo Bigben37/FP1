@@ -7,7 +7,7 @@ Abstand $\Delta t$ berechnet.
   \Delta \nu = \frac{N}{\Delta t}, \qquad s_{\Delta \nu} = \Delta \nu \cdot \frac{s_{\Delta t}}{\Delta t} = \frac{N \cdot s_{\Delta t}}{\Delta t^2}
 \end{equation}
 Der Fehler der Zeitdifferenz $\Delta t$ wurde auf $s_{\Delta t} = 10$\,\textmu s abgeschätzt.\footnote{Dies ist das 5-fache des protokollierte Fehlers, da 
-zusätzliche Fehler auftreten, die nicht von der Bestimmung des Maximums herrühren.} \\
+zusätzliche Fehler auftreten, die nicht vom Ablesen der Maxima herrühren.} \\
 Aus \autoref{eq:alpha:exp} folgt:
 \begin{equation}
   \label{eq:x0:m}
@@ -64,7 +64,7 @@ Versuchaufbaus sind in \autoref{sec:aufbau} aufgelistet.
   \alpha = \frac{\lambda \cdot L}{2 \cdot n \cdot d} \cdot \frac{1}{\omega \cdot m}, \qquad
   s_{\alpha} = \alpha \cdot \sqrt{\left(\frac{s_m}{m}\right)^2 + \left(\frac{s_\omega}{\omega}\right)^2}
 \end{equation}
-Die Kreisfrequenz $\omega$ lässt sich aus der Periodendauer folgendermaßen bestimmen:
+Die Kreisfrequenz $\omega$ lässt sich aus der Periodendauer $T$ folgendermaßen bestimmen:
 \begin{equation}
   \label{eq:omega}
   \omega = \frac{2 \pi}{T}, \qquad s_{\omega} = \omega \cdot \frac{s_T}{T}
@@ -79,7 +79,8 @@ Da alle Mitführungskoeffizienten innerhalb einer Standardabweichung übereinsti
 
 \subsection{Variabler Periodendauer \texorpdfstring{$T$}{T}}
 Es werden wieder die einzelnen Differenzenfrequenzen mit \autoref{eq:delta_nu} berechnet. Hier ist der Fehler $s_{\Delta t}$ 
-auf die Zeitdifferenz $\Delta t$ entweder 5 oder 10 \textmu s, je nach verwendeter Auflösung des Oszilloskops. \\
+auf die Zeitdifferenz $\Delta t$ entweder 5 oder 10 \textmu s, je nach verwendeter Auflösung des Oszilloskops.\footnote{Auch hier ist der 
+verwendete Fehler das 5-fache des angegebenen Fehlers.} \\
 Die gemessenen Werte werden in einem $\Delta \nu$-$\omega$-Diagramm dargestellt. 
 Dazu werden die einstellten Periodendauern $T$ mit \autoref{eq:omega} in Kreisfrequenzen $\omega$ umgerechnet. \\
 Die Daten können wieder mit einer Geraden beschrieben werden:
@@ -144,12 +145,12 @@ Sie stimmen innerhalb von drei Standardabweichungen überein, deshalb kann wiede
 \end{equation}
 
 \subsection{Vergleich der verschiedenen Mitführungskoeffizienten}
-Der theoretsiche Mitführungskoeffizient $\alpha_{\text{theo}}$ lässt sich mit \autoref{eq:alpha:theo} mit dem Brechungsindex von Quarz $n=1.457$ 
-und der Dispersion $\frac{\difd n}{\difd \lambda} = -300\,\text{cm}^{-1}$ bei der Wellenlänge $\lambda = 632.8$\,nm berechnen.
+Der theoretische Mitführungskoeffizient $\alpha_{\text{theo}}$ lässt sich mit \autoref{eq:alpha:theo} mit dem Brechungsindex von Quarzglas $n=1.457$ 
+und der Dispersion $\frac{\difd n}{\difd \lambda} = -300\,\text{cm}^{-1}$ bei der Wellenlänge  $\lambda = 632.8$\,nm berechnen.
 \begin{equation}
   \alpha_{\text{theo}} \approx 0.542
 \end{equation}
-Es werden zum Vergleich nochmal die berechneten Mitführungskoeffizienten bei variablen Periodendauern $\alpha_T$ und bei variablen Auftreffpunkten 
+Es werden zum Vergleich nochmal die gemittelten Mitführungskoeffizienten bei variablen Periodendauern $\alpha_T$ und bei variablen Auftreffpunkten 
 $\alpha_{x_0}$ aufgelistet.
 \begin{equation}
 \begin{split}
@@ -157,7 +158,7 @@ $\alpha_{x_0}$ aufgelistet.
   \alpha_{x_0} = 0.536 \pm 0.002
 \end{split}
 \end{equation}
-Sie stimmen innerhalb von zwei Standardabweichungen überein und der gewichtete Mittelwert lautet:
+Die beiden stimmen innerhalb von zwei Standardabweichungen überein und der gewichtete Mittelwert lautet:
 \begin{equation}
   \alpha_{\text{exp}} = 0.535 \pm 0.002
 \end{equation}

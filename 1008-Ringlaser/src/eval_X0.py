@@ -26,8 +26,8 @@ def fitX0(period):
     fit.saveData('../calc/fit_T_%dms.txt' % period, 'w')
 
     # legend
-    l = TLegend(0.15, 0.65, 0.4, 0.85)
-    l.SetTextSize(0.025)
+    l = TLegend(0.15, 0.65, 0.425, 0.85)
+    l.SetTextSize(0.03)
     l.AddEntry(g, 'Messreihe bei T = %d ms' % period, 'p')
     l.AddEntry(fit.function, 'Fit mit x_{0}\'(#Delta#nu) = x_{m} + m * #Delta#nu', 'l')
     fit.addParamsToLegend(l, [('%.3f', '%.3f'), ('%.4f', '%.4f')], chisquareformat='%.2f')

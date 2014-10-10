@@ -10,8 +10,8 @@ import numpy as np
 def fitT(x0):
     # get data and make graph
     data = TData.fromPath('../data/x0_%dmm.txt' % x0)
-    c = TCanvas('c_%d' % x0, ', 1280, 720')
-    g = data.makeGraph('g_%d' % x0, 'Kreisfrequenz #omega / (1/ms)', 'Differenzenfrequenz #Delta #nu / kHz')
+    c = TCanvas('c_%d' % x0, '', 1280, 720)
+    g = data.makeGraph('g_%d' % x0, 'Kreisfrequenz #omega / (rad/ms)', 'Differenzenfrequenz #Delta#nu / kHz')
     g.Draw('AP')
 
     # fit
@@ -22,8 +22,8 @@ def fitT(x0):
     fit.saveData('../calc/fit_x0_%dmm.txt' % x0, 'w')
 
     # legend
-    l = TLegend(0.15, 0.65, 0.46, 0.85)
-    l.SetTextSize(0.025)
+    l = TLegend(0.15, 0.625, 0.425, 0.85)
+    l.SetTextSize(0.03)
     l.AddEntry(g, 'Messreihe bei x_{0}\' = %d mm' % x0, 'p')
     l.AddEntry(fit.function, 'Fit mit #Delta#nu (#omega) = a + b*#omega', 'l')
     fit.addParamsToLegend(l, [('%.1f', '%.1f'), ('%.0f', '%.0f')], chisquareformat='%.2f')
@@ -73,7 +73,7 @@ def main():
     # make latex tables for fit results an alphas
     with TxtFile('../src/fit_T.tex', 'w') as f:
         f.write2DArrayToLatexTable(zip(*([(x0s)] + zip(*zip(*fitresults)[0]) + zip(*zip(*fitresults)[1]))),
-                                   ['$x_0\'$ / mm', '$a$ / kHz', '$s_{a}$ / kHz', '$b$ / (kHz $\cdot$ ms)', '$s_b$ / (kHz $\cdot$ ms)'],
+                                   ['$x_0\'$ / mm', '$a$ / kHz', '$s_{a}$ / kHz', '$b$ / (kHz $\cdot$ ms / rad)', '$s_b$ / (kHz $\cdot$ ms / rad)'],
                                    ['%d', '%.1f', '%.1f', '%.0f', '%.0f'],
                                    'Fitergebnisse von $\Delta \\nu(\\omega)$ bei festen Auftrittpunkten $x_0\'$.', 'tab:fit:T')
 

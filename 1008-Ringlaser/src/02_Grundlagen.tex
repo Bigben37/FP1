@@ -34,8 +34,51 @@ durch Wandstöße zurück in den Grundzustand.
 
 \subsection{Der Mitführungskoeffizient als Konsequenz der speziellen Relativitätstheorie}
 
-Taylor
-Doppler-Disp
+\subsubsection*{Relativistische Addition von Geschwindigkeiten}
+Schon vor der Formulierung der speziellen Relativitätstheorie war durch verschiedene Experimente bekannt,
+dass Strahlung von bewegten, optisch dichten Medien zum Teil mitgeführt wird.
+Für die Geschwindigkeit $v$ der Strahlung im bewegten Medium mit Brechungsindex $n$, gemessen vom Ruhesystem,
+gilt
+\begin{equation}
+\label{}
+v = v' \pm \alpha \cdot w = \frac{c}{n} \pm \alpha \cdot w
+\end{equation}
+Die Geschwindigkeit des bewegten Systems ist $w$, $c$ die Lichtgeschwindigkeit,
+$v'$ die Lichtgeschwindigkeit im bewegten System und
+$\alpha$ der Mitführungskoeffizient.
+Das Auftreten des Mitführungskoeffizienten wurde damals mit einer teilweisen Mitführung des Äthers erklärt.\\
+In der Relativitätstheorie folgt der Mitführungskoeffizient als Grenzfall für kleine Geschwindigkeiten
+aus der Formel für die Geschwindigkeitsaddition bei Transformation in bewegte Inertialsysteme:
+\begin{equation}
+\label{}
+v=\frac{v'+w}{1+\frac{v' \cdot w}{c^2}}
+\end{equation}
+Division des Bruchs durch $c$ liefert
+\begin{equation}
+\label{}
+v=\frac{\frac{v'}{c}+\frac{w}{c}}{\frac{1}{c}+\frac{v' \cdot \frac{w}{c}}{c^2}}
+\end{equation}
+und aus der Taylorentwicklung um 0 für $w \ll c$, also $w/c \ll 1$ folgt
+\begin{equation}
+\label{}
+v \approx v' + (c-\frac{v'^2}{c})\cdot \frac{w}{c}+ (-v'+\frac{v'^3}{c^2})\cdot \left(\frac{w}{c}\right)^2
+\end{equation}
+Da für die Lichtgeschwindigkeit $v'$ im Medium mit Brechungsindex $n$ gilt
+\begin{equation}
+\label{}
+v'=\frac{c}{n}
+\end{equation}
+lautet die Taylorentwicklung bis zum linearen Term
+\begin{equation}
+\label{}
+v \approx v' + (1-\frac{1}{n^2})\cdot w
+\end{equation}
+Dies entspricht dem Zusammenhang, den A. J. Fresnel aus der Äthertheorie ableitete.
+
+\subsubsection*{Relativistischer Dopplereffekt}
+Die Relativitätstheorie liefert aber noch einen weiteren Beitrag zum Mitführungskoeffizienten.
+
+
 
 
 \subsection{Bestimmung des Mitführungskoeffizienten mit dem Ringlaser}

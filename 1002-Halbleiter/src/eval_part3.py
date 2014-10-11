@@ -21,7 +21,7 @@ def getParams(detector, element):
         params.append([(3750, 600, 10), (585, 610), (560, 630), (0, 280)])
         params.append([(600, 675, 20), (640, 700), (620, 720), (0, 30)])
     elif detector == 'Si' and element == 'Co':
-        params.append([(250, 600, 20), (580, 650), (570, 660), (0, 30)])
+        params.append([(250, 600, 20), (580, 650), (570, 660), (0, 22)])
         params.append([(), (670, 710), (650, 750), (0, 3)])
     return params
 
@@ -32,6 +32,7 @@ def printTotalSpectrum(data, element, detector, logy=True):
     g = data.makeGraph('g%s-%s' % (element, detector), 'Kanal k', 'Counts N')
     prepareGraph(g)
     g.GetXaxis().SetRangeUser(0, 2500)
+    g.SetMinimum(0.9)
     g.Draw('APX')
     c.Update()
     if PRINTGRAPHS:
@@ -44,7 +45,7 @@ def fitSpectrum(detector, element, params, logy=True):
 
     fitresults = []
     for i, peak in enumerate(params):
-        c = TCanvas('cpeakl_%s-%s_%d' % (element, detector, i))
+        c = TCanvas('cpeakl_%s-%s_%d' % (element, detector, i), '', 1280, 720)
         g = data.makeGraph('g%s-%s_%d' % (element, detector, i), 'Kanal k', 'Counts N')
         prepareGraph(g)
         g.GetXaxis().SetRangeUser(peak[2][0], peak[2][1])
@@ -56,13 +57,13 @@ def fitSpectrum(detector, element, params, logy=True):
         paramnames = []
         if len(peak[0]) == 5:
             fit = Fitter('fit%d' % i, 'pol1(0) + 1/(sqrt(2*pi*[4]^2))*gaus(2)')
-            paramnames = ['a', 'b', 'A', 'x_{c}', 's']
+            paramnames = ['a', 'b', 'A', 'k_{c}', 's']
         elif len(peak[0]) == 4:
             fit = Fitter('fit%d' % i, '[0] + 1/(sqrt(2*pi*[3]^2))*gaus(1)')
-            paramnames = ['a', 'A', 'x_{c}', 's']
+            paramnames = ['a', 'A', 'k_{c}', 's']
         elif len(peak[0]) == 3:
             fit = Fitter('fit%d' % i, '1/(sqrt(2*pi*[2]^2))*gaus(0)')
-            paramnames = ['A', 'x_{c}', 's']
+            paramnames = ['A', 'k_{c}', 's']
 
         l = None
         if len(peak[0]) > 0:
@@ -72,11 +73,11 @@ def fitSpectrum(detector, element, params, logy=True):
 
             fitname = ''
             if len(peak[0]) == 5:
-                fitname = 'N(k) = a + b*k + #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{x-x_{c}}{#sigma})^{2})'
+                fitname = 'N(k) = a + b*k + #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{k-k_{c}}{#sigma})^{2})'
             elif len(peak[0]) == 4:
-                fitname = 'N(k) = a + #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{x-x_{c}}{#sigma})^{2})'
+                fitname = 'N(k) = a + #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{k-k_{c}}{#sigma})^{2})'
             elif len(peak[0]) == 3:
-                fitname = 'N(k) = #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{x-x_{c}}{#sigma})^{2})'
+                fitname = 'N(k) = #frac{A}{#sqrt{2#pi*#sigma^{2}}} exp(- #frac{1}{2} (#frac{k-k_{c}}{#sigma})^{2})'
             fit.saveData('../calc/part3/fit_%s-%s_%02d.txt' % (element, detector, i), 'w')
             results = []
             for j, param in fit.params.iteritems():
@@ -85,7 +86,7 @@ def fitSpectrum(detector, element, params, logy=True):
 
             # legend
             l = TLegend(0.675, 0.5, 0.995, 0.85)
-            l.SetTextSize(0.02)
+            l.SetTextSize(0.025)
             l.AddEntry(g, 'Messwerte', 'p')
             l.AddEntry(fit.function, 'Fit mit', 'l')
             l.AddEntry(0, fitname, '')

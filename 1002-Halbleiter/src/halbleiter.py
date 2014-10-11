@@ -87,8 +87,8 @@ class P1SemiCon(DataErrors):
             if not n == 0:
                 if not y == 0:
                     self.points[i] = (x, y / n, sx, y / n * np.sqrt((sy / y) ** 2 + (sn / n) ** 2))
-            else:
-                del self.points[i]
+                else:
+                    pass  # y = 0, leave data as is is
 
 
 class P2SemiCon(DataErrors):

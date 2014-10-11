@@ -209,6 +209,47 @@ e^{-\frac{1}{2} (\frac{x-x_{\text{c}}(t)}{\sigma(t)})^2} \ \, .
 
 
 \subsection{Transmission und Absorption von Strahlung in Halbleitern}
+Für die Transmission von Strahlung gilt eine exponentielle Abhängigkeit von Absorptionskoeffizient
+$\alpha$ und Probendicke $l$:
+\begin{equation}
+\label{}
+T = T_0 \cdot e^{-\alpha l}
+\end{equation}
+$T$ ist die transmittierte Strahlungsintensität und $T_0$ die auftreffende Intensität.
+Für die Absorption $A$ gilt mit der Konstante $A_0$
+\begin{equation}
+\label{}
+A = A_0 \cdot (1 - e^{-\alpha l}) \ \, .
+\end{equation}
+Der Absorptionskoeffizient $\alpha$ ist abhängig von der Energie $E$ der einfallenden Strahlung:
+\begin{equation}
+\label{}
+\alpha(E) = AC \left(
+\frac{\tilde{\Theta}(E-E_{\text{g}}+E_{\text{p}})^2}{\exp (E_{\text{p}}/kT)-1}+
+\frac{\tilde{\Theta}(E-E_{\text{g}}-E_{\text{p}})^2}{1-\exp (-E_{\text{p}}/kT)}
+\right)
+\end{equation}
+
+$\tilde{\Theta}$ ist die Einheitsstufenfunktion:
+
+\begin{equation}
+\label{}
+\tilde{\Theta}(x)=
+\begin{cases}
+x & x \geq 0 \\
+0 & x < 0
+\end{cases}
+\end{equation}
+
+$AC$ ist eine Konstante,
+$E_{\text{g}}$ die Bandlückenenergie, $E_{\text{p}}$ die Energie des am Übergang beteiligten Phonons,
+$k$ die Boltzmannkonstante und $T$ die Temperatur.\\
+Wird die Stärke der Absorption von Strahlung durch eine Änderung des Probenwiderstands gemessen,
+muss die Rekombination von Ladungsträgern an der Probenoberfläche
+(in einer Schicht mit der Dicke $d$) berücksichtigt werden.
+Dies wird durch das Einfügen des
+Faktors\footnote{Entnommen aus \cite{staatsex}, da der Faktor in der Versuchsanleitung falsch angegeben ist.}
+$\exp(-\alpha \cdot d)$ in das Modell für die Absorption erreicht.
 
 \subsection{Lock-in-Verstärker}
 

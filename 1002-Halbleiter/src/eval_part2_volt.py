@@ -188,7 +188,7 @@ def fitSigma(sigs, times):
             f.writeline('\t', str(x), str(y))
 
     c = TCanvas('cSigma', '', 1280, 720)
-    g = data.makeGraph('Sigma', 'Zeit t / s', 'Standardabweichung #sigma / m')
+    g = data.makeGraph('Sigma', 'Zeit t / s', 'Standardabweichung #sigma / cm')
     g.Draw('AP')
 
     fit = Fitter('fitS', 'sqrt(2*[0]*(x+[1]))')

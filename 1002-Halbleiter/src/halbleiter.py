@@ -93,7 +93,7 @@ class P1SemiCon(DataErrors):
 
 class P2SemiCon(DataErrors):
 
-    UERROR = 0.5
+    UERROR = 0.4
 
     def loadData(self):
         d = os.path.dirname(os.path.abspath(__file__))

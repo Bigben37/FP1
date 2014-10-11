@@ -68,6 +68,9 @@ def getFitParams(elem):
 def fitAbsTrans(elem, filterx, ymax):
     # get errors
     errors = evalYErrors(elem)
+    with TxtFile('../calc/part1/%s_yerrors.txt' % elem, 'w') as f:
+        f.writeline('\t', *map(str, errors))
+    
     # get absoprtion and transmission data
     abs = calcRealIntensity(elem, P1SemiCon.CSAMPLE, errors[1])
     abs.filterX(*filterx)
@@ -80,7 +83,7 @@ def fitAbsTrans(elem, filterx, ymax):
     graphs = []
     colors = [(1, 16, 2), (4, 36, 6)]
     for i, data in enumerate(datas):
-        g = data.makeGraph('g_%s_abstrans_%d' % (elem, i), P1SemiCon.LABELS[P1SemiCon.CENERGY], 'Intensit#ddot{a}t / b.E.')
+        g = data.makeGraph('g_%s_abstrans_%d' % (elem, i), P1SemiCon.LABELS[P1SemiCon.CENERGY], 'Intensit#ddot{a}ten I_{Pyro}, I_{Probe}')
         g.SetMinimum(0)
         g.SetMaximum(ymax)
         g.SetMarkerStyle(8)
@@ -112,15 +115,15 @@ def fitAbsTrans(elem, filterx, ymax):
     fittertrans.fit(graphs[1], paramstrans[2], paramstrans[3], '+')
     fittertrans.saveData('../calc/part1/%s_fit_Trans.txt' % elem, 'w')
     
-    l = TLegend(0.7, 0.4, 0.99, 0.85)
+    l = TLegend(0.65, 0.4, 0.99, 0.85)
     l.SetTextSize(0.02)
     l.AddEntry(graphs[0], 'Absorption Abs(E)', 'p')
-    l.AddEntry(fitterabs.function, 'Fit mit Abs(E) = A_{0}*e^{-#alpha(E, E_{g})*d} (1 - e^{-#alpha(E, E_{g})*(l-d)})', 'l')
+    l.AddEntry(fitterabs.function, 'Fit mit Abs(E) = A_{0}*e^{-#alpha(E, E_{g})*d} (1 - e^{-#alpha(E, E_{g})*(l-d)}) + y_{0}', 'l')
     fitterabs.addParamsToLegend(l, [('%.3f', '%.3f'), ('%.4f', '%.4f'), ('%.4f', '%.4f'), ('%.5f', '%.5f')], chisquareformat='%.2f')
     l.AddEntry(0, '', '')
     l.AddEntry(graphs[1], 'Transmission Trans(E)', 'p')
     l.AddEntry(fittertrans.function, 'Fit mit Trans(E) = T_{0}*e^{-#alpha(E, E_{g})*l}', 'l')
-    fittertrans.addParamsToLegend(l, [('%.4f', '%.4f'), ('%.4f', '%.4f')], chisquareformat='%.2f')
+    fittertrans.addParamsToLegend(l, [('%.4f', '%.4f'), ('%.3f', '%.3f')], chisquareformat='%.2f')
     l.Draw()
     
     c.Update()
@@ -129,8 +132,9 @@ def fitAbsTrans(elem, filterx, ymax):
     return (fitterabs.params[2]['value'], fitterabs.params[2]['error']), (fittertrans.params[1]['value'], fittertrans.params[1]['error'])
 
 
-def plotMultiChannelSpectrum(elem, mode, multichannels, legendlabels, rangeX, rangeY=(0, 5.5)):
+def plotMultiChannelSpectrum(elem, mode, multichannels, legendlabels, rangeX, rangeY=(0, 5.5), connect=False):
     label = '%s_%s' % (elem, mode)
+    drawoptions = 'L' if connect else ''
 
     c = TCanvas('c_spectrum_%s' % label, '', 1280, 720)
     graphs = []
@@ -155,12 +159,12 @@ def plotMultiChannelSpectrum(elem, mode, multichannels, legendlabels, rangeX, ra
         if first:
             g.SetMarkerColor(2)
             g.SetLineColor(2)
-            g.Draw('APL')
+            g.Draw('AP' + drawoptions)
             first = False
         else:
             g.SetMarkerColor(3 + i)
             g.SetLineColor(3 + i)
-            g.Draw('PL')
+            g.Draw('P' + drawoptions)
     l.Draw()
     
     vline = TLine(0, rangeY[0], 0, rangeY[1])
@@ -175,13 +179,17 @@ def main():
     elems = ['Si', 'Ge']
     filterxs = [(0, 1.8), (0, 1)]
     ymaxs = [0.25, 0.25]
+    yundergrounds = [0.03, 0.1]
     energies = []
-    for elem, filterx, ymax in zip(elems, filterxs, ymaxs):
+    for elem, filterx, ymax, yunderground in zip(elems, filterxs, ymaxs, yundergrounds):
         energies.append(fitAbsTrans(elem, filterx, ymax))
         plotMultiChannelSpectrum(elem, 'Messung', 
                                  [(P1SemiCon.CANGLE, P1SemiCon.CPYRO), (P1SemiCon.CANGLE, P1SemiCon.CSAMPLE)], 
-                                 ['Signal des Pyrodetektors', 'Signal der Probe'], (-5, 80))
-        plotMultiChannelSpectrum(elem, 'Lampe', [(P1SemiCon.CANGLE, P1SemiCon.CPYRO)], ['Signal des Pyrodetektors'], (-5, 80))
+                                 ['Signal des Pyrodetektors', 'Signal der Probe'], (-5, 80), connect=True)
+        plotMultiChannelSpectrum(elem, 'Untergrund', 
+                                 [(P1SemiCon.CANGLE, P1SemiCon.CPYRO), (P1SemiCon.CANGLE, P1SemiCon.CSAMPLE)], 
+                                 ['Untergrund des Pyrodetektors', 'Untergrund der Probe'], (-5, 80), (0, yunderground))
+        plotMultiChannelSpectrum(elem, 'Lampe', [(P1SemiCon.CANGLE, P1SemiCon.CPYRO)], ['Signal des Pyrodetektors'], (-5, 80), connect=True)
     
     for i, energie in enumerate(energies):
         with TxtFile('../calc/part1/%s_bandgap_avg.txt' % elems[i], 'w') as f:

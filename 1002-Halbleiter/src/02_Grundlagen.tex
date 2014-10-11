@@ -193,7 +193,7 @@ Mit den Näherungen
 \end{equation}
 folgt
 \begin{equation}
-\label{}
+\label{eq:gaus:params}
 \begin{split}
 & A(t) = C \cdot e^{-\frac{t}{\tau_n}}\\
 & \sigma(t) = \sqrt{2 D_{\text{n}} \cdot t}\\
@@ -234,12 +234,13 @@ c(t) = A(t_{\text{c}})
 \cdot
 \frac{1}{\sqrt{2  \pi  \cdot \sigma(t_{\text{c}})^2}}
 \cdot
-e^{-\frac{1}{2}(\frac{t - t_{\text{c}}}{\sigma(t_{\text{c}}) / \mu_{\text{n}} E})^2}
+e^{-\frac{1}{2}\left(\frac{t - t_{\text{c}}}{\sigma(t_{\text{c}}) / \mu_{\text{n}} E}\right)^2}
 \end{equation}
 \autoref{eq:gauss} wird bei der Auswertung für die Fits verwendet.
 
 
 \subsection{Transmission und Absorption von Strahlung in Halbleitern}
+\label{sub:part1:princ:transabs}
 Für die Transmission von Strahlung gilt eine exponentielle Abhängigkeit von Absorptionskoeffizient
 $\alpha$ und Probendicke $l$:
 \begin{equation}

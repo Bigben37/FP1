@@ -167,10 +167,12 @@ def evalPart3():
 
         # make energy gauge and calculate absorption probabilities
         peaks = []
+        sigmas = []
         absProbs_det = []
         for fit in fitresults:
             for peak in fit:
                 c, sc = peak[-2]
+                sigmas.append(peak[-1][0])
                 peaks.append((c, sc))
                 absProbs_det.append(calcAbsorpProb(peak, area))
         makeEnergyGauge(det, peaks, litvals)
@@ -178,6 +180,14 @@ def evalPart3():
         with TxtFile('../calc/part3/AbsProbs_%s.txt' % det, 'w') as f:
             for i, absProb in enumerate(absProbs_det):
                 f.writeline('\t', str(litvals[i]), *map(str, absProb))
+        with TxtFile('../calc/part3/RER_%s.txt' % det, 'w') as f:
+            RERs = []
+            for sigma, litval in zip(sigmas, litvals):
+                RER = 2*np.sqrt(2*np.log(2))*sigma / litval
+                RERs.append(RER)
+                f.writeline('\t', str(litval), str(RER))
+            RER = np.average(RERs)
+            f.writeline(str(RER))
 
     # calculate absorption rations for peaks
     detnames = zip(*detectors)[0]

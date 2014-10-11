@@ -175,11 +175,11 @@ $\tilde{\mu}$ und $\tilde{D}$ kann die resultierende Differentialgleichung
 gelöst werden durch
 \begin{equation}
 \label{}
-c(t,x) = C \cdot e^{\frac{t}{\tau_n}}
+c(t,x) = C \cdot e^{-\frac{t}{\tau_n}}
 \cdot
 \frac{1}{\sqrt{4  \pi  \cdot \tilde{D}  \cdot t}}
 \cdot
-e^{\frac{(x + \tilde{\mu} E t)^2}{4 \tilde{D}  t}}
+e^{-\frac{(x - \tilde{\mu} E t)^2}{4 \tilde{D}  t}}
 \ \ (+ C_0) \ \, .
 \end{equation}
 Die Lösung ist eine Gaußverteilung mit einer exponentiell abfallender Amplitude
@@ -195,17 +195,48 @@ folgt
 \begin{equation}
 \label{}
 \begin{split}
-& A(t) = C \cdot e^{\frac{t}{\tau_n}}\\
+& A(t) = C \cdot e^{-\frac{t}{\tau_n}}\\
 & \sigma(t) = \sqrt{2 D_{\text{n}} \cdot t}\\
-& x_{\text{c}}(t) = - \mu_{\text{n}} \cdot E \cdot t\\
+& x_{\text{c}}(t) = \mu_{\text{n}} \cdot E \cdot t\\
 \end{split}
 \end{equation}
 mit der Gaußverteilung
 \begin{equation}
 \label{}
-c(x,t) = A(t) \cdot \frac{1}{\sqrt{2 \pi \cdot \sigma(t)^2}} \cdot
+c(t,x) = A(t) \cdot \frac{1}{\sqrt{2 \pi \cdot \sigma(t)^2}} \cdot
 e^{-\frac{1}{2} (\frac{x-x_{\text{c}}(t)}{\sigma(t)})^2} \ \, .
 \end{equation}
+\subsubsection*{Zeitabhängigkeit von $c$ bei festem Ort}
+Im Experiment wird die Zeitabhängigkeit der Ladungsträgerkonzentration am festen Ort x = d untersucht:
+\begin{equation}
+\label{}
+c(t) = A(t)
+\cdot
+\frac{1}{\sqrt{2  \pi  \cdot \sigma(t)^2}}
+\cdot
+e^{-\frac{1}{2}(\frac{d - \mu_{\text{n}} E t}{\sigma(t)})^2}
+\end{equation}
+Sei $t_{\text{c}}$ der Zeitpunkt, an dem sich das Maximum der Gaußfunktion unter der Nadel befindet.
+Es gilt dann mit der Geschwindigkeit $v$ der Ladungsträger
+\begin{equation}
+\label{}
+d = v \cdot t_{\text{c}} = \mu_{\text{n}} \cdot E \cdot t_{\text{c}} \ \, .
+\end{equation}
+Mit den Näherungen (das exakte Ergebnis liefert die McKelvey-Korrektur in \cite{staatsex})
+\begin{equation}
+\label{}
+\sigma(t) \approx \sigma(t_{\text{c}}) \quad \text{und} \quad A(t) \approx A(t_{\text{c}})
+\end{equation}
+lässt sich obige Gleichung damit umformen zu
+\begin{equation}
+\label{eq:gauss}
+c(t) = A(t_{\text{c}})
+\cdot
+\frac{1}{\sqrt{2  \pi  \cdot \sigma(t_{\text{c}})^2}}
+\cdot
+e^{-\frac{1}{2}(\frac{t - t_{\text{c}}}{\sigma(t_{\text{c}}) / \mu_{\text{n}} E})^2}
+\end{equation}
+\autoref{eq:gauss} wird bei der Auswertung für die Fits verwendet.
 
 
 \subsection{Transmission und Absorption von Strahlung in Halbleitern}
@@ -252,11 +283,19 @@ Faktors\footnote{Entnommen aus \cite{staatsex}, da der Faktor in der Versuchsanl
 $\exp(-\alpha \cdot d)$ in das Modell für die Absorption erreicht.
 
 \subsection{Lock-in-Verstärker}
+Bei der Bestimmung der Bandlücke im ersten Versuchsteil wird ein Lock-in-Verstärker verwendet.
+Damit kann ein elektrisches Signal sehr effizient vom Signaluntergrund getrennt werden.
+Er beruht auf folgendem Prinzip:\\
+Ein
 
-
-Bilder mit Mathematica + Formeln
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/lockin.pdf}
+  \caption{capt.}
+  \label{img:lab}
+\end{center}
+\end{figure}
 
 \subsection{++}
 optisches Gitter\\
 Energie(alpha)\\
-shockley, ohmscher Kontakt

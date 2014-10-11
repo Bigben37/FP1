@@ -284,18 +284,53 @@ $\exp(-\alpha \cdot d)$ in das Modell für die Absorption erreicht.
 
 \subsection{Lock-in-Verstärker}
 Bei der Bestimmung der Bandlücke im ersten Versuchsteil wird ein Lock-in-Verstärker verwendet.
-Damit kann ein elektrisches Signal sehr effizient vom Signaluntergrund getrennt werden.
+Damit kann ein elektrisches Signal sehr effizient von einem unbekannten Signaluntergrund getrennt werden.
 Er beruht auf folgendem Prinzip:\\
-Ein
+Ein Signal $s(t)$ wird mit einem periodischen Referenzsignal $s_{\text{ref}}(\omega t)$
+mit bekannter Frequenz $\omega$ moduliert:
+\begin{equation}
+\label{}
+s_{\text{mod}}(t) = s(t) \cdot s_{\text{ref}}(\omega t)
+\end{equation}
+Das modulierte Signal $s_{\text{mod}}(t)$ kommt zusammen mit einem großen Untergrundrauschen $u(t)$
+am Verstärker an, wird dort mit dem Referenzsignal multipliziert und das Produkt über $N$
+Periodendauern $T$ des Referenzsignals integriert. Das Ausgangssignal $S(t)$ des Verstärkers ist also
+\begin{equation}
+\label{}
+S(t) = \int_{t-N T}^t{[s(t') \cdot s_{\text{ref}}(\omega t') + u(t')] \cdot s_{\text{ref}}(\omega t')} \,\difd t'
+\end{equation}
+Das Integral entspricht dem Skalarprodukt im Vektorraum der periodischen Funktionen.
+Das Skalarprodukt ist nur für Signale mit der Referenzfrequenz ungleich Null,
+alle anderen Frequenzkomponenten werden ausgefiltert.
 
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/lockin.pdf}
-  \caption{capt.}
-  \label{img:lab}
+  \caption{Signale am Lock-in-Verstärker: Filterung eines Signals mit bekannter Modulationsfrequenz
+  aus einem hohen Untergrundrauschen.}
+  \label{img:lockin}
 \end{center}
 \end{figure}
 
-\subsection{++}
-optisches Gitter\\
-Energie(alpha)\\
+\autoref{img:lockin} zeigt beispielhaft die Signalverläufe am Lock-in-Verstärker für
+eine Lorentzkurve als Signal und einem Polynom 2.\,Ordnung mit zwei überlagerten Sinusschwingungen als Untergrund.
+Das Referenzsignal ist ein Sinus mit der Frequenz f=30\,Hz, die Integration erfolgt über 10 Perioden.
+Das Lorentz-Signal ist auf dem Untergrund (rote Kurve) nicht zu erkennen.
+
+Der Verstärker ist aber in der Lage, aus diesem Signal
+an seinem Ausgang mit einer leichten Zeitverzögerung
+eine fast identische Kopie des gewünschten Signals zu liefern.
+
+
+\subsection{Reflexion am optischen Gitter}
+Für die Bestimmung der Bandlücke im zweiten Versuchsteil wird ein Reflexionsgitter verwendet.
+Die Winkelabhängigkeit des Reflexionsvermögens wird in \cite{staatsex} beschrieben. Es gilt
+für die Energie $E$ der reflektierten Strahlung in Abhängigkeit des Anstellwinkels des Gitters $\phi$
+\begin{equation}
+\label{}
+E(\phi)=\frac{h c}{2 d \sin(\phi) \cos (\psi)} \ \, .
+\end{equation}
+$\psi$ ist der halbe Öffnungswinkel der optischen Bank, $d$ die Gitterkonstante,
+$h$ das Plancksche Wirkungsquantum und $c$ die Lichtgeschwindigkeit.
+
+

@@ -104,35 +104,84 @@ hat die Verbindung eine lineare ohmsche Charakteristik.
 Die Bewegung der Ladungsträger in einem Halbleiter wird durch zwei Prozesse bestimmt:
 \emph{Drift} und \emph{Diffision}.
 Der Driftstrom $j_{\text{drift}}$ wird durch ein äußeres elektrisches Feld $E$ verursacht
-und beträgt
+und beträgt für Elektronen
 \begin{equation}
 \label{}
-j_{\text{drift}}=\mu_{\text{n}} \cdot n \cdot E
+j_{\text{drift,n}}=\mu_{\text{n}} \cdot n \cdot E
 \end{equation}
-Die Mobilität der Elektronen (Verhältnis von Driftgeschwindigkeit zum angelegtem Feld) ist $\mu_{\text{n}}$,
-die Ladungsträgerdichte wird als $n$ bezeichnet.
-Eine räumliche Inhomogenität von $n$ führt zu einem Diffusionsstrom $j_{\text{diff}}$:
+und für Löcher
 \begin{equation}
 \label{}
-j_{\text{diff}}=D_{\text{n}} \cdot \frac{\partial n}{\partial x}
+j_{\text{drift,p}}=-\mu_{\text{p}} \cdot p \cdot E \ \, .
 \end{equation}
-$D_{\text{n}}$ ist die materialspezifische Diffusionskonstante.\
-Wegen Ladungserhaltung muss die Ladungsträgerdichte $n(t)$ die \emph{Kontinuitätsgleichung} erfüllen:
+Die Mobilität der Ladungsträger (Verhältnis von Driftgeschwindigkeit zum angelegtem Feld) ist $\mu$,
+die Ladungsträgerdichte wird als $n$ bzw. $p$ bezeichnet.
+Eine räumliche Inhomogenität von $n$ und $p$ führt zu einem Diffusionsstrom $j_{\text{diff}}$:
+\begin{equation}
+\label{}
+j_{\text{diff,n}}=D_{\text{n}} \cdot \frac{\partial n}{\partial x},
+\qquad j_{\text{diff,p}}=D_{\text{p}} \cdot \frac{\partial p}{\partial x}
+\end{equation}
+$D$ ist die materialspezifische Diffusionskonstante.\\
+Wegen Ladungserhaltung müssen die Ladungsträgerdichten $n(t)$ und $p(t)$ die
+\emph{Kontinuitätsgleichung} erfüllen:
 Die zeitliche Änderung der Elektronen im Leitungsband wird durch die Zahl der ins Valenzband
-zurückfallenden Elektronen und die Divergenz des Stromes $j$ bestimmt:
+zurückfallenden Elektronen und die Divergenz des Stromes $j_{\text{n}}$ bestimmt:
 \begin{equation}
 \label{}
-\frac{\partial n}{\partial t}= -\frac{n-n_0}{\tau_{\text{n}}}-\frac{\partial j}{\partial x}
+\frac{\partial n}{\partial t}= -\frac{n-n_0}{\tau_{\text{n}}}-\frac{\partial j_{\text{n}}}{\partial x}
 \end{equation}
 Die Ladungsträgerdichte im Gleichgewicht ist $n_0$, die mittlere Lebensdauer der Elektronen
-im Leitungsband $\tau_{\text{n}}$.\\
-
-
-DGLs lösen für Gaußkurve
-
-
-
-TODO:Quelle: engl wiki, Haynes–Shockley experiment
+im Leitungsband $\tau_{\text{n}}$. Analog gilt für Löcher
+\begin{equation}
+\label{}
+\frac{\partial p}{\partial t}= -\frac{p-p_0}{\tau_{\text{p}}}-\frac{\partial j_{\text{p}}}{\partial x} \ \, .
+\end{equation}
+Das Einsetzen der Gleichungen für die Ströme in die Kontinuitätsgleichung liefert
+\begin{equation}
+\label{}
+\frac{\partial n}{\partial t}=
+-\frac{n-n_0}{\tau_{\text{n}}}
++ D_{\text{n}} \cdot \frac{\partial^2 n}{\partial x^2}
++ \mu_{\text{n}} \cdot n \cdot \frac{\partial E}{\partial x}
++ \mu_{\text{n}} \cdot \frac{\partial n}{\partial x} \cdot E
+\end{equation}
+und
+\begin{equation}
+\label{}
+\frac{\partial p}{\partial t}=
+-\frac{p-p_0}{\tau_{\text{p}}}
++ D_{\text{p}} \cdot \frac{\partial^2 p}{\partial x^2}
+- \mu_{\text{p}} \cdot p \cdot \frac{\partial E}{\partial x}
+- \mu_{\text{p}} \cdot \frac{\partial p}{\partial x} \cdot E
+\end{equation}
+%TODO make citaion
+Für ein konstantes E-Feld gilt $\partial E / \partial x = 0$ und ein Term fällt aus den Gleichungen.
+Durch weitere Überlegungen (siehe \cite{staatsex}) können die beiden Differentialgleichungen
+gekoppelt und gelöst werden:
+Man nimmt an, dass kleine Unterschiede der Ladungsträgerkonzentrationen $n$ und $p$
+sofort durch Coulomb-Wechselwirkung ausgeglichen werden. Dies führt zu $\tau_p$ = $\tau_n$
+(im p-dotierten Germanium passt sich $\tau_p$ an $\tau_n$ an)
+und zur Kopplung der beiden Gleichungen.\\
+Nach Einführung einer ambipolaren Ladungsträgerkonzentration $c$ und reduzierten Konstanten
+$\tilde{\mu}$ und $\tilde{D}$ kann die resultierende Differentialgleichung
+\begin{equation}
+\label{}
+\frac{\partial c}{\partial t}=
+-\frac{c-c_0}{\tau_{\text{n}}}
++ \tilde{\mu} \cdot \frac{\partial c}{\partial x} \cdot E
++ \tilde{D} \cdot \frac{\partial^2 c}{\partial x^2}
+\end{equation}
+gelöst werden durch
+\begin{equation}
+\label{}
+c(t,x) = C \cdot e^{\frac{t}{\tau_n}}
+\cdot
+\frac{1}{\sqrt{4  \pi  \tilde{D}  t}}
+\cdot
+e^{\frac{(x - \tilde{\mu} E t)^2}{4 \tilde{D}  t}}
++ C_0 \ \, .
+\end{equation}
 
 
 

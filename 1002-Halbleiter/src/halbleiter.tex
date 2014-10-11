@@ -55,8 +55,13 @@
 
 \usepackage{pdfpages} % include pdf files
 
+\usepackage[nottoc,numbib]{tocbibind} % bibliography in TOC
+
 % NEW COMMANDS
 \newcommand{\difd}{\mathrm{d}}
+\newcommand{\chemel}[2]{\texorpdfstring{${}^{#2}\text{#1}$}{#1-#2}}
+\newcommand{\co}{\chemel{Co}{57}}
+\newcommand{\am}{\chemel{Am}{241}}
 
 % DOCUMENT SETTINGS
 
@@ -81,7 +86,7 @@ Alle Berechnungen in diesem Protokoll wurden unter Python 2.7 mit Hilfe folgende
 oder mit Mathematica 10 durchgeführt. \\
 Die Graphiken wurden mit Inkscape (\url{http://www.inkscape.org}) gezeichnet.\\[\baselineskip]
 Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
-\url{https://github.com/Bigben37/FP1/tree/master/0908-LHWZ} abgerufen werden.
+\url{https://github.com/Bigben37/FP1/tree/master/1002-Halbleiter} abgerufen werden.
 \thispagestyle{empty}
 
 \newpage
@@ -110,6 +115,9 @@ Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
 \input{04_Durchfuerung_HD}
 \input{05_Auswertung_HD}
 
+\newpage
+\bibliographystyle{plain}
+\bibliography{refs}
 
 \appendix
 \section{Anhang}

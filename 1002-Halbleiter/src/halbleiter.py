@@ -93,7 +93,7 @@ class P1SemiCon(DataErrors):
 
 class P2SemiCon(DataErrors):
 
-    UERROR = 1
+    UERROR = 0.5
 
     def loadData(self):
         d = os.path.dirname(os.path.abspath(__file__))
@@ -138,3 +138,9 @@ def prepareGraph(g):
     g.SetMarkerSize(0.3)
     g.SetLineColor(15)
     g.SetLineWidth(0)
+    
+def getByCloseX(data, x):
+    for i in xrange(data.getLength() - 1):
+        if data.points[i][0] <= x < data.points[i + 1][0]:
+            return data.points[i]
+    return data.points[data.getLength() - 1]

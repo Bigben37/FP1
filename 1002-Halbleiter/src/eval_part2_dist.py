@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7
 import numpy as np
 from functions import setupROOT, loadCSVToList, avgerrors
-from halbleiter import P2SemiCon
+from halbleiter import P2SemiCon, getByCloseX
 from ROOT import TCanvas, TLegend
 from fitter import Fitter
 from data import DataErrors
@@ -34,13 +34,6 @@ def getDistances():
     distances = map(f, distances)
     sd = 0.05
     return map(lambda x: (x, sd), distances)
-
-
-def getByCloseX(data, x):
-    for i in xrange(data.getLength() - 1):
-        if data.points[i][0] <= x < data.points[i + 1][0]:
-            return data.points[i]
-    return data.points[data.getLength() - 1]
 
 
 def evalDistance(n, params):
@@ -155,7 +148,7 @@ def fitA(amps, times):
     listsy = list(listsy)
     for i, y in enumerate(listy):
         listsy[i] = y * np.sqrt(listsy[i] ** 2 + slaser_rel ** 2)
-    
+
     data = DataErrors.fromLists(listx, listy, listsx, listsy)
 
     c = TCanvas('cA', '', 1280, 720)
@@ -195,14 +188,14 @@ def fitSigma(sigs, times):
 
     fit = Fitter('fitS', 'sqrt(2*[0]*(x + [1]))')
     fit.setParam(0, 'D_{n}', 100)
-    fit.setParam(1, 'x0', 0)
+    fit.setParam(1, 't_{0}', 0)
     fit.fit(g, 1e-6, 21e-6)
     fit.saveData('../calc/part2/dist_fit_sigma.txt')
 
-    l = TLegend(0.15, 0.65, 0.4, 0.85)
+    l = TLegend(0.15, 0.625, 0.45, 0.85)
     l.SetTextSize(0.03)
     l.AddEntry('Sigma', 'Messung', 'p')
-    l.AddEntry(fit.function, 'Fit mit #simga(t) = #sqrt{2*D_{n}*t}', 'l')
+    l.AddEntry(fit.function, 'Fit mit #sigma(t) = #sqrt{2*D_{n}*(t + t_{0})}', 'l')
     fit.addParamsToLegend(l, [('%.1f', '%.1f'), ('%.2e', '%.2e')], chisquareformat='%.2f')
     l.Draw()
 
@@ -237,10 +230,10 @@ def evalDistances():
     plotDistances(graphs, distances)
 
     # fit params of gauss
-    mu, smu = fitXc(distances, times)  # in cm^2 / s
+    mu, smu = fitXc(distances, times)  # in cm^2 / Vs
     fitA(amps, times)
     E = 48.8 / 3  # in V / cm
-    sigs = map(lambda x: (x[0] * mu * E, x[0] * mu * E * np.sqrt((x[1] / x[0]) ** 2 + (smu / mu) ** 2)), sigs)
+    sigs = map(lambda x: (x[0] * mu * E, x[0] * mu * E * np.sqrt((x[1] / x[0]) ** 2 + (smu / mu) ** 2)), sigs)  # simga = sigma' * mu * E
     fitSigma(sigs, times)
 
 

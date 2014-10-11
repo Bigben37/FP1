@@ -153,8 +153,8 @@ und
 -\frac{p-p_0}{\tau_{\text{p}}}
 + D_{\text{p}} \cdot \frac{\partial^2 p}{\partial x^2}
 - \mu_{\text{p}} \cdot p \cdot \frac{\partial E}{\partial x}
-- \mu_{\text{p}} \cdot \frac{\partial p}{\partial x} \cdot E
-\end{equation}
+- \mu_{\text{p}} \cdot \frac{\partial p}{\partial x} \cdot E \ \,.
+\end{equation} 
 %TODO make citaion
 Für ein konstantes E-Feld gilt $\partial E / \partial x = 0$ und ein Term fällt aus den Gleichungen.
 Durch weitere Überlegungen (siehe \cite{staatsex}) können die beiden Differentialgleichungen
@@ -177,13 +177,38 @@ gelöst werden durch
 \label{}
 c(t,x) = C \cdot e^{\frac{t}{\tau_n}}
 \cdot
-\frac{1}{\sqrt{4  \pi  \tilde{D}  t}}
+\frac{1}{\sqrt{4  \pi  \cdot \tilde{D}  \cdot t}}
 \cdot
-e^{\frac{(x - \tilde{\mu} E t)^2}{4 \tilde{D}  t}}
-+ C_0 \ \, .
+e^{\frac{(x + \tilde{\mu} E t)^2}{4 \tilde{D}  t}}
+\ \ (+ C_0) \ \, .
+\end{equation}
+Die Lösung ist eine Gaußverteilung mit einer exponentiell abfallender Amplitude
+(verursacht durch Rekombination mit $\tau_n$),
+einer Standardabweichung, die durch die Diffusion bestimmt wird
+und einem wandernden Schwerpunkt, dessen Ort durch E-Feld und Ladungsträgermobilität bestimmt wird.
+Mit den Näherungen
+\begin{equation}
+\label{}
+\tilde{D} \rightarrow D_{\text{n}} \ \text{und} \ \tilde{\mu} \rightarrow \mu_{\text{n}}
+\end{equation}
+folgt
+\begin{equation}
+\label{}
+\begin{split}
+& A(t) = C \cdot e^{\frac{t}{\tau_n}}\\
+& \sigma(t) = \sqrt{2 D_{\text{n}} \cdot t}\\
+& x_{\text{c}}(t) = - \mu_{\text{n}} \cdot E \cdot t\\
+\end{split}
+\end{equation}
+mit der Gaußverteilung
+\begin{equation}
+\label{}
+c(x,t) = A(t) \cdot \frac{1}{\sqrt{2 \pi \cdot \sigma(t)^2}} \cdot
+e^{-\frac{1}{2} (\frac{x-x_{\text{c}}(t)}{\sigma(t)})^2} \ \, .
 \end{equation}
 
 
+\subsection{Transmission und Absorption von Strahlung in Halbleitern}
 
 \subsection{Lock-in-Verstärker}
 

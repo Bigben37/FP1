@@ -172,7 +172,7 @@ def evalPart3():
         for fit in fitresults:
             for peak in fit:
                 c, sc = peak[-2]
-                sigmas.append(peak[-1][0])
+                sigmas.append(peak[-1])
                 peaks.append((c, sc))
                 absProbs_det.append(calcAbsorpProb(peak, area))
         makeEnergyGauge(det, peaks, litvals)
@@ -182,12 +182,13 @@ def evalPart3():
                 f.writeline('\t', str(litvals[i]), *map(str, absProb))
         with TxtFile('../calc/part3/RER_%s.txt' % det, 'w') as f:
             RERs = []
-            for sigma, litval in zip(sigmas, litvals):
-                RER = 2*np.sqrt(2*np.log(2))*sigma / litval
+            for sigma, peak in zip(sigmas, peaks):
+                s, ss = sigma
+                p, sp = peak
+                RER = 2*np.sqrt(2*np.log(2))*s/ p
+                sRER = RER * np.sqrt((ss / s) ** 2 + (sp / p) ** 2)
                 RERs.append(RER)
-                f.writeline('\t', str(litval), str(RER))
-            RER = np.average(RERs)
-            f.writeline(str(RER))
+                f.writeline('\t', str(p), str(sp), str(RER), str(sRER))
 
     # calculate absorption rations for peaks
     detnames = zip(*detectors)[0]

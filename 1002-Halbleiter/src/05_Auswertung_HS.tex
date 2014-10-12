@@ -1,7 +1,18 @@
 \subsection{Messergebnisse und Auswertung}
+Die Messungen wurden mit einem digitalen Oszilloskop durchgeführt. Die Zeiten und Spannungen sind nicht kontinuierlich verteilt, sie können 
+nur diskrete Werte annehmen. Die Auflösung der Zeit beträgt $\Delta t = 0.02$\,\textmu s, die der Spannung $\Delta U = 0.1$\,mV. \\
+TODO Gleichverteilung. %TODO Gleichverteilung
+\begin{equation}
+  s_t = \frac{\Delta t}{\sqrt{12}}, \qquad s_U = \frac{\Delta U}{\sqrt{12}}
+\end{equation}
+Beim Ablesen der Treibspannung $U_T$ wurde eine deutliche Veränderung der gemessenen Treibspannung bei unterschiedlich eingestellten 
+Anzeigeoffsets beobachtet. Aus diesem Grund wurde der Fehler der Treibspannung auf $s_{U_T} = 0.4$\,V geschätzt. \\
+Der Fehler auf den Abstand $d$ zwischen Lichtleiter und Messspitze wurde auf $s_d = 0.05$\,mm gesetzt.
 \subsubsection{Bestimmung des Offsets \texorpdfstring{$x_0$}{x0}}
 Der Abstand zwischen Messspitze und Lichtleiter wurde aufgrund des Versuchsaufbaus mit einem Offset $x_0$ gemessen. Der Offset wurde separat 
-von jedem Versuchspartner einmal bestimmt. Aus den Messwerten wurde der Mittelwert bestimmt (Fehler der Einzelmessung $s_{x_i} = 0.2$\,mm):
+von jedem Versuchspartner einmal bestimmt. Aus den Messwerten wurde der Mittelwert bestimmt (Fehler der Einzelmessung 
+$s_{x_i} = 0.2$\,mm \footnote{Die Schieblehre konnte nicht direkt angelegt werden, um den Versuchsaufbau nicht zu beschädigen. 
+Dadurch ist konnte man den Offset nicht so genau bestimmen.}):
 \begin{equation}
   x_0 = (1.25 \pm 0.14)\,\text{mm}
 \end{equation}
@@ -20,6 +31,8 @@ aus \autoref{eq:gauss} und einem linearen Untergrund:
   U(t) = a + b \cdot t + A \cdot \frac{1}{\sqrt{2  \pi  \cdot \sigma^2}} \cdot
   e^{-\frac{1}{2} \left( \frac{t - t_{\text{c}}}{\sigma^2} \right)^2}
 \end{equation}
+Für die weiteren Berechnungen sind für die Amplitude $A$, den zeitlichen Schwerpunkt $t_c$ und die Standardabweichung $\sigma$ die Fehler aus 
+den Fits verwendet worden.
 Die untergrundbereinigten Messungen (ohne Fits) sind in \autoref{img:distances} dargestellt.
 \begin{figure}[H]
 \begin{center}
@@ -31,7 +44,16 @@ Die untergrundbereinigten Messungen (ohne Fits) sind in \autoref{img:distances} 
 
 \paragraph{Bestimmung der Ladungsträgermobilität $\mu$}
 Für jeden Gaußfit wird die Entfernung $d$ zwischen Lichtleiter und Nadelspitze über dem Zeitpunkt des Maximumdurchlaufs $t_{\text{c}}$ 
-aufgetragen (\autoref{img:dist:fitxc}). Der so erhaltene Graph wird mit einer Geraden gefittet.
+aufgetragen (\autoref{img:dist:fitxc}), da der örtliche Schwerpunkt $x_c(t)$ zum Zeitpunkt $t_c$ genau $d$ entspricht. Mit 
+\autoref{eq:gaus:params} erhält man so eine proportionale Abhängigkeit des Abstandes $d$ von dem zeitlichen Schwerpunkt $t_c$ mit 
+$\mu \cdot E$ als Proportionalitätskonstante.
+\begin{equation}
+  d = x_c(t_c) = \mu \cdot E \cdot t_c
+\end{equation} 
+Der so erhaltene Graph wird mit einer Geraden gefittet.
+\begin{equation}
+  x_c(t_c) = x_0 + m \cdot t_c
+\end{equation}
 
 \begin{figure}[H]
 \begin{center}
@@ -43,13 +65,12 @@ aufgetragen (\autoref{img:dist:fitxc}). Der so erhaltene Graph wird mit einer Ge
 
 Der Betrag des Achsenabschnitts $|x_0| = (1.01 \pm 0.03)$\,mm stimmt innerhalb von zwei Standardabweichungen mit dem oben bestimmten Wert des 
 Offsets überein.\\
-Die Steigung $m$ ist das Produkt aus Ladungsträgermobilität und angelegtem E-Feld 
-(nach \autoref{eq:gaus:params}):
+Die Steigung $m$ ist das Produkt aus Ladungsträgermobilität und angelegtem E-Feld:
 \begin{equation}
   \label{eq:efield}
   m = \mu \cdot E = \mu \cdot \frac{U}{d}
 \end{equation}
-mit $U = (48.8 \pm 0.4)$\,V und $d=30$\,mm. Man erhält mit Gauß'scher Fehlerfortpflanzung für $\mu$
+mit $U = (48.8 \pm 0.4)$\,V und $d=30$\,mm. Man erhält mit Gauß'scher Fehlerfortpflanzung für $\mu$:
 \begin{equation}
   \mu = (3079 \pm 29)\,\frac{\text{cm}^2}{\text{V} \cdot \text{s}}
 \end{equation}
@@ -91,8 +112,13 @@ Für die Bestimmung der mittleren Lebensdauer wird der Zusammenhang aus \autoref
   A(t) = C \cdot e^{- \frac{t}{\tau_\text{n}}} + a
 \end{equation}
 Der Offset gibt einen systematischen Fehler an, der durch einen Teil des Untergrundes, welcher nicht mit der linearen Funktion oben 
-berücksichtigt wurde, verursacht werden könnte.
-
+berücksichtigt wurde, verursacht werden könnte. \\
+Der Fehler auf die Amplituden kommt aus den Fits der einzelnen Gauß-Peaks. Jedoch muss noch berücksichtigt werden, dass jeder Peak von einem 
+eigenen Laserpuls erzeugt wurde. Der relative Fehler auf die Intensität des Lasers wurde auf $s_\text{Laser, rel} = 5\%$ geschätzt. Dadurch 
+lässt sich nun der Fehler auf die Amplituden mit 
+\begin{equation}
+  s_A = \sqrt{s_\text{Fit}^2 + s_\text{Laser, rel}^2}
+\end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part2/dist_fitA.pdf}

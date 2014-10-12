@@ -228,12 +228,27 @@ Mit den Näherungen (das exakte Ergebnis liefert die McKelvey-Korrektur in \cite
 \end{equation}
 lässt sich obige Gleichung damit umformen zu
 \begin{equation}
-\label{eq:gauss}
+\label{}
 c(t) = A(t_{\text{c}})
 \cdot
 \frac{1}{\sqrt{2  \pi  \cdot \sigma(t_{\text{c}})^2}}
 \cdot
-e^{-\frac{1}{2}\left(\frac{t - t_{\text{c}}}{\sigma(t_{\text{c}}) / \mu_{\text{n}} E}\right)^2}
+e^{-\frac{1}{2}\left(\frac{t - t_{\text{c}}}{\sigma(t_{\text{c}}) / \mu_{\text{n}} E}\right)^2} \ \, .
+\end{equation}
+Mit
+\begin{equation}
+\label{}
+\tilde{\sigma} := \frac{\sigma(t_{\text{c}})}{\mu_{\text{n}} E} \qquad \text{und} \qquad 
+\tilde{A} := \frac{A(t_{\text{c}})}{\mu_{\text{n}} E}
+\end{equation}
+erhält man
+\begin{equation}
+\label{eq:gauss}
+c(t) = \tilde{A}
+\cdot
+\frac{1}{\sqrt{2  \pi  \cdot \tilde{\sigma}^2}}
+\cdot
+e^{-\frac{1}{2}\left(\frac{t - t_{\text{c}}}{\tilde{\sigma}}\right)^2} \ \, .
 \end{equation}
 \autoref{eq:gauss} wird bei der Auswertung für die Fits verwendet.
 

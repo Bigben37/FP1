@@ -145,15 +145,15 @@ def calcWMinMax(phi):
     return wmin, wmax
 
 
-def calcsE(phi):
-    print(np.rad2deg(phi))
-    psi = np.radians(7.5)
+def calcsE(phi, elem):
     h = 4.136e-15  # in eV / s
     c = 2.999e8  # in m/s
-    d = 0.02  # in m
+    if elem == 'Si':
+        d = 1 / 1200e3
+    elif elem == 'Ge':
+        d = 1 / 600e3
     wmin, wmax = calcWMinMax(phi)
-    #print(np.rad2deg(wmin), np.rad2deg(wmax))
-    return 0.5 * (h * c / (2 * d * np.cos(psi) * np.sin(wmin / 2)) - h * c / (2 * d * np.cos(psi) * np.sin(wmax / 2)))
+    return 0.5 * (-h * c / (2 * d * np.cos(wmin / 2) * np.sin(phi)) + h * c / (2 * d * np.cos(wmax / 2) * np.sin(phi)))
 
 def convertEnergyToAngle(E, elem):
     h = 4.136e-15  # in eV / s
@@ -229,12 +229,18 @@ def main():
                                  ['Energie E(#alpha)'], (0, 80), connect=True, addlabel='_ea')
 
     for i, energie in enumerate(energies):
-        with TxtFile('../calc/part1/%s_bandgap_avg.txt' % elems[i], 'w') as f:
-            f.writeline('\t', *map(str, avgerrors(*zip(*energie))))
+        listenergy = []
+        listnewerrors = []
         with TxtFile('../calc/part1/%s_bandgap_syserror.txt' % elems[i], 'w') as f:
             for e, se in energie:
-                sesys = calcsE(convertEnergyToAngle(e, elems[i]))
-                f.writeline('\t', str(e), str(se), str(sesys), str(np.sqrt(se ** 2 + sesys ** 2)))
+                listenergy.append(e)
+                sesys = calcsE(convertEnergyToAngle(e, elems[i]), elems[i])
+                newerror = np.sqrt(se ** 2 + sesys ** 2)
+                listnewerrors.append(newerror)
+                f.writeline('\t', str(e), str(se), str(sesys), str(newerror))
+        with TxtFile('../calc/part1/%s_bandgap_avg.txt' % elems[i], 'w') as f:
+            f.writeline('\t', *map(str, avgerrors(listenergy, listnewerrors)))
+        
             
 
 

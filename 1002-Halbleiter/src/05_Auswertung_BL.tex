@@ -70,21 +70,22 @@ Man erhält für die Bandlückenenergie von Silizium:
   E_{g, \text{Trans}} &= (1.141 \pm 0.003)\,\text{eV}
 \end{split}
 \end{equation}
-Für den Fehler von $E_g$ muss allerdings noch berücksichtigt werden, dass die endliche Breite der Blende ($d=2$\,cm) und 
+Für den Fehler von $E_g$ muss allerdings noch berücksichtigt werden, dass die endliche Breite der Blende ($b=2$\,cm) und 
 des Gitters ($D=2.5$\,cm) nicht eine genaue Energie sondern ein Energieintervall gemessen wird. Nach \cite{staatsex} können 
-die Winkel $W_\text{min}$ und $W_\text{max}$ berechnet werden, zwischen denen die Photonen bei einem festen Anstellwinkel $\Phi$ noch 
-gemessen werden:
+die Winkel $W_\text{min}$ und $W_\text{max}$ berechnet werden: 
 \begin{equation}
 \begin{split}
-  W_\text{min}(\Phi) &= \Psi + \arcsin \left( \sin(\Psi) - \frac{\frac{D}{2} \cdot \cos(\Phi) + \frac{d}{2} \cdot \cos(\Psi)}{L} \right) \\
-  W_\text{max}(\Phi) &= \Psi + \arcsin \left( \sin(\Psi) + \frac{\frac{D}{2} \cdot \cos(\Phi) + \frac{d}{2} \cdot \cos(\Psi)}{L} \right) 
+  W_\text{min}(\Phi) &= \Psi + \arcsin \left( \sin(\Psi) - \frac{\frac{D}{2} \cdot \cos(\Phi) + \frac{b}{2} \cdot \cos(\Psi)}{L} \right) \\
+  W_\text{max}(\Phi) &= \Psi + \arcsin \left( \sin(\Psi) + \frac{\frac{D}{2} \cdot \cos(\Phi) + \frac{b}{2} \cdot \cos(\Psi)}{L} \right) 
 \end{split}
 \end{equation}
-mit $\Psi=7.5^\circ$ und dem Abstand $L=55$\,cm zwischen Blende und Gitter. \\
-Es kann nun der systematische Fehler aus dieser Unschärfe berechnet werden:
+mit $\Psi=7.5^\circ$ und dem Abstand $L=55$\,cm zwischen Blende und Gitter. Diese Winkel stellen nun zwei verschiedene Öffnungswinkel der Bank 
+(früher $2\Psi$) dar. Für diese neuen Öffnungswinkel wird nun die Energie aus \autoref{eq:energy_angle} bestimmt und die Hälfte der Differenz 
+dieser beiden Energien als systematischen Fehler $s_E$ gesetzt\footnote{Diese Formel ist in \cite{staatsex} falsch angegeben.}:
 \begin{equation}
-  s_E = \frac{1}{2} \left( \frac{h \cdot c}{2 \cdot d \cdot \cos(\Psi) \cdot \sin (W_\text{min} / 2)} - \frac{h \cdot c}{2 \cdot d \cdot \cos(\Psi) \cdot \sin (W_\text{max} / 2)} \right) 
+  s_E = \frac{1}{2} \left( \frac{h \cdot c}{2 \cdot d \cdot \cos(W_\text{max} / 2) \cdot \sin (\Phi)} - \frac{h \cdot c}{2 \cdot d \cdot \cos(W_\text{min} / 2) \cdot \sin (\Phi)} \right) 
 \end{equation}
+mit $d$ Gitterkonstante.\\
 Für den gesamten Fehler auf $E_g$ folgt:
 \begin{equation}
   s_{E_g} = \sqrt{s_\text{Fit}^2 + s_E^2}
@@ -93,19 +94,19 @@ Die errechneten Bandlückenenergien können mit \autoref{eq:energy_angle} in den
 neuen Fehler:
 \begin{equation}
 \begin{split}
-  E_{g, \text{Abs}} &= (1.1043 \pm )\,\text{eV} \\
-  E_{g, \text{Trans}} &= (1.141 \pm )\,\text{eV}
+  E_{g, \text{Abs}} &= (1.104 \pm 0.003)\,\text{eV} \\
+  E_{g, \text{Trans}} &= (1.141 \pm 0.004)\,\text{eV}
 \end{split}
 \end{equation}
 Der gewichtete Mittelwert liefert:
 \begin{equation}
-  \bar{E}_g = (1.10637 \pm 0.0008)\,\text{eV}
+  \bar{E}_g = (1.115 \pm 0.002)\,\text{eV}
 \end{equation}
 Die Abweichung vom Literaturwert
 \begin{equation}
   E_g^{\text{Lit}} = 1.12\,\text{eV}
 \end{equation}
-beträgt ca. 1\% des Messwertes. Der Fit liefert nur die statistsichen Fehler 
+beträgt ca. 0.5\% des Messwertes.
 
 
 \subsubsection{Bandlückenenergie von Germanium}
@@ -117,15 +118,6 @@ liefert die Bandlückenenergien von Germanium:
   E_{g, \text{Trans}} &= (0.694 \pm 0.002)\,\text{eV}
 \end{split}
 \end{equation}
-%TODO Fehler E_g aus Aufbau
-Der gewichtete Mittelwert beträgt
-\begin{equation}
-  \bar{E}_g = (0.6917 \pm 0.0015)\,\text{eV}
-\end{equation}
-\begin{equation}
-  E_g^{\text{Lit}} = 0.66\,\text{eV}
-\end{equation}
-
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part1/Ge_fit_AbsTrans.pdf}
@@ -133,3 +125,21 @@ Der gewichtete Mittelwert beträgt
   \label{img:ge:transabs}
 \end{center}
 \end{figure}
+Mit systematischen Fehlern:
+\begin{equation}
+\begin{split}
+  E_{g, \text{Abs}} &= (0.6906 \pm 0.002)\,\text{eV} \\
+  E_{g, \text{Trans}} &= (0.694 \pm 0.003)\,\text{eV}
+\end{split}
+\end{equation}
+Der gewichtete Mittelwert beträgt:
+\begin{equation}
+  \bar{E}_g = (0.692 \pm 0.002)\,\text{eV}
+\end{equation}
+Er liegt über dem Literaturwert (Abweichung ca. 5\%).
+\begin{equation}
+  E_g^{\text{Lit}} = 0.66\,\text{eV}
+\end{equation}
+Die höhere prozentuale Abweichung vom Literaturwert kann mit der geringeren Empfindlichkeit der Germaniumprobe erklärt werden, da höhere 
+Verstärkungen zu größeren Fehlern führen.
+

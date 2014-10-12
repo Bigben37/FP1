@@ -8,7 +8,7 @@ Die Spektren von \co\ und \am\ sind in \autoref{img:cdte:co:spektrum} und \autor
 von \am\, bei Kanal 300, den 122.06\,keV-Peak von \co\, bei Kanal 600 und den 136.47\,keV-Peak von \co\, bei Kanal 700.
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[width=\textwidth]{../img/part3/Co-CdTe_spectrum.pdf}
+  \includegraphics[width=0.95\textwidth]{../img/part3/Co-CdTe_spectrum.pdf}
   \caption{Spektrum von \co, gemessen mit dem CdTe-Detektor.}
   \label{img:cdte:co:spektrum}
 \end{center}
@@ -16,7 +16,7 @@ von \am\, bei Kanal 300, den 122.06\,keV-Peak von \co\, bei Kanal 600 und den 13
 
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[width=\textwidth]{../img/part3/Am-CdTe_spectrum.pdf}
+  \includegraphics[width=0.95\textwidth]{../img/part3/Am-CdTe_spectrum.pdf}
   \caption{Spektrum von \am, gemessen mit dem CdTe-Detektor.}
   \label{img:cdte:am:spektrum}
 \end{center}
@@ -30,7 +30,8 @@ Die einzelnen Peaks werden mit einer normierten Gauß-Kurve gefittet.
   N(k) = A \cdot \frac{1}{\sqrt{2\pi \cdot \sigma^2}} \cdot e^{-\frac{1}{2} \left( \frac{k-k_c}{\sigma} \right)^2}
 \end{equation}
 Die Fits sind in \autoref{img:am:cdte:peak0}, \autoref{img:co:cdte:peak0} und \autoref{img:co:cdte:peak1} dargestellt. Wie man erkennt, sind die 
-Peaks nicht ganz symmetrisch verteilt. Durch die unterschiedliche Absorptionstiefe ist der Abstand zu Kathode und Anode nicht konstant, die 
+Peaks nicht ganz symmetrisch.
+Durch die unterschiedliche Absorptionstiefe ist der Abstand zu Kathode und Anode nicht konstant, die 
 entstandenen Ladungsträger rekombinieren teilweise wieder. Dieser Effekt soll jedoch nach \cite{staatsex} nicht berücksichtigt werden, die 
 Peaks können in guter Näherung mit einer Gauß-Kurve gefittet werden.
 \begin{figure}[H]
@@ -79,7 +80,8 @@ Man erhält für die Parameter:
 \end{figure}
 Der hohe Wert des $\chi^2$ kann mit einer Nichtlinearität des Detektors oder des MCA erklärt werden. Allerdings ist ein quadratischer Fit 
 (vermutetes Modell) bei nur drei Messpunkten nicht sinnvoll, da die Anzahl der einzelnen Messpunkte der Anzahl der Fitparameter entspricht, es 
-gibt keinen Freiheitsgrad. Die Fehler der Messpunkte stammen aus den Fits (die akzeptable $chi^2$-Werte besitzen). Die Counts 
+gibt dann keinen Freiheitsgrad.
+Die Fehler der Messpunkte stammen aus den Fits (die akzeptable $\chi^2$-Werte besitzen). Die Counts 
 wurden wie oben beschrieben als poissonverteilt angenommen.
 
 \paragraph{Relative Energieauflösung}
@@ -198,7 +200,7 @@ Kanal & RER \\ \hline
 621.3 $\pm$ 0.9 & 0.054 $\pm$ 0.004 \\ \hline
 690.6 $\pm$ 0.9 & 0.028 $\pm$ 0.003 \\ \hline
 \end{tabular}
-\caption{Energieauflösungen des Si-Detektors}
+\caption{Energieauflösungen des Si-Detektors.}
 \label{tab:si:rer}
 \end{center}
 \end{table}
@@ -219,7 +221,7 @@ Energie & $\text{Abs}_{\text{Si}} / \text{Abs}_{\text{CdTe}}$ & Literaturwert \c
 122.06 & 0.0087 $\pm$ 0.0007 & 0.0183 \\ \hline
 136.47 & 0.0090 $\pm$ 0.0010 & 0.0200 \\ \hline
 \end{tabular}
-\caption{Energieauflösungen des Si-Detektors}
+\caption{Absorptionsverhältnisse von Si- und CdTe-Detektor.}
 \label{tab:absrel}
 \end{center}
 \end{table}

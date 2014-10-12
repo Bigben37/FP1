@@ -204,16 +204,26 @@ Kanal & RER \\ \hline
 \end{table}
 
 \subsubsection{Absorptionsverhältnisse}
+Die Absorptionswahrscheinlichkeit lässt sich mit der Amplitude $A$ aus dem Gauß-Fit und der Detektoroberfläche $a$ bestimmen: 
+\begin{equation}
+  \text{Abs} = \frac{A}{a}
+\end{equation}
+Der Quotient aus der Absorptionswahrscheinlichkeit der beiden Detektoren bei gleicher Energie liefert das Absorptionsverhältnis 
+(\autoref{tab:absrel}).
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{|c|c|}
+\begin{tabular}{|c|c|c|}
 \hline 
-Kanal & RER \\ \hline
-299.2 $\pm$ 0.4 & 0.096 $\pm$ 0.003 \\ \hline
-621.3 $\pm$ 0.9 & 0.054 $\pm$ 0.004 \\ \hline
-690.6 $\pm$ 0.9 & 0.028 $\pm$ 0.003 \\ \hline
+Energie & $\text{Abs}_{\text{Si}} / \text{Abs}_{\text{CdTe}}$ & Literaturwert \cite{staatsex} \\ \hline
+59.5 & 0.0181    $\pm$ 0.0006 & 0.0140 \\ \hline
+122.06 & 0.0087 $\pm$ 0.0007 & 0.0183 \\ \hline
+136.47 & 0.0090 $\pm$ 0.0010 & 0.0200 \\ \hline
 \end{tabular}
 \caption{Energieauflösungen des Si-Detektors}
-\label{tab:si:rer}
+\label{tab:absrel}
 \end{center}
 \end{table}
+Die berechneten Werte stimmen nicht mit den Literaturwerten \cite{staatsex} überein. Dies kann mehrerer Gründe haben 
+(beschrieben in \cite{staatsex}), wie zum Beispiel Absorption der Epoxid- und $\text{SiO}_2$-Schicht oder Ladungsrekombination. Jedoch 
+stimmt die Vorrausage von \cite{staatsex}, dass die gemessenen Werte etwa um den Faktor 2 von den Literaturwerten abweichen, für die beiden Peaks 
+mit höherer Energie.

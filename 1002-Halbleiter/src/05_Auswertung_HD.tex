@@ -30,7 +30,9 @@ Die einzelnen Peaks werden mit einer normierten Gauß-Kurve gefittet.
   N(k) = A \cdot \frac{1}{\sqrt{2\pi \cdot \sigma^2}} \cdot e^{-\frac{1}{2} \left( \frac{k-k_c}{\sigma} \right)^2}
 \end{equation}
 Die Fits sind in \autoref{img:am:cdte:peak0}, \autoref{img:co:cdte:peak0} und \autoref{img:co:cdte:peak1} dargestellt. Wie man erkennt, sind die 
-Peaks nicht ganz symmetrisch verteilt. %TODO verweis staatsex
+Peaks nicht ganz symmetrisch verteilt. Durch die unterschiedliche Absorptionstiefe ist der Abstand zu Kathode und Anode nicht konstant, die 
+entstandenen Ladungsträger rekombinieren teilweise wieder. Dieser Effekt soll jedoch nach \cite{staatsex} nicht berücksichtigt werden, die 
+Peaks können in guter Näherung mit einer Gauß-Kurve gefittet werden.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part3/Am-CdTe_00.pdf}
@@ -56,7 +58,11 @@ Peaks nicht ganz symmetrisch verteilt. %TODO verweis staatsex
 \end{figure}
 
 \paragraph{Energieeichung}
-Platzhalter
+Die Literaturwerte der Peaks werden über den oben erhaltenen Erwartungswerten der Gauß-Kurven aufgetragen. Dieser Graph ist Grundlage der 
+Energieeichung (\autoref{img:cdte:energygauge}). Es wird eine lineare Abhängigkeit der gemessenen Energie $E$ von der Kanalnummer $k$ angenommen.
+\begin{equation}
+  E(k) = a + b*k
+\end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part3/energygauge_CdTe.pdf}

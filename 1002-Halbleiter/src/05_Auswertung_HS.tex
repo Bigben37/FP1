@@ -1,9 +1,13 @@
 \subsection{Messergebnisse und Auswertung}
-Die Messungen wurden mit einem digitalen Oszilloskop durchgeführt. Die Zeiten und Spannungen sind nicht kontinuierlich verteilt, sie können 
-nur diskrete Werte annehmen. Die Auflösung der Zeit beträgt $\Delta t = 0.02$\,\textmu s, die der Spannung $\Delta U = 0.1$\,mV. \\
-TODO Gleichverteilung. %TODO Gleichverteilung
+Die Messungen wurden mit einem digitalen Oszilloskop durchgeführt.
+Wegen der begrenzten Auflösung des A/D-Wandlers sind die Messwerte für
+die Zeiten und Spannungen nicht kontinuierlich verteilt, sie können 
+nur diskrete Werte annehmen. Der Kanalabstand für die Zeitmesswerte beträgt $\Delta t = 0.02$\,\textmu s,
+der der Spannung $\Delta U = 0.1$\,mV. \\
+Unter Annahme einer Gleichverteilung der Messwerte innerhalb eines Kanals des A/D-Wandlers folgt
+für den Fehler auf die Messwerte
 \begin{equation}
-  s_t = \frac{\Delta t}{\sqrt{12}}, \qquad s_U = \frac{\Delta U}{\sqrt{12}}
+  s_t = \frac{\Delta t}{\sqrt{12}} = 6\,\text{ns}, \qquad s_U = \frac{\Delta U}{\sqrt{12}} = 29\,\text{\textmu V}
 \end{equation}
 Beim Ablesen der Treibspannung $U_T$ wurde eine deutliche Veränderung der gemessenen Treibspannung bei unterschiedlich eingestellten 
 Anzeigeoffsets beobachtet. Aus diesem Grund wurde der Fehler der Treibspannung auf $s_{U_T} = 0.4$\,V geschätzt. \\

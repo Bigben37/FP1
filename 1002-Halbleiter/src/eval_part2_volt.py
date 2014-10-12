@@ -8,7 +8,7 @@ from data import DataErrors
 from txtfile import TxtFile
 
 
-PRINTGRAPHS = False  # set False for quicker testing
+PRINTGRAPHS = True  # set False for quicker testing
 
 
 def getParams():

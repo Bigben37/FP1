@@ -103,8 +103,6 @@ wenn das Modell und die Fitparameter korrekt sind und die Messwerte normalvertei
 Auf dem 5\%-Signifikanzniveau kann die Nullhypothese (Korrektheit von Modell und Normalverteilung der Messwerte)
 also nicht abgelehnt werden.
 
-
-
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part2/dist_fitSigma.pdf}
@@ -123,6 +121,7 @@ Sie stimmt innerhalb von zwei Standardabweichungen mit dem Literaturwert überei
 \end{equation}
 
 \paragraph{Bestimmung der mittleren Lebensdauer $\tau_\text{n}$}
+Die Amplituden werden wegen \autoref{eq:scale} auch mit dem Faktor $\mu \cdot E$ multipliziert. \\
 Für die Bestimmung der mittleren Lebensdauer wird der Zusammenhang aus \autoref{eq:gaus:params} mit einen konstanten Offset $a$ verwendet:
 \begin{equation}
   A(t) = C \cdot e^{- \frac{t}{\tau_\text{n}}} + a
@@ -157,7 +156,8 @@ Die Ursache dafür ist Rekombination der Ladungsträger an oberflächlichen Gitt
 da die Eindringtiefe des Lasers in Germanium nicht hoch ist.
 
 \subsubsection{Variation der Treibspannung \texorpdfstring{$U_T$}{U\_T}}
-
+Die Auswertung für die verschiedenen Treibspannungen $U_T$ erfolgt ähnlich wie oben. In \autoref{img:volts} sind alle gemessenen Gauß-Kurven 
+ohne Untergrund dargestellt.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part2/voltages.pdf}
@@ -167,34 +167,80 @@ da die Eindringtiefe des Lasers in Germanium nicht hoch ist.
 \end{figure}
 
 \paragraph{Bestimmung der Ladungsträgermobilität $\mu$} 
-Platzhalter
-
+Aus \autoref{eq:gaus:params} folgt mit $E = \frac{U_T}{l}$:
+\begin{equation}
+  \frac{1}{E} = \frac{\mu}{d} \cdot t \quad \Rightarrow \quad \frac{1}{U_T} = \frac{\mu}{l\cdot d} \cdot t
+\end{equation}
+Mit dieser Geraden und einem Offset $\frac{1}{U_0}$ werden die Daten gefittet (\autoref{img:volt:fitxc}).
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part2/volt_fitXc.pdf}
-  \caption{caption}
+  \caption{Fit der reziproken Treibspannung über den durch die Fits erhaltenen zeitlichen Erwartungswerten 
+  zur Bestimmung der Ladungsträgermobilität $\mu$.}
   \label{img:volt:fitxc}
 \end{center}
 \end{figure}
+Man erhält für die Steigung:
+\begin{equation}
+  m = (3260 \pm 54)\,\frac{1}{\text{V}\cdot\text{s}}
+\end{equation}
+Dadurch lässt sich mit:
+\begin{equation}
+  m = \frac{\mu}{l \cdot (d + x_0)} \Rightarrow \mu = m \cdot l \cdot (d + x_0)
+\end{equation}
+die Mobilität bestimmen. $l=3$\,cm ist die Länge der Germaniumprobe, $d=(3.15\pm 0.05)$\,cm der gemessene Abstand und $x_0$ 
+der oben (\autoref{img:dist:fitxc}) bestimmte Offset. \\
+Man erhält für die Mobilität:
+\begin{equation}
+  \mu = (4073 \pm 89)\,\frac{\text{cm}^2}{\text{V} \cdot \text{s}}
+\end{equation}
+Der Literaturwert liegt innerhalb des 2-$\sigma$-Intervalls des gemessenen Wertes.
+\begin{equation}
+  \mu^{\text{Lit}} = 3900\,\frac{\text{cm}^2}{\text{V} \cdot \text{s}}
+\end{equation}
 
 \paragraph{Bestimmung der Diffusionskonstanten $D_\text{n}$}
-Platzhalter
-
+Wie oben wurden die gemessenen Standardabweichungen $\tilde{\sigma}$ nach \autoref{eq:scale} mit $\mu \cdot E$ multipliziert. Dabei 
+wurde für jedes $\tilde{\sigma}$ die bei der Messung verwendete Treibspannung $U_T$ zur Bestimmung des elektrischen Feldes $E$ benutzt. 
+Durch den großen Fehler der Treibspannung (verursacht durch die oben beschriebene Fehlfunktion des Oszilloskops) fallen Fehler der einzelnen 
+$\sigma$ viel zu groß aus. Dies zeigt sich auch am viel zu kleinen $\chi^2$-Wert des Fits (\autoref{img:volt:fitsigma}).
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part2/volt_fitSigma.pdf}
-  \caption{caption}
+  \caption{Standardabweichung der gefitteten Gaußkurven in Abhängigkeit des Zeitpunktes des Maximumsdurchlaufs $t{_\text{c}}$
+  und Fit zur Bestimmung der Diffusionskonstanten~$D$.}
   \label{img:volt:fitsigma}
 \end{center}
 \end{figure}
+Man erhält für die Diffusionskonstante:
+\begin{equation}
+  D_\text{n} = (102 \pm 11)\,\frac{\text{cm}^2}{\text{s}}
+\end{equation}
+Sie stimmt mit dem Literaturwert überein.
+\begin{equation}
+  D_\text{n}^{\text{Lit}} = 101\,\frac{\text{cm}^2}{\text{s}} 
+\end{equation}
 
 \paragraph{Bestimmung der mittleren Lebensdauer $\tau_\text{n}$}
-Platzhalter
-
+Hier werden wieder wie bei der Diffusionskonstante die einzelnen Amplituden mit dem jeweiligen Faktor $\mu \cdot E$ nach \autoref{eq:scale} 
+multipliziert. Des weiteren wird wie bei der Berechnung von $\tau_\text{n}$ bei verschiedenen Abständen $d$ der Fehler der Laseramplitude 
+berücksichtigt. Die Messwerte sind in \autoref{img:volt:fita} dargestellt und mit folgender Gleichung gefittet:
+\begin{equation}
+  A(t) = C \cdot e^{- \frac{t}{\tau_\text{n}}} + a
+\end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/part2/volt_fitA.pdf}
-  \caption{caption}
+  \caption{Amplituden der gefitteten Gaußkurven in Abhängigkeit des Zeitpunktes des Maximumsdurchlaufs $t_{\text{c}}$
+  und Fit zur Bestimmung der mittleren Lebensdauer~$\tau_{\text{n}}$.}
   \label{img:volt:fita}
 \end{center}
 \end{figure}
+Man erhält für die mittleren Lebensdauer $\tau_\text{n}$:
+\begin{equation}
+  \tau_\text{n} = (2.91 \pm 0.16)\,\text{\textmu s}
+\end{equation}
+Dieser Wert liegt wieder weit unterhalb des Literaturwerts, die Abweichung folgt aus der gleichen Ursache wie oben beschrieben.
+\begin{equation}
+  \tau_\text{n}^\text{Lit} = (45 \pm 2)\,\text{\textmu s}
+\end{equation}

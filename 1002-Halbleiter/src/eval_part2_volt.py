@@ -239,7 +239,7 @@ def evalVoltages():
         graphs.append(data.makeGraph('g', 'Zeit t / s', 'Spannung U / V'))
     plotVoltages(graphs, volts)
 
-    offset, soffset = loadCSVToList('../calc/part2/offset.txt')[0]  # xoffset in mm
+    offset, soffset = 1.01428734007, 0.032424164823  # xoffset in mm
     d, sd = 3.15 + offset, np.sqrt(0.05 ** 2 + soffset ** 2)  # distance in mm
     mu, smu = fitXc(volts, times, d, sd)  # in cm^2 / Vs
     energies = map(lambda x: (x[0] / 3, x[1] / 3), volts)  # E = U / d, d = 3cm

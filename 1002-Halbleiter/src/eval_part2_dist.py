@@ -153,6 +153,7 @@ def fitA(amps, times):
 
     c = TCanvas('cA', '', 1280, 720)
     g = data.makeGraph('A', 'Zeit t / s', 'Amplitude A / V')
+    g.GetYaxis().SetTitleOffset(1.2)
     g.Draw('AP')
 
     fit = Fitter('A', '[0]*exp(-(x)/[1])+[2]')
@@ -174,6 +175,9 @@ def fitA(amps, times):
     if PRINTGRAPHS or True:
         c.Update()
         c.Print('../img/part2/dist_fitA.pdf', 'pdf')
+        c.SetLogy()
+        c.Update()
+        c.Print('../img/part2/dist_fitA_log.pdf', 'pdf')
 
 
 def fitSigma(sigs, times):
@@ -231,8 +235,9 @@ def evalDistances():
 
     # fit params of gauss
     mu, smu = fitXc(distances, times)  # in cm^2 / Vs
-    fitA(amps, times)
     E = 48.8 / 3  # in V / cm
+    amps = map(lambda x: (x[0] * mu * E, x[0] * mu * E * np.sqrt((x[1] / x[0]) ** 2 + (smu / mu) ** 2)), amps)  # A = A' * mu * E
+    fitA(amps, times)
     sigs = map(lambda x: (x[0] * mu * E, x[0] * mu * E * np.sqrt((x[1] / x[0]) ** 2 + (smu / mu) ** 2)), sigs)  # simga = sigma' * mu * E
     fitSigma(sigs, times)
 

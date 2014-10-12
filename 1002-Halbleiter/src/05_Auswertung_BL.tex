@@ -70,7 +70,33 @@ Man erhält für die Bandlückenenergie von Silizium:
   E_{g, \text{Trans}} &= (1.141 \pm 0.003)\,\text{eV}
 \end{split}
 \end{equation}
-%TODO Fehler E_g aus Aufbau
+Für den Fehler von $E_g$ muss allerdings noch berücksichtigt werden, dass die endliche Breite der Blende ($d=2$\,cm) und 
+des Gitters ($D=2.5$\,cm) nicht eine genaue Energie sondern ein Energieintervall gemessen wird. Nach \cite{staatsex} können 
+die Winkel $W_\text{min}$ und $W_\text{max}$ berechnet werden, zwischen denen die Photonen bei einem festen Anstellwinkel $\Phi$ noch 
+gemessen werden:
+\begin{equation}
+\begin{split}
+  W_\text{min}(\Phi) &= \Psi + \arcsin \left( \sin(\Psi) - \frac{\frac{D}{2} \cdot \cos(\Phi) + \frac{d}{2} \cdot \cos(\Psi)}{L} \right) \\
+  W_\text{max}(\Phi) &= \Psi + \arcsin \left( \sin(\Psi) + \frac{\frac{D}{2} \cdot \cos(\Phi) + \frac{d}{2} \cdot \cos(\Psi)}{L} \right) 
+\end{split}
+\end{equation}
+mit $\Psi=7.5^\circ$ und dem Abstand $L=55$\,cm zwischen Blende und Gitter. \\
+Es kann nun der systematische Fehler aus dieser Unschärfe berechnet werden:
+\begin{equation}
+  s_E = \frac{1}{2} \left( \frac{h \cdot c}{2 \cdot d \cdot \cos(\Psi) \cdot \sin (W_\text{min} / 2)} - \frac{h \cdot c}{2 \cdot d \cdot \cos(\Psi) \cdot \sin (W_\text{max} / 2)} \right) 
+\end{equation}
+Für den gesamten Fehler auf $E_g$ folgt:
+\begin{equation}
+  s_{E_g} = \sqrt{s_\text{Fit}^2 + s_E^2}
+\end{equation}
+Die errechneten Bandlückenenergien können mit \autoref{eq:energy_angle} in den Anstellwinkel $\Phi$ umgerechnet werden. Es folgt für die 
+neuen Fehler:
+\begin{equation}
+\begin{split}
+  E_{g, \text{Abs}} &= (1.1043 \pm )\,\text{eV} \\
+  E_{g, \text{Trans}} &= (1.141 \pm )\,\text{eV}
+\end{split}
+\end{equation}
 Der gewichtete Mittelwert liefert:
 \begin{equation}
   \bar{E}_g = (1.10637 \pm 0.0008)\,\text{eV}

@@ -157,24 +157,30 @@ def fitA(amps, times):
 
     c = TCanvas('cA', '', 1280, 720)
     g = data.makeGraph('A', 'Zeit t / s', 'Amplitude A / V')
+    g.GetYaxis().SetTitleOffset(1.2)
     g.Draw('AP')
 
-    fit = Fitter('A', '[0]*exp(-(x)/[1])')
+    fit = Fitter('A', '[0]*exp(-(x)/[1])+[2]')
+    fit.function.SetNpx(1000)
     fit.setParam(0, 'C', 5e-8)
     fit.setParam(1, '#tau_{n}', 45e-6)
+    fit.setParam(2, 'a', 0)
     fit.fit(g, 7.5e-6, 18e-6)
     fit.saveData('../calc/part2/volt_fit_A.txt')
 
     l = TLegend(0.625, 0.625, 0.85, 0.85)
     l.SetTextSize(0.03)
     l.AddEntry('A', 'Messung', 'p')
-    l.AddEntry(fit.function, 'Fit mit A(t) = C*e^{- #frac{t}{#tau_{n}}}', 'l')
-    fit.addParamsToLegend(l, [('%.2e', '%.1e'), ('%.2e', '%.1e')], chisquareformat='%.2f')
+    l.AddEntry(fit.function, 'Fit mit A(t) = C*e^{- #frac{t}{#tau_{n}}} + a', 'l')
+    fit.addParamsToLegend(l, [('%.2e', '%.1e'), ('%.2e', '%.1e'), ('%.2e', '%.1e')], chisquareformat='%.2f')
     l.Draw()
 
     if PRINTGRAPHS or True:
         c.Update()
         c.Print('../img/part2/volt_fitA.pdf', 'pdf')
+        c.SetLogy()
+        c.Update()
+        c.Print('../img/part2/volt_fitA_log.pdf', 'pdf')
 
 
 def fitSigma(sigs, times):
@@ -236,8 +242,10 @@ def evalVoltages():
     offset, soffset = loadCSVToList('../calc/part2/offset.txt')[0]  # xoffset in mm
     d, sd = 3.15 + offset, np.sqrt(0.05 ** 2 + soffset ** 2)  # distance in mm
     mu, smu = fitXc(volts, times, d, sd)  # in cm^2 / Vs
-    fitA(amps, times)
     energies = map(lambda x: (x[0] / 3, x[1] / 3), volts)  # E = U / d, d = 3cm
+    amps = map(lambda x, E: (x[0] * mu * E[0], x[0] * mu * E[0] * np.sqrt((x[1] / x[0]) ** 2 + (smu / mu) ** 2) + (E[1] / E[0]) ** 2), 
+               amps, energies)
+    fitA(amps, times)
     sigs = map(lambda x, E: (x[0] * mu * E[0], x[0] * mu * E[0] * np.sqrt((x[1] / x[0]) ** 2 + (smu / mu) ** 2) + (E[1] / E[0]) ** 2), 
                sigs, energies)
     fitSigma(sigs, times)

@@ -1,5 +1,6 @@
 #!/usr/bin/python2.7
 from functions import setupROOT, loadCSVToList  # make sure to add ../lib to your project path or copy file from there
+from kernspin import ERRORS
 from data import DataErrors
 from ROOT import TCanvas, TLegend
 from txtfile import TxtFile
@@ -14,8 +15,8 @@ def calcGyro(nu, snu, B, sB):
     return gyro, sgyro
 
 def main():
-    snu = 0  # TODO get error
-    sB = 0  # TODO get error
+    snu = ERRORS['nu']  # TODO get error
+    sB = ERRORS['B']
     files = ['H', 'Glycol']
     for file in files:
         datalist = loadCSVToList('../data/03-%s.txt' % file)
@@ -25,9 +26,11 @@ def main():
                 f.writeline('\t', *map(str, calcGyro(nu, snu, B, sB)))
         else:
             x, y = zip(*datalist)
-            sx = [sB] * len(x)
+            sx = [0] * len(x)
             sy = [snu] * len(y)
             data = DataErrors.fromLists(x, y, sx, sy)
+            #data.setXErrorRel(sBrel)
+            data.setXErrorAbs(sB)
             c = TCanvas('c%s' % file, '', 1280, 720)
             g = data.makeGraph('g%s' % file, 'Magnetfeld B / mT', 'Resonanzfrequenz #nu / MHz')
             g.Draw('AP')
@@ -38,11 +41,11 @@ def main():
             fit.fit(g, datalist[0][0] * 0.95, datalist[-1][0] * 1.05)
             fit.saveData('../calc/fit-%s.txt' % file, 'w')
             
-            l = TLegend(0.15, 0.65, 0.45, 0.85)
+            l = TLegend(0.15, 0.65, 0.475, 0.85)
             l.SetTextSize(0.03)
             l.AddEntry(g, 'Messdaten', 'p')
             l.AddEntry(fit.function, 'Fit mit ', 'l')
-            fit.addParamsToLegend(l, [('%.2f', '%.2f'), ('%.4f', '%.4f')])
+            fit.addParamsToLegend(l, [('%.2f', '%.2f'), ('%.4f', '%.4f')], advancedchi=True)
             l.Draw()
             
             gyro = 2 * np.pi * fit.params[1]['value'] * 1000

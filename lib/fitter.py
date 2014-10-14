@@ -135,7 +135,7 @@ class Fitter:
             f.writeline()
             f.close()
 
-    def addParamsToLegend(self, legend, format='', chisquare=True, chisquareformat='%e', lang='de'):
+    def addParamsToLegend(self, legend, format='', chisquare=True, chisquareformat='%.2e', advancedchi=False, lang='de'):
         """adds fit information to legend
 
         Arguments:
@@ -147,7 +147,11 @@ class Fitter:
         """
         # chi squared
         if chisquare:
-            legend.AddEntry(0, '#chi^{2} / DoF = ' + chisquareformat % self.getChisquareOverDoF(), '')
+            if not advancedchi:
+                legend.AddEntry(0, '#chi^{2} / DoF = ' + chisquareformat % self.getChisquareOverDoF(), '')
+            else:
+                chistring = '#chi^{2} / DoF = %s / %s = %s' % (chisquareformat, '%d', chisquareformat)
+                legend.AddEntry(0, chistring % (self.getChisquare(), self.getDoF(), self.getChisquareOverDoF()), '')
         # parameter label
         lang_param = 'Parameter:'
         if lang == 'en':

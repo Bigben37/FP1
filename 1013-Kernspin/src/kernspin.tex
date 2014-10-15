@@ -54,7 +54,10 @@
 
 \usepackage{pdfpages} % include pdf files
 
+\usepackage[nottoc,numbib]{tocbibind} % bibliography in TOC
+
 % NEW COMMANDS
+\newcommand{\refeq}[1]{\overset{\text{\eqref{#1}}}{=}}
 
 % DOCUMENT SETTINGS
 
@@ -78,8 +81,8 @@ Alle Berechnungen in diesem Protokoll wurden unter Python 2.7 mit Hilfe folgende
 \end{itemize}
 oder mit oder Mathematica 10 durchgeführt.
 Die Graphiken wurden mit Inkscape (\url{http://www.inkscape.org}) gezeichnet.\\[\baselineskip]
-Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
-\url{https://github.com/Bigben37/FP1/tree/master/0908-LHWZ} abgerufen werden.
+Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter
+\url{https://github.com/Bigben37/FP1/tree/master/1013-Kernspin} abgerufen werden.
 \thispagestyle{empty}
 
 \newpage
@@ -96,11 +99,14 @@ Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
 \input{04_Durchfuerung}
 \input{05_Auswertung}
 
-%TODO add when finished
-%\appendix
-%\section{Anhang}
-%\subsection{Messprotokoll}
-%\includepdf[pages={-}]{../data/protokoll.pdf}
+\newpage
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\appendix
+\section{Anhang}
+\subsection{Messprotokoll}
+\includepdf[pages={-}]{../data/protocol.pdf}
 
 
 \end{document}

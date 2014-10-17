@@ -32,8 +32,12 @@ class HanleData(DataErrors):
                     self.addPoint(x, y, sx, sy)
                     
 
-    def convertTimeToB(self, a, b, c1, c2):
-        pass
+    def convertTimeToB(self, fit):
+        for i in xrange(self.getLength()):
+            x, y, sx, sy = self.getPoint(i)
+            x = fit.Eval(x) * 3.363e-4 * 1000 # in mT
+            sx = x * 0.01
+            self.points[i] = (x, y, sx, sy)
     
 def prepareGraph(g):
     g.SetMarkerStyle(8)

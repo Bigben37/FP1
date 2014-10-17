@@ -92,7 +92,7 @@ void FP_Hanle_Macro(Int_t sw, TString data)
     Double_t current = g->Eval(time);
     current = current*0.0003363*1000.;
     hanleramp->SetPoint(i,current,vy.at(i));
-    //    hanleramp->SetPointError(i,xerr*current,yerr*vy.at(i));  //switch on to use errors (you need to do that to get responsible goodness of fit)
+    hanleramp->SetPointError(i,xerr*current,yerr*vy.at(i));  //switch on to use errors (you need to do that to get responsible goodness of fit)
   }
 
   ////////////////////////

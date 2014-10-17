@@ -30,16 +30,21 @@ class Fitter:
         self._covMatrix = None
         self._corrMatrix = None
 
-    def setParam(self, index, name, startvalue=1):
+    def setParam(self, index, name, value=1, fixed=False):
         """initializes parameter
 
         Arguments:
         index      -- index of parameter (has to be the same as in the function of constructor)
         name       -- name of parameter
-        startvalue -- start value of parameter for fit (default = 1)
+        value -- value of parameter for fit (default = 1)
+        fixed -- if true fixes parameter (no fitting)
         """
-        self.params[index] = {'name': name, 'startvalue': startvalue, 'value': 0, 'error': 0}
-        self._function.SetParameter(index, startvalue)
+        if not fixed:
+            self.params[index] = {'name': name, 'startvalue': value, 'value': 0, 'error': 0}
+            self._function.SetParameter(index, value)
+        else:
+            #self.params[index] = {'name': name, 'startvalue': value, 'value': value, 'error': 0}
+            self._function.FixParameter(index, value)
         self._function.SetParName(index, name)
 
     def fit(self, graph, xstart, xend, options=''):
@@ -59,7 +64,7 @@ class Fitter:
             self.params[i]['error'] = self.virtualFitter.GetParError(i)
         n = len(self.params)
         self._covMatrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
-        self._corrMatrix = [[self._covMatrix[col][row] / (self.params[col]['error'] * self.params[row]['error']) for row in xrange(n)] for col in xrange(n)]
+        #self._corrMatrix = [[self._covMatrix[col][row] / (self.params[col]['error'] * self.params[row]['error']) for row in xrange(n)] for col in xrange(n)]
 
     def getFunction(self):
         """returns fit function"""
@@ -131,7 +136,7 @@ class Fitter:
             f.writeline('')
             f.writeline('correlation matrix')
             f.writeline('==================')
-            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
+            #f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
             f.writeline()
             f.close()
 

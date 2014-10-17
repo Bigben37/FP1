@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Fri Oct 17 08:54:23 CEST 2014
+markTmpDer=true
+builderNum=2
+outputDir=bin
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=hanle.tex
+outputFile=hanle.pdf
+langSpell=de
+markDer=true
+srcDir=src

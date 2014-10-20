@@ -140,7 +140,7 @@ class Fitter:
             f.writeline()
             f.close()
 
-    def addParamsToLegend(self, legend, format='', chisquare=True, chisquareformat='%.2e', advancedchi=False, lang='de'):
+    def addParamsToLegend(self, legend, format='', chisquare=True, chisquareformat='%.2e', advancedchi=False, units=None, lang='de'):
         """adds fit information to legend
 
         Arguments:
@@ -165,6 +165,8 @@ class Fitter:
         # add params
         for i, param in self.params.iteritems():
             label = '%s #pm %s'
+            if units:
+                label = '(' + label + ') ' + units[i]
             if format:
                 label = '%s: ' + label % format[i]
             else:

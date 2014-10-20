@@ -2,7 +2,7 @@
 from functions import setupROOT, loadCSVToList  # make sure to add ../lib to your project path or copy file from there
 from kernspin import ERRORS
 from data import DataErrors
-from ROOT import TCanvas
+from ROOT import TCanvas, TLegend
 
 
 def evalBx():
@@ -47,9 +47,15 @@ def evalBI():
     gup.SetMarkerColor(2)
     gup.SetLineColor(2)
     gup.Draw('P')
+    
+    l = TLegend(0.15, 0.70, 0.5, 0.85)
+    l.SetTextSize(0.03)
+    l.AddEntry(glow, 'Messung mit zunehmendem Strom I', 'l')
+    l.AddEntry(gup, 'Messung mit abnehmendem Strom I', 'l')
+    l.Draw()
 
     c.Update()
-    c.Print('../img/02-BI.pdf', 'pdf')
+    c.Print('../img/02-B-I.pdf', 'pdf')
 
 
 def main():

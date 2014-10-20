@@ -26,7 +26,7 @@ def evalBx():
     
 
 
-def evalIB():
+def evalBI():
     # load from low
     datalist = loadCSVToList('../data/02-I-B-low.txt')
     x, y = zip(*datalist)
@@ -49,12 +49,12 @@ def evalIB():
     gup.Draw('P')
 
     c.Update()
-    c.Print('../img/02-IB.pdf', 'pdf')
+    c.Print('../img/02-BI.pdf', 'pdf')
 
 
 def main():
     evalBx()
-    evalIB()
+    evalBI()
 
 if __name__ == '__main__':
     setupROOT()

@@ -18,6 +18,10 @@ def calcMu(gyro, sgyro):
     hbar = 1.05457173e-34  # m^2 * kg / s
     return map(lambda x: 0.5 * hbar * x, (gyro, sgyro)) # mu, smu
 
+def calcNucGFactor(gyrp, sgyro):
+    hbar = 1.05457173e-34  # m^2 * kg / s 
+    mu_n = 5.05078353e-24
+
 def main():
     snu = ERRORS['nu']  # TODO get error
     sB = ERRORS['B']
@@ -41,7 +45,7 @@ def main():
             g.Draw('AP')
             
             fit = Fitter('fit%s' % file, 'pol1(0)')
-            fit.setParam(0, '#nu_{0}', 0)
+            fit.setParam(0, '#nu_{0}', 0, True)
             fit.setParam(1, 'm', 0.002)
             fit.fit(g, datalist[0][0] * 0.95, datalist[-1][0] * 1.05)
             fit.saveData('../calc/fit-%s.txt' % file, 'w')

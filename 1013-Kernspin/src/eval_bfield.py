@@ -50,8 +50,8 @@ def evalBI():
     
     l = TLegend(0.15, 0.70, 0.5, 0.85)
     l.SetTextSize(0.03)
-    l.AddEntry(glow, 'Messung mit zunehmendem Strom I', 'l')
-    l.AddEntry(gup, 'Messung mit abnehmendem Strom I', 'l')
+    l.AddEntry(glow, 'Messung mit zunehmendem Strom I', 'p')
+    l.AddEntry(gup, 'Messung mit abnehmendem Strom I', 'p')
     l.Draw()
 
     c.Update()

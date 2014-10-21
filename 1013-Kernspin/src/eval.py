@@ -1,10 +1,10 @@
 #!/usr/bin/python2.7
 from functions import setupROOT, loadCSVToList  # make sure to add ../lib to your project path or copy file from there
 from kernspin import ERRORS
-from data import DataErrors
+from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
 from ROOT import TCanvas, TLegend
-from txtfile import TxtFile
-from fitter import Fitter
+from txtfile import TxtFile  # make sure to add ../lib to your project path or copy file from there
+from fitter import Fitter  # make sure to add ../lib to your project path or copy file from there
 import numpy as np
 
 
@@ -40,7 +40,7 @@ def main():
             B, nu = datalist[0]
             gyro, sgyro = calcGyro(nu, snu, B, sB)
             if not sgyrorel == 0:
-                sgyro = gyro * sgyrorel 
+                sgyro = gyro * sgyrorel
             with TxtFile('../calc/%s.txt' % file, 'w') as f:
                 f.writeline('\t', 'gyro', *map(str, (gyro, sgyro)))
                 f.writeline('\t', 'mu', *map(str, calcMu(gyro, sgyro)))

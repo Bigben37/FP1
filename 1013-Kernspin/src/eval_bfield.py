@@ -1,7 +1,7 @@
 #!/usr/bin/python2.7
 from functions import setupROOT, loadCSVToList  # make sure to add ../lib to your project path or copy file from there
 from kernspin import ERRORS
-from data import DataErrors
+from data import DataErrors  # make sure to add ../lib to your project path or copy file from there
 from ROOT import TCanvas, TLegend
 
 

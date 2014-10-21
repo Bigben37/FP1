@@ -95,13 +95,41 @@ Strahlungsfeld erzeugt, gemessen werden.
 Über einen längeren Zeitraum betrachtet sollten sich die Besetzungszahlen der beiden Energieniveaus annähern, was zu einer Reduktion des oben 
 beschriebenen Effekts führt. Dieser Abnahme wird durch \emph{Relaxationsprozesse} entgegengewirkt, durch welche die höherenergetischen Zustände 
 in die niederenergetischen Zustände zurückfallen, ohne dabei Strahlung abgeben. \\
-Wird die Energie bei dieser Zustandsänderung in Form von Wärme an das Gitter des Materials ab, so spricht man von \emph{Spin-Gitter Relaxation}. \\
-Des Weiteren gibt es die \emph{Spin-Spin Relaxation}. %TODO Erklärung.
+Wird die Energie bei dieser Zustandsänderung in Form von Wärme an das Gitter des Materials ab, so spricht man von \emph{Spin-Gitter-Relaxation}. \\
+Des Weiteren gibt es die \emph{Spin-Spin-Relaxation}. %TODO Erklärung.
 
-\subsection{Hallsonde}
+\subsection{Der Hall-Effekt}
+Bringt man einen stromdurchflossenen Leiter in ein Magnetfeld,
+dann wirkt auf die Leitungselektronen die Lorentzkraft $\vec{F_L}$:
 \begin{equation}
-  U_H = v \cdot B \cdot d
+\label{eq:lorentz}
+\vec{F_L} = q \cdot (\vec{v} \times \vec{B})
 \end{equation}
+Die Elementarladung ist $q$, $\vec{v}$ die Driftgeschwindigkeit der Elektronen und $\vec{B}$ das Magnetfeld.
+Durch die Kraft werden die Elektronen gegenüber den festen Atomrümpfen verschoben und es
+bildet sich ein elektrisches Feld $\vec{E}$ aus,
+das auf die Elektronen die Kraft
 \begin{equation}
-  U_H = \frac{I}{n \cdot e}
+\label{eq:Fe}
+\vec{F_C} = \vec{E} \cdot q
 \end{equation}
+ausübt. Mit
+\begin{equation}
+\label{}
+ U_H = \frac{E}{d},
+\end{equation}
+dem Kräftegleichgewicht $\vec{F_L} = \vec{F_C}$ und $\vec{v} \perp \vec{B}$ folgt
+\begin{equation}
+  U_H = v \cdot B \cdot d \ \, .
+\end{equation}
+Es bildet sich also eine Hall-Spannung $U_H$ aus, die proportional zur Stärke des Magnetfelds ist und
+als Messsignal verwendet werden kann.
+\autoref{img:hall} zeigt diese Verhältnisse am Leiter.
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=0.5\textwidth]{../img/hall.pdf}
+  \caption{Hall-Effekt: Ablenkung von bewegten Elektronen im Leiter.}
+  \label{img:hall}
+\end{center}
+\end{figure}

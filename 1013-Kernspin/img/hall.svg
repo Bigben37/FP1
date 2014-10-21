@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="hall.pdf">
+   sodipodi:docname="hall.svg">
   <defs
      id="defs4">
     <marker
@@ -123,7 +123,7 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.52"
+     inkscape:zoom="1"
      inkscape:cx="241.18107"
      inkscape:cy="192.30343"
      inkscape:document-units="px"
@@ -459,5 +459,29 @@
        id="path3806-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="czc" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="383.11224"
+       y="568.07812"
+       id="text3050"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3052"
+         x="383.11224"
+         y="568.07812"
+         style="font-size:32px">-  -  -  -  -  -  -  -</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="365.52631"
+       y="829.10156"
+       id="text3050-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3052-6"
+         x="365.52631"
+         y="829.10156"
+         style="font-size:24px">+  +  +  +  +  +  +  +</tspan></text>
   </g>
 </svg>

@@ -17,13 +17,12 @@ def evalBx():
     g.Draw('AP')
     c.Update()
     c.Print('../img/01-B-x.pdf', 'pdf')
-    
+
     g.GetXaxis().SetRangeUser(3, 37)
     g.SetMinimum(395)
     g.SetMaximum(410)
     c.Update()
     c.Print('../img/01-B-x-zoom.pdf', 'pdf')
-    
 
 
 def evalBI():
@@ -47,7 +46,7 @@ def evalBI():
     gup.SetMarkerColor(2)
     gup.SetLineColor(2)
     gup.Draw('P')
-    
+
     l = TLegend(0.15, 0.70, 0.5, 0.85)
     l.SetTextSize(0.03)
     l.AddEntry(glow, 'Messung mit zunehmendem Strom I', 'p')

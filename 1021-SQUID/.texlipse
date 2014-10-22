@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Wed Oct 22 09:08:30 CEST 2014
+markTmpDer=true
+builderNum=2
+outputDir=bin
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=squid.tex
+outputFile=squid.pdf
+langSpell=de
+markDer=true
+srcDir=src

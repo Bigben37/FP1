@@ -40,10 +40,10 @@ class Fitter:
         fixed -- if true fixes parameter (no fitting)
         """
         if not fixed:
-            self.params[index] = {'name': name, 'startvalue': value, 'value': 0, 'error': 0}
+            self.params[index] = {'name': name, 'startvalue': value, 'value': 0, 'error': 0, 'fixed': False}
             self._function.SetParameter(index, value)
         else:
-            #self.params[index] = {'name': name, 'startvalue': value, 'value': value, 'error': 0}
+            self.params[index] = {'name': name, 'startvalue': value, 'value': value, 'error': 0, 'fixed': True}
             self._function.FixParameter(index, value)
         self._function.SetParName(index, name)
 
@@ -58,13 +58,23 @@ class Fitter:
         options -- fitting options (see ROOT documentation)
         """
         graph.Fit(self._function, 'Q' + options, '', xstart, xend)  # Q = quit mode, no print out on console
+        # get fitted params
         self.virtualFitter = TVirtualFitter.GetFitter()
         for i in self.params:
             self.params[i]['value'] = self.virtualFitter.GetParameter(i)
             self.params[i]['error'] = self.virtualFitter.GetParError(i)
-        n = len(self.params)
-        self._covMatrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(n)] for col in xrange(n)]
-        #self._corrMatrix = [[self._covMatrix[col][row] / (self.params[col]['error'] * self.params[row]['error']) for row in xrange(n)] for col in xrange(n)]
+        # get cov. and corr. matrix
+        freeparams = dict()  # map cov. matrix index to params index, only not fixed params are in cov. matrix
+        freecount = 0
+        fixedcount = 0
+        for i, param in self.params.iteritems():
+            if param['fixed']:
+                fixedcount += 1
+            else:
+                freecount += 1
+                freeparams[i-fixedcount] = i
+        self._covMatrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(freecount)] for col in xrange(freecount)]
+        self._corrMatrix = [[self._covMatrix[col][row] / (self.params[freeparams[col]]['error'] * self.params[freeparams[row]]['error']) for row in xrange(freecount)] for col in xrange(freecount)]
 
     def getFunction(self):
         """returns fit function"""
@@ -136,7 +146,7 @@ class Fitter:
             f.writeline('')
             f.writeline('correlation matrix')
             f.writeline('==================')
-            #f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
+            f.writelines('\t'.join(str(j) for j in i) + '\n' for i in self._corrMatrix)
             f.writeline()
             f.close()
 

@@ -174,11 +174,22 @@ class Fitter:
         legend.AddEntry(0, lang_param, '')
         # add params
         for i, param in self.params.iteritems():
-            label = '%s #pm %s'
-            if units:
-                label = '(' + label + ') ' + units[i]
-            if format:
-                label = '%s: ' + label % format[i]
+            if param['fixed']:
+                label = '%s'
+                if units:
+                    label = label + ' ' + units[i]
+                if format:
+                    label = '%s: ' + label % format[i]
+                else:
+                    label = '%s: ' + label % '%e'
+                legend.AddEntry(0, label % (param['name'], param['value']), '')
+                
             else:
-                label = '%s: ' + label % ('%e', '%e')
-            legend.AddEntry(0, label % (param['name'], param['value'], param['error']), '')
+                label = '%s #pm %s'
+                if units:
+                    label = '(' + label + ') ' + units[i]
+                if format:
+                    label = '%s: ' + label % format[i]
+                else:
+                    label = '%s: ' + label % ('%e', '%e')
+                legend.AddEntry(0, label % (param['name'], param['value'], param['error']), '')

@@ -1,21 +1,12 @@
 #!/usr/bin/python2.7
-from functions import setupROOT, loadCSVToList
+from ROOT import TCanvas, TMultiGraph, TLegend, gPad
+
 from data import DataErrors
-from ROOT import TCanvas, TLegend
 from fitter import Fitter
-from txtfile import TxtFile
+from functions import setupROOT, loadCSVToList
+
+from hanle import setMultiGraphTitle, TempToSeries, serieslabels, seriescolors, STEMP
 import numpy as np
-
-ST = 2
-serieslabels = {0: 'Tag 1, abk#ddot{u}hlen', 1: 'Tag 2, abk#ddot{u}hlen', 2: 'Tag 2, aufw#ddot{a}rmen'}
-
-
-def TempToSeries(T):
-    series = [[23, 19, 14], [7, 5, 0, -1, -3, -4, -7, -8], [3, 10]]
-    for i, s in enumerate(series):
-        if T in s:
-            return i
-    return None
 
 
 def TempToPressure(T):
@@ -36,26 +27,22 @@ def TempToPressure(T):
 def printOverview(datas, phi, mintau, maxtau):
     # make graphs
     c = TCanvas('c_%d' % phi)
-    colors = [1, 4, 5]
-    graphs = []
+    graphs = TMultiGraph()
     for s, datalist in datas.iteritems():
         data = DataErrors.fromLists(*zip(*datalist))
-        g = data.makeGraph('g_%d_%d' % (phi, s), 'Druck p / mPa', '#tau / ns')
-        g.SetMarkerColor(colors[s])
-        g.SetLineColor(colors[s])
-        g.SetMinimum(mintau - 5)
-        g.SetMaximum(maxtau + 5)
-        g.GetXaxis().SetLimits(0, 230)
-        graphs.append(g)
+        g = data.makeGraph('g_%d_%d' % (phi, s))
+        g.SetMarkerColor(seriescolors[s])
+        g.SetLineColor(seriescolors[s])
+        graphs.Add(g)
+    graphs.Draw('AP')
+    gPad.Update()
+    graphs.SetMinimum(mintau - 5)
+    graphs.SetMaximum(maxtau + 5)
+    graphs.GetXaxis().SetLimits(0, 230)
+    setMultiGraphTitle(graphs, 'Druck p / mPa', '#tau / ns')
 
-    for i in [1, 0, 2]:
-        if i == 1:
-            graphs[i].Draw('AP')
-        else:
-            graphs[i].Draw('P')
-    
-    l = TLegend(0.15, 0.7, 0.4, 0.85)
-    for i, graph in enumerate(graphs):
+    l = TLegend(0.6, 0.15, 0.85, 0.3)
+    for i, graph in enumerate(graphs.GetListOfGraphs()):
         l.AddEntry(graph, serieslabels[i], 'p')
     l.Draw()
 
@@ -74,7 +61,7 @@ def makeFit(datalist, phi, name=''):
     fit.setParam(0, '#tau_{0}', 119)
     fit.setParam(1, 'm', 0.5)
     fit.fit(g, 0, 225, 'M')
-    fit.saveData('../calc/fit_tau_%02d' % phi, 'w')
+    fit.saveData('../calc/fit_tau_%02d.txt' % phi, 'w')
 
     l = TLegend(0.55, 0.15, 0.85, 0.4)
     l.SetTextSize(0.03)
@@ -82,8 +69,8 @@ def makeFit(datalist, phi, name=''):
     l.AddEntry(fit.function, 'Fit mit #tau(p) = #tau_{0} + m * p', 'l')
     fit.addParamsToLegend(l, [('%.1f', '%.1f'), ('%.2f', '%.2f')], chisquareformat='%.2f', advancedchi=True, units=['ns', 'ns / mPa'])
     l.Draw()
-    
-    g.SetMinimum(min(fit.params[0]['value'], min(data.getY())*0.975))
+
+    g.SetMinimum(min(fit.params[0]['value'], min(data.getY()) * 0.975))
 
     c.Update()
     c.Print('../img/taus_fit_%02d%s.pdf' % (phi, name), 'pdf')
@@ -99,7 +86,7 @@ def main():
         maxtau = max(zip(*datalist)[1])
         for T, tau, stau in datalist:
             p = TempToPressure(T)
-            sp = p * ST / (T + 273.15)
+            sp = p * STEMP / (T + 273.15)
             datas[TempToSeries(T)].append((p, tau, sp, stau))  # sort in right series list
 
         printOverview(datas, phi, mintau, maxtau)

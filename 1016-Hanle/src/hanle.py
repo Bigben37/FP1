@@ -1,6 +1,12 @@
-from data import DataErrors
 import os
+
+from data import DataErrors
+
 import numpy as np
+
+STEMP = 2
+serieslabels = {0: 'Tag 1, abk#ddot{u}hlen', 1: 'Tag 2, abk#ddot{u}hlen', 2: 'Tag 2, aufw#ddot{a}rmen'}
+seriescolors = [4, 1, 3]
 
 
 class HanleData(DataErrors):
@@ -57,8 +63,22 @@ class HanleData(DataErrors):
             self.points[i] = (x, y, sx, sy)
 
 
+def TempToSeries(T):
+    series = [[23, 19, 14], [7, 5, 0, -1, -3, -4, -7, -8], [3, 10]]
+    for i, s in enumerate(series):
+        if T in s:
+            return i
+    return None
+
+
 def prepareGraph(g):
     g.SetMarkerStyle(8)
     g.SetMarkerSize(0.3)
     g.SetLineColor(15)
     g.SetLineWidth(0)
+
+def setMultiGraphTitle(mg, xtitle, ytitle):
+    mg.GetXaxis().SetTitle(xtitle)
+    mg.GetXaxis().CenterTitle()
+    mg.GetYaxis().SetTitle(ytitle)
+    mg.GetYaxis().CenterTitle()

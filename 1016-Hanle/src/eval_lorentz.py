@@ -1,11 +1,13 @@
 #!/usr/bin/python2.7
-from functions import setupROOT
-from hanle import HanleData, prepareGraph
 from ROOT import TCanvas, TLegend
-import numpy as np
-from fitter import Fitter
-from txtfile import TxtFile
 import os
+
+from fitter import Fitter
+from functions import setupROOT
+from txtfile import TxtFile
+
+from hanle import HanleData, prepareGraph
+import numpy as np
 
 
 def fitFuncLorentz(x, par):
@@ -149,7 +151,7 @@ def main():
     taus[0] = dict()
     taus[45] = dict()
     taus[90] = dict()
-    # init error list 
+    # init error list
     errortaus = dict()
     errortaus[0] = []
     errortaus[90] = []
@@ -170,8 +172,8 @@ def main():
                 errortemps[phi] = T
             else:
                 taus[phi][T] = fitLorentzPeak(name, phi, T)
-                
-    # get errors for 0 and 90 deg 
+
+    # get errors for 0 and 90 deg
     relerrors = dict()
     if errortaus[0] and errortaus[90]:
         for phi, taulist in errortaus.iteritems():
@@ -185,7 +187,7 @@ def main():
                 f.writeline('\t', str(avg), str(stdev))
             taus[phi][errortemps[phi]] = avg, stdev
             relerrors[phi] = stdev / avg
-    
+
     relerrors[45] = np.average(relerrors.values())  # average over 0 and 90 error
 
     for phi, Ttaus in taus.iteritems():

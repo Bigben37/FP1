@@ -59,14 +59,14 @@ def fitBVoltage(bdata, name):
     g.Draw('AP')
     g.Draw('PX')
 
-    xmin = getXStart(bdata, bdata.getLength() / 10, 0.25)
-    xmax = getXEnd(bdata, bdata.getLength() / 10, 0.25)
+    xmin = getXStart(bdata, bdata.getLength() / 10, 0.25) + 0.1
+    xmax = getXEnd(bdata, bdata.getLength() / 10, 0.25) - 0.1
     fit = Fitter('fitBV_%s' % name, 'pol1(0)')
     fit.setParam(0, 'a', 0)
     fit.setParam(1, 'b', -2. / 3)
     fit.fit(g, xmin, xmax, 'M')
     fit.saveData('../calc/fitBV_%s.txt' % name, 'w')
-    
+
     l = TLegend(0.55, 0.6, 0.85, 0.85)
     l.SetTextSize(0.03)
     l.AddEntry(g, 'Messdaten', 'p')
@@ -100,6 +100,7 @@ def fitLorentzPeak(name, phi, T):
     muB = 9.27400968e-24
     hbar = 1.05457126e-34
     a = gJ * muB / hbar / 1e12  # in 1/(mT*ns)
+    b = 0
     if phi == 45:
         xmin, xmax = -0.05, 0.05
         A = 0.02
@@ -108,6 +109,8 @@ def fitLorentzPeak(name, phi, T):
         xmin, xmax = -0.1, 0.1
         A = -0.02
         c = 1
+    if T == -8 and phi == 0:
+        xmin, xmax = -0.075, 0.075
     phipar = np.deg2rad(phi)
     # fit graph
     fit = Fitter('fit_%s' % name, fitFuncLorentz, (xmin, xmax, 6))
@@ -115,9 +118,9 @@ def fitLorentzPeak(name, phi, T):
     fit.setParam(1, '#phi', phipar)
     fit.setParam(2, 'A', A)
     fit.setParam(3, 'a', a, True)
-    fit.setParam(4, 'b', 0)
+    fit.setParam(4, 'b', b)
     fit.setParam(5, 'c', c)
-    fit.fit(g, xmin, xmax)
+    fit.fit(g, xmin, xmax, 'M')
     fit.saveData('../calc/fit_%s.txt' % name, 'w')
 
     # add legend
@@ -128,8 +131,8 @@ def fitLorentzPeak(name, phi, T):
     l.SetTextSize(0.03)
     l.AddEntry(g, 'Messdaten', 'p')
     l.AddEntry(fit.function, 'Fit mit Lorentzkurve', 'l')
-    fit.addParamsToLegend(l, format=[('%.2f', '%.2f'), ('%.2e', '%.1e'), ('%.2e', '%.1e'), '%.2e', ('%.2e', '%.1e'), ('%.3f', '%.3f')], 
-                          chisquareformat='%.0f', advancedchi=True, units=['ns', 'rad', 'V/ns', '1/(mT*ns)', 'T', 'V'])
+    fit.addParamsToLegend(l, format=[('%.2f', '%.2f'), ('%.2e', '%.1e'), ('%.2e', '%.1e'), '%.2e', ('%.2e', '%.1e'), ('%.3f', '%.3f')],
+                          chisquareformat='%.2f', advancedchi=True, units=['ns', 'rad', 'V/ns', '1/(mT*ns)', 'T', 'V'])
     l.Draw()
 
     # print to file
@@ -146,6 +149,12 @@ def main():
     taus[0] = dict()
     taus[45] = dict()
     taus[90] = dict()
+    # init error list 
+    errortaus = dict()
+    errortaus[0] = []
+    errortaus[90] = []
+    errortemps = dict()
+    # fit all data
     for file in os.listdir(os.path.join(os.getcwd(), '../data/messungen/')):
         if file.endswith('.tab'):
             name = file[:-4]
@@ -156,12 +165,34 @@ def main():
                 T = int(name[4:6])
             if name[-3] == 'm':
                 T *= -1
-            taus[phi][T] = fitLorentzPeak(name, phi, T)
+            if name[-2] == '_':
+                errortaus[phi].append(fitLorentzPeak(name, phi, T))
+                errortemps[phi] = T
+            else:
+                taus[phi][T] = fitLorentzPeak(name, phi, T)
+                
+    # get errors for 0 and 90 deg 
+    relerrors = dict()
+    if errortaus[0] and errortaus[90]:
+        for phi, taulist in errortaus.iteritems():
+            avg = np.average(zip(*taulist)[0])
+            stdev = np.std(zip(*taulist)[0], ddof=1)
+            relerror = stdev / avg
+            with TxtFile('../calc/errortaus_%02d.txt' % phi, 'w') as f:
+                for tau, error in taulist:
+                    f.writeline('\t', str(tau), str(error))
+                f.writeline('avg + stdev')
+                f.writeline('\t', str(avg), str(stdev))
+            taus[phi][errortemps[phi]] = avg, stdev
+            relerrors[phi] = stdev / avg
 
     for phi, Ttaus in taus.iteritems():
         with TxtFile('../calc/taus_%02d.txt' % phi, 'w') as f:
             for T, tau in Ttaus.iteritems():
-                f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[1]))
+                if not phi == 45:  # use new errors
+                    f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[0] * relerrors[phi]))
+                else:
+                    f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[1]))
 
 if __name__ == '__main__':
     setupROOT()

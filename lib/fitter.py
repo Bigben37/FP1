@@ -4,6 +4,7 @@
 __author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
 
 from ROOT import TF1, TVirtualFitter    # ROOT library
+from scipy.stats import chi2            # for p-value of chi^2
 from txtfile import TxtFile             # basic output to txt files, can be found the /lib directory
 
 
@@ -93,6 +94,14 @@ class Fitter:
     def getChisquareOverDoF(self):
         """returns chi^2 over degrees of freedom of fit"""
         return self.getChisquare() / self.getDoF()
+    
+    def getPValue(self):
+        """returns p-value of chi^2 test"""
+        p = chi2.cdf(self.getChisquare(), self.getDoF())
+        if p < 0.5:
+            return p, 'l'
+        else:
+            return 1-p, 'r'
 
     def getCovMatrix(self):
         """returns covariance matrix of fit"""
@@ -132,8 +141,9 @@ class Fitter:
             f.writeline('fitting info')
             f.writeline('============')
             f.writeline(TxtFile.CHISQUARE + ':\t\t' + str(self.getChisquare()))
-            f.writeline('DoF:\t' + str(self.getDoF()) + '')
+            f.writeline('DoF:\t' + str(self.getDoF()))
             f.writeline(TxtFile.CHISQUARE + '/DoF:\t' + str(self.getChisquareOverDoF()))
+            f.writeline('\t', 'p-value:', *map(str, self.getPValue()))
             f.writeline('')
             f.writeline('parameters')
             f.writeline('==========')

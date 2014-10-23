@@ -30,9 +30,24 @@ class HanleData(DataErrors):
                     data = map(lambda x: float(x.replace(',', '.')), row.strip().split('\t'))
                     x = data[0]
                     y = data[self.channel]
-                    sx = x * 0.01
-                    sy = y * 0.01
-                    self.addPoint(x, y, sx, sy)
+                    self.addPoint(x, y, 0, 0)
+        self.setXErrorAbs(self.getMinDeltaX() / 2)
+        self.setYErrorAbs(self.getMinDeltaY() / 2)
+
+    def getMinDeltaX(self):
+        """get x bin error"""
+        deltas = set()
+        for i in xrange(self.getLength() - 1):
+            deltas.add(self.points[i + 1][0] - self.points[i][0])
+        return min(deltas)
+
+    def getMinDeltaY(self):
+        """get y bin error"""
+        deltas = set()
+        for i in xrange(self.getLength() - 1):
+            deltas.add(abs(self.points[i + 1][1] - self.points[i][1]))
+        deltas.discard(0)
+        return min(deltas)
 
     def convertTimeToB(self, fit):
         for i in xrange(self.getLength()):
@@ -67,7 +82,7 @@ def TempToPressure(T):
     a4 = -31.0889985
     a5 = 58.0183959
     a6 = -27.6304546
-    return 1000 * pc * np.exp((Tc / T2) * (a1 * Tr + a2 * Tr ** 1.89 + a3 * Tr ** 2 + a4 * Tr ** 8 + 
+    return 1000 * pc * np.exp((Tc / T2) * (a1 * Tr + a2 * Tr ** 1.89 + a3 * Tr ** 2 + a4 * Tr ** 8 +
                                            a5 * Tr ** 8.5 + a6 * Tr ** 9))
 
 

@@ -73,7 +73,7 @@ class Fitter:
                 fixedcount += 1
             else:
                 freecount += 1
-                freeparams[i-fixedcount] = i
+                freeparams[i - fixedcount] = i
         self._covMatrix = [[self.virtualFitter.GetCovarianceMatrixElement(col, row) for row in xrange(freecount)] for col in xrange(freecount)]
         self._corrMatrix = [[self._covMatrix[col][row] / (self.params[freeparams[col]]['error'] * self.params[freeparams[row]]['error']) for row in xrange(freecount)] for col in xrange(freecount)]
 
@@ -94,14 +94,14 @@ class Fitter:
     def getChisquareOverDoF(self):
         """returns chi^2 over degrees of freedom of fit"""
         return self.getChisquare() / self.getDoF()
-    
+
     def getPValue(self):
         """returns p-value of chi^2 test"""
         p = chi2.cdf(self.getChisquare(), self.getDoF())
         if p < 0.5:
             return p, 'l'
         else:
-            return 1-p, 'r'
+            return 1 - p, 'r'
 
     def getCovMatrix(self):
         """returns covariance matrix of fit"""
@@ -193,7 +193,7 @@ class Fitter:
                 else:
                     label = '%s: ' + label % '%e'
                 legend.AddEntry(0, label % (param['name'], param['value']), '')
-                
+
             else:
                 label = '%s #pm %s'
                 if units:

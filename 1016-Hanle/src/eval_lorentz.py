@@ -185,14 +185,13 @@ def main():
                 f.writeline('\t', str(avg), str(stdev))
             taus[phi][errortemps[phi]] = avg, stdev
             relerrors[phi] = stdev / avg
+    
+    relerrors[45] = np.average(relerrors.values())  # average over 0 and 90 error
 
     for phi, Ttaus in taus.iteritems():
         with TxtFile('../calc/taus_%02d.txt' % phi, 'w') as f:
             for T, tau in Ttaus.iteritems():
-                if not phi == 45:  # use new errors
-                    f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[0] * relerrors[phi]))
-                else:
-                    f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[1]))
+                f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[0] * relerrors[phi]))
 
 if __name__ == '__main__':
     setupROOT()

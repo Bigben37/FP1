@@ -92,7 +92,7 @@ void FP_Hanle_Macro(Int_t sw, TString data)
     Double_t current = g->Eval(time);
     current = current*0.0003363*1000.;
     hanleramp->SetPoint(i,current,vy.at(i));
-    hanleramp->SetPointError(i,xerr*current,yerr*vy.at(i));  //switch on to use errors (you need to do that to get responsible goodness of fit)
+    hanleramp->SetPointError(i,fabs(xerr*current),fabs(yerr*vy.at(i)));  //switch on to use errors (you need to do that to get responsible goodness of fit)
   }
 
   ////////////////////////
@@ -195,7 +195,7 @@ void FP_Hanle_Macro(Int_t sw, TString data)
   c1->SetGrid();
   c1->SetFillColor(10);
   ramp->Draw("AP");
-  c1->SaveAs(data+"_1.png");
+  c1->SaveAs(data+"_1.pdf");
 
   TCanvas* c2 = new TCanvas("hanle", "hanle", 600, 600);
   hanle->GetXaxis()->SetTitle("time");
@@ -205,7 +205,26 @@ void FP_Hanle_Macro(Int_t sw, TString data)
   c2->SetGrid();
   c2->SetFillColor(10);
   hanle->Draw("AP");
-  c2->SaveAs(data+"_2.png");
+  c2->SaveAs(data+"_2.pdf");
+
+  cout <<endl;
+  cout <<"Fitting..."<<endl;
+  cout <<endl;
+
+  gStyle->SetOptFit(1111);
+
+  cout <<endl;
+
+  TFitResultPtr r = hanleramp->Fit(myfit,"SRM");
+  Double_t chi2   = r->Chi2();
+  Int_t ndf  = r->Ndf();
+  Double_t prob   = r->Prob();
+
+  cout << "Chi2 " << chi2 <<  endl;
+  cout << "Ndof " << ndf << endl;
+  cout << "Probability " << prob << endl;
+  cout <<endl;
+
 
   TCanvas* c3 = new TCanvas("fit", "fit", 600, 600);
   myfit->GetXaxis()->SetTitle("current");
@@ -216,7 +235,7 @@ void FP_Hanle_Macro(Int_t sw, TString data)
   c3->SetFillColor(10);
   //  myfit->Draw("ACP");
   myfit->Draw();
-  c3->SaveAs(data+"_3.png");
+  c3->SaveAs(data+"_3.pdf");
 
   TCanvas* c4 = new TCanvas("hanleramp", "hanleramp", 600, 600);
   hanleramp->GetXaxis()->SetTitle("current");
@@ -226,7 +245,7 @@ void FP_Hanle_Macro(Int_t sw, TString data)
   c4->SetGrid();
   c4->SetFillColor(10);
   hanleramp->Draw("AP");
-  c4->SaveAs(data+"_4.png");
+  c4->SaveAs(data+"_4.pdf");
 
   TFile* f_out = new TFile(data+".root","RECREATE");
   c1->Write();

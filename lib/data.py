@@ -402,7 +402,7 @@ class DataErrors(GeneralData):
         relerror -- relative error
         """
         for i in range(self.getLength()):
-            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][0] * relerror, self.points[i][3])
+            self.points[i] = (self.points[i][0], self.points[i][1], abs(self.points[i][0] * relerror), self.points[i][3])
 
     def setXErrorFunc(self, f):
         """calculates x-error with given function from x-value
@@ -429,7 +429,7 @@ class DataErrors(GeneralData):
         relerror -- relative error
         """
         for i in range(self.getLength()):
-            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], self.points[i][1] * relerror)
+            self.points[i] = (self.points[i][0], self.points[i][1], self.points[i][2], abs(self.points[i][1] * relerror))
 
     def setYErrorFunc(self, f):
         """calculates y-error with given function from y-value

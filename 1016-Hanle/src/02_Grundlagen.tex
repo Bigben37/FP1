@@ -7,7 +7,7 @@ Semiklassisch wird der Hanle-Effekt folgendermaßen erklärt:
 Wenn linear polarisiertes Licht (konstante Richtung von $\vec{\text{E}}$- und $\vec{\text{B}}$-Feld)
 ein Atom anregt, ist für dieses angeregte Atom die Richtung seines Dipolmoments $\vec{P}$ vorgegeben:
 Es zeigt in Richtung des $\vec{\text{E}}$-Feldes. Senkrecht dazu steht das magnetische Moment $\vec{\mu}$.
-\autoref{img:rotation} zeigt den Zusammenhang.\\
+\autoref{img:rotation} zeigt den Zusammenhang.
 
 \begin{figure}[H]
 \begin{center}
@@ -91,10 +91,10 @@ Die Lösung ist für $\Phi=0^{\circ}$ eine Lorentzkurve und für $\Phi=90^{\circ
 \subsection{Quantenmechanische Erklärung des Hanle-Effekts}
 Der Hanle-Effekt lässt sich auch quantenmechanisch erklären; er ist ein Sonderfall des \emph{level-crossing}. 
 Es können mehrere Atomzustände mit derselben Energie existieren, die durch die Feinstrukturaufspaltungen einzelner Zustände (was zu einer Überkreuzung 
-dieser führt, \emph{level-crossing}) oder durch das Anlegen eines äußeren Magnetfeldes $B$ (der Hanle-Effekt tritt bei $B=0$), was zur Zeeman-Aufspaltung 
+dieser führt, \emph{level-crossing}) oder durch das Anlegen eines äußeren Magnetfeldes $B$ (der Hanle-Effekt tritt bei $B=0$ auf), was zur Zeeman-Aufspaltung 
 führt, verursacht werden.
-Es zeigt sich der Effekt der \emph{Resonanzfluoreszenz}, welcher aus der Interferenz dieser sich überlagernder Zustände folgt. \\
-Auf die genaue quantenmechanische Betrachtung soll hier eingegangen werden, es wird auf \cite{manual} verwiesen.
+Es zeigt sich der Effekt der \emph{Resonanzfluoreszenz}, welcher aus der Interferenz dieser sich überlagernden Zustände folgt. \\
+Auf die genaue quantenmechanische Herleitung soll hier nicht eingegangen werden, es wird auf \cite{manual} verwiesen.
 
 
 
@@ -105,22 +105,19 @@ der das Ergebnis systematisch verfälscht:
 Ein Photon, das emittiert wird, wenn ein Atom in den Grundzustand zurückfällt,
 kann von einem weiteren Atom absorbiert werden.
 Dies führt dazu, dass angeregte Zustände in der Resonanzzelle länger bestehen bleiben,
-als ihre Lebensdauer es vorhersagt.
+als ihre Lebensdauer es erlaubt.
 Durch eine Messreihe bei verschiedenen Temperaturen kann die Stärke dieses Effekts bestimmt werden und
 man erhält ein bereinigtes Ergebnis.
 Man geht davon aus, dass der Effekt proportional zur Anzahl der Quecksilberatome in der Resonanzzelle ist,
 also auch proportional zur Partialdruck des Quecksilbers.
 Über die Dampfdruckkurve kann der Partialdruck aus der Temperatur der Zelle berechnet werden.
-Die Formel dafür lautet
+Die Formel dafür lautet:
 \begin{equation}
 \label{eq:vaporpress}
 \ln(p/p_{\text{c}})= (T/T_{\text{c}}) \cdot (a_1T_{\text{r}}^{}+a_2T_{\text{r}}^{1.89}+a_3T_{\text{r}}^{2}
 +a_4T_{\text{r}}^{8}+a_5T_{\text{r}}^{8.5}+a_6T_{\text{r}}^{9})
 \end{equation}
 mit $T_{\text{r}}=1-(T/T_{\text{c}})$ und den Parametern
-
-
-
 \begin{equation}
 \label{eq:params}
 \begin{split}
@@ -128,9 +125,7 @@ T_{\text{c}} &= 1764\,\text{K} \ \: \qquad a_1=-4.57618  \ \: \qquad a_2=-1.4072
 p_{\text{c}} &= 167\,\text{MPa}     \qquad a_4=-31.08800      \qquad a_5=58.01840  \  \qquad a_6=-27.63045
 \end{split}
 \end{equation}
-
-Die Kovarianzmatrix $C$ für die Parameter lautet (aus \cite{manual})
-
+Die Kovarianzmatrix $C$ für die Parameter lautet (aus \cite{manual}):
 \begin{equation}
 \label{eq:cov}
 C=

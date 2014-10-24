@@ -74,7 +74,11 @@ noch ein relativer Fehler von \mbox{$ s_\text{rel} = 1\% $} des Messwerts gesetz
   s_U = \sqrt{s_{\text{Bin}}^2 + (s_\text{rel} \cdot U)^2}
 \end{equation}
 Diese Graphen können nun mit \autoref{eq:intensity} gefittet werden;
-die Lebensdauer erhält man direkt aus dem Fit.
+die Lebensdauer $\tau$ erhält man direkt aus dem Fit.
+\begin{equation}
+I(\Phi,B) = A \tau \cdot \frac{2 a \tau  (B-B_0) \sin (2 \Phi )+(2 a \tau  (B-B_0))^2-\cos (2 \Phi )+1}
+{2 \left((2 a \tau  (B-B_0))^2+1\right)}+c 
+\end{equation}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=\textwidth]{../img/fit_00_p05_1.pdf}
@@ -111,9 +115,11 @@ Für den Fehler auf die Lebensdauern bei $\Phi=45^\circ$ wurde aus den beiden Fe
   \label{eq:error:tau:45}
   \left( \frac{s_\tau}{\tau} \right)_{45^\circ} = 0.012
 \end{equation}
-\subsubsection{Fitergebnisse}
+\subsubsection{Fitergebnisse der Hanle-Kurven}
 \label{subsub:fitresults}
-Die Ergebnisse für die drei Winkel sind in \autoref{tab:phi:0}, \autoref{tab:phi:45} und \autoref{tab:phi:90} aufgelistet. Die Fehler der 
+Die Ergebnisse für die drei Winkel sind in \autoref{tab:phi:0}, \autoref{tab:phi:45} und \autoref{tab:phi:90} aufgelistet. Die Werte bei 
+$T=5^\circ$ wurden aus den Mittelwerten der 10 Messwerte bestimmt (für $\Phi=0^\circ$ und $\Phi=90^\circ$).
+Die Fehler der 
 Lebensdauern sind wie oben beschrieben aus der Standardabweichung der Lebensdauern bei konstanter Temperatur bestimmt worden. Bei den Fehlern 
 der Winkel wurde diese Korrektur nicht vorgenommen; hier wurden die Fehler aus den Fits verwendet. Die Lebensdauern werden in 
 \ref{subsub:fittaus} gefittet.
@@ -127,7 +133,7 @@ gewünschten Wert übereinstimmt. Die $90^\circ$-Einstellung liegt ca. 4 Standar
 gefittete Wert weit neben dem Gewünschten. Dies liegt daran, dass der Abstand zwischen $0^\circ$- und $90^\circ$-Einstellung auf der Winkelskala 
 des Polarisationsfilters nicht genau $90^\circ$ betrug und trotzdem die $45^\circ$-Einstellung genau $45^\circ$ unterhalb der $90^\circ$-Einstellung 
 gewählt wurde (siehe \ref{sub:calibration}). Für die Bestimmung der Lebensdauern spielt dies hier jedoch keine Rolle, da der Winkel beim Fit 
-nicht festgelegt wurde.
+nicht festgelegt wurde. Im weiteren Verlauf wird trotzdem diese Einstellung als $45^\circ$-Einstellung bezeichnet.
 \input{avgphis}
 
 \subsection{Extrapolation der mittleren Lebensdauern auf  \texorpdfstring{0\,Pa}{0 Pa}}
@@ -219,14 +225,21 @@ Der Achsenabschnitt $\tau_0$ liefert die von dem Effekt des \emph{Coherence Narr
   \label{img:taus:day2:90}
 \end{center}
 \end{figure}
+Die p-Werte für die Fits betragen 21\% ($\Phi=0^\circ$, rechtsseitig), 20\% ($\Phi=45^\circ$, rechtsseitig) und 
+28\% ($\Phi=90^\circ$, linksseitig). Damit wird für keinen der Fits die Nullhypothese abgelehnt, dass die Messwerte normalverteilt 
+um das Modell sind.
 
-\include{taus_final}
+
+Die extrapolierten Lebensdauern sind in \autoref{tab:tau:final} zusammengefasst. Sie stimmen innerhalb ihrer Fehlergrenzen überein.
+\input{taus_final}
 Der gewichtete Mittelwert der einzelnen Lebensdauern beträgt:
 \begin{equation}
   \bar{\tau} = (99.5 \pm 1.1)\,\text{ns}
 \end{equation}
-Er stimmt nicht mit dem Literaturwert \cite{manual} 
+Er liegt unterhalb des Literaturwertes \cite{manual}.
 \begin{equation}
   \tau^{\text{Lit}} = 119\,\text{ns}
 \end{equation}
-überein.
+Dies liegt an einer zu großen Halbwertsbreite der Lorentzkurven. Ein Grund dafür können magnetische Störfelder sein, die durch die Kalibrierung nicht 
+vollständig unterdrückt wurden. Außerdem könnte eine Verbreiterung durch die Umrechnung der Rampenspannung in eine Magnetfeldstärke erklärt werden, 
+wenn die Spannung nicht 1:1 in einen Strom umgewandelt wird oder der angegebene Faktor für die Stärke des Magnetfeldes pro Strom ungenau ist.

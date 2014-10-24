@@ -69,39 +69,141 @@ Es folgt:
 Daraus lässt sich nun die Intensität des Hanle-Signals in Abhängigkeit des vorhandenen Magnetfeldes $B$ angeben (\autoref{img:fit:lorentz:0}, 
 \autoref{img:fit:lorentz:45}, \autoref{img:fit:lorentz:90}).
 Der Fehler auf das Magnetfeld wurde zu 1\% des Wertes gewählt. Auf die Intensität (hier gemessene Spannung $U$) wurde zusätzlich zur halben Binbreite 
-noch ein relativer Fehler von $s_\text{rel} = 1\%$ des Messwerts gesetzt:
+noch ein relativer Fehler von $s_\text{rel} = 1\%$ des Messwerts gesetzt:\footnote{Begründet mit Intensitätschwankungen des Photomultipliers.}
 \begin{equation}
   s_U = \sqrt{s_{\text{Bin}}^2 + (s_\text{rel} \cdot U)^2}
 \end{equation}
-Dieser Graph kann nun mit \autoref{eq:intensity} gefittet werden.
+Dieser Graph kann nun mit \autoref{eq:intensity} gefittet werden; die Lebensdauer kann direkt aus dem Fit abgelesen.
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[width=\textwidth]{../img/fit_00_m03.pdf}
-  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=-3\,{}^\circ$C und $\Phi=0^\circ$.}
+  \includegraphics[width=\textwidth]{../img/fit_00_p05_1.pdf}
+  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=5\,{}^\circ$C und $\Phi=0^\circ$.}
   \label{img:fit:lorentz:0}
 \end{center}
 \end{figure}
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[width=\textwidth]{../img/fit_45_m03.pdf}
-  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=-3\,{}^\circ$C und $\Phi=45^\circ$.}
+  \includegraphics[width=\textwidth]{../img/fit_45_p05.pdf}
+  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=5\,{}^\circ$C und $\Phi=45^\circ$.}
   \label{img:fit:lorentz:45}
 \end{center}
 \end{figure}
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[width=\textwidth]{../img/fit_90_m03.pdf}
-  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=-3\,{}^\circ$C und $\Phi=90^\circ$.}
+  \includegraphics[width=\textwidth]{../img/fit_90_p05_6.pdf}
+  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=5\,{}^\circ$C und $\Phi=90^\circ$.}
   \label{img:fit:lorentz:90}
 \end{center}
 \end{figure}
 Die Fitergebnisse aller Messungen werden in Abschnitt \ref{subsub:fitresults} diskutiert.
 
 \subsubsection{Fehler auf die Lebensdauer}
+Der Fehler auf die Lebensdauer, den man aus dem Fit erhält, ist möglicherweise zu klein. Deshalb wurde für eine ausgewählte Temperatur ($T=5\,{}^\circ$C) 
+die Messung bei $\Phi=0^\circ$ und $\Phi=90^\circ$ mehrmals ($N=10$) durchgeführt. Aus dem Mittelwert und der Standardabweichung wurde 
+nun ein relativer Fehler auf $\tau$ berechnet. Man erhält:
+\begin{equation}
+  \label{eq:error:tau:0_90}
+  \left( \frac{s_\tau}{\tau} \right)_{0^\circ} = 0.013 \qquad \left( \frac{s_\tau}{\tau} \right)_{90^\circ} = 0.011
+\end{equation}
+Für den Fehler auf die Lebensdauern bei $\Phi=90^\circ$ wurde aus den beiden Fehlern der Mittelwert gebildet.
+\begin{equation}
+  \label{eq:error:tau:45}
+  \left( \frac{s_\tau}{\tau} \right)_{0^\circ} = 0.012
+\end{equation}
 \subsubsection{Fitergebnisse}
 \label{subsub:fitresults}
+Die Ergebnisse für die drei Winkel sind in \autoref{tab:phi:0}, \autoref{tab:phi:45} und \autoref{tab:phi:90} aufgelistet. Die Fehler der 
+Lebensdauern sind wie oben beschrieben aus der Standardabweichung der Lebensdauern bei konstanter Temperatur bestimmt worden. Bei den Fehlern 
+der Winkel wurde diese Korrektur nicht vorgenommen; hier wurden die Fehler aus den Fits verwendet. Die Lebensdauern werden in 
+\ref{subsub:fittaus} gefittet.
 \input{taus_00}
 \input{taus_45}
 \input{taus_90}
 
-\subsection{Extrapolation auf 0 Pa}
+Mann kann für jeden Winkel den Mittelwert aus den gefitteten Winkeln bestimmen (\autoref{tab:avgphis}). Der Fehler berechnet sich aus der 
+Standardabweichung, dividiert durch die Wurzel der Anzahl der Messungen. Man erkennt, dass für die $0^\circ$-Einstellung das Ergebnis gut mit dem 
+gewünschten Wert übereinstimmt. Die $90^\circ$-Einstellung liegt ca. 4 Standardabweichungen daneben. Bei der $45^\circ$-Einstellung liegt der 
+gefittete Wert weit neben dem Gewünschten. Dies liegt daran, dass der Abstand zwischen $0^\circ$- und $90^\circ$-Einstellung auf der Winkelskala 
+des Polarisationsfilters nicht genau $90^\circ$ betrug und trotzdem die $45^\circ$-Einstellung genau $45^\circ$ unterhalb der $90^\circ$-Einstellung 
+gewählt wurde (siehe \ref{sub:calibration}). Für die Bestimmung der Lebensdauern spielt dies hier jedoch keine Rolle, da der Winkel beim Fit 
+nicht festgelegt wurde.
+\input{avgphis}
+
+\subsection{Extrapolation der mittleren Lebensdauern auf  \texorpdfstring{0\,Pa}{0 Pa}}
+Um nun die richtige Lebensdauer zu bestimmen, müssen die gefitteten Lebensdauern über dem Dampfdruck des Quecksilbers aufgetragen werden und auf 
+0\,Pa extrapoliert werden.
+\subsubsection{Berechnung des Dampfdrucks aus der Temperatur}
+Der Dampfdruck wird mit \autoref{eq:vaporpress} berechnet (\autoref{tab:pressure}). Der Fehler folgt aus der Gauß'schen Fehlerfortpflanzung.
+Dabei wird die oben angegebene Kovarianzmatrix (\autoref{eq:cov}) benutzt.
+\begin{equation}
+\begin{split}
+  & f = f(x_1, \ldots, x_n) \\
+  & s_f^2 = \sum_{i, j}^n \left( \frac{\partial f}{\partial x_i} \right) \left( \frac{\partial f}{\partial x_j} \right) \cov(x_i, x_j)
+\end{split}
+\end{equation}
+Dabei wurde ein Fehler von 2\,K auf die Temperatur angenommen.
+\input{temp_pressure}
+\subsubsection{Bestimmung der Lebensdauer}
+\label{subsub:fittaus}
+Die Lebensdauern bei den drei Winkeleinstellungen sind in \autoref{img:taus:00}, \autoref{img:taus:45} und \autoref{img:taus:90} über 
+dem oben berechneten Dampfdruck aufgetragen. 
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/taus_00.pdf}
+  \caption{caption}
+  \label{img:taus:00}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/taus_45.pdf}
+  \caption{caption}
+  \label{img:taus:45}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/taus_90.pdf}
+  \caption{caption}
+  \label{img:taus:90}
+\end{center}
+\end{figure}
+
+Man sieht, dass die Werte vom ersten Tag nicht in den linearen Zusammenhang passen. Außerdem 
+sieht man in \autoref{img:TI}, dass die Temperaturen des ersten Tages nicht mit denen des zweiten Tages konsistent sind. Dies sollte zwar kein 
+Problem darstellen, falls die richtige Temperatur gemessen wurde, könnte aber trotzdem auf ein Problem hindeuten. Deshalb wurden die Werte des 
+ersten Tages bei der folgenden Extrapolation nicht mit berücksichtigt. \\
+Die Lebensdauern werden nun mit Geraden gefittet (\autoref{img:taus:day2:00}, \autoref{img:taus:day2:45}, \autoref{img:taus:day2:90}).
+\begin{equation}
+  \tau(p) = \tau_0 + m \cdot p
+\end{equation}
+Der Achsenabschnitt $\tau_0$ liefert die von dem Effekt des \emph{Coherence Narrowing} bereinigte Lebensdauer.
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/taus_00_day2.pdf}
+  \caption{caption}
+  \label{img:taus:day2:00}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/taus_45_day2.pdf}
+  \caption{caption}
+  \label{img:taus:day2:45}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/taus_90_day2.pdf}
+  \caption{caption}
+  \label{img:taus:day2:90}
+\end{center}
+\end{figure}
+
+\include{taus_final}

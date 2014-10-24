@@ -81,6 +81,13 @@ def fitBVoltage(bdata, name):
 
     return fit.function
 
+def normPhi(phi):
+    while phi < -np.pi:
+        phi += np.pi
+    while phi > np.pi:
+        phi -= np.pi
+    return phi
+
 
 def fitLorentzPeak(name, phi, T):
     # read data
@@ -143,7 +150,7 @@ def fitLorentzPeak(name, phi, T):
     canvas.Update()
     canvas.Print('../img/fit_%s.pdf' % name, 'pdf')
 
-    return (fit.params[0]['value'], fit.params[0]['error']), (fit.params[1]['value'], fit.params[1]['error'])
+    return (fit.params[0]['value'], fit.params[0]['error']), (normPhi(fit.params[1]['value']), fit.params[1]['error'])
 
 
 def main():

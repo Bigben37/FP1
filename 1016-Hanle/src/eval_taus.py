@@ -20,8 +20,9 @@ def TempToPressure(T):
     a4 = -31.0889985
     a5 = 58.0183959
     a6 = -27.6304546
-    return 1000 * pc * np.exp((Tc / T2) * (a1 * Tr + a2 * Tr ** 1.89 + a3 * Tr ** 2 + a4 * Tr ** 8 +
-                                           a5 * Tr ** 8.5 + a6 * Tr ** 9))
+    P = 1000 * pc * np.exp((Tc / T2) * (a1 * Tr + a2 * Tr ** 1.89 + a3 * Tr ** 2 + a4 * Tr ** 8 +
+                                           a5 * Tr ** 8.5 + a6 * Tr ** 9))  # in mPa
+    return P
 
 
 def printOverview(datas, phi, mintau, maxtau):

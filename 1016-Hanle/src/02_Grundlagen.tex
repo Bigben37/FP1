@@ -1,6 +1,5 @@
 \section{Physikalische Grundlagen}
 Die Ausführungen in diesem Abschnitt orientieren sich an \cite{manual}.
-%TODO add manual to bibtex
 
 \subsection{Semiklassische Erklärung des Hanle-Effekts}
 
@@ -68,13 +67,13 @@ Winkel
 \end{equation}
 Die Winkel- und Magnetfeldabhängigkeit der Intensität wird also von folgendem Integral beschrieben:
 \begin{equation}
-\label{eq:int}
+\label{}
 I(\Phi,B) = A \cdot \int_0^{\infty} \sin^2 \left( \frac{g_J \cdot \mu_B}{\hbar} \cdot (B-B_0) \cdot t + \Phi \right) \cdot
 \text{e}^{-\frac{\tau}{t}} \ \text{d}t + c \, \ .
 \end{equation}
-$\Phi$ ist der Winkel zwischen der Polarisationsachse des eingestrahlten Lichts und der Richtung,
+$(\Phi + 90^{\circ})$ ist der Winkel zwischen der Polarisationsachse des eingestrahlten Lichts und der Richtung,
 in der sich der Strahlungsdetektor befindet.
-$A$, $B_0$ und $c$ sind hier Konstanten, die die Amplitude und Offsets der Messdaten beschreiben.
+$A$, $B_0$ und $c$ sind Konstanten, die die Amplitude und Offsets der Messdaten beschreiben.
 Die Lösung des Integrals lautet
 \begin{equation}
 \label{eq:intensity}
@@ -86,7 +85,55 @@ mit
 \label{}
 a=\frac{g_J \cdot \mu_B}{\hbar} \, \ .
 \end{equation}
+Die Lösung ist für $\Phi=0^{\circ}$ eine Lorentzkurve und für $\Phi=90^{\circ}$ eine inverse Lorentzkurve.
+\autoref{eq:intensity} wird für die Fits an die Messdaten verwendet.
 
 \subsection{Quantenmechanische Erklärung des Hanle-Effekts}
 
 \subsection{\emph{Coherence Narrowing} und Dampfdruck}
+
+Bei der Bestimmung der mittleren Lebensdauer $\tau$ des angeregten Zustands tritt ein Effekt auf,
+der das Ergebnis systematisch verfälscht:
+Ein Photon, das emittiert wird, wenn ein Atom in den Grundzustand zurückfällt,
+kann von einem weiteren Atom absorbiert werden.
+Dies führt dazu, dass angeregte Zustände in der Resonanzzelle länger bestehen bleiben,
+als ihre Lebensdauer es vorhersagt.
+Durch eine Messreihe bei verschiedenen Temperaturen kann die Stärke dieses Effekts bestimmt werden und
+man erhält ein bereinigtes Ergebnis.
+Man geht davon aus, dass der Effekt proportional zur Anzahl der Quecksilberatome in der Resonanzzelle ist,
+also auch proportional zur Partialdruck des Quecksilbers.
+Über die Dampfdruckkurve kann der Partialdruck aus der Temperatur der Zelle berechnet werden.
+Die Formel dafür lautet
+\begin{equation}
+\label{eq:vaporpress}
+\ln(p/p_{\text{c}})= (T/T_{\text{c}}) \cdot (a_1T_{\text{r}}^{}+a_2T_{\text{r}}^{1.89}+a_3T_{\text{r}}^{2}
++a_4T_{\text{r}}^{8}+a_5T_{\text{r}}^{8.5}+a_6T_{\text{r}}^{9})
+\end{equation}
+mit $T_{\text{r}}=1-(T/T_{\text{c}})$ und den Parametern
+
+
+
+\begin{equation}
+\label{eq:params}
+\begin{split}
+T_{\text{c}} &= 1764\,\text{K} \ \: \qquad a_1=-4.57618  \ \: \qquad a_2=-1.40726        \qquad a_3=2.36264\\
+p_{\text{c}} &= 167\,\text{TPa}     \qquad a_4=-31.08800      \qquad a_5=58.01840  \  \qquad a_6=-27.63045
+\end{split}
+\end{equation}
+
+Die Kovarianzmatrix $K$ für die Parameter lautet (aus \cite{manual})
+
+\begin{equation}
+\label{eq:cov}
+K=
+\left(
+\begin{array}{cccccc}
+ 0.00222 & -0.03976 & 0.03860 & -0.05715 & 0.10490 & -0.04884 \\
+ -0.03976 & 0.71363 & -0.69302 & 1.05062 & -1.93198 & 0.90105 \\
+ 0.03860 & -0.69302 & 0.67305 & -1.0233 & 1.88215 & -0.87799 \\
+ -0.05715 & 1.05062 & -1.0233 & 1.80598 & -3.35831 & 1.58313 \\
+ 0.10490 & -1.93198 & 1.88215 & -3.35831 & 6.24979 & -2.94835 \\
+ -0.04884 & 0.90105 & -0.87799 & 1.58313 & -2.94835 & 1.39186 \\
+\end{array}
+\right)
+\end{equation}

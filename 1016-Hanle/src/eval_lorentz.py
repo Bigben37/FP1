@@ -111,7 +111,7 @@ def fitLorentzPeak(name, phi, T):
         xmin, xmax = -0.1, 0.1
         A = -0.02
         c = 1
-    if T == -8 and phi == 0:
+    if T == -8 and phi == 0:  # special case, wont fit with 0.01
         xmin, xmax = -0.075, 0.075
     phipar = np.deg2rad(phi)
     # fit graph
@@ -142,23 +142,21 @@ def fitLorentzPeak(name, phi, T):
     canvas.Update()
     canvas.Print('../img/fit_%s.pdf' % name, 'pdf')
 
-    return fit.params[0]['value'], fit.params[0]['error']
+    return (fit.params[0]['value'], fit.params[0]['error']), (fit.params[1]['value'], fit.params[1]['error'])
 
 
 def main():
-    # init tau-lists
-    taus = dict()
-    taus[0] = dict()
-    taus[45] = dict()
-    taus[90] = dict()
+    # init data-lists
+    taus = {0:dict(), 45: dict(), 90: dict()}
+    phioffsets = {0:dict(), 45: dict(), 90: dict()}
     # init error list
-    errortaus = dict()
-    errortaus[0] = []
-    errortaus[90] = []
+    errortaus = {0: [], 90: []}
+    errorphis = {0: [], 90: []}
     errortemps = dict()
     # fit all data
     for file in os.listdir(os.path.join(os.getcwd(), '../data/messungen/')):
         if file.endswith('.tab'):
+            # parse file name
             name = file[:-4]
             phi = int(name[:2])
             if name.count('_') == 1:
@@ -167,33 +165,53 @@ def main():
                 T = int(name[4:6])
             if name[-3] == 'm':
                 T *= -1
+            # get fit params
             if name[-2] == '_':
-                errortaus[phi].append(fitLorentzPeak(name, phi, T))
+                tau, phioffset = fitLorentzPeak(name, phi, T)
+                errortaus[phi].append(tau)
+                errorphis[phi].append(phioffset)
                 errortemps[phi] = T
             else:
-                taus[phi][T] = fitLorentzPeak(name, phi, T)
+                taus[phi][T], phioffsets[phi][T] = fitLorentzPeak(name, phi, T)
 
     # get errors for 0 and 90 deg
-    relerrors = dict()
+    relTauErrors = dict()
+    relPhiOffsetErrors = dict()
+    # error for taus
     if errortaus[0] and errortaus[90]:
+        # for
         for phi, taulist in errortaus.iteritems():
             avg = np.average(zip(*taulist)[0])
             stdev = np.std(zip(*taulist)[0], ddof=1)
-            relerror = stdev / avg
             with TxtFile('../calc/errortaus_%02d.txt' % phi, 'w') as f:
                 for tau, error in taulist:
                     f.writeline('\t', str(tau), str(error))
                 f.writeline('avg + stdev')
                 f.writeline('\t', str(avg), str(stdev))
             taus[phi][errortemps[phi]] = avg, stdev
-            relerrors[phi] = stdev / avg
+            relTauErrors[phi] = stdev / avg
+        relTauErrors[45] = np.average(relTauErrors.values())  # average over 0 and 90 error
+    # error for phi offsets
+    if errorphis[0] and errorphis[90]:
+        for phi, phioffsetlist in errorphis.iteritems():
+            avg = np.average(zip(*phioffsetlist)[0])
+            stdev = np.std(zip(*phioffsetlist)[0], ddof=1)
+            relerror = stdev / avg
+            with TxtFile('../calc/errorphioffsets_%02d.txt' % phi, 'w') as f:
+                for offset, error in phioffsetlist:
+                    f.writeline('\t', str(np.rad2deg(offset)), str(np.rad2deg(error)))
+                f.writeline('avg + stdev')
+                f.writeline('\t', str(np.rad2deg(avg)), str(np.rad2deg(stdev)))
+            phioffsets[phi][errortemps[phi]] = avg, stdev
+            relPhiOffsetErrors[phi] = avg, stdev
+        relPhiOffsetErrors[45] = np.average(relPhiOffsetErrors.values())  # average over 0 and 90 error
 
-    relerrors[45] = np.average(relerrors.values())  # average over 0 and 90 error
 
     for phi, Ttaus in taus.iteritems():
         with TxtFile('../calc/taus_%02d.txt' % phi, 'w') as f:
             for T, tau in Ttaus.iteritems():
-                f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[0] * relerrors[phi]))
+                f.writeline('\t', str(T).rjust(3, ' '), str(tau[0]), str(tau[0] * relTauErrors[phi]),
+                            str(np.rad2deg(phioffsets[phi][T][0])), str(np.rad2deg(phioffsets[phi][T][1])))
 
 if __name__ == '__main__':
     setupROOT()

@@ -85,6 +85,7 @@ def fitBVoltage(bdata, name):
 def fitLorentzPeak(name, phi, T):
     # read data
     data = HanleData.fromPath('../data/messungen/%s.tab' % name, 1)
+    data.setYErrorFunc(lambda x: np.sqrt((0.01 * x) ** 2 + data.points[0][3] ** 2))
     bdata = HanleData.fromPath('../data/messungen/%s.tab' % name, 2)
     # convert time to B-field and show only points with -0.2mT < x < 0.2mT
     data.convertTimeToB(fitBVoltage(bdata, name))

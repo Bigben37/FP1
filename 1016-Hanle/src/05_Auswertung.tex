@@ -39,6 +39,67 @@ Die Kühlleistung des Elements ist also sowohl zum Quadrat des Stroms als auch z
 
 
 \subsection{Bestimmung der Lebensdauer aus dem Lorentz-Peak}
-Ausgewähltes Beispiel
-\subsection{Fehler auf die Lebensdauer}
+\subsubsection{Vorgehensweise}
+Für jede Messung erhält man zwei Graphen: Die Abhängigkeit der Rampenspannung $U$, die an der Spule anliegt, von der Zeit und der 
+zeitliche Lorentzpeak des Hanle-Effekts. Die Spannung $U$ wird in dem Wertebereich, in dem sie sich verändert, mit 
+einem Polynom ersten Grades gefittet (\autoref{img:fit:BV}). Der Fehler auf die Spannung $U$ und die Zeit $t$ wurde jeweils auf die Hälfte der 
+Binbreite gesetzt.\footnote{Diese Werte werden hier nicht explizit angegeben, da sie für verschiedene Messungen aufgrund der unterschiedlichen 
+Auflösung des Oszilloskops variieren.}
+\begin{equation}
+  \label{eq:BV:fitfunction}
+  U(t) = a + b \cdot t
+\end{equation}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fitBV_00_m03.pdf}
+  \caption{Linearer Fit der angelegten Spannung $U$ an der Spule. Hier exemplarisch für $T=-3\,{}^\circ$C und $\Phi=0^\circ$.}
+  \label{img:fit:BV}
+\end{center}
+\end{figure}
+Da sich der Strom $I$, der durch Spule fließt, direkt aus dem Wert der Spannung $U$ ergibt ($I(t) = U(t) \cdot 1\,\frac{\text{A}}{\text{V}}$), kann man nun zu 
+jedem Zeitpunkt $t$ (innerhalb der Änderung von $U$) die Stärke $B$ des angelegten Magnetfeldes bestimmen. Dazu benötigt man eine spulenspezifische 
+Proportionalitätskonstante $p$, (hier $p=3.363\cdot10^{-4}\,\frac{\text{T}}{\text{A}}$), 
+welche die Änderung des Flusses $B$ mit dem Strom $I$ beschreibt. 
+Es folgt:
+\begin{equation}
+  B(t) = p \cdot I(t)
+\end{equation}
+Daraus lässt sich nun die Intensität des Hanle-Signals in Abhängigkeit des vorhandenen Magnetfeldes $B$ angeben (\autoref{img:fit:lorentz:0}, 
+\autoref{img:fit:lorentz:45}, \autoref{img:fit:lorentz:90}).
+Der Fehler auf das Magnetfeld wurde zu 1\% des Wertes gewählt. Auf die Intensität (hier gemessene Spannung $U$) wurde zusätzlich zur halben Binbreite 
+noch ein relativer Fehler von $s_\text{rel} = 1\%$ des Messwerts gesetzt:
+\begin{equation}
+  s_U = \sqrt{s_{\text{Bin}}^2 + (s_\text{rel} \cdot U)^2}
+\end{equation}
+Dieser Graph kann nun mit \autoref{eq:intensity} gefittet werden.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_00_m03.pdf}
+  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=-3\,{}^\circ$C und $\Phi=0^\circ$.}
+  \label{img:fit:lorentz:0}
+\end{center}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_45_m03.pdf}
+  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=-3\,{}^\circ$C und $\Phi=45^\circ$.}
+  \label{img:fit:lorentz:45}
+\end{center}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/fit_90_m03.pdf}
+  \caption{Fit des Hanle-Signals mit Lorentzkurve. Hier exemplarisch für $T=-3\,{}^\circ$C und $\Phi=90^\circ$.}
+  \label{img:fit:lorentz:90}
+\end{center}
+\end{figure}
+Die Fitergebnisse aller Messungen werden in Abschnitt \ref{subsub:fitresults} diskutiert.
+
+\subsubsection{Fehler auf die Lebensdauer}
+\subsubsection{Fitergebnisse}
+\label{subsub:fitresults}
+\input{taus_00}
+\input{taus_45}
+\input{taus_90}
+
 \subsection{Extrapolation auf 0 Pa}

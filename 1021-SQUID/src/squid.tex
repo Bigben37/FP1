@@ -54,6 +54,8 @@
 
 \usepackage{pdfpages} % include pdf files
 
+\usepackage[nottoc,numbib]{tocbibind} % bibliography in TOC 
+
 % NEW COMMANDS
 
 % DOCUMENT SETTINGS
@@ -96,11 +98,14 @@ Alle Python-Skripte, \LaTeX-Skripte und SVG-Graphiken können online unter \\
 \input{04_Durchfuerung}
 \input{05_Auswertung}
 
-%TODO add when finished
-%\appendix
-%\section{Anhang}
-%\subsection{Messprotokoll}
-%\includepdf[pages={-}]{../data/protokoll.pdf}
+\newpage
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\appendix
+\section{Anhang}
+\subsection{Messprotokoll}
+\includepdf[pages={-}]{../data/protocol.pdf}
 
 
 \end{document}

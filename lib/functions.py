@@ -3,9 +3,10 @@
 
 __author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
 
-import os
-import numpy as np
 from ROOT import gROOT, gStyle
+import os
+
+import numpy as np
 
 
 def loadCSVToList(path, delimiter='\t'):
@@ -21,7 +22,10 @@ def loadCSVToList(path, delimiter='\t'):
         data = []
         with open(p, 'r') as f:
             for line in f:
-                data.append(list(map(lambda x: float(x), line.strip().split(delimiter))))  # remove \n, split by delimiter, convert to float
+                try:
+                    data.append(list(map(lambda x: float(x) if x else None, line.strip().split(delimiter))))  # remove \n, split by delimiter, convert to float
+                except ValueError:
+                    print('Warning: Could not convert %s' % line)
         return data
 
 

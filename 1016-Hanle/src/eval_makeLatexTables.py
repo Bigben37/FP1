@@ -1,9 +1,15 @@
 #!/usr/bin/python2.7
+"""Create LaTeX tables from multiple csv-files"""
+
+__author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
+# ========================================================================
+# make sure to add ../../lib to your project path or copy files from there
 from functions import loadCSVToList
 from txtfile import TxtFile
+# ========================================================================
 
 
-def makeTauTables():
+def makeTauTables():  # table with fitted taus and angles for each position
     phis = [0, 45, 90]
     for phi in phis:
         data = loadCSVToList('../calc/taus_%02d.txt' % phi)
@@ -15,7 +21,7 @@ def makeTauTables():
                                        'tab:phi:%0d' % phi)
 
 
-def makeTempTable():
+def makeTempTable():  # table with calculated pressures
     data = loadCSVToList('../calc/temp_pressure.txt')
     data.sort(key=lambda x: x[0], reverse=True)
     with TxtFile('../src/temp_pressure.tex', 'w') as f:
@@ -24,13 +30,14 @@ def makeTempTable():
                                    'tab:pressure')
 
 
-def makePhiTable():
+def makePhiTable():  # table with fitted angles and position angles
     data = loadCSVToList('../calc/avgphis.txt')
     data.sort(key=lambda x: x[0])
     with TxtFile('../src/avgphis.tex', 'w') as f:
         f.write2DArrayToLatexTable(data, ['$\\Phi$ / ${}^{\\circ}$', '$\\Phi_\\text{fit}$ / ${}^{\\circ}$',
                                           '$s_{\\Phi_\\text{fit}}$ / ${}^{\\circ}$'],
-                                   ['%d', '%.2f', '%.2f'], 'Theoretischer und gefitteter Winkel der drei Einstellungen am Aufbau.',
+                                   ['%d', '%.2f', '%.2f'],
+                                   'Theoretischer und gefitteter Winkel der drei Einstellungen am Aufbau.',
                                    'tab:avgphis')
 
 

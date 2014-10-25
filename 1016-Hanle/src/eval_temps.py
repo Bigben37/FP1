@@ -1,20 +1,42 @@
 #!/usr/bin/python2.7
+"""Evaluate T-I, T-U and U-I dependencies"""
+
+__author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
+
+
 from ROOT import TCanvas, TMultiGraph, TLegend, gPad
 
+# ========================================================================
+# make sure to add ../../lib to your project path or copy files from there
 from data import DataErrors
 from fitter import Fitter
 from functions import setupROOT, loadCSVToList
+# ========================================================================
 
 from hanle import setMultiGraphTitle, TempToSeries, serieslabels, seriescolors, STEMP
 
 
 def makeGraph(xlist, ylist, slist, xerror, yerror, xlabel, ylabel, name, fit=False, fitlabel=''):
+    """ make graph with optional linear fit
+
+    Arguments:
+    xlist    -- list with x-values
+    ylist    -- list with y-values
+    slist    -- list with measurement series
+    xerror   -- absolute error on x-values
+    yerror   -- absolute error on y-values
+    xlabel   -- title of x-axis
+    ylabel   -- title of y-axis
+    name     -- appendix to file name
+    fit      -- if True fits data with linear model (default=False)
+    fitlabel -- fit function as string for legend
+    """
     xmin = min(xlist)
     xmax = max(xlist)
 
     datas = dict()
     for x, y, s in zip(xlist, ylist, slist):
-        if datas.has_key(s):
+        if s in datas:
             datas[s].append((x, y, xerror, yerror))
         else:
             datas[s] = [(x, y, xerror, yerror)]
@@ -51,15 +73,17 @@ def makeGraph(xlist, ylist, slist, xerror, yerror, xlabel, ylabel, name, fit=Fal
         l.AddEntry(graph, serieslabels[i], 'p')
     if fit:
         l.AddEntry(fit.function, 'Fit mit %s' % fitlabel, 'l')
-        fit.addParamsToLegend(l, [('%.2f', '%.2f'), ('%.3f', '%.3f')], chisquareformat='%.2f', advancedchi=True, units=['U', '#Omega'])
+        fit.addParamsToLegend(l, [('%.2f', '%.2f'), ('%.3f', '%.3f')], chisquareformat='%.2f',
+                              advancedchi=True, units=['U', '#Omega'])
     l.Draw()
 
     c.Update()
     c.Print('../img/graph_%s.pdf' % name, 'pdf')
 
+
 def main():
-    SU = 0.2
-    SI = 0.02
+    SU = 0.2  # error U
+    SI = 0.02  # error I
 
     datalist = loadCSVToList('../data/temps.txt')
     listT, listI, listU = zip(*datalist)

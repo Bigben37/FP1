@@ -1,10 +1,12 @@
+"""Contains a class to load oscilloskop data and some auxiliary methods"""
+
+__author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
+
 import os
 
-from data import DataErrors
+from data import DataErrors  # make sure to add ../../lib to your project path or copy file from there
 
-import numpy as np
-
-STEMP = 2
+STEMP = 2  # Temperature Error
 serieslabels = {0: 'Tag 1, abk#ddot{u}hlen', 1: 'Tag 2, abk#ddot{u}hlen', 2: 'Tag 2, aufw#ddot{a}rmen'}
 seriescolors = [4, 1, 3]
 
@@ -72,12 +74,21 @@ def TempToSeries(T):
 
 
 def prepareGraph(g):
+    """set unified graph style for graph with errors and a lot of data points"""
     g.SetMarkerStyle(8)
     g.SetMarkerSize(0.3)
     g.SetLineColor(15)
     g.SetLineWidth(0)
 
+
 def setMultiGraphTitle(mg, xtitle, ytitle):
+    """set and center axis titles of TMultiGraph
+
+    Arguments:
+    mg     -- TMultiGraph
+    xtitle -- title of x-axis
+    ytitle -- title of y-axis
+    """
     mg.GetXaxis().SetTitle(xtitle)
     mg.GetXaxis().CenterTitle()
     mg.GetYaxis().SetTitle(ytitle)

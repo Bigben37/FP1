@@ -6,10 +6,10 @@ from the given path is loaded.
 
 __author__ = "Benjamin Rottler (benjamin@dierottlers.de)"
 
-from ROOT import TGraph, TGraphErrors   # ROOT library
-import array                            # C-like arrays (for ROOT library)
-import numpy as np                      # Numpy
-from txtfile import TxtFile             # basic output to txt files, can be found the /lib directory
+from ROOT import TGraph, TGraphErrors  # ROOT library
+import array  # C-like arrays (for ROOT library)
+import numpy as np  # Numpy
+from txtfile import TxtFile  # basic output to txt files, can be found the /lib directory
 
 
 class GeneralData(object):
@@ -229,6 +229,24 @@ class Data(GeneralData):
             f.writeline('\\end{center}')
             f.writeline('\\label{' + label + '}')
             f.writeline('\\end{table}')
+
+    def multiplyX(self, mult):
+        """multiply x-value with constant
+
+        Arguments:
+        mult -- multiplier
+        """
+        for i in range(self.getLength()):
+            self.points[i] = (mult * self.points[i][0], self.points[i][1])
+
+    def multiplyY(self, mult):
+        """multiply y-value with constant
+
+        Arguments:
+        mult -- multiplier
+        """
+        for i in range(self.getLength()):
+            self.points[i] = (self.points[i][0], mult * self.points[i][1])
 
     def __add__(self, other):
         """addition operator for two instances, adds y-values, while not changing the x-values"""

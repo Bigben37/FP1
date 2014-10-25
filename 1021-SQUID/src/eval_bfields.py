@@ -11,14 +11,15 @@ from squid import SquidData, prepareGraph
 
 
 fitparams = {'Spule_R1': (8, 50), 'Spule_R2': (0, 50), 'Spule_R3': (12, 40), 'Spule_R4': (10, 35), 'Spule_R5_1': (10, 30)}
+RFBs = {1:21e-3, 3:60e-3, 6:120e-3, 10:195e-3, 15:290e-3, 20:380e-3, 50:950e-3, 100:1900e-3}
 
-def ampToB(si, A, sA):
+def ampToB(rfb, A, sA):
     """returns B-field in T"""
-    B = 9.3e-9 * A / si
-    sB = 9.3e-9 * sA / si
+    B = 9.3e-9 * A / RFBs[rfb]
+    sB = 9.3e-9 * sA / RFBs[rfb]
     return B, sB
 
-def evalGraph(dir, name, si, mode='', omega=0):
+def evalGraph(dir, name, rfb, mode='', omega=0):
     """create graph with optional fit
     
     Arguments:
@@ -88,7 +89,7 @@ def evalGraph(dir, name, si, mode='', omega=0):
     c.Print('../img/%s%s.pdf' % (mode, name2), 'pdf')
 
     even.filterX(xmin , xmax)
-    makePolarPlot(even, name, omega, phi, si, offset)
+    makePolarPlot(even, name, omega, phi, rfb, offset)
 
     if mode == 'fit':
         return [(fit.params[0]['value'], fit.params[0]['error']), (fit.params[1]['value'], fit.params[1]['error']),
@@ -134,15 +135,15 @@ def makePolarPlot(squiddata, name, omega, phi, si, offset):
 def main():
     evalGraph('141022', 'Spule_R1', 1, 'both')
     # make fits
-    fitfiles = [('141022', 'Spule_R1', 100e3), ('141022', 'Spule_R2', 100e3), ('141022', 'Spule_R3', 100e3),
-                ('141022', 'Spule_R4', 100e3), ('141022', 'Spule_R5_1', 100e3), ('141021', 'Magnet', 1e3),
-                ('141022', 'Magnetspan_0grad', 100e3), ('141022', 'Magnetspan_45grad', 20e3),
-                ('141022', 'Magnetspan_90grad', 45e3)]
+    fitfiles = [('141022', 'Spule_R1', 100), ('141022', 'Spule_R2', 100), ('141022', 'Spule_R3', 100),
+                ('141022', 'Spule_R4', 100), ('141022', 'Spule_R5_1', 100), ('141021', 'Magnet', 1),
+                ('141022', 'Magnetspan_0grad', 100), ('141022', 'Magnetspan_45grad', 20),
+                ('141022', 'Magnetspan_90grad', 50)]
     results = dict()
-    sis = dict()
-    for dir, file, si in fitfiles:
-        results[file] = evalGraph(dir, file, si, 'fit')
-        sis[file] = si
+    rfbs = dict()
+    for dir, file, rfb in fitfiles:
+        results[file] = evalGraph(dir, file, rfb, 'fit')
+        rfbs[file] = rfb
 
     # print fit results to file
     reslabels = {0: 'Amplitude', 1: 'omega', 2: 'phi'}
@@ -152,7 +153,7 @@ def main():
                 f.writeline('\t', key, *map(str, results[key][i]))
 
     # calculate b-field from fitted amplitudes
-    bfields = [(key, results[key][0], ampToB(sis[key], *results[key][0])) for key in results]
+    bfields = [(key, results[key][0], ampToB(rfbs[key], *results[key][0])) for key in results]
     with TxtFile('../calc/bfields_fit.txt', 'w') as f:
         for key, res, bfield in bfields:
             f.writeline('\t', key, *map(str, res + bfield))
@@ -164,11 +165,11 @@ def main():
         f.writeline('\t', *map(str, avgomega))
 
     # print graphs without fitting, averaged omega from fits is used for polar plot
-    drawfiles = [('141022', 'Au-Plaettchen', 100e3), ('141022', 'emptyHolder', 100e3), ('141022', 'emptyHolder_afterShaking', 100e3),
-                 ('141022', 'emptyHolder_perpendicular', 100e3), ('141022', 'Fe-Span', 100e3), ('141022', 'Stabmagnet_parallel', 1e3),
-                 ('141022', 'Untergrund', 100e3)]
-    for dir, file, si in drawfiles:
-        evalGraph(dir, file, si, omega=avgomega[0])
+    drawfiles = [('141022', 'Au-Plaettchen', 100), ('141022', 'emptyHolder', 100), ('141022', 'emptyHolder_afterShaking', 100),
+                 ('141022', 'emptyHolder_perpendicular', 100), ('141022', 'Fe-Span', 100), ('141022', 'Stabmagnet_parallel', 1),
+                 ('141022', 'Untergrund', 100)]
+    for dir, file, rfb in drawfiles:
+        evalGraph(dir, file, rfb, omega=avgomega[0])
 
 if __name__ == '__main__':
     setupROOT()

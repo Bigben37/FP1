@@ -1,5 +1,5 @@
 \section{Physikalische Grundlagen}
-Die Ausführungen in diesem Abschnitt orientieren sich an \cite{manual}.
+Die Ausführungen in diesem Abschnitt orientieren sich an \cite{manual} und an \cite{staatsex}.
 \subsection{Supraleitung}
 Das Auftreten von Supraleitung wird phänomenologisch dadurch beschrieben,
 dass der elektrische Widerstand eines Leiters unterhalb einer bestimmten Temperatur nicht mehr
@@ -49,4 +49,61 @@ gemessen werden.
 
 
 \subsection{Magnetfeld einer Leiterschleife}
+Die magnetische Flussdichte $\difd \vec{B}$ am Ort $\vec{r}$ eines mit dem Strom $I$ durchflossenen
+Leiters mit Länge $\difd \vec{l}$ 
+am Ort $\vec{r}'$ lässt sich mit Hilfe des \emph{Biot-Savart}-Gesetzes bestimmen:
+\begin{equation}
+  \label{eq:biotsavart}
+  \difd \vec{B}(\vec{r}) = \frac{\mu_0 \cdot I}{4 \pi} \cdot \difd \vec{l} \times \frac{\vec{r} - \vec{r}'}{\abs{\vec{r} - \vec{r}'}^3}
+\end{equation} 
 
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=0.3\textwidth]{../img/circloop.pdf}
+  \caption{Kreisförmige Leiterschleife mit Radius $R$, parallel zur $x$-$y$-Ebene.}
+  \label{img:circloop}
+\end{center}
+\end{figure}
+
+Es wird eine kreisförmige Leiterschleife parallel zu der $x$-$y$-Ebene
+mit dem Radius $R$ betrachtet (\autoref{img:circloop}) \cite{dem2}.
+Da die Komponente
+\begin{equation}
+\label{}
+\difd B_\perp = \difd B \cdot \sin \alpha
+\end{equation}
+senkrecht zur $z-$Achse bei der Integration über $\difd l$ verschwindet 
+(Rotationssymmetrie), bleibt nur die parallele Komponente
+\begin{equation}
+\label{}
+\difd B_\parallel = \difd B \cdot \cos \alpha
+\end{equation}
+zu betrachten. Wie in 
+\autoref{img:bvector} zu erkennen ist, gilt
+\begin{equation}
+\label{eq:absdif}
+  \abs{\difd \vec{l} \times \left( \vec{r} - \vec{r}' \right)} = \abs{\vec{r} - \vec{r}'} \cdot \difd l \cdot \underbrace{\sin \varphi}_{= 1} 
+  = \abs{\vec{r} - \vec{r}'} \cdot \difd l = \frac{R}{\cos \alpha} \cdot \difd l
+\end{equation}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=0.3\textwidth]{../img/bvector.pdf}
+  \caption{Komponenten des $\vec{B}$-Vektors und Dreieck zwischen $R$, $\vec{r}-\vec{r}'$ und $\vec{r}$.}
+  \label{img:bvector}
+\end{center}
+\end{figure}
+Es folgt für $B_\parallel$:
+\begin{equation}
+\begin{split}
+  \label{eq:bparallel}
+    B_\parallel &= \int \difd B_\parallel = \int \difd B \cdot \cos \alpha \\
+  &\refeq{eq:biotsavart} \frac{\mu_0 \cdot I}{4 \pi} \cdot \oint \frac{\abs{\difd \vec{l} \times \left( \vec{r} - \vec{r}' \right)}}{\abs{\vec{r} - \vec{r}'}^3} \cdot \cos \alpha \\
+  &\refeq{eq:absdif} \frac{\mu_0 \cdot I}{4 \pi} \cdot \frac{R}{\abs{\vec{r} - \vec{r}'}^3} \cdot \oint \difd s = \frac{\mu_0 \cdot I}{2} \cdot \frac{R^2}{\abs{\vec{r} - \vec{r}'}^3}
+\end{split}
+\end{equation}
+Mit $\abs{\vec{r} - \vec{r}'}^2 = R^2 + (z-z')^2$ folgt damit für die magnetische Flussdichte $\vec{B}(z, z')$
+\begin{equation}
+  \vec{B}(z, z') = B_\parallel \cdot \hat{e}_z \refeq{eq:bparallel} \frac{\mu_0 \cdot I}{2} \cdot \frac{R^2}{ \left( R^2 + (z-z')^2 \right)^{3/2}} \cdot \hat{e}_z
+\end{equation}
+
+Dieser Zusammenhang wird in der Auswertung mit den Messwerten verglichen.

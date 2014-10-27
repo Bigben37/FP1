@@ -4,6 +4,7 @@ from data import DataErrors
 
 
 class SquidData(DataErrors):
+
     def __init__(self):
         super(SquidData, self).__init__()
         self.even = False
@@ -24,7 +25,7 @@ class SquidData(DataErrors):
             first = True
             i = 0
             for row in f:
-                if i > 0 and (i % 2 == 0) == self.even :
+                if i > 0 and (i % 2 == 0) == self.even:
                     x, y = map(float, row.strip().split(',')[:2])
                     self.addPoint(x, y, 0, 0)
                 i += 1
@@ -45,6 +46,7 @@ class SquidData(DataErrors):
             deltas.add(abs(self.points[i + 1][1] - self.points[i][1]))
         deltas.discard(0)
         return min(deltas)
+
 
 def prepareGraph(g):
     """set unified graph style for graph with errors and a lot of data points"""

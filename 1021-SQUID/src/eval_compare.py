@@ -32,7 +32,6 @@ def main():
     l.AddEntry(gTheo, 'theoreitsche Magnetfeldst#ddot{a}rke B_{z}', 'p')
     l.Draw()
 
-
     c.Update()
     c.Print('../img/compare.pdf', 'pdf')
 

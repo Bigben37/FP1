@@ -11,7 +11,8 @@ from squid import SquidData, prepareGraph
 
 
 fitparams = {'Spule_R1': (8, 50), 'Spule_R2': (0, 50), 'Spule_R3': (12, 40), 'Spule_R4': (10, 35), 'Spule_R5_1': (10, 30)}
-RFBs = {1:21e-3, 3:60e-3, 6:120e-3, 10:195e-3, 15:290e-3, 20:380e-3, 50:950e-3, 100:1900e-3}
+RFBs = {1: 21e-3, 3: 60e-3, 6: 120e-3, 10: 195e-3, 15: 290e-3, 20: 380e-3, 50: 950e-3, 100: 1900e-3}
+
 
 def ampToB(rfb, A, sA):
     """returns B-field in T"""
@@ -19,9 +20,10 @@ def ampToB(rfb, A, sA):
     sB = 9.3e-9 * sA / RFBs[rfb]
     return B, sB
 
+
 def evalGraph(dir, name, rfb, mode='', omega=0):
     """create graph with optional fit
-    
+
     Arguments:
     dir  -- directory
     name -- name of file with data (without extension)
@@ -59,7 +61,7 @@ def evalGraph(dir, name, rfb, mode='', omega=0):
         # fit
         fit = Fitter('fit_%s' % name, '[0]*sin([1]*x+[2]) + [3]')
         fit.function.SetNpx(1000)
-        fit.setParam(0 , 'A', (ymax - ymin) / 2)
+        fit.setParam(0, 'A', (ymax - ymin) / 2)
         fit.setParam(1, '#omega', 2 * np.pi / 8)
         fit.setParam(2, '#phi', 0)
         fit.setParam(3, 'c', offset)
@@ -86,12 +88,13 @@ def evalGraph(dir, name, rfb, mode='', omega=0):
         name2 = name
     c.Print('../img/%s%s.pdf' % (mode, name2), 'pdf')
 
-    even.filterX(xmin , xmax)
+    even.filterX(xmin, xmax)
     makePolarPlot(even, name, omega, phi, rfb, offset)
 
     if mode == 'fit':
         return [(abs(fit.params[0]['value']), fit.params[0]['error']), (fit.params[1]['value'], fit.params[1]['error']),
                 (fit.params[2]['value'], fit.params[2]['error'])]
+
 
 def makePolarPlot(squiddata, name, omega, phi, si, offset):
     # generate polar data
@@ -134,6 +137,7 @@ def makePolarPlot(squiddata, name, omega, phi, si, offset):
     # print canvas
     c.Update()
     c.Print('../img/polar_%s.pdf' % name, 'pdf')
+
 
 def main():
     evalGraph('141022', 'Spule_R1', 1, 'both')

@@ -22,7 +22,11 @@ Ein äußeres Magnetfeld wird durch induzierte Ströme vollständig kompensiert.
 Wechselt ein Material in den supraleitenden Zustand, während es sich in einem Magnetfeld befindet,
 so bleibt ein konstanter Kreisstrom erhalten (Meissner-Ochsenfeld-Effekt).
 Die Bohr-Sommerfeldsche Quantisierungsregel erlaubt hier allerdings nicht beliebige Stromstärken,
-sondern es sind nur ganzzahlige Vielfache eines \emph{Flussquants} erlaubt.
+sondern es sind nur ganzzahlige Vielfache eines \emph{Flussquants} $\phi_0$ erlaubt.
+Der Wert für $\phi_0$ beträgt
+\begin{equation}
+\phi_0 = 2.0678 \cdot 10^{-15}\,\text{Tm}^2 \ \, .
+\end{equation}
 Wird die äußere Magnetfeldstärke geändert,
 so können kleine Änderungen vom Supraleiter durch induzierte Oberflächenströme kompensiert werden
 (ihre Eindringtiefe wird durch die London-Gleichungen beschrieben).
@@ -45,8 +49,27 @@ so ändert sich das Magnetfeld am Supraleiter über den kritischen Wert hinaus u
 des Kompensationsstroms um ein Flussquant. Dies ist mit dem kurzzeitigen
 Zusammenbruch der Supraleitfähigkeit und Energieaufnahme aus dem elektromagnetischem Wechselfeld verbunden.
 Der Grad der Energieaufnahme kann als Einbruch der Spannungsamplitude am Schwingkreis
-gemessen werden.
-
+gemessen werden.\\
+Eine periodische Änderung des Magnetfelds führt zu einer periodischen Änderung des Signals des SQUID.
+Der Zusammenhang zwischen der Signalamplitude $\Delta V$ und dem Magnetfeld $B_\text{z}$ ist folgender:
+\begin{equation}
+\label{eq:AtoB}
+B_\text{z} = F \cdot \frac{\Delta V}{2 s_\text{i}}
+\end{equation}
+$F$ ist der Feld-Fluss-Koeffizient ($F$ = 9.3\,nT/$\phi_0$) und $s_\text{i}$ der Transferkoeffizient,
+der die Empfindlichkeit des Messgeräts beschreibt und mit einem Widerstand $R_{\text{FB}}$ eingestellt
+werden kann (siehe \autoref{tab:transfk}).
+\begin{table}[H]
+\caption{Zusammenhang zwischen Widerstand $R_{\text{FB}}$ und Transferkoeffizient $s_\text{i}$ (\cite{userman}).}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+$R_{\text{FB}}$ / k\text{\textOmega}	&	1	&	3	&	6	&	10	&	15	&	20	&	15	&	100	\\ \hline
+$s_\text{i}$ / \text{mV}/$\phi_0$		&	21	&	60	&	120	&	195	&	290	&	380	&	950	&	1900	\\ \hline
+\end{tabular}
+\end{center}
+\label{tab:transfk}
+\end{table}
 
 \subsection{Magnetfeld einer Leiterschleife}
 Die magnetische Flussdichte $\difd \vec{B}$ am Ort $\vec{r}$ eines mit dem Strom $I$ durchflossenen

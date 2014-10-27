@@ -1,10 +1,13 @@
 #!/usr/bin/python2.7
 from ROOT import TCanvas, TLegend, TLine, gPad
 
+# ========================================================================
+# make sure to add ../../lib to your project path or copy files from there
 from data import Data
 from fitter import Fitter
 from functions import setupROOT, avgerrors
 from txtfile import TxtFile
+# ========================================================================
 
 import numpy as np
 from squid import SquidData, prepareGraph

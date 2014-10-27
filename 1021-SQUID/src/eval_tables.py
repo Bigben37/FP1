@@ -1,6 +1,10 @@
 #!/usr/bin/python2.7
+# ========================================================================
+# make sure to add ../../lib to your project path or copy files from there
 from functions import loadCSVToList
 from txtfile import TxtFile
+# ========================================================================
+
 
 def makeBfields_fit():
     bfields = loadCSVToList('../calc/bfields_leiterschleife_fit.txt')

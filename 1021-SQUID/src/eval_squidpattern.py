@@ -1,8 +1,11 @@
 #!/usr/bin/python2.7
 from ROOT import TCanvas, TLegend
 
+# ========================================================================
+# make sure to add ../../lib to your project path or copy files from there
 from data import Data
 from functions import setupROOT, loadCSVToList
+# ========================================================================
 
 
 def main():

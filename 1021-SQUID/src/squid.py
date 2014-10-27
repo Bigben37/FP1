@@ -1,6 +1,9 @@
 import os
 
+# ========================================================================
+# make sure to add ../../lib to your project path or copy files from there
 from data import DataErrors
+# ========================================================================
 
 
 class SquidData(DataErrors):

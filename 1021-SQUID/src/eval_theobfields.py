@@ -1,7 +1,10 @@
 #!/usr/bin/python2.7
 
+# ========================================================================
+# make sure to add ../../lib to your project path or copy files from there
 from functions import loadCSVToList
 from txtfile import TxtFile
+# ========================================================================
 
 import numpy as np
 

@@ -41,12 +41,12 @@ Mit der Kreisfrequenz $\omega$ und dem Phasenoffset $\phi$ kann nun ein Polarplo
     y(t) &= |B_z(t)| \cdot \sin(\omega \cdot t + \phi)
   \end{split}
 \end{equation}
-$B_z(t)$ berechnet sich für jeden Zeitpunkt $t$ mit \autoref{eq:AtoB} aus $U'(t)$. Von der eigentlichen Spannung $U'(t)$ muss noch der 
+$B_z(t)$ berechnet sich für jeden Zeitpunkt $t$ mit \autoref{eq:AtoB} aus $U'(t)$. Von der eigentlichen Spannung $U(t)$ muss noch der 
 konstante Offset $c$ abgezogen werden, damit die Amplitude um 0 herum oszilliert.
 \begin{equation}
   U'(t) = U(t) - c
 \end{equation}
-Die so erhaltenen Polardarstellung für den Beispielfit sieht man in \autoref{img:ex:polar}
+Die so erhaltenen Polardarstellung für den Beispielfit sieht man in \autoref{img:ex:polar}.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=0.6\textwidth]{../img/polar_Spule_R1.pdf}
@@ -133,7 +133,7 @@ $z=(2.5 \pm 0.3)\,$cm bestimmt.
 \input{bfields_theo}
 
 \subsubsection{Vergleich gemessener und theoretischer Werte}
-Zum Vergleich der mit dem SQUID gemessenen und aus Geometrie der Leiterschleife bestimmten Magnetfeldstärken $B_z$ wurden diese gemeinsam 
+Zum Vergleich der mit dem SQUID gemessenen und aus der Geometrie der Leiterschleife bestimmten Magnetfeldstärken $B_z$ wurden diese gemeinsam 
 in einer doppeltlogarithmischen Graphik über dem Strom $I$ aufgetragen (\autoref{img:compare}). Die Werte stimmen innerhalb des 
 maximal 3-$\sigma$-Intervalls überein (vergleiche dazu \autoref{tab:B:fit} und \autoref{tab:B:theo}). Die gemessenen Werte liegen immer unterhalb 
 der theoretischen Werte. Dies könnte daran liegen, dass zur Berechnung der theoretischen Werte ein zu kleiner Abstand von SQUID und Leiterschleife 
@@ -153,7 +153,7 @@ Mittelwert aus Kreisfrequenzen der Fits gebildet. Man erhält:
   \bar{\omega} = (0.87207 \pm 0.00006) \, \frac{\text{rad}}{\text{s}}
 \end{equation}
 Der zur Erstellung der Polarplots nötige y-Offset der Daten wurde mit dem Mittelwert aller Messpunkte genähert. Dies ist vertretbar, da es sich 
-um periodische Signale handelt.
+um periodische Signale handelt. Der konstante Phasenoffset $\phi$ wurde hier 0 gesetzt, dies entspricht einer Rotation in der Polardarstellung.
 
 \subsubsection{Untergrund}
 \autoref{img:underground} zeigt das \emph{SQUID}-Signal bei ausgeschaltetem Motor, ohne Probe.
@@ -175,9 +175,6 @@ Deformation und Drift der Messsignale.
 Eine weitere Untergrundmessung ohne Probe wurde mit rotierendem Proben\-hal\-ter durch\-ge\-führt.
 Hier wird ein periodisches Signal mit ca. 40\,mV Amplitude gemessen.
 Der Probenhalter ist also leicht magnetisch.\\
-Zur Erstellung des Polarplots wurde der Mittelwert über die Winkelgeschwindigkeiten gebildet,
-die aus den Sinusfits gewonnen wurden.
-Im Polarplot ist keine deutliche Winkelabhängigkeit zu erkennen.
 
 \begin{figure}[H]
 \begin{center}
@@ -237,7 +234,6 @@ Die Struktur des magnetischen Dipols ist erkennbar, sie ist aber leicht in eine 
 Dies kann damit erklärt werden, dass das Feld des Magnetspans erst im Fernfeld ein Dipolfeld ist.
 Nahe an der Probe wird das Feld durch die Oberflächenstruktur des Magnetspans verformt.
 
-
 \subsubsection{Eisenspan}
 \begin{figure}[H]
 \begin{center}
@@ -251,8 +247,6 @@ Nahe an der Probe wird das Feld durch die Oberflächenstruktur des Magnetspans v
 Bei der Messung am Eisenspan ist keine Magnetisierung erkennbar.
 Das periodische Signal mit 40\,mV Amplitude wird vermutlich durch den magnetisierten Probenhalter
 verursacht (siehe oben).\\
-Der Polarplot liefert hier keine eindeutige Aussage.
-
 
 \subsubsection{Goldplättchen}
 \begin{figure}[H]

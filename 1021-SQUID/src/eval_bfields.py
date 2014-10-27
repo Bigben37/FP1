@@ -39,13 +39,9 @@ def evalGraph(dir, name, rfb, mode='', omega=0):
     g = even.makeGraph('g_%s' % name, 'Zeit t / s', 'Spannung U / V')
     offset = g.GetMean(2)
     g.GetXaxis().SetLimits(0, 50)
-    if mode == 'fit':  # draw error bars when fitting
-        prepareGraph(g)
-        g.Draw('AP')
-        g.Draw('PX')
-    else:
-        g.SetMarkerStyle(1)
-        g.Draw('APX')
+    prepareGraph(g)
+    g.Draw('AP')
+    g.Draw('PX')
     if mode == 'both':  # print 2nd graph
         odd = SquidData.fromPath('../data/%s/%s_HM1508-2.csv' % (dir, name), False)
         godd = odd.makeGraph('godd_%s' % name, 'Zeit t / s', 'Spannung U / V')

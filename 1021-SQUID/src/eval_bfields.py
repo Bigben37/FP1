@@ -45,8 +45,10 @@ def evalGraph(dir, name, rfb, mode='', omega=0):
     if mode == 'both':  # print 2nd graph
         odd = SquidData.fromPath('../data/%s/%s_HM1508-2.csv' % (dir, name), False)
         godd = odd.makeGraph('godd_%s' % name, 'Zeit t / s', 'Spannung U / V')
-        godd.SetMarkerStyle(1)
+        prepareGraph(godd)
         godd.SetMarkerColor(2)
+        godd.SetLineColor(50)
+        godd.Draw('P')
         godd.Draw('PX')
 
     xmin, xmax = 0, 50
@@ -88,7 +90,7 @@ def evalGraph(dir, name, rfb, mode='', omega=0):
     makePolarPlot(even, name, omega, phi, rfb, offset)
 
     if mode == 'fit':
-        return [(fit.params[0]['value'], fit.params[0]['error']), (fit.params[1]['value'], fit.params[1]['error']),
+        return [(abs(fit.params[0]['value']), fit.params[0]['error']), (fit.params[1]['value'], fit.params[1]['error']),
                 (fit.params[2]['value'], fit.params[2]['error'])]
 
 def makePolarPlot(squiddata, name, omega, phi, si, offset):
@@ -155,9 +157,13 @@ def main():
 
     # calculate b-field from fitted amplitudes
     bfields = [(key, results[key][0], ampToB(rfbs[key], *results[key][0])) for key in results]
+    bfields.sort(key=lambda x: x[0])
     with TxtFile('../calc/bfields_fit.txt', 'w') as f:
         for key, res, bfield in bfields:
             f.writeline('\t', key, *map(str, res + bfield))
+    with TxtFile('../calc/bfields_leiterschleife_fit.txt', 'w') as f:
+        for key, res, bfield in bfields[-5:]:
+            f.writeline('\t', *map(str, bfield))
 
     # calculate average omega
     omegas = [results[key][1] for key in results]

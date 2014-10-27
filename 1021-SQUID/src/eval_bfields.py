@@ -16,8 +16,8 @@ RFBs = {1: 21e-3, 3: 60e-3, 6: 120e-3, 10: 195e-3, 15: 290e-3, 20: 380e-3, 50: 9
 
 def ampToB(rfb, A, sA):
     """returns B-field in T"""
-    B = 9.3e-9 * A / RFBs[rfb]
-    sB = 9.3e-9 * sA / RFBs[rfb]
+    B = 9.3e-9 * A / (2 * RFBs[rfb])
+    sB = 9.3e-9 * sA / (2 * RFBs[rfb])
     return B, sB
 
 
@@ -122,11 +122,6 @@ def makePolarPlot(squiddata, name, omega, phi, si, offset):
     g.SetMinimum(negdim)
     g.SetMaximum(posdim)
     g.GetXaxis().SetLimits(negdim, posdim)
-    if name == 'Spule_R5_1':
-        gPad.SetLeftMargin(0.15)
-        gPad.SetBottomMargin(0.15)
-        g.GetYaxis().SetTitleOffset(1.5)
-        g.GetXaxis().SetNdivisions(8 + 5 * 100)
 
     # draw axis cross
     vline = TLine(0, negdim, 0, posdim)

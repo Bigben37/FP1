@@ -8,7 +8,7 @@ import numpy as np
 
 def main():
     R = (3.2 + 4.4) / 4 / 1000  # from mm to m
-    sR = 0.05 / (2 * np.sqrt(2)) / 1000  # from mm to m
+    sR = 0.5 / (2 * np.sqrt(2)) / 1000  # from mm to m
 
     z = (29 - 26.5) / 100  # from cm to m
     sz = 0.2 * np.sqrt(2) / 100  # from cm m

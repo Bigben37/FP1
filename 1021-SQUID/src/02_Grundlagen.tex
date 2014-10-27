@@ -92,13 +92,11 @@ Es wird eine kreisförmige Leiterschleife parallel zu der $x$-$y$-Ebene
 mit dem Radius $R$ betrachtet (\autoref{img:circloop}) \cite{dem2}.
 Da die Komponente
 \begin{equation}
-\label{}
 \difd B_\perp = \difd B \cdot \sin \alpha
 \end{equation}
 senkrecht zur $z-$Achse bei der Integration über $\difd l$ verschwindet 
 (Rotationssymmetrie), bleibt nur die parallele Komponente
 \begin{equation}
-\label{}
 \difd B_\parallel = \difd B \cdot \cos \alpha
 \end{equation}
 zu betrachten. Wie in 
@@ -126,6 +124,7 @@ Es folgt für $B_\parallel$:
 \end{equation}
 Mit $\abs{\vec{r} - \vec{r}'}^2 = R^2 + (z-z')^2$ folgt damit für die magnetische Flussdichte $\vec{B}(z, z')$
 \begin{equation}
+  \label{eq:Bz:biotsavart}
   \vec{B}(z, z') = B_\parallel \cdot \hat{e}_z \refeq{eq:bparallel} \frac{\mu_0 \cdot I}{2} \cdot \frac{R^2}{ \left( R^2 + (z-z')^2 \right)^{3/2}} \cdot \hat{e}_z
 \end{equation}
 

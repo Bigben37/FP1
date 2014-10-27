@@ -1,43 +1,73 @@
 \section{Messergebnisse und Auswertung}
 
 \subsection{Vorgehensweise bei der Auswertung}
-Fehler: immer ein Bin.\\
-Beispiel: R1
+\autoref{img:ex:both} zeigt beispielhaft das Signal einer Messung mit dem SQUID. Man erkennt, dass das Messignal in zwei, vertikal verschobene 
+Sinuskurven aufgespalten ist. Da dies für einen sinnvollen Fit ungünstig ist, wird für alle Messignale nur das obere Signal gefittet. 
+Wir gehen davon aus, dass der Fit des unteren Signals oder die Bildung des Mittelwerts der beiden Signale das gleiche Ergebnis liefert.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=0.9\textwidth]{../img/both_Spule_R1.pdf}
-  \caption{\emph{SQUID}-Signal der stromdurchflossenen Leiterschleife.
+  \caption{\emph{SQUID}-Signal der stromdurchflossenen Leiterschleife mit R1 als Widerstand.
   Der Grund für die Aufspaltung in zwei vertikal verschobene Sinuskurven ist nicht bekannt.}
   \label{img:ex:both}
 \end{center}
 \end{figure}
 
+Das obere Signal wird mit einer allgemeinen Sinuskurve
+\begin{equation}
+  \label{eq:fit}
+  U(t) = A \cdot \sin(\omega \cdot t + \phi) + c
+\end{equation}
+gefittet. Dabei ist $A$ die Amplitude, $\omega$ die Kreisfrequenz, $\phi$ ein konstanter Phasenoffset und $c$ ein konstanter Spannungsoffset.
+Dieser Ansatz ist sinnvoll, da die Probe rotiert wird und somit auch ein periodisches Signal erwartet werden kann. \\
+Ein Beispiel für einen Fit ist in \autoref{img:ex:fit} dargestellt. Der $\chi^2$-Wert ist überhöht, weil dem Signal ein Untergrundsignal überlagert 
+ist und das sinusförmige Signal somit deformiert wird. \\
+Aus der Amplitude $A$ lässt sich nun mit \autoref{eq:AtoB} das maximale Stärke des Magnetfeldes berechnen. Diese Ergebnis wird hier für das 
+Beispiel nicht extra angegeben, da die Diskussion der Magnetfeldstärke der Leiterschleife weiter unten erfolgt.
+
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=0.9\textwidth]{../img/fit_Spule_R1.pdf}
-  \caption{Fit des oberen Signals aus \autoref{img:ex:both} mit einer Sinusfunktion.}
+  \caption{Fit des oberen Signals der Leiterschleife mit R1 als Widerstand mit einer Sinusfunktion.}
   \label{img:ex:fit}
 \end{center}
 \end{figure}
 
-
-
+Mit der Kreisfrequenz $\omega$ und dem Phasenoffset $\phi$ kann nun ein Polarplot des Messsignals durch folgende Transformation erstellt werden.
+\begin{equation}
+  \label{eq:polartransform}
+  \begin{split}
+    x(t) &= |B_z(t)| \cdot \cos(\omega \cdot t + \phi) \\
+    y(t) &= |B_z(t)| \cdot \sin(\omega \cdot t + \phi)
+  \end{split}
+\end{equation}
+$B_z(t)$ berechnet sich für jeden Zeitpunkt $t$ mit \autoref{eq:AtoB} aus $U'(t)$. Von der eigentlichen Spannung $U'(t)$ muss noch der 
+konstante Offset $c$ abgezogen werden, damit die Amplitude um 0 herum oszilliert.
+\begin{equation}
+  U'(t) = U(t) - c
+\end{equation}
+Die so erhaltenen Polardarstellung für den Beispielfit sieht man in \autoref{img:ex:polar}
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=0.6\textwidth]{../img/polar_Spule_R1.pdf}
   \caption{Polarplot der Messdaten aus \autoref{img:ex:fit} mit der Kreisfrequenz $\omega$,
-  die aus dem Fit gewonnen wurde: Dipolfeld einer stromdurchflossenen Leiterschleife.}
+  die aus dem Fit gewonnen wurde: Dipolfeld einer stromdurchflossenen Leiterschleife mit R1 als Widerstand.}
   \label{img:ex:polar}
 \end{center}
 \end{figure}
 
 \subsection{Vermessung des Magnetfeldes der Leiterschleife}
 \subsubsection{Berechnung aus der SQUID-Messung}
+
+Die SQUID-Signale wurden wie oben beschrieben mit einem Sinus gefittet und in einem Polarplot dargestellt 
+(\autoref{img:R1} bis \autoref{img:R5}). Bei den Fits wurde jeweils ein Bereich auf der x-Achse gewählt, in dem Amplitude keine zu großen 
+Schwankungen aufwies.
+
 \begin{figure}[H]
 \begin{center}
   \includegraphics[width=0.64\textwidth]{../img/fit_Spule_R1.pdf}
   \includegraphics[width=0.35\textwidth]{../img/polar_Spule_R1.pdf}
-  \caption{caption}
+  \caption{Fit und Polarplot des Magnetfeldes der Leiterschleife mit Widerstand R1.}
   \label{img:R1}
 \end{center}
 \end{figure}
@@ -46,7 +76,7 @@ Beispiel: R1
 \begin{center}
   \includegraphics[width=0.64\textwidth]{../img/fit_Spule_R2.pdf}
   \includegraphics[width=0.35\textwidth]{../img/polar_Spule_R2.pdf}
-  \caption{caption}
+  \caption{Fit und Polarplot des Magnetfeldes der Leiterschleife mit Widerstand R2.}
   \label{img:R2}
 \end{center}
 \end{figure}
@@ -55,7 +85,7 @@ Beispiel: R1
 \begin{center}
   \includegraphics[width=0.64\textwidth]{../img/fit_Spule_R3.pdf}
   \includegraphics[width=0.35\textwidth]{../img/polar_Spule_R3.pdf}
-  \caption{caption}
+  \caption{Fit und Polarplot des Magnetfeldes der Leiterschleife mit Widerstand R3.}
   \label{img:R3}
 \end{center}
 \end{figure}
@@ -64,7 +94,7 @@ Beispiel: R1
 \begin{center}
   \includegraphics[width=0.64\textwidth]{../img/fit_Spule_R4.pdf}
   \includegraphics[width=0.35\textwidth]{../img/polar_Spule_R4.pdf}
-  \caption{caption}
+  \caption{Fit und Polarplot des Magnetfeldes der Leiterschleife mit Widerstand R4.}
   \label{img:R4}
 \end{center}
 \end{figure}
@@ -73,20 +103,57 @@ Beispiel: R1
 \begin{center}
   \includegraphics[width=0.64\textwidth]{../img/fit_Spule_R5_1.pdf}
   \includegraphics[width=0.35\textwidth]{../img/polar_Spule_R5_1.pdf}
-  \caption{caption}
+  \caption{Fit und Polarplot des Magnetfeldes der Leiterschleife mit Widerstand R5.}
   \label{img:R5}
 \end{center}
 \end{figure}
 
+Aus den Amplitude der Fits erhält man mit \autoref{eq:AtoB} die Stärke des Magnetfeldes (\autoref{tab:B:fit}).
+\input{bfields_fit}
+Der Fehler auf $B_z$ ist sehr klein, dies liegt daran, dass er ausschließlich aus den Fehlern der Fitparameter stammt und damit nicht alle 
+Fehlermechanismen erfasst werden. Für einen besseren Fehler hätten mehrere Messungen mit den selben Bedingungen durchgeführt werden müssen.
+
 \subsubsection{Berechnung aus der Geometrie der Leiterschleife}
+Aus \autoref{eq:Bz:biotsavart} lässt sich nun die theoretische Stärke des Magnetfeldes $B_z$ in $z$-Richtung bestimmen. 
+Mit $I = \frac{U}{R}$ und $z'=0$ (Leiterschleife im Ursprung) folgt:
+\begin{equation}
+  B_z = \frac{\mu \cdot U}{2 R} \cdot \frac{r^2}{ \left( r^2 + z^2 \right)^{3/2}}
+\end{equation}
+Dabei ist $r$ der Radius, $U$ die angelegte Spannung und $R$ der Widerstand der Leiterschleife. Der Fehler lässt sich mit Gauß'scher 
+Fehlerfortpflanzung berechnen:
+\begin{equation}
+  \begin{split}
+     s_{B_z} = \frac{\mu \cdot r}{2 R \left(r^2+z^2\right)^{5/2}} \big( & r^6 \text{sU}^2+r^4 \left(s_r^2 U^2+2 s_U^2 z^2\right) \\ 
+     &+r^2 z^2 \left(U^2 \left(9 s_z^2-4 s_r^2\right)+s_U^2 z^2\right)+4 s_r^2 U^2 z^4 \big)^{1/2}
+  \end{split}
+\end{equation}
+Die berechneten Werte sind in \autoref{tab:B:theo} aufgelistet. Der Radius wurde auf $r=(1.90 \pm 0.18)\,$mm und der Abstand auf 
+$z=(2.5 \pm 0.3)\,$cm bestimmt.
 
-\subsubsection{Vergleich}
+\input{bfields_theo}
 
-
-
-
+\subsubsection{Vergleich gemessener und theoretischer Werte}
+Zum Vergleich der mit dem SQUID gemessenen und aus Geometrie der Leiterschleife bestimmten Magnetfeldstärken $B_z$ wurden diese gemeinsam 
+in einer doppeltlogarithmischen Graphik über dem Strom $I$ aufgetragen (\autoref{img:compare}). Die Werte stimmen innerhalb des 
+maximal 3-$\sigma$-Intervalls überein (vergleiche dazu \autoref{tab:B:fit} und \autoref{tab:B:theo}). Die gemessenen Werte liegen immer unterhalb 
+der theoretischen Werte. Dies könnte daran liegen, dass zur Berechnung der theoretischen Werte ein zu kleiner Abstand von SQUID und Leiterschleife 
+gemessen wurde.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[width=\textwidth]{../img/compare_loglog.pdf}
+  \caption{Vergleich von gemessener und theoretischer Magnetfeldstärke $B_z$ der Leiterschleife für verschiedene Ströme $I$.}
+  \label{img:compare}
+\end{center}
+\end{figure}
 
 \subsection{Vermessung des Magnetfelder verschiedener Proben}
+Im Folgenden konnten nicht alle SQUID-Signale gefittet werden. Um in diesen Fällen trotzdem einen Polarplot erstellen zu können, wurde der 
+Mittelwert aus Kreisfrequenzen der Fits gebildet. Man erhält:
+\begin{equation}
+  \bar{\omega} = (0.87207 \pm 0.00006) \, \frac{\text{rad}}{\text{s}}
+\end{equation}
+Der zur Erstellung der Polarplots nötige y-Offset der Daten wurde mit dem Mittelwert aller Messpunkte genähert. Dies ist vertretbar, da es sich 
+um periodische Signale handelt.
 
 \subsubsection{Untergrund}
 \autoref{img:underground} zeigt das \emph{SQUID}-Signal bei ausgeschaltetem Motor, ohne Probe.
@@ -104,17 +171,13 @@ Deformation und Drift der Messsignale.
 \end{center}
 \end{figure}
 
-
-
 \subsubsection{Probenhalter}
-Eine weitere Untergrundmessung ohne Probe wurde mit rotierendem Probenhalter durchgeführt.
+Eine weitere Untergrundmessung ohne Probe wurde mit rotierendem Proben\-hal\-ter durch\-ge\-führt.
 Hier wird ein periodisches Signal mit ca. 40\,mV Amplitude gemessen.
 Der Probenhalter ist also leicht magnetisch.\\
 Zur Erstellung des Polarplots wurde der Mittelwert über die Winkelgeschwindigkeiten gebildet,
 die aus den Sinusfits gewonnen wurden.
 Im Polarplot ist keine deutliche Winkelabhängigkeit zu erkennen.
-
-
 
 \begin{figure}[H]
 \begin{center}
@@ -125,10 +188,6 @@ Im Polarplot ist keine deutliche Winkelabhängigkeit zu erkennen.
   \label{img:holder}
 \end{center}
 \end{figure}
-
-
-
-
 
 \subsubsection{Stabmagnet}
 \begin{figure}[H]
@@ -142,13 +201,11 @@ Im Polarplot ist keine deutliche Winkelabhängigkeit zu erkennen.
 Die Messung am Stabmagneten wurde gemäß \autoref{eq:fit} gefittet.
 Für die Amplitude der Schwingung erhält man
 \begin{equation}
-\label{}
 A_{\text{St}}=(3.9399 \pm 0.0010)\, \text{V} \ \, .
 \end{equation}
 Daraus folgt nach \autoref{eq:AtoB} für die maximale Magnetfeldstärke des Stabmagneten
 \begin{equation}
-\label{}
-B_{\text{St}} = (1.745 \pm 0.004)\,\text{\textmu T} \ \, .
+B_{\text{St}} = (872 \pm 2)\,\text{nT} \ \, .
 \end{equation}
 Auf dem Polarplot ist deutlich die Struktur des magnetischen Dipols zu erkennen.
 
@@ -165,13 +222,11 @@ Auf dem Polarplot ist deutlich die Struktur des magnetischen Dipols zu erkennen.
 Auch die Messung am Magnetspan wurde gemäß \autoref{eq:fit} gefittet.
 Für die Amplitude der Schwingung erhält man
 \begin{equation}
-\label{}
 A_{\text{St}}=(3.880 \pm 0.005)\, \text{V} \ \, .
 \end{equation}
 Daraus folgt nach \autoref{eq:AtoB} für die maximale Magnetfeldstärke des Stabmagneten
 \begin{equation}
-\label{}
-B_{\text{St}} = (94.96 \pm 0.11)\,\text{nT} \ \, .
+B_{\text{St}} = (47.48 \pm 0.06)\,\text{nT} \ \, .
 \end{equation}
 Obwohl die Spannungsamplitude hier fast genauso hoch ist wie bei der Messung am Stabmagneten,
 ist das berechnete Magnetfeld viel kleiner. Dies liegt an den unterschiedlichen Transferkoeffizienten,
